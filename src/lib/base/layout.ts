@@ -25,6 +25,13 @@ export interface PaletteEntry {
   category: PaletteCategory;
   size: readonly [number, number];
   limit: number;
+  /**
+   * The level this structure sits at for the Town Hall in question — its
+   * ceiling there, which is what a maxed village looks like. The board draws
+   * the art for this level, so a TH5 cannon is the stubby one and a TH15
+   * cannon is not.
+   */
+  level: number;
 }
 
 export interface Tile {
@@ -45,10 +52,10 @@ export type Palette = Map<string, PaletteEntry>;
 
 export function paletteFor(th: number): PaletteEntry[] {
   return [
-    { id: TOWN_HALL_ID, name: `Town Hall ${th}`, category: 'townhall', size: [4, 4] as const, limit: 1 },
+    { id: TOWN_HALL_ID, name: `Town Hall ${th}`, category: 'townhall', size: [4, 4] as const, limit: 1, level: th },
     ...buildingsAtTH(th).map((b) => ({
       id: b.id, name: b.name, category: b.category as PaletteCategory,
-      size: b.size, limit: b.countHere,
+      size: b.size, limit: b.countHere, level: b.maxHere,
     })),
   ];
 }

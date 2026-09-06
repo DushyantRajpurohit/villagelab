@@ -3,7 +3,10 @@ import {
   GRID, TOWN_HALL_ID, abbrev, canPlace, countOf, eraseAt, paletteFor,
   lineTiles, paletteIndex, place, sanitise, snapOrigin, statsFor, type Tile,
 } from '../layout';
-import { depth, footprint, isoCanvas, toScreen, toTile, TILE_W, TILE_H } from '../iso';
+import {
+  depth, footprint, isoCanvas, toScreen, toTile, TILE_W, TILE_H,
+  initialCamera, panBy, toLayer, viewport, zoomAt, MAX_SCALE, MIN_SCALE,
+} from '../iso';
 import { MAX_TH } from '@/lib/game/town-halls';
 
 const entries = paletteFor(14);
@@ -279,5 +282,96 @@ describe('isometric projection', () => {
     expect(depth(12, 12, 1, 1)).toBeGreaterThan(depth(8, 8, 4, 4) - 8);
     expect(depth(0, 0, 4, 4)).toBeLessThan(depth(20, 20, 1, 1));
     expect(depth(5, 5, 1, 1)).toBeLessThan(depth(5, 6, 1, 1));
+  });
+});
+
+describe('camera', () => {
+  const V = isoCanvas(GRID);
+  const base = initialCamera(V.width, V.height);
+
+  it('shows the whole board at rest', () => {
+    const v = viewport(base, V.width, V.height);
+    expect(v.sx).toBe(0);
+    expect(v.sy).toBe(0);
+    expect(v.sw).toBe(V.width);
+    expect(v.sh).toBe(V.height);
+  });
+
+  it('keeps the point under the cursor fixed while zooming', () => {
+    // The whole point of zoom-to-cursor: whatever is under the pointer stays
+    // under the pointer, so aiming at a corner of the base actually works.
+    for (const [px, py] of [[100, 80], [V.width / 2, V.height / 2], [V.width - 40, V.height - 30]]) {
+      const before = toLayer(base, V.width, V.height, px, py);
+      const zoomed = zoomAt(base, V.width, V.height, px, py, 2);
+      const after = toLayer(zoomed, V.width, V.height, px, py);
+      expect(after.x).toBeCloseTo(before.x, 4);
+      expect(after.y).toBeCloseTo(before.y, 4);
+    }
+  });
+
+  it('clamps zoom to its range', () => {
+    let c = base;
+    for (let i = 0; i < 40; i++) c = zoomAt(c, V.width, V.height, 10, 10, 2);
+    expect(c.scale).toBe(MAX_SCALE);
+    for (let i = 0; i < 40; i++) c = zoomAt(c, V.width, V.height, 10, 10, 0.5);
+    expect(c.scale).toBe(MIN_SCALE);
+  });
+
+  it('never pans past the edge of the board', () => {
+    let c = zoomAt(base, V.width, V.height, V.width / 2, V.height / 2, 3);
+    for (const [dx, dy] of [[9e4, 9e4], [-9e4, -9e4], [9e4, -9e4]]) {
+      c = panBy(c, V.width, V.height, dx, dy);
+      const v = viewport(c, V.width, V.height);
+      expect(v.sx).toBeGreaterThanOrEqual(-1e-6);
+      expect(v.sy).toBeGreaterThanOrEqual(-1e-6);
+      expect(v.sx + v.sw).toBeLessThanOrEqual(V.width + 1e-6);
+      expect(v.sy + v.sh).toBeLessThanOrEqual(V.height + 1e-6);
+    }
+  });
+
+  it('cannot pan at all when the whole board is visible', () => {
+    const c = panBy(base, V.width, V.height, 500, 500);
+    const v = viewport(c, V.width, V.height);
+    expect(v.sx).toBe(0);
+    expect(v.sy).toBe(0);
+  });
+
+  it('round-trips a tile through the camera at any zoom', () => {
+    // Hit-testing goes screen -> layer -> tile; if zoom broke that, every click
+    // while zoomed would land on the wrong tile.
+    const c = zoomAt(base, V.width, V.height, V.width / 2, V.height / 2, 2.5);
+    const v = viewport(c, V.width, V.height);
+    for (const [tx, ty] of [[22, 22], [21, 23], [23, 21]]) {
+      const centre = toScreen(V, tx + 0.5, ty + 0.5);
+      // Where that tile centre appears on screen under this camera.
+      const px = ((centre.x - v.sx) / v.sw) * V.width;
+      const py = ((centre.y - v.sy) / v.sh) * V.height;
+      const back = toLayer(c, V.width, V.height, px, py);
+      expect(toTile(V, back.x, back.y, GRID)).toEqual({ x: tx, y: ty });
+    }
+  });
+});
+
+describe('sanitise as a trust boundary', () => {
+  it('drops structures the Town Hall cannot build even when the layout claims that TH', () => {
+    // Layouts come from localStorage, so their `th` is a claim. A layout
+    // tagged TH3 can still hold TH14 structures.
+    const th3 = paletteIndex(paletteFor(3));
+    const smuggled: Tile[] = [
+      { id: 'cannon', x: 0, y: 0 },
+      { id: 'inferno_tower', x: 10, y: 10 },  // TH10+
+      { id: 'eagle_artillery', x: 20, y: 20 }, // TH11+
+    ];
+    const kept = sanitise(th3, smuggled);
+    expect(kept.map((t) => t.id)).toEqual(['cannon']);
+  });
+
+  it('enforces per-Town-Hall counts, not just which structures exist', () => {
+    const th3 = paletteIndex(paletteFor(3));
+    const limit = paletteFor(3).find((e) => e.id === 'cannon')!.limit;
+    const many: Tile[] = Array.from({ length: limit + 4 }, (_, i) => ({
+      id: 'cannon', x: (i % 8) * 4, y: Math.floor(i / 8) * 4,
+    }));
+    expect(sanitise(th3, many)).toHaveLength(limit);
   });
 });

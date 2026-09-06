@@ -11,7 +11,7 @@ Next.js 16 · TypeScript · Postgres · deployed free.
 | `/clan/[tag]` | Roster health, donation ratios, Town Hall spread |
 | `/clan/[tag]/war` | Live war: scoreline, matchup, attacks still owed |
 | `/clan/[tag]/log` | War history: record, win rate, average stars |
-| `/base` | 44×44 layout editor, placement limits enforced per Town Hall |
+| `/base` | Isometric 44×44 editor with the game's own art, placement limits per Town Hall |
 
 The player page also covers the **Builder Base** — hall level, builder trophies
 and troop progress against the hall's ceiling. Levels only, no costs: see
@@ -132,13 +132,21 @@ stack, and ISR plus Postgres covers the load until traffic proves otherwise.
 Unofficial fan content. The attribution Supercell's [Fan Content Policy](https://supercell.com/en/fan-content-policy/)
 requires is in the root layout so it cannot be dropped from a page.
 
-The base builder renders official structure art, used under that policy. The
-files live in `public/sprites/`, one per structure, and `public/sprites/credits.json`
-records what each one is and where it came from: the community wiki, at the
-highest level `src/lib/game/buildings.ts` says the structure reaches. Picking
-"highest numbered file on the wiki" is not safe on its own — it yields
+The base builder renders official structure art, used under that policy, and it
+renders it **per level**: a structure is drawn at the level the selected Town
+Hall can reach, so a TH4 cannon is the stubby one and a TH14 cannon is not.
+`src/lib/game/buildings.ts` supplies that ceiling.
+
+Files live in `public/sprites/`, named by content hash and shared between levels
+whose art is identical — 370 files covering 405 structure-levels. Which file a
+structure and level resolve to is `src/lib/base/sprite-index.json`; a level with
+no entry of its own uses the highest entry below it, which is why the index is
+smaller than the number of levels. `public/sprites/credits.json` records the
+provenance.
+
+Picking "highest numbered file on the wiki" is not safe on its own — it yields
 `Archer_Tower109.png` and `Air_Defense2012.png`, a typo and a year — so the
-game data is the cap.
+game data caps which files are considered.
 
 Everything else in the UI is original, including the vector structure icons in
 `src/lib/base/icons.ts`. Those are still the fallback the board draws while a
@@ -152,9 +160,9 @@ src/lib/game/      curated dataset, interpolation, planner + progress logic
 src/lib/war/       war analysis — star credit, standings, war log summaries
 src/lib/theme.ts   three-state theme store (system / light / dark)
 src/lib/base/      base layout rules — collision, count limits, drag painting
-src/lib/base/iso.ts      isometric projection and its inverse, both tested
+src/lib/base/iso.ts      isometric projection, its inverse, and the zoom/pan camera
 src/lib/base/terrain.ts  the village ground, painted once and cached
-src/lib/base/sprites.ts  lazy sprite loading, with the vector icons as fallback
+src/lib/base/sprites.ts  per-level sprite resolution and lazy loading
 src/lib/coc/       Supercell client, tag handling, key rotation, mock generator
 src/lib/data/      read paths — Postgres only, never upstream
 src/lib/ingest/    the only code that calls Supercell

@@ -11,7 +11,8 @@ import {
 import { drawIcon, type Ink } from '@/lib/base/icons';
 import { TERRAIN, paintTerrain } from '@/lib/base/terrain';
 import {
-  depth, footprint, isoCanvas, toTile, tileDiamond, trace, type Iso,
+  depth, footprint, initialCamera, isoCanvas, panBy, toLayer, toTile, tileDiamond,
+  trace, viewport, zoomAt, MAX_SCALE, MIN_SCALE, type Camera, type Iso,
 } from '@/lib/base/iso';
 import { sprite, spriteUrl } from '@/lib/base/sprites';
 import { MAX_TH } from '@/lib/game/town-halls';
@@ -88,6 +89,15 @@ export function BaseBuilder() {
   const [erasing, setErasing] = useState(false);
   const [hover, setHover] = useState<{ x: number; y: number } | null>(null);
   const [note, setNote] = useState<string | null>(null);
+  const [cam, setCam] = useState<Camera>(() => initialCamera(VIEW.width, VIEW.height));
+  /**
+   * A structure picked up by dragging it. `grab` is the offset from the
+   * structure's origin to the tile grabbed, so it does not jump to the cursor
+   * the moment you touch it.
+   */
+  const [moving, setMoving] = useState<
+    { tile: Tile; grab: { x: number; y: number }; at: { x: number; y: number } } | null
+  >(null);
 
   /**
    * The canvas lives in state, not a ref, so the draw effect can depend on it.
@@ -118,13 +128,23 @@ export function BaseBuilder() {
   const tileAt = useCallback((clientX: number, clientY: number) => {
     if (!canvas) return null;
     const r = canvas.getBoundingClientRect();
-    // Screen space to canvas space, then canvas space to the isometric grid.
-    return toTile(
-      VIEW,
+    // Screen -> canvas backing -> (through the camera) layer -> isometric tile.
+    const p = toLayer(
+      cam, VIEW.width, VIEW.height,
       ((clientX - r.left) / r.width) * VIEW.width,
       ((clientY - r.top) / r.height) * VIEW.height,
-      GRID,
     );
+    return toTile(VIEW, p.x, p.y, GRID);
+  }, [canvas, cam]);
+
+  /** Canvas-backing pixels for a client point, for camera maths. */
+  const backingAt = useCallback((clientX: number, clientY: number) => {
+    if (!canvas) return null;
+    const r = canvas.getBoundingClientRect();
+    return {
+      x: ((clientX - r.left) / r.width) * VIEW.width,
+      y: ((clientY - r.top) / r.height) * VIEW.height,
+    };
   }, [canvas]);
 
   const apply = useCallback((x: number, y: number, erase: boolean) => {
@@ -137,20 +157,66 @@ export function BaseBuilder() {
     if (next) commit(next);
   }, [palette, tiles, selected, commit]);
 
+  /** Middle-button or shift-drag pans, the way map editors do. */
+  const panning = useRef<{ x: number; y: number } | null>(null);
+
   function onPointerDown(e: ReactPointerEvent<HTMLCanvasElement>) {
     e.preventDefault();
     e.currentTarget.setPointerCapture(e.pointerId);
+
+    if (e.button === 1 || e.shiftKey) {
+      panning.current = { x: e.clientX, y: e.clientY };
+      return;
+    }
+
     dragging.current = true;
     const t = tileAt(e.clientX, e.clientY);
     if (!t) return;
     lastPainted.current = t;
-    apply(t.x, t.y, erasing || e.button === 2);
+
+    const erase = erasing || e.button === 2;
+    if (!erase) {
+      // Dragging something already on the board moves it, the way it works in
+      // the game. Only empty ground places a new structure — otherwise every
+      // attempt to nudge a building drops another one on top of it.
+      const under = topAt(palette, tiles, t.x, t.y);
+      if (under) {
+        setMoving({
+          tile: under,
+          grab: { x: t.x - under.x, y: t.y - under.y },
+          at: { x: under.x, y: under.y },
+        });
+        return;
+      }
+    }
+    apply(t.x, t.y, erase);
   }
 
   function onPointerMove(e: ReactPointerEvent<HTMLCanvasElement>) {
+    if (panning.current) {
+      const r = e.currentTarget.getBoundingClientRect();
+      const k = VIEW.width / r.width;
+      // The delta is resolved here, not inside the updater. React may run an
+      // updater later than the event that queued it — by which time pointerup
+      // has set `panning.current` to null and reading it would throw.
+      const dx = (e.clientX - panning.current.x) * k;
+      const dy = (e.clientY - panning.current.y) * k;
+      panning.current = { x: e.clientX, y: e.clientY };
+      setCam((c) => panBy(c, VIEW.width, VIEW.height, dx, dy));
+      return;
+    }
+
     const t = tileAt(e.clientX, e.clientY);
     const moved = !hover || !t || hover.x !== t.x || hover.y !== t.y;
     if (moved) setHover(t);
+
+    if (moving) {
+      if (t && moved) {
+        setMoving((m) => (m ? { ...m, at: { x: t.x - m.grab.x, y: t.y - m.grab.y } } : m));
+      }
+      return;
+    }
+
     if (!dragging.current || !t || !moved) return;
 
     // Drag-painting only makes sense for single-tile pieces: walls and traps.
@@ -171,7 +237,30 @@ export function BaseBuilder() {
     if (next !== tiles) commit(next);
   }
 
-  const endDrag = () => { dragging.current = false; lastPainted.current = null; };
+  /** Drop a structure being moved, if where it landed is legal. */
+  function finishMove() {
+    if (!moving) return;
+    const { tile, at } = moving;
+    setMoving(null);
+    if (at.x === tile.x && at.y === tile.y) return;
+    const without = tiles.filter((t) => t !== tile);
+    if (canPlace(palette, without, tile.id, at.x, at.y)) {
+      commit([...without, { id: tile.id, x: at.x, y: at.y }]);
+    }
+  }
+
+  function onWheel(e: React.WheelEvent<HTMLCanvasElement>) {
+    const b = backingAt(e.clientX, e.clientY);
+    if (!b) return;
+    setCam((c) => zoomAt(c, VIEW.width, VIEW.height, b.x, b.y, e.deltaY < 0 ? 1.15 : 1 / 1.15));
+  }
+
+  const endDrag = () => {
+    finishMove();
+    panning.current = null;
+    dragging.current = false;
+    lastPainted.current = null;
+  };
 
   /* ------------------------------------------------------------- drawing */
 
@@ -184,16 +273,17 @@ export function BaseBuilder() {
   const onSpriteReady = useCallback(() => setSpriteTick((t) => t + 1), []);
 
   /**
-   * Two cached layers under the live one. Terrain is ~2000 diamonds plus
-   * scenery; structures are up to a few hundred sprites. Both are static while
-   * the pointer moves, so redrawing them on every hover — which is every few
-   * milliseconds during a drag — is what would make this feel slow. Each layer
-   * repaints only when the inputs it actually depends on change.
+   * Terrain is cached, structures are not.
+   *
+   * Terrain is thousands of diamonds and scattered scenery, it never changes
+   * while you build, and it is texture — magnifying the cached copy when zoomed
+   * costs nothing anyone can see. Structures are the opposite: a few hundred
+   * drawImage calls, cheap to repeat, and the whole reason to zoom in is to
+   * look at them closely. Drawing them live means the sprite is rasterised at
+   * the size it is displayed, so zooming sharpens them instead of blurring a
+   * cached bitmap.
    */
   const terrainLayer = useRef<{ theme: string; c: HTMLCanvasElement } | null>(null);
-  const structLayer = useRef<
-    { theme: string; tiles: Tile[]; palette: Palette; tick: number; c: HTMLCanvasElement } | null
-  >(null);
 
   useEffect(() => {
     const g = canvas?.getContext('2d');
@@ -211,31 +301,40 @@ export function BaseBuilder() {
       terrainLayer.current = { theme, c };
     }
 
-    const cached = structLayer.current;
-    if (!cached || cached.tiles !== tiles || cached.palette !== palette
-        || cached.theme !== theme || cached.tick !== spriteTick) {
-      const c = cached?.c ?? document.createElement('canvas');
-      c.width = VIEW.width;
-      c.height = VIEW.height;
-      const sg = c.getContext('2d');
-      if (!sg) return;
-      sg.clearRect(0, 0, VIEW.width, VIEW.height);
-      // Painter's algorithm: back to front, or a Town Hall swallows the wall
-      // standing in front of it.
-      const order = [...tiles].sort((a, b) => {
-        const pa = palette.get(a.id), pb = palette.get(b.id);
-        if (!pa || !pb) return 0;
-        return depth(a.x, a.y, pa.size[0], pa.size[1]) - depth(b.x, b.y, pb.size[0], pb.size[1]);
-      });
-      for (const t of order) drawStructure(sg, palette.get(t.id), t.x, t.y, VIEW, onSpriteReady);
-      structLayer.current = { theme, tiles, palette, tick: spriteTick, c };
+    // Zoom and pan are a crop of the terrain, not a repaint of it.
+    const v = viewport(cam, VIEW.width, VIEW.height);
+    g.clearRect(0, 0, VIEW.width, VIEW.height);
+    if (terrainLayer.current) {
+      g.drawImage(terrainLayer.current.c, v.sx, v.sy, v.sw, v.sh, 0, 0, VIEW.width, VIEW.height);
     }
 
-    g.clearRect(0, 0, VIEW.width, VIEW.height);
-    if (terrainLayer.current) g.drawImage(terrainLayer.current.c, 0, 0);
-    if (structLayer.current) g.drawImage(structLayer.current.c, 0, 0);
+    // Everything else is drawn in layer coordinates under the camera transform.
+    g.save();
+    g.scale(VIEW.width / v.sw, VIEW.height / v.sh);
+    g.translate(-v.sx, -v.sy);
 
-    if (hover) {
+    // Painter's algorithm: back to front, or a Town Hall swallows the wall
+    // standing in front of it.
+    const order = [...tiles].sort((a, b) => {
+      const pa = palette.get(a.id), pb = palette.get(b.id);
+      if (!pa || !pb) return 0;
+      return depth(a.x, a.y, pa.size[0], pa.size[1]) - depth(b.x, b.y, pb.size[0], pb.size[1]);
+    });
+    for (const t of order) {
+      if (moving && t === moving.tile) continue;
+      drawStructure(g, palette.get(t.id), t.x, t.y, VIEW, onSpriteReady);
+    }
+
+    if (moving) {
+      const p = palette.get(moving.tile.id);
+      if (p) {
+        const without = tiles.filter((t) => t !== moving.tile);
+        const ok = canPlace(palette, without, moving.tile.id, moving.at.x, moving.at.y);
+        g.globalAlpha = 0.75;
+        drawStructure(g, p, moving.at.x, moving.at.y, VIEW, onSpriteReady, ok ? undefined : '#ff5f56');
+        g.globalAlpha = 1;
+      }
+    } else if (hover) {
       if (erasing) {
         // Outline what would actually go, not the tile under the cursor: on a
         // 4x4 those differ, and a tile-sized diamond makes the eraser look like
@@ -261,7 +360,8 @@ export function BaseBuilder() {
         }
       }
     }
-  }, [canvas, tiles, hover, selected, erasing, palette, theme, spriteTick, onSpriteReady]);
+    g.restore();
+  }, [canvas, tiles, hover, selected, erasing, palette, theme, spriteTick, onSpriteReady, cam, moving]);
 
   /* --------------------------------------------------------- persistence */
 
@@ -282,15 +382,20 @@ export function BaseBuilder() {
   }
 
   function open(l: BaseLayout) {
-    // A layout built at a higher Town Hall can hold structures this one cannot,
-    // so it is filtered rather than trusted — and we say what was dropped.
-    const kept = l.th === th ? l.tiles : sanitise(palette, l.tiles);
+    // Always filtered, never trusted — including when the layout's own Town
+    // Hall matches this one. Layouts live in localStorage and can be edited by
+    // hand, so `l.th` is a claim, not a guarantee: a layout tagged TH3 holding
+    // TH14 structures would otherwise load them all and report "110 placed of
+    // 77 available".
+    const kept = sanitise(palette, l.tiles);
+    const dropped = l.tiles.length - kept.length;
     commit(kept);
     setLayoutId(l.id);
     setName(l.name);
-    setNote(kept.length < l.tiles.length
-      ? `Built for TH${l.th}: ${l.tiles.length - kept.length} structures TH${th} cannot build were dropped.`
-      : null);
+    setNote(dropped === 0 ? null
+      : l.th === th
+        ? `${dropped} structures TH${th} cannot build were dropped.`
+        : `Built for TH${l.th}: ${dropped} structures TH${th} cannot build were dropped.`);
   }
 
   function remove(id: string) {
@@ -319,6 +424,25 @@ export function BaseBuilder() {
         title="Canvas"
         action={
           <div className="flex items-center gap-1.5">
+            <Toolbtn
+              onClick={() => setCam((c) => zoomAt(c, VIEW.width, VIEW.height, VIEW.width / 2, VIEW.height / 2, 1 / 1.4))}
+              disabled={cam.scale <= MIN_SCALE}
+            >
+              −
+            </Toolbtn>
+            <span className="num w-10 text-center text-[11px] text-faint">{cam.scale.toFixed(1)}×</span>
+            <Toolbtn
+              onClick={() => setCam((c) => zoomAt(c, VIEW.width, VIEW.height, VIEW.width / 2, VIEW.height / 2, 1.4))}
+              disabled={cam.scale >= MAX_SCALE}
+            >
+              +
+            </Toolbtn>
+            <Toolbtn
+              onClick={() => setCam(initialCamera(VIEW.width, VIEW.height))}
+              disabled={cam.scale === MIN_SCALE}
+            >
+              Fit
+            </Toolbtn>
             <Toolbtn onClick={undo} disabled={!history.length}>Undo</Toolbtn>
             <Toolbtn onClick={() => setErasing((e) => !e)} active={erasing}>Eraser</Toolbtn>
             <Toolbtn onClick={() => tiles.length && commit([])} disabled={!tiles.length} danger>Clear</Toolbtn>
@@ -343,6 +467,7 @@ export function BaseBuilder() {
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
             onPointerUp={endDrag}
+            onWheel={onWheel}
             onPointerLeave={() => { endDrag(); setHover(null); }}
             onContextMenu={(e) => e.preventDefault()}
             aria-label={`Village grid, ${GRID} by ${GRID} tiles, ${stats.placed} structures placed`}
@@ -351,7 +476,9 @@ export function BaseBuilder() {
           />
         </div>
         <p className="mt-3 text-center text-[12px] text-faint">
-          Click to place · drag to paint walls and traps · right-click to remove
+          Click to place · drag a structure to move it · drag to paint walls and traps
+          <br />
+          Right-click to remove · scroll to zoom · shift-drag or middle-drag to pan
         </p>
       </Panel>
 
@@ -468,7 +595,7 @@ function drawStructure(
   g.lineWidth = forceStroke ? 2.5 : 1.5;
   g.stroke();
 
-  const img = sprite(p.id, onSpriteReady);
+  const img = sprite(p.id, p.level, onSpriteReady);
   if (img && img.naturalWidth > 0) {
     // Slightly narrower than the diamond. The art carries its own margin and
     // shadow, so drawing it at full width makes neighbours a tile apart look
@@ -500,6 +627,29 @@ function drawStructure(
   g.fillText(abbrev(p.name), f.cx, f.cy);
 }
 
+/** The structure's own art at the level this Town Hall reaches. */
+function SpriteChip({ entry }: { entry: PaletteEntry }) {
+  const url = spriteUrl(entry.id, entry.level);
+  if (!url) {
+    const col = styleOf(entry.category);
+    return (
+      <span
+        className="h-7 w-7 shrink-0 rounded-[4px] border"
+        style={{ background: col.plate, borderColor: col.edge }}
+      />
+    );
+  }
+  return (
+    <Image
+      src={url}
+      alt=""
+      width={28}
+      height={28}
+      className="h-7 w-7 shrink-0 object-contain"
+    />
+  );
+}
+
 function PaletteRow({ entry, used, active, onSelect }: {
   entry: PaletteEntry; used: number; active: boolean; onSelect: () => void;
 }) {
@@ -512,13 +662,7 @@ function PaletteRow({ entry, used, active, onSelect }: {
         active ? 'border-gold/50 bg-panel-3' : 'border-transparent hover:bg-panel-2'
       } ${full ? 'opacity-45' : ''}`}
     >
-      <Image
-        src={spriteUrl(entry.id)}
-        alt=""
-        width={28}
-        height={28}
-        className="h-7 w-7 shrink-0 object-contain"
-      />
+      <SpriteChip entry={entry} />
       <span className="flex-1 truncate text-[12px]">{entry.name}</span>
       <span className={`num text-[11px] ${full ? 'text-ok' : 'text-muted'}`}>{used}/{entry.limit}</span>
       <span className="num text-[10px] text-faint">{entry.size[0]}×{entry.size[1]}</span>
