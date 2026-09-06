@@ -5,38 +5,65 @@ import type { PointerEvent as ReactPointerEvent } from 'react';
 import {
   GRID, TOWN_HALL_ID, abbrev, canPlace, countOf, eraseAt, paletteFor,
   lineTiles, paletteIndex, place, sanitise, snapOrigin, statsFor,
-  type BaseLayout, type PaletteCategory, type PaletteEntry, type Tile,
+  type BaseLayout, type Palette, type PaletteCategory, type PaletteEntry, type Tile,
 } from '@/lib/base/layout';
+import { drawIcon, type Ink } from '@/lib/base/icons';
+import { TERRAIN, geometry, paintTerrain, tileFromPoint } from '@/lib/base/terrain';
 import { MAX_TH } from '@/lib/game/town-halls';
 import { usePlannerState } from '@/lib/store';
 import { useResolvedTheme } from '@/lib/theme';
 import { Panel, Stat } from '@/components/primitives';
 
-/** Canvas is drawn at a fixed resolution and scaled by CSS. */
-const RESOLUTION = 880;
+/**
+ * Canvas is drawn at a fixed resolution and scaled by CSS. It is well above the
+ * ~760px display width on purpose: structure icons carry fine detail, and at
+ * 1:1 they turn to mush on a 2x display.
+ */
+const RESOLUTION = 1320;
 const FONT = 'ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
 
-/** Read from the live palette so the canvas follows the theme like everything else. */
-function themeColors() {
-  const cs = getComputedStyle(document.documentElement);
-  const v = (name: string, fallback: string) => cs.getPropertyValue(name).trim() || fallback;
-  const dark = cs.getPropertyValue('color-scheme').includes('dark');
-  return {
-    ground: v('--color-panel-2', '#10161c'),
-    grid: dark ? 'rgba(255,255,255,.05)' : 'rgba(90,60,20,.10)',
-    gridMajor: dark ? 'rgba(255,255,255,.10)' : 'rgba(90,60,20,.20)',
-  };
+interface CatStyle {
+  ink: Ink;
+  /** Footprint plate under the icon. A layout editor has to show which tiles
+   *  a structure occupies, so the icon alone is not enough. */
+  plate: string;
+  edge: string;
+  /** Swatch colour for the palette list. */
+  chip: string;
 }
 
-const COLOR: Record<PaletteCategory, { fill: string; stroke: string; text: string }> = {
-  defense: { fill: '#4a2320', stroke: '#c0574d', text: '#ffb3ab' },
-  trap: { fill: '#4a3410', stroke: '#c99b2e', text: '#ffd98a' },
-  resource: { fill: '#3f3a14', stroke: '#c0a83a', text: '#f0dc8a' },
-  army: { fill: '#3a2447', stroke: '#a76bd0', text: '#e0b3ff' },
-  wall: { fill: '#33383f', stroke: '#7b8797', text: '#c3ccd8' },
-  other: { fill: '#1d3446', stroke: '#4a8ec0', text: '#9fd4ff' },
-  townhall: { fill: '#4a3a12', stroke: '#f0b429', text: '#ffe6a8' },
+const STYLE: Record<PaletteCategory, CatStyle> = {
+  defense: {
+    ink: { body: '#b3574a', shade: '#8a3f35', accent: '#f0c05a', line: '#2b1a17' },
+    plate: 'rgba(46,20,16,.42)', edge: 'rgba(240,150,130,.55)', chip: '#b3574a',
+  },
+  trap: {
+    ink: { body: '#a8862f', shade: '#7d6222', accent: '#e8c65a', line: '#2b230f' },
+    plate: 'rgba(48,36,10,.40)', edge: 'rgba(232,198,90,.5)', chip: '#c99b2e',
+  },
+  resource: {
+    ink: { body: '#b09a4c', shade: '#7f6f37', accent: '#f2d564', line: '#2b2410' },
+    plate: 'rgba(44,38,12,.40)', edge: 'rgba(240,214,100,.5)', chip: '#c0a83a',
+  },
+  army: {
+    ink: { body: '#8e5fb0', shade: '#6b448a', accent: '#dcaef2', line: '#241832' },
+    plate: 'rgba(38,22,50,.44)', edge: 'rgba(197,140,230,.5)', chip: '#a76bd0',
+  },
+  wall: {
+    ink: { body: '#8f97a2', shade: '#6b727c', accent: '#c3ccd8', line: '#2a2e33' },
+    plate: 'rgba(28,32,36,.40)', edge: 'rgba(180,192,206,.5)', chip: '#7b8797',
+  },
+  other: {
+    ink: { body: '#5a8fb8', shade: '#436e90', accent: '#a8d8f0', line: '#16232e' },
+    plate: 'rgba(16,32,44,.42)', edge: 'rgba(140,200,236,.5)', chip: '#4a8ec0',
+  },
+  townhall: {
+    ink: { body: '#c99a3c', shade: '#9c7429', accent: '#f4cd63', line: '#3a2a0c' },
+    plate: 'rgba(54,38,8,.44)', edge: 'rgba(244,205,99,.62)', chip: '#f0b429',
+  },
 };
+
+const styleOf = (c: PaletteCategory): CatStyle => STYLE[c] ?? STYLE.other;
 
 const UNDO_DEPTH = 40;
 
@@ -86,9 +113,13 @@ export function BaseBuilder() {
   const tileAt = useCallback((clientX: number, clientY: number) => {
     if (!canvas) return null;
     const r = canvas.getBoundingClientRect();
-    const x = Math.floor(((clientX - r.left) / r.width) * GRID);
-    const y = Math.floor(((clientY - r.top) / r.height) * GRID);
-    return x >= 0 && x < GRID && y >= 0 && y < GRID ? { x, y } : null;
+    // The canvas is wider than the grid — scenery rings the field — so the
+    // point is resolved against that geometry, not against the raw bounds.
+    return tileFromPoint(
+      ((clientX - r.left) / r.width) * RESOLUTION,
+      ((clientY - r.top) / r.height) * RESOLUTION,
+      RESOLUTION, GRID,
+    );
   }, [canvas]);
 
   const apply = useCallback((x: number, y: number, erase: boolean) => {
@@ -139,45 +170,72 @@ export function BaseBuilder() {
 
   /* ------------------------------------------------------------- drawing */
 
+  /**
+   * Two cached layers under the live one. Terrain is thousands of scattered
+   * tufts and rocks; structures are up to a few hundred vector icons. Both are
+   * static while the pointer moves, so redrawing them on every hover — which is
+   * every few milliseconds during a drag — is what would make this feel slow.
+   * Each layer repaints only when the inputs it actually depends on change.
+   */
+  const terrainLayer = useRef<{ theme: string; c: HTMLCanvasElement } | null>(null);
+  const structLayer = useRef<{ theme: string; tiles: Tile[]; palette: Palette; c: HTMLCanvasElement } | null>(null);
+
   useEffect(() => {
     const g = canvas?.getContext('2d');
     if (!g) return;
-    const cell = RESOLUTION / GRID;
-    const colors = themeColors();
+    const { cell, origin } = geometry(RESOLUTION, GRID);
 
-    g.fillStyle = colors.ground;
-    g.fillRect(0, 0, RESOLUTION, RESOLUTION);
-
-    g.lineWidth = 1;
-    for (const [step, stroke] of [[1, colors.grid], [4, colors.gridMajor]] as const) {
-      g.strokeStyle = stroke;
-      for (let i = 0; i <= GRID; i += step) {
-        const p = Math.round(i * cell) + 0.5;
-        g.beginPath(); g.moveTo(p, 0); g.lineTo(p, RESOLUTION); g.stroke();
-        g.beginPath(); g.moveTo(0, p); g.lineTo(RESOLUTION, p); g.stroke();
-      }
+    if (terrainLayer.current?.theme !== theme) {
+      const c = document.createElement('canvas');
+      c.width = c.height = RESOLUTION;
+      const tg = c.getContext('2d');
+      if (!tg) return;
+      paintTerrain(tg, { size: RESOLUTION, grid: GRID, theme: TERRAIN[theme] });
+      terrainLayer.current = { theme, c };
     }
 
-    for (const t of tiles) drawTile(g, palette.get(t.id), t.x, t.y, cell);
+    const cached = structLayer.current;
+    if (!cached || cached.tiles !== tiles || cached.palette !== palette || cached.theme !== theme) {
+      const c = cached?.c ?? document.createElement('canvas');
+      c.width = c.height = RESOLUTION;
+      const sg = c.getContext('2d');
+      if (!sg) return;
+      sg.clearRect(0, 0, RESOLUTION, RESOLUTION);
+      const walls = wallSet(palette, tiles);
+      for (const t of tiles) drawStructure(sg, palette.get(t.id), t.x, t.y, cell, origin, walls);
+      structLayer.current = { theme, tiles, palette, c };
+    }
+
+    g.clearRect(0, 0, RESOLUTION, RESOLUTION);
+    if (terrainLayer.current) g.drawImage(terrainLayer.current.c, 0, 0);
+    if (structLayer.current) g.drawImage(structLayer.current.c, 0, 0);
 
     if (hover) {
       if (erasing) {
+        // Outline what would actually go, not the tile under the cursor: on a
+        // 4x4 those differ, and the tile-sized box makes the eraser look like
+        // it will nibble a corner off.
+        const box = topAt(palette, tiles, hover.x, hover.y);
+        const p = box ? palette.get(box.id) : undefined;
         g.strokeStyle = '#ff5f56';
-        g.lineWidth = 2;
-        g.strokeRect(hover.x * cell, hover.y * cell, cell, cell);
+        g.lineWidth = Math.max(2, cell * 0.14);
+        g.strokeRect(
+          origin + (box ?? hover).x * cell, origin + (box ?? hover).y * cell,
+          (p?.size[0] ?? 1) * cell, (p?.size[1] ?? 1) * cell,
+        );
       } else {
         const p = palette.get(selected);
         if (p) {
           const at = snapOrigin(p.size, hover.x, hover.y);
           const ok = canPlace(palette, tiles, selected, at.x, at.y);
-          g.globalAlpha = 0.55;
-          drawTile(g, p, at.x, at.y, cell, ok ? undefined : '#ff5f56');
+          g.globalAlpha = 0.6;
+          drawStructure(g, p, at.x, at.y, cell, origin, null, ok ? undefined : '#ff5f56');
           g.globalAlpha = 1;
         }
       }
     }
-    // `theme` is not read here — themeColors() re-reads the live CSS variables —
-    // but it must stay a dependency so a palette change triggers a repaint.
+    // `theme` is not read for the CSS palette any more, but it still selects the
+    // terrain and must stay a dependency so a palette change repaints.
   }, [canvas, tiles, hover, selected, erasing, palette, theme]);
 
   /* --------------------------------------------------------- persistence */
@@ -344,28 +402,102 @@ export function BaseBuilder() {
   );
 }
 
-function drawTile(
+/** Tile keys of every wall, so a wall can see its neighbours in O(1). */
+function wallSet(palette: Palette, tiles: Tile[]): Set<string> {
+  const out = new Set<string>();
+  for (const t of tiles) {
+    if (palette.get(t.id)?.category === 'wall') out.add(`${t.x},${t.y}`);
+  }
+  return out;
+}
+
+/** The structure covering a tile, topmost first — what the eraser would take. */
+function topAt(palette: Palette, tiles: Tile[], x: number, y: number): Tile | null {
+  for (let i = tiles.length - 1; i >= 0; i--) {
+    const p = palette.get(tiles[i].id);
+    if (!p) continue;
+    const t = tiles[i];
+    if (x >= t.x && x < t.x + p.size[0] && y >= t.y && y < t.y + p.size[1]) return t;
+  }
+  return null;
+}
+
+/**
+ * Walls are drawn as masonry that fuses with its neighbours rather than as
+ * separate blocks. A wall line is the one structure whose whole point is being
+ * continuous, and 40 individually rounded squares read as a dotted trail.
+ */
+function drawWall(
+  g: CanvasRenderingContext2D, style: CatStyle,
+  tx: number, ty: number, cell: number, origin: number,
+  walls: Set<string> | null, forceStroke?: string,
+) {
+  const x = origin + tx * cell;
+  const y = origin + ty * cell;
+  const pad = cell * 0.1;
+  const near = (dx: number, dy: number) => walls?.has(`${tx + dx},${ty + dy}`) ?? false;
+
+  g.fillStyle = style.ink.body;
+  roundRect(g, x + pad, y + pad, cell - pad * 2, cell - pad * 2, cell * 0.22);
+  g.fill();
+
+  // Bridge the gap toward each adjacent wall so a run comes out solid.
+  for (const [dx, dy] of [[1, 0], [0, 1], [-1, 0], [0, -1]] as const) {
+    if (!near(dx, dy)) continue;
+    g.fillRect(
+      x + (dx === 0 ? pad : dx > 0 ? cell - pad * 2 : 0),
+      y + (dy === 0 ? pad : dy > 0 ? cell - pad * 2 : 0),
+      dx === 0 ? cell - pad * 2 : pad * 2,
+      dy === 0 ? cell - pad * 2 : pad * 2,
+    );
+  }
+
+  g.fillStyle = style.ink.accent;
+  g.fillRect(x + pad * 1.6, y + pad * 1.6, cell - pad * 3.2, cell * 0.16);
+  g.strokeStyle = forceStroke ?? style.ink.line;
+  g.lineWidth = Math.max(1, cell * 0.05);
+  roundRect(g, x + pad, y + pad, cell - pad * 2, cell - pad * 2, cell * 0.22);
+  g.stroke();
+}
+
+function drawStructure(
   g: CanvasRenderingContext2D,
   p: PaletteEntry | undefined,
-  tx: number, ty: number, cell: number,
+  tx: number, ty: number, cell: number, origin: number,
+  walls: Set<string> | null,
   forceStroke?: string,
 ) {
   if (!p) return;
-  const col = COLOR[p.category] ?? COLOR.other;
-  const x = tx * cell, y = ty * cell, w = p.size[0] * cell, h = p.size[1] * cell;
-  const pad = p.size[0] === 1 ? 0.8 : 1.5;
+  const style = styleOf(p.category);
 
-  g.fillStyle = col.fill;
-  g.strokeStyle = forceStroke ?? col.stroke;
-  g.lineWidth = p.size[0] === 1 ? 1 : 1.5;
-  roundRect(g, x + pad, y + pad, w - pad * 2, h - pad * 2, Math.min(4, w / 5));
+  if (p.category === 'wall') {
+    drawWall(g, style, tx, ty, cell, origin, walls, forceStroke);
+    return;
+  }
+
+  const x = origin + tx * cell;
+  const y = origin + ty * cell;
+  const w = p.size[0] * cell;
+  const h = p.size[1] * cell;
+  const pad = Math.max(0.5, cell * 0.06);
+  const r = Math.min(cell * 0.3, w / 6);
+
+  // Footprint plate: the icon says what it is, the plate says which tiles it
+  // takes. Both matter here — this is a placement tool, not a picture.
+  roundRect(g, x + pad, y + pad, w - pad * 2, h - pad * 2, r);
+  g.fillStyle = style.plate;
   g.fill();
+  g.strokeStyle = forceStroke ?? style.edge;
+  g.lineWidth = Math.max(1, cell * 0.06);
   g.stroke();
 
-  // A 1x1 is too small for even two letters; leave walls and traps unlabelled.
-  if (p.size[0] < 2) return;
-  g.fillStyle = col.text;
-  g.font = `600 ${Math.max(7, cell * (p.size[0] >= 4 ? 0.78 : 0.62))}px ${FONT}`;
+  const inset = Math.min(w, h) * 0.08;
+  if (drawIcon(g, p.id, x + inset, y + inset, Math.min(w, h) - inset * 2, style.ink)) return;
+
+  // No icon for this id: fall back to initials so a newly added building still
+  // renders as something a person can identify.
+  g.fillStyle = style.ink.accent;
+  g.font = `700 ${Math.max(7, cell * (p.size[0] >= 4 ? 0.7 : 0.55))}px ${FONT}`;
   g.textAlign = 'center';
   g.textBaseline = 'middle';
   g.fillText(abbrev(p.name), x + w / 2, y + h / 2);
@@ -381,11 +513,35 @@ function roundRect(g: CanvasRenderingContext2D, x: number, y: number, w: number,
   g.closePath();
 }
 
+/** The same icon as the canvas, at chip size, so the list and board agree. */
+function IconChip({ entry }: { entry: PaletteEntry }) {
+  const [c, setC] = useState<HTMLCanvasElement | null>(null);
+  useEffect(() => {
+    const g = c?.getContext('2d');
+    if (!g) return;
+    const style = styleOf(entry.category);
+    g.clearRect(0, 0, 40, 40);
+    roundRect(g, 1, 1, 38, 38, 9);
+    g.fillStyle = style.plate;
+    g.fill();
+    g.strokeStyle = style.edge;
+    g.lineWidth = 2;
+    g.stroke();
+    if (!drawIcon(g, entry.id, 4, 4, 32, style.ink)) {
+      g.fillStyle = style.ink.accent;
+      g.font = `700 15px ${FONT}`;
+      g.textAlign = 'center';
+      g.textBaseline = 'middle';
+      g.fillText(abbrev(entry.name), 20, 21);
+    }
+  }, [c, entry]);
+  return <canvas ref={setC} width={40} height={40} aria-hidden className="h-5 w-5 shrink-0" />;
+}
+
 function PaletteRow({ entry, used, active, onSelect }: {
   entry: PaletteEntry; used: number; active: boolean; onSelect: () => void;
 }) {
   const full = used >= entry.limit;
-  const col = COLOR[entry.category] ?? COLOR.other;
   return (
     <button
       type="button"
@@ -394,10 +550,7 @@ function PaletteRow({ entry, used, active, onSelect }: {
         active ? 'border-gold/50 bg-panel-3' : 'border-transparent hover:bg-panel-2'
       } ${full ? 'opacity-45' : ''}`}
     >
-      <span
-        className="h-3.5 w-3.5 shrink-0 rounded-[3px] border"
-        style={{ background: col.fill, borderColor: col.stroke }}
-      />
+      <IconChip entry={entry} />
       <span className="flex-1 truncate text-[12px]">{entry.name}</span>
       <span className={`num text-[11px] ${full ? 'text-ok' : 'text-muted'}`}>{used}/{entry.limit}</span>
       <span className="num text-[10px] text-faint">{entry.size[0]}×{entry.size[1]}</span>

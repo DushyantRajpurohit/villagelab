@@ -3,6 +3,7 @@ import {
   GRID, TOWN_HALL_ID, abbrev, canPlace, countOf, eraseAt, paletteFor,
   lineTiles, paletteIndex, place, sanitise, snapOrigin, statsFor, type Tile,
 } from '../layout';
+import { geometry, tileFromPoint } from '../terrain';
 import { MAX_TH } from '@/lib/game/town-halls';
 
 const entries = paletteFor(14);
@@ -212,5 +213,46 @@ describe('lineTiles', () => {
   it('is bounded even across the whole grid', () => {
     const line = lineTiles({ x: 0, y: 0 }, { x: GRID - 1, y: GRID - 1 });
     expect(line).toHaveLength(GRID);
+  });
+});
+
+describe('canvas geometry', () => {
+  const SIZE = 1320;
+
+  it('maps the centre of every tile back to that tile', () => {
+    const { cell, origin } = geometry(SIZE, GRID);
+    for (const [tx, ty] of [[0, 0], [0, GRID - 1], [GRID - 1, 0], [GRID - 1, GRID - 1], [21, 13]]) {
+      const px = origin + (tx + 0.5) * cell;
+      const py = origin + (ty + 0.5) * cell;
+      expect(tileFromPoint(px, py, SIZE, GRID)).toEqual({ x: tx, y: ty });
+    }
+  });
+
+  it('round-trips every tile on the board', () => {
+    const { cell, origin } = geometry(SIZE, GRID);
+    for (let ty = 0; ty < GRID; ty++) {
+      for (let tx = 0; tx < GRID; tx++) {
+        const hit = tileFromPoint(origin + (tx + 0.5) * cell, origin + (ty + 0.5) * cell, SIZE, GRID);
+        expect(hit).toEqual({ x: tx, y: ty });
+      }
+    }
+  });
+
+  it('rejects the scenery border rather than clamping into the field', () => {
+    const { cell, origin, span } = geometry(SIZE, GRID);
+    expect(tileFromPoint(0, 0, SIZE, GRID)).toBeNull();
+    expect(tileFromPoint(SIZE - 1, SIZE - 1, SIZE, GRID)).toBeNull();
+    // Just outside each edge of the field.
+    expect(tileFromPoint(origin - cell * 0.5, origin + span / 2, SIZE, GRID)).toBeNull();
+    expect(tileFromPoint(origin + span + cell * 0.5, origin + span / 2, SIZE, GRID)).toBeNull();
+    expect(tileFromPoint(origin + span / 2, origin - cell * 0.5, SIZE, GRID)).toBeNull();
+    expect(tileFromPoint(origin + span / 2, origin + span + cell * 0.5, SIZE, GRID)).toBeNull();
+  });
+
+  it('puts the field inside the canvas with room for the border', () => {
+    const { origin, span } = geometry(SIZE, GRID);
+    expect(origin).toBeGreaterThan(0);
+    expect(origin + span).toBeLessThan(SIZE);
+    expect(origin).toBeCloseTo(SIZE - (origin + span), 6);
   });
 });
