@@ -1,0 +1,14 @@
+{
+  "name": "clashverse",
+  "version": "0.1.0",
+  "private": true,
+  "description": "All-rounder Clash of Clans platform for players and clans",
+  "type": "module",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "check": "node scripts/check-data.js"
+  },
+  "engines": { "node": ">=20" }
+}

@@ -1,0 +1,40 @@
+name: Ingest
+
+# GitHub Actions is the scheduler because Vercel's Hobby plan only offers
+# daily cron. Scheduled runs on public repos are free.
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: 'Tags to process this run'
+        default: '20'
+
+concurrency:
+  group: ingest
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Trigger ingestion
+        env:
+          SITE_URL: ${{ secrets.SITE_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          LIMIT: ${{ inputs.limit || '20' }}
+        run: |
+          set -euo pipefail
+          response=$(mktemp)
+          code=$(curl -sS -o "$response" -w '%{http_code}' \
+            --max-time 90 \
+            -H "Authorization: Bearer $CRON_SECRET" \
+            "$SITE_URL/api/cron/ingest?limit=$LIMIT")
+          echo "HTTP $code"
+          cat "$response"
+          echo
+          # 429 means we hit the upstream rate limit — fail loudly rather than
+          # silently under-ingesting for days.
+          if [ "$code" != "200" ]; then exit 1; fi

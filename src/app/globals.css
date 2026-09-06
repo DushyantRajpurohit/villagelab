@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   VillageLab design tokens.
+
+   Two complete palettes. Light is a warm parchment-and-gold scheme in the
+   spirit of the game's own UI; dark is the same language after sundown — warm
+   browns rather than cold slate, so the gold still reads as gold.
+
+   The resource colours (gold / elixir / dark elixir) are *data* colours: a
+   number's hue tells you which currency it is. They are never decoration, and
+   both palettes keep them distinguishable against their own background.
+
+   Nothing here reproduces Supercell artwork, iconography or typography.
+   ========================================================================= */
+
+@theme {
+  /* --- light (default) --- */
+  --color-bg:        #efe3ce;
+  --color-panel:     #fffaf1;
+  --color-panel-2:   #f6ebd8;
+  --color-panel-3:   #ead9be;
+  --color-line:      #d9c19b;
+  --color-line-2:    #b9986b;
+
+  --color-text:      #3a2a16;
+  --color-text-2:    #5d4728;
+  --color-muted:     #8a7250;
+  --color-faint:     #a08a68;
+
+  --color-gold:      #c98b0d;
+  --color-gold-2:    #a86f05;
+  --color-ink:       #2a1d0a;
+
+  --color-elixir:    #a13cb0;
+  --color-dark:      #5f4fcc;
+
+  --color-ok:        #1f8f4e;
+  --color-warn:      #c07408;
+  --color-bad:       #c3352a;
+  --color-info:      #1d6fc4;
+
+  --bevel:           rgba(255, 255, 255, .85);
+  --shadow-panel:    0 1px 0 rgba(255,255,255,.7) inset, 0 2px 4px rgba(90,60,20,.10), 0 10px 24px rgba(90,60,20,.10);
+  --shadow-raised:   0 2px 0 var(--color-gold-2), 0 4px 10px rgba(90,60,20,.28);
+
+  --radius-panel:    14px;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-baloo), ui-rounded, "Segoe UI", system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+}
+
+/* The dark palette, applied both by system preference and by explicit choice.
+   Written twice on purpose: a media query cannot be re-scoped to an attribute,
+   and an explicit choice must win over the system in *both* directions. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg:      #17120c;
+    --color-panel:   #221b13;
+    --color-panel-2: #2c2318;
+    --color-panel-3: #392e20;
+    --color-line:    #483a28;
+    --color-line-2:  #665136;
+
+    --color-text:    #f6ecd9;
+    --color-text-2:  #d8c7ab;
+    --color-muted:   #a08a6d;
+    --color-faint:   #756450;
+
+    --color-gold:    #f0b429;
+    --color-gold-2:  #b7820e;
+    --color-ink:     #241906;
+
+    --color-elixir:  #d874e4;
+    --color-dark:    #a294f5;
+
+    --color-ok:      #46dd8b;
+    --color-warn:    #ffb746;
+    --color-bad:     #ff6f64;
+    --color-info:    #58aeff;
+
+    --bevel:         rgba(255, 255, 255, .07);
+    --shadow-panel:  0 1px 0 rgba(255,255,255,.05) inset, 0 2px 4px rgba(0,0,0,.45), 0 12px 28px rgba(0,0,0,.35);
+    --shadow-raised: 0 2px 0 var(--color-gold-2), 0 4px 12px rgba(0,0,0,.5);
+
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --color-bg:      #17120c;
+  --color-panel:   #221b13;
+  --color-panel-2: #2c2318;
+  --color-panel-3: #392e20;
+  --color-line:    #483a28;
+  --color-line-2:  #665136;
+
+  --color-text:    #f6ecd9;
+  --color-text-2:  #d8c7ab;
+  --color-muted:   #a08a6d;
+  --color-faint:   #756450;
+
+  --color-gold:    #f0b429;
+  --color-gold-2:  #b7820e;
+  --color-ink:     #241906;
+
+  --color-elixir:  #d874e4;
+  --color-dark:    #a294f5;
+
+  --color-ok:      #46dd8b;
+  --color-warn:    #ffb746;
+  --color-bad:     #ff6f64;
+  --color-info:    #58aeff;
+
+  --bevel:         rgba(255, 255, 255, .07);
+  --shadow-panel:  0 1px 0 rgba(255,255,255,.05) inset, 0 2px 4px rgba(0,0,0,.45), 0 12px 28px rgba(0,0,0,.35);
+  --shadow-raised: 0 2px 0 var(--color-gold-2), 0 4px 12px rgba(0,0,0,.5);
+
+  color-scheme: dark;
+}
+
+:root { color-scheme: light; }
+:root[data-theme="light"] { color-scheme: light; }
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  /* A faint woven texture so large empty areas are not dead flat. Two cheap
+     gradients — no image request, and it disappears at normal reading zoom. */
+  background-image:
+    repeating-linear-gradient(45deg, color-mix(in srgb, var(--color-line) 9%, transparent) 0 1px, transparent 1px 7px),
+    repeating-linear-gradient(-45deg, color-mix(in srgb, var(--color-line) 7%, transparent) 0 1px, transparent 1px 9px);
+}
+
+/* Tabular numerals everywhere a figure is compared down a column. */
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Headings and figures carry the display face; body copy stays a system sans
+   so long text renders instantly and legibly. */
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+/* Interpolated values carry this marker — see src/lib/game/curve.ts */
+.est-mark {
+  color: var(--color-faint);
+  font-weight: 400;
+  cursor: help;
+}
+
+/* --- surfaces -------------------------------------------------------------
+   The chunky, lit-from-above card the game's own panels suggest: a bright top
+   edge, a heavier bottom, and a real shadow underneath. */
+.surface {
+  background: var(--color-panel);
+  border: 1px solid var(--color-line);
+  border-bottom-color: var(--color-line-2);
+  border-radius: var(--radius-panel);
+  box-shadow: var(--shadow-panel);
+}
+
+/* --- raised controls ------------------------------------------------------
+   A solid bottom border reads as thickness, and removing it on :active reads
+   as the button physically depressing. */
+.raised {
+  box-shadow: var(--shadow-raised);
+  transform: translateY(0);
+  transition: transform .06s ease, box-shadow .06s ease, background-color .15s ease;
+}
+.raised:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 var(--color-gold-2), 0 1px 3px rgba(0,0,0,.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .raised, .raised:active:not(:disabled) { transition: none; transform: none; }
+}
