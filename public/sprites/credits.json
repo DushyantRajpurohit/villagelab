@@ -1,0 +1,227 @@
+{
+ "_readme": "Structure art used under Supercell's Fan Content Policy. Sourced from the Clash of Clans community wiki (clashofclans.fandom.com), one file per structure at the highest level the game data in src/lib/game/buildings.ts says exists. Fetched as 256px-wide thumbnails, which the CDN serves as WebP.",
+ "_policy": "https://supercell.com/en/fan-content-policy/",
+ "_source": "https://clashofclans.fandom.com",
+ "sprites": {
+  "__townhall": {
+   "file": "Town_Hall16.png",
+   "level": 16,
+   "maxLevel": 17
+  },
+  "air_bomb": {
+   "file": "Air_Bomb11.png",
+   "level": 11,
+   "maxLevel": 11
+  },
+  "air_defense": {
+   "file": "Air_Defense15.png",
+   "level": 15,
+   "maxLevel": 15
+  },
+  "air_sweeper": {
+   "file": "Air_Sweeper7.png",
+   "level": 7,
+   "maxLevel": 8
+  },
+  "archer_tower": {
+   "file": "Archer_Tower21.png",
+   "level": 21,
+   "maxLevel": 22
+  },
+  "army_camp": {
+   "file": "Army_Camp14.png",
+   "level": 14,
+   "maxLevel": 16
+  },
+  "barracks": {
+   "file": "Barracks19.png",
+   "level": 19,
+   "maxLevel": 19
+  },
+  "blacksmith": {
+   "file": "Blacksmith9.png",
+   "level": 9,
+   "maxLevel": 10
+  },
+  "bomb": {
+   "file": "Bomb11.png",
+   "level": 11,
+   "maxLevel": 12
+  },
+  "bomb_tower": {
+   "file": "Bomb_Tower11.png",
+   "level": 11,
+   "maxLevel": 11
+  },
+  "builders_hut": {
+   "file": "Builders_Hut4.png",
+   "level": 4,
+   "maxLevel": 4
+  },
+  "cannon": {
+   "file": "Cannon21.png",
+   "level": 21,
+   "maxLevel": 22
+  },
+  "clan_castle": {
+   "file": "Clan_Castle13.png",
+   "level": 13,
+   "maxLevel": 13
+  },
+  "dark_barracks": {
+   "file": "Dark_Barracks13.png",
+   "level": 13,
+   "maxLevel": 13
+  },
+  "dark_drill": {
+   "file": "Dark_Elixir_Drill11.png",
+   "level": 11,
+   "maxLevel": 11
+  },
+  "dark_spell_factory": {
+   "file": "Dark_Spell_Factory6.png",
+   "level": 6,
+   "maxLevel": 6
+  },
+  "dark_storage": {
+   "file": "Dark_Elixir_Storage12.png",
+   "level": 12,
+   "maxLevel": 12
+  },
+  "eagle_artillery": {
+   "file": "Eagle_Artillery7.png",
+   "level": 7,
+   "maxLevel": 8
+  },
+  "elixir_collector": {
+   "file": "Elixir_Collector17.png",
+   "level": 17,
+   "maxLevel": 17
+  },
+  "elixir_storage": {
+   "file": "Elixir_Storage19.png",
+   "level": 19,
+   "maxLevel": 19
+  },
+  "firespitter": {
+   "file": "Firespitter3.png",
+   "level": 3,
+   "maxLevel": 3
+  },
+  "giant_bomb": {
+   "file": "Giant_Bomb9.png",
+   "level": 9,
+   "maxLevel": 10
+  },
+  "gold_mine": {
+   "file": "Gold_Mine17.png",
+   "level": 17,
+   "maxLevel": 17
+  },
+  "gold_storage": {
+   "file": "Gold_Storage19.png",
+   "level": 19,
+   "maxLevel": 19
+  },
+  "hidden_tesla": {
+   "file": "Hidden_Tesla15.png",
+   "level": 15,
+   "maxLevel": 15
+  },
+  "inferno_tower": {
+   "file": "Inferno_Tower10_Single.png",
+   "level": 10,
+   "maxLevel": 10
+  },
+  "laboratory": {
+   "file": "Laboratory15.png",
+   "level": 15,
+   "maxLevel": 15
+  },
+  "monolith": {
+   "file": "Monolith4.png",
+   "level": 4,
+   "maxLevel": 4
+  },
+  "mortar": {
+   "file": "Mortar16.png",
+   "level": 16,
+   "maxLevel": 16
+  },
+  "multi_archer_tower": {
+   "file": "Multi-Archer_Tower3.png",
+   "level": 3,
+   "maxLevel": 3
+  },
+  "multi_gear_tower": {
+   "file": "Multi-Gear_Tower3_FastAttack.png",
+   "level": 3,
+   "maxLevel": 3
+  },
+  "pet_house": {
+   "file": "Pet_House10.png",
+   "level": 10,
+   "maxLevel": 10
+  },
+  "ricochet_cannon": {
+   "file": "Ricochet_Cannon3.png",
+   "level": 3,
+   "maxLevel": 3
+  },
+  "scattershot": {
+   "file": "Scattershot6.png",
+   "level": 6,
+   "maxLevel": 6
+  },
+  "seeking_air_mine": {
+   "file": "Seeking_Air_Mine5.png",
+   "level": 5,
+   "maxLevel": 6
+  },
+  "skeleton_trap": {
+   "file": "SkeletonTrap5.png",
+   "level": 5,
+   "maxLevel": 5
+  },
+  "spell_factory": {
+   "file": "Spell_Factory8.png",
+   "level": 8,
+   "maxLevel": 8
+  },
+  "spell_tower": {
+   "file": "Spell_Tower4_Rage.png",
+   "level": 4,
+   "maxLevel": 4
+  },
+  "spring_trap": {
+   "file": "Spring_Trap5.png",
+   "level": 5,
+   "maxLevel": 6
+  },
+  "tornado_trap": {
+   "file": "Tornado_Trap2.png",
+   "level": 2,
+   "maxLevel": 4
+  },
+  "wall": {
+   "file": "Wall17.png",
+   "level": 17,
+   "maxLevel": 17
+  },
+  "wizard_tower": {
+   "file": "Wizard_Tower15.png",
+   "level": 15,
+   "maxLevel": 15
+  },
+  "workshop": {
+   "file": "Workshop8.png",
+   "level": 8,
+   "maxLevel": 8
+  },
+  "xbow": {
+   "file": "X-Bow5.png",
+   "level": 5,
+   "maxLevel": 11
+  }
+ }
+}

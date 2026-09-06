@@ -130,8 +130,20 @@ stack, and ISR plus Postgres covers the load until traffic proves otherwise.
 ## Legal
 
 Unofficial fan content. The attribution Supercell's [Fan Content Policy](https://supercell.com/en/fan-content-policy/)
-requires is in the root layout so it cannot be dropped from a page. No Supercell
-artwork is used — all UI is original.
+requires is in the root layout so it cannot be dropped from a page.
+
+The base builder renders official structure art, used under that policy. The
+files live in `public/sprites/`, one per structure, and `public/sprites/credits.json`
+records what each one is and where it came from: the community wiki, at the
+highest level `src/lib/game/buildings.ts` says the structure reaches. Picking
+"highest numbered file on the wiki" is not safe on its own — it yields
+`Archer_Tower109.png` and `Air_Defense2012.png`, a typo and a year — so the
+game data is the cap.
+
+Everything else in the UI is original, including the vector structure icons in
+`src/lib/base/icons.ts`. Those are still the fallback the board draws while a
+sprite loads or if one is missing, so removing `public/sprites/` degrades the
+builder rather than breaking it.
 
 ## Layout
 
@@ -140,6 +152,9 @@ src/lib/game/      curated dataset, interpolation, planner + progress logic
 src/lib/war/       war analysis — star credit, standings, war log summaries
 src/lib/theme.ts   three-state theme store (system / light / dark)
 src/lib/base/      base layout rules — collision, count limits, drag painting
+src/lib/base/iso.ts      isometric projection and its inverse, both tested
+src/lib/base/terrain.ts  the village ground, painted once and cached
+src/lib/base/sprites.ts  lazy sprite loading, with the vector icons as fallback
 src/lib/coc/       Supercell client, tag handling, key rotation, mock generator
 src/lib/data/      read paths — Postgres only, never upstream
 src/lib/ingest/    the only code that calls Supercell

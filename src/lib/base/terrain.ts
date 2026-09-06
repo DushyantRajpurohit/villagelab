@@ -1,60 +1,52 @@
 /**
- * The village ground the grid sits on.
+ * The village ground the isometric grid sits on.
  *
- * Terrain is expensive relative to the rest of the frame — a few thousand
- * tufts and pebbles — and it never changes while you build, so it is painted
+ * Terrain is expensive relative to the rest of the frame — ~2000 diamonds plus
+ * scattered scenery — and it never changes while you build, so it is painted
  * once onto an offscreen canvas and blitted. Repainting happens only when the
- * theme or the canvas size changes.
+ * theme changes.
  *
  * Everything scattered here comes from a seeded PRNG rather than Math.random,
  * so the same village draws identically on every repaint. With Math.random the
  * grass reshuffles on each hover and the whole board shimmers.
  */
 
-/** Tiles of scenery drawn outside the buildable grid, per side. */
-export const PAD_TILES = 2;
+import { PAD_TILES, TILE_H, TILE_W, toScreen, tileDiamond, trace, type Iso } from './iso';
 
 export interface TerrainTheme {
   grass: string;
   grassAlt: string;
-  /** Scenery ring outside the playable area. */
+  /** Ground outside the playable diamond. */
   rough: string;
-  roughAlt: string;
   detail: string;
   rock: string;
   tree: string;
   treeShade: string;
-  /** Grid rules over the buildable area. */
   grid: string;
-  gridMajor: string;
   edge: string;
 }
 
 export const TERRAIN: Record<'light' | 'dark', TerrainTheme> = {
   light: {
-    grass: '#7ba85c',
-    grassAlt: '#74a156',
-    rough: '#5e8a49',
-    roughAlt: '#578143',
-    detail: 'rgba(255,255,255,.16)',
+    grass: '#7cab5c',
+    grassAlt: '#74a355',
+    rough: '#43663a',
+    detail: 'rgba(255,255,255,.14)',
     rock: '#9aa08c',
     tree: '#3f7038',
     treeShade: '#2f5a2b',
-    grid: 'rgba(20,40,15,.10)',
-    gridMajor: 'rgba(20,40,15,.20)',
-    edge: 'rgba(30,50,20,.45)',
+    grid: 'rgba(20,40,15,.13)',
+    edge: 'rgba(28,48,20,.5)',
   },
   dark: {
-    grass: '#3a5834',
-    grassAlt: '#35512f',
-    rough: '#2a4126',
-    roughAlt: '#263c22',
-    detail: 'rgba(255,255,255,.09)',
+    grass: '#3d5c36',
+    grassAlt: '#375430',
+    rough: '#1f3320',
+    detail: 'rgba(255,255,255,.08)',
     rock: '#5c6357',
     tree: '#2c4f2a',
     treeShade: '#1f3b1f',
-    grid: 'rgba(255,255,255,.07)',
-    gridMajor: 'rgba(255,255,255,.14)',
+    grid: 'rgba(255,255,255,.08)',
     edge: 'rgba(0,0,0,.5)',
   },
 };
@@ -71,102 +63,92 @@ function rng(seed: number): () => number {
 }
 
 export interface TerrainOpts {
-  /** Full canvas edge length in device pixels. */
-  size: number;
-  /** Buildable tiles per side. */
+  width: number;
+  height: number;
   grid: number;
+  iso: Iso;
   theme: TerrainTheme;
 }
 
-/** Pixel geometry shared by the terrain and everything drawn on top of it. */
-export function geometry(size: number, grid: number) {
-  const cell = size / (grid + PAD_TILES * 2);
-  return { cell, origin: PAD_TILES * cell, span: grid * cell };
-}
-
-/**
- * Inverse of `geometry`: the tile a canvas point falls on, or null when it
- * lands in the scenery border. Kept pure and beside the geometry it inverts —
- * an off-by-one here silently places structures one tile from the cursor,
- * which is the kind of bug that is obvious in use and invisible in review.
- */
-export function tileFromPoint(
-  px: number, py: number, size: number, grid: number,
-): { x: number; y: number } | null {
-  const units = grid + PAD_TILES * 2;
-  const x = Math.floor((px / size) * units) - PAD_TILES;
-  const y = Math.floor((py / size) * units) - PAD_TILES;
-  return x >= 0 && x < grid && y >= 0 && y < grid ? { x, y } : null;
-}
-
-export function paintTerrain(g: CanvasRenderingContext2D, { size, grid, theme }: TerrainOpts) {
-  const { cell, origin, span } = geometry(size, grid);
+export function paintTerrain(
+  g: CanvasRenderingContext2D,
+  { width, height, grid, iso, theme }: TerrainOpts,
+) {
   const rand = rng(0x5eed);
 
-  // Scenery ring first, then the buildable field is laid over it.
   g.fillStyle = theme.rough;
-  g.fillRect(0, 0, size, size);
+  g.fillRect(0, 0, width, height);
 
-  for (let i = 0; i < 900; i++) {
-    const x = rand() * size;
-    const y = rand() * size;
-    if (x > origin - cell && x < origin + span + cell && y > origin - cell && y < origin + span + cell) continue;
-    g.fillStyle = rand() > 0.5 ? theme.roughAlt : theme.detail;
-    g.fillRect(x, y, cell * (0.2 + rand() * 0.5), cell * (0.14 + rand() * 0.3));
+  // Scenery sits outside the field, on the apron the diamond leaves bare.
+  // Placement is rejected rather than clamped: a tree half-over the board edge
+  // reads as a bug, and the corners have room to spare.
+  const outside = (px: number, py: number) => {
+    const dx = (px - iso.originX) / (TILE_W / 2);
+    const dy = (py - iso.originY) / (TILE_H / 2);
+    const tx = (dx + dy) / 2;
+    const ty = (dy - dx) / 2;
+    return tx < -0.6 || ty < -0.6 || tx > grid + 0.6 || ty > grid + 0.6;
+  };
+
+  for (let i = 0; i < 1100; i++) {
+    const x = rand() * width;
+    const y = rand() * height;
+    if (!outside(x, y)) continue;
+    g.fillStyle = theme.detail;
+    g.fillRect(x, y, TILE_W * (0.1 + rand() * 0.3), TILE_H * (0.14 + rand() * 0.3));
   }
 
-  // Trees and rocks, kept clear of the field so nothing overlaps a structure.
-  for (let i = 0; i < 46; i++) {
-    const edge = Math.floor(rand() * 4);
-    const along = rand() * size;
-    const depth = (0.25 + rand() * 1.35) * cell;
-    const x = edge === 0 ? along : edge === 1 ? along : edge === 2 ? depth : size - depth;
-    const y = edge === 0 ? depth : edge === 1 ? size - depth : along;
-    if (rand() > 0.34) {
-      const r = cell * (0.4 + rand() * 0.28);
+  for (let i = 0; i < 150; i++) {
+    const x = rand() * width;
+    const y = rand() * height;
+    if (!outside(x, y)) continue;
+    if (rand() > 0.35) {
+      const r = TILE_W * (0.22 + rand() * 0.16);
       g.fillStyle = theme.treeShade;
-      g.beginPath(); g.arc(x, y + r * 0.28, r, 0, Math.PI * 2); g.fill();
+      g.beginPath(); g.ellipse(x, y + r * 0.5, r * 1.05, r * 0.5, 0, 0, Math.PI * 2); g.fill();
       g.fillStyle = theme.tree;
-      g.beginPath(); g.arc(x, y, r * 0.9, 0, Math.PI * 2); g.fill();
+      g.beginPath(); g.arc(x, y, r * 0.85, 0, Math.PI * 2); g.fill();
     } else {
-      const r = cell * (0.22 + rand() * 0.2);
+      const r = TILE_W * (0.1 + rand() * 0.1);
       g.fillStyle = theme.rock;
-      g.beginPath();
-      g.ellipse(x, y, r * 1.3, r, rand() * Math.PI, 0, Math.PI * 2);
+      g.beginPath(); g.ellipse(x, y, r * 1.4, r, rand() * Math.PI, 0, Math.PI * 2); g.fill();
+    }
+  }
+
+  // The field: one diamond per tile, in a two-tone checker like the game's.
+  for (let ty = 0; ty < grid; ty++) {
+    for (let tx = 0; tx < grid; tx++) {
+      tileDiamond(g, iso, tx, ty);
+      g.fillStyle = (tx + ty) % 2 === 0 ? theme.grass : theme.grassAlt;
       g.fill();
     }
   }
 
-  // The buildable field: a one-tile checker, the way the game reads its grid.
-  for (let ty = 0; ty < grid; ty++) {
-    for (let tx = 0; tx < grid; tx++) {
-      g.fillStyle = (tx + ty) % 2 === 0 ? theme.grass : theme.grassAlt;
-      g.fillRect(
-        Math.round(origin + tx * cell), Math.round(origin + ty * cell),
-        Math.ceil(cell), Math.ceil(cell),
-      );
-    }
-  }
-
-  // Tufts, so the field is not a flat colour under sparse layouts.
-  for (let i = 0; i < 1400; i++) {
-    const x = origin + rand() * span;
-    const y = origin + rand() * span;
+  // Tufts, so the field is not flat colour under a sparse layout.
+  for (let i = 0; i < 1600; i++) {
+    const tx = rand() * grid;
+    const ty = rand() * grid;
+    const p = toScreen(iso, tx, ty);
     g.fillStyle = theme.detail;
-    g.fillRect(x, y, cell * (0.1 + rand() * 0.22), cell * 0.09);
+    g.fillRect(p.x, p.y, TILE_W * (0.08 + rand() * 0.16), TILE_H * 0.16);
   }
 
+  g.strokeStyle = theme.grid;
   g.lineWidth = 1;
-  for (const [step, stroke] of [[1, theme.grid], [4, theme.gridMajor]] as const) {
-    g.strokeStyle = stroke;
-    for (let i = 0; i <= grid; i += step) {
-      const p = Math.round(origin + i * cell) + 0.5;
-      g.beginPath(); g.moveTo(p, origin); g.lineTo(p, origin + span); g.stroke();
-      g.beginPath(); g.moveTo(origin, p); g.lineTo(origin + span, p); g.stroke();
+  for (let i = 0; i <= grid; i++) {
+    for (const [a, b] of [
+      [toScreen(iso, i, 0), toScreen(iso, i, grid)],
+      [toScreen(iso, 0, i), toScreen(iso, grid, i)],
+    ]) {
+      g.beginPath(); g.moveTo(a.x, a.y); g.lineTo(b.x, b.y); g.stroke();
     }
   }
 
+  const c = [toScreen(iso, 0, 0), toScreen(iso, grid, 0), toScreen(iso, grid, grid), toScreen(iso, 0, grid)];
+  trace(g, c.map((p) => [p.x, p.y]));
   g.strokeStyle = theme.edge;
-  g.lineWidth = Math.max(2, cell * 0.16);
-  g.strokeRect(origin - g.lineWidth / 2, origin - g.lineWidth / 2, span + g.lineWidth, span + g.lineWidth);
+  g.lineWidth = Math.max(2, TILE_H * 0.3);
+  g.stroke();
 }
+
+export { PAD_TILES };

@@ -3,7 +3,7 @@ import {
   GRID, TOWN_HALL_ID, abbrev, canPlace, countOf, eraseAt, paletteFor,
   lineTiles, paletteIndex, place, sanitise, snapOrigin, statsFor, type Tile,
 } from '../layout';
-import { geometry, tileFromPoint } from '../terrain';
+import { depth, footprint, isoCanvas, toScreen, toTile, TILE_W, TILE_H } from '../iso';
 import { MAX_TH } from '@/lib/game/town-halls';
 
 const entries = paletteFor(14);
@@ -216,43 +216,68 @@ describe('lineTiles', () => {
   });
 });
 
-describe('canvas geometry', () => {
-  const SIZE = 1320;
+describe('isometric projection', () => {
+  const VIEW = isoCanvas(GRID);
 
-  it('maps the centre of every tile back to that tile', () => {
-    const { cell, origin } = geometry(SIZE, GRID);
-    for (const [tx, ty] of [[0, 0], [0, GRID - 1], [GRID - 1, 0], [GRID - 1, GRID - 1], [21, 13]]) {
-      const px = origin + (tx + 0.5) * cell;
-      const py = origin + (ty + 0.5) * cell;
-      expect(tileFromPoint(px, py, SIZE, GRID)).toEqual({ x: tx, y: ty });
-    }
-  });
-
-  it('round-trips every tile on the board', () => {
-    const { cell, origin } = geometry(SIZE, GRID);
+  it('round-trips the centre of every tile on the board', () => {
     for (let ty = 0; ty < GRID; ty++) {
       for (let tx = 0; tx < GRID; tx++) {
-        const hit = tileFromPoint(origin + (tx + 0.5) * cell, origin + (ty + 0.5) * cell, SIZE, GRID);
-        expect(hit).toEqual({ x: tx, y: ty });
+        const c = toScreen(VIEW, tx + 0.5, ty + 0.5);
+        expect(toTile(VIEW, c.x, c.y, GRID)).toEqual({ x: tx, y: ty });
       }
     }
   });
 
-  it('rejects the scenery border rather than clamping into the field', () => {
-    const { cell, origin, span } = geometry(SIZE, GRID);
-    expect(tileFromPoint(0, 0, SIZE, GRID)).toBeNull();
-    expect(tileFromPoint(SIZE - 1, SIZE - 1, SIZE, GRID)).toBeNull();
-    // Just outside each edge of the field.
-    expect(tileFromPoint(origin - cell * 0.5, origin + span / 2, SIZE, GRID)).toBeNull();
-    expect(tileFromPoint(origin + span + cell * 0.5, origin + span / 2, SIZE, GRID)).toBeNull();
-    expect(tileFromPoint(origin + span / 2, origin - cell * 0.5, SIZE, GRID)).toBeNull();
-    expect(tileFromPoint(origin + span / 2, origin + span + cell * 0.5, SIZE, GRID)).toBeNull();
+  it('projects the four corners to the diamond, not a square', () => {
+    const top = toScreen(VIEW, 0, 0);
+    const right = toScreen(VIEW, GRID, 0);
+    const bottom = toScreen(VIEW, GRID, GRID);
+    const left = toScreen(VIEW, 0, GRID);
+    // Top and bottom share an x; left and right share a y. That is the diamond.
+    expect(right.x - top.x).toBeCloseTo(top.x - left.x, 6);
+    expect(bottom.x).toBeCloseTo(top.x, 6);
+    expect(left.y).toBeCloseTo(right.y, 6);
+    // And it is 2:1 — twice as wide as it is tall.
+    expect(right.x - left.x).toBeCloseTo((bottom.y - top.y) * 2, 6);
   });
 
-  it('puts the field inside the canvas with room for the border', () => {
-    const { origin, span } = geometry(SIZE, GRID);
-    expect(origin).toBeGreaterThan(0);
-    expect(origin + span).toBeLessThan(SIZE);
-    expect(origin).toBeCloseTo(SIZE - (origin + span), 6);
+  it('rejects points outside the field rather than clamping into it', () => {
+    const top = toScreen(VIEW, 0, 0);
+    expect(toTile(VIEW, top.x, top.y - TILE_H, GRID)).toBeNull();
+    expect(toTile(VIEW, 0, 0, GRID)).toBeNull();
+    expect(toTile(VIEW, VIEW.width, VIEW.height, GRID)).toBeNull();
+    // Just off each of the four diagonal edges.
+    const left = toScreen(VIEW, 0, GRID / 2);
+    expect(toTile(VIEW, left.x - TILE_W, left.y, GRID)).toBeNull();
+    const right = toScreen(VIEW, GRID, GRID / 2);
+    expect(toTile(VIEW, right.x + TILE_W, right.y, GRID)).toBeNull();
+  });
+
+  it('keeps the whole board inside the canvas', () => {
+    for (const [x, y] of [[0, 0], [GRID, 0], [GRID, GRID], [0, GRID]]) {
+      const p = toScreen(VIEW, x, y);
+      expect(p.x).toBeGreaterThanOrEqual(0);
+      expect(p.x).toBeLessThanOrEqual(VIEW.width);
+      expect(p.y).toBeGreaterThanOrEqual(0);
+      expect(p.y).toBeLessThanOrEqual(VIEW.height);
+    }
+    // Headroom above the top corner, so tall sprites are not clipped.
+    expect(toScreen(VIEW, 0, 0).y).toBeGreaterThan(100);
+  });
+
+  it('sizes a footprint diamond from its tile span', () => {
+    const one = footprint(VIEW, 10, 10, 1, 1);
+    const four = footprint(VIEW, 10, 10, 4, 4);
+    expect(one.halfW * 2).toBeCloseTo(TILE_W, 6);
+    expect(four.halfW).toBeCloseTo(one.halfW * 4, 6);
+    // The near corner is where a sprite stands.
+    expect(four.baseY).toBeCloseTo(four.cy + four.halfH, 6);
+  });
+
+  it('orders a structure in front of one behind it', () => {
+    // A 1x1 nearer the viewer must paint after a 4x4 whose origin is further back.
+    expect(depth(12, 12, 1, 1)).toBeGreaterThan(depth(8, 8, 4, 4) - 8);
+    expect(depth(0, 0, 4, 4)).toBeLessThan(depth(20, 20, 1, 1));
+    expect(depth(5, 5, 1, 1)).toBeLessThan(depth(5, 6, 1, 1));
   });
 });

@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { PointerEvent as ReactPointerEvent } from 'react';
 import {
@@ -8,18 +9,22 @@ import {
   type BaseLayout, type Palette, type PaletteCategory, type PaletteEntry, type Tile,
 } from '@/lib/base/layout';
 import { drawIcon, type Ink } from '@/lib/base/icons';
-import { TERRAIN, geometry, paintTerrain, tileFromPoint } from '@/lib/base/terrain';
+import { TERRAIN, paintTerrain } from '@/lib/base/terrain';
+import {
+  depth, footprint, isoCanvas, toTile, tileDiamond, trace, type Iso,
+} from '@/lib/base/iso';
+import { sprite, spriteUrl } from '@/lib/base/sprites';
 import { MAX_TH } from '@/lib/game/town-halls';
 import { usePlannerState } from '@/lib/store';
 import { useResolvedTheme } from '@/lib/theme';
 import { Panel, Stat } from '@/components/primitives';
 
 /**
- * Canvas is drawn at a fixed resolution and scaled by CSS. It is well above the
- * ~760px display width on purpose: structure icons carry fine detail, and at
- * 1:1 they turn to mush on a 2x display.
+ * The board is isometric, so its canvas is a wide rectangle rather than a
+ * square: the 44x44 field projects to a 2:1 diamond, plus an apron of scenery
+ * and headroom for sprites standing up at the back row.
  */
-const RESOLUTION = 1320;
+const VIEW = isoCanvas(GRID);
 const FONT = 'ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
 
 interface CatStyle {
@@ -113,12 +118,12 @@ export function BaseBuilder() {
   const tileAt = useCallback((clientX: number, clientY: number) => {
     if (!canvas) return null;
     const r = canvas.getBoundingClientRect();
-    // The canvas is wider than the grid — scenery rings the field — so the
-    // point is resolved against that geometry, not against the raw bounds.
-    return tileFromPoint(
-      ((clientX - r.left) / r.width) * RESOLUTION,
-      ((clientY - r.top) / r.height) * RESOLUTION,
-      RESOLUTION, GRID,
+    // Screen space to canvas space, then canvas space to the isometric grid.
+    return toTile(
+      VIEW,
+      ((clientX - r.left) / r.width) * VIEW.width,
+      ((clientY - r.top) / r.height) * VIEW.height,
+      GRID,
     );
   }, [canvas]);
 
@@ -171,72 +176,92 @@ export function BaseBuilder() {
   /* ------------------------------------------------------------- drawing */
 
   /**
-   * Two cached layers under the live one. Terrain is thousands of scattered
-   * tufts and rocks; structures are up to a few hundred vector icons. Both are
-   * static while the pointer moves, so redrawing them on every hover — which is
-   * every few milliseconds during a drag — is what would make this feel slow.
-   * Each layer repaints only when the inputs it actually depends on change.
+   * Sprites arrive asynchronously, so a load has to invalidate the cached
+   * structure layer and force a repaint — otherwise the board keeps showing
+   * the vector fallback until something else happens to change.
+   */
+  const [spriteTick, setSpriteTick] = useState(0);
+  const onSpriteReady = useCallback(() => setSpriteTick((t) => t + 1), []);
+
+  /**
+   * Two cached layers under the live one. Terrain is ~2000 diamonds plus
+   * scenery; structures are up to a few hundred sprites. Both are static while
+   * the pointer moves, so redrawing them on every hover — which is every few
+   * milliseconds during a drag — is what would make this feel slow. Each layer
+   * repaints only when the inputs it actually depends on change.
    */
   const terrainLayer = useRef<{ theme: string; c: HTMLCanvasElement } | null>(null);
-  const structLayer = useRef<{ theme: string; tiles: Tile[]; palette: Palette; c: HTMLCanvasElement } | null>(null);
+  const structLayer = useRef<
+    { theme: string; tiles: Tile[]; palette: Palette; tick: number; c: HTMLCanvasElement } | null
+  >(null);
 
   useEffect(() => {
     const g = canvas?.getContext('2d');
     if (!g) return;
-    const { cell, origin } = geometry(RESOLUTION, GRID);
 
     if (terrainLayer.current?.theme !== theme) {
       const c = document.createElement('canvas');
-      c.width = c.height = RESOLUTION;
+      c.width = VIEW.width;
+      c.height = VIEW.height;
       const tg = c.getContext('2d');
       if (!tg) return;
-      paintTerrain(tg, { size: RESOLUTION, grid: GRID, theme: TERRAIN[theme] });
+      paintTerrain(tg, {
+        width: VIEW.width, height: VIEW.height, grid: GRID, iso: VIEW, theme: TERRAIN[theme],
+      });
       terrainLayer.current = { theme, c };
     }
 
     const cached = structLayer.current;
-    if (!cached || cached.tiles !== tiles || cached.palette !== palette || cached.theme !== theme) {
+    if (!cached || cached.tiles !== tiles || cached.palette !== palette
+        || cached.theme !== theme || cached.tick !== spriteTick) {
       const c = cached?.c ?? document.createElement('canvas');
-      c.width = c.height = RESOLUTION;
+      c.width = VIEW.width;
+      c.height = VIEW.height;
       const sg = c.getContext('2d');
       if (!sg) return;
-      sg.clearRect(0, 0, RESOLUTION, RESOLUTION);
-      const walls = wallSet(palette, tiles);
-      for (const t of tiles) drawStructure(sg, palette.get(t.id), t.x, t.y, cell, origin, walls);
-      structLayer.current = { theme, tiles, palette, c };
+      sg.clearRect(0, 0, VIEW.width, VIEW.height);
+      // Painter's algorithm: back to front, or a Town Hall swallows the wall
+      // standing in front of it.
+      const order = [...tiles].sort((a, b) => {
+        const pa = palette.get(a.id), pb = palette.get(b.id);
+        if (!pa || !pb) return 0;
+        return depth(a.x, a.y, pa.size[0], pa.size[1]) - depth(b.x, b.y, pb.size[0], pb.size[1]);
+      });
+      for (const t of order) drawStructure(sg, palette.get(t.id), t.x, t.y, VIEW, onSpriteReady);
+      structLayer.current = { theme, tiles, palette, tick: spriteTick, c };
     }
 
-    g.clearRect(0, 0, RESOLUTION, RESOLUTION);
+    g.clearRect(0, 0, VIEW.width, VIEW.height);
     if (terrainLayer.current) g.drawImage(terrainLayer.current.c, 0, 0);
     if (structLayer.current) g.drawImage(structLayer.current.c, 0, 0);
 
     if (hover) {
       if (erasing) {
         // Outline what would actually go, not the tile under the cursor: on a
-        // 4x4 those differ, and the tile-sized box makes the eraser look like
+        // 4x4 those differ, and a tile-sized diamond makes the eraser look like
         // it will nibble a corner off.
         const box = topAt(palette, tiles, hover.x, hover.y);
         const p = box ? palette.get(box.id) : undefined;
+        if (box && p) {
+          trace(g, footprint(VIEW, box.x, box.y, p.size[0], p.size[1]).points.map((q) => [...q]));
+        } else {
+          tileDiamond(g, VIEW, hover.x, hover.y);
+        }
         g.strokeStyle = '#ff5f56';
-        g.lineWidth = Math.max(2, cell * 0.14);
-        g.strokeRect(
-          origin + (box ?? hover).x * cell, origin + (box ?? hover).y * cell,
-          (p?.size[0] ?? 1) * cell, (p?.size[1] ?? 1) * cell,
-        );
+        g.lineWidth = 2.5;
+        g.stroke();
       } else {
         const p = palette.get(selected);
         if (p) {
           const at = snapOrigin(p.size, hover.x, hover.y);
           const ok = canPlace(palette, tiles, selected, at.x, at.y);
-          g.globalAlpha = 0.6;
-          drawStructure(g, p, at.x, at.y, cell, origin, null, ok ? undefined : '#ff5f56');
+          g.globalAlpha = 0.65;
+          drawStructure(g, p, at.x, at.y, VIEW, onSpriteReady, ok ? undefined : '#ff5f56');
           g.globalAlpha = 1;
         }
       }
     }
-    // `theme` is not read for the CSS palette any more, but it still selects the
-    // terrain and must stay a dependency so a palette change repaints.
-  }, [canvas, tiles, hover, selected, erasing, palette, theme]);
+  }, [canvas, tiles, hover, selected, erasing, palette, theme, spriteTick, onSpriteReady]);
 
   /* --------------------------------------------------------- persistence */
 
@@ -313,16 +338,16 @@ export function BaseBuilder() {
         <div className="mt-4 flex justify-center">
           <canvas
             ref={setCanvas}
-            width={RESOLUTION}
-            height={RESOLUTION}
+            width={VIEW.width}
+            height={VIEW.height}
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
             onPointerUp={endDrag}
             onPointerLeave={() => { endDrag(); setHover(null); }}
             onContextMenu={(e) => e.preventDefault()}
             aria-label={`Village grid, ${GRID} by ${GRID} tiles, ${stats.placed} structures placed`}
-            className="block aspect-square w-full max-w-[760px] touch-none rounded-[10px] border border-line bg-panel-2"
-            style={{ cursor: erasing ? 'not-allowed' : 'crosshair' }}
+            className="block w-full max-w-[1040px] touch-none rounded-[10px] border border-line bg-panel-2"
+            style={{ aspectRatio: `${VIEW.width} / ${VIEW.height}`, cursor: erasing ? 'not-allowed' : 'crosshair' }}
           />
         </div>
         <p className="mt-3 text-center text-[12px] text-faint">
@@ -402,15 +427,6 @@ export function BaseBuilder() {
   );
 }
 
-/** Tile keys of every wall, so a wall can see its neighbours in O(1). */
-function wallSet(palette: Palette, tiles: Tile[]): Set<string> {
-  const out = new Set<string>();
-  for (const t of tiles) {
-    if (palette.get(t.id)?.category === 'wall') out.add(`${t.x},${t.y}`);
-  }
-  return out;
-}
-
 /** The structure covering a tile, topmost first — what the eraser would take. */
 function topAt(palette: Palette, tiles: Tile[], x: number, y: number): Tile | null {
   for (let i = tiles.length - 1; i >= 0; i--) {
@@ -423,119 +439,65 @@ function topAt(palette: Palette, tiles: Tile[], x: number, y: number): Tile | nu
 }
 
 /**
- * Walls are drawn as masonry that fuses with its neighbours rather than as
- * separate blocks. A wall line is the one structure whose whole point is being
- * continuous, and 40 individually rounded squares read as a dotted trail.
+ * One structure: its footprint diamond, then its sprite standing on it.
+ *
+ * The sprite is scaled so its width matches the diamond's and anchored so its
+ * bottom edge sits on the diamond's near corner — which is where the game
+ * draws the ground line in this art. Anchoring by centre instead makes tall
+ * buildings appear to float a tile behind where they actually are.
  */
-function drawWall(
-  g: CanvasRenderingContext2D, style: CatStyle,
-  tx: number, ty: number, cell: number, origin: number,
-  walls: Set<string> | null, forceStroke?: string,
-) {
-  const x = origin + tx * cell;
-  const y = origin + ty * cell;
-  const pad = cell * 0.1;
-  const near = (dx: number, dy: number) => walls?.has(`${tx + dx},${ty + dy}`) ?? false;
-
-  g.fillStyle = style.ink.body;
-  roundRect(g, x + pad, y + pad, cell - pad * 2, cell - pad * 2, cell * 0.22);
-  g.fill();
-
-  // Bridge the gap toward each adjacent wall so a run comes out solid.
-  for (const [dx, dy] of [[1, 0], [0, 1], [-1, 0], [0, -1]] as const) {
-    if (!near(dx, dy)) continue;
-    g.fillRect(
-      x + (dx === 0 ? pad : dx > 0 ? cell - pad * 2 : 0),
-      y + (dy === 0 ? pad : dy > 0 ? cell - pad * 2 : 0),
-      dx === 0 ? cell - pad * 2 : pad * 2,
-      dy === 0 ? cell - pad * 2 : pad * 2,
-    );
-  }
-
-  g.fillStyle = style.ink.accent;
-  g.fillRect(x + pad * 1.6, y + pad * 1.6, cell - pad * 3.2, cell * 0.16);
-  g.strokeStyle = forceStroke ?? style.ink.line;
-  g.lineWidth = Math.max(1, cell * 0.05);
-  roundRect(g, x + pad, y + pad, cell - pad * 2, cell - pad * 2, cell * 0.22);
-  g.stroke();
-}
-
 function drawStructure(
   g: CanvasRenderingContext2D,
   p: PaletteEntry | undefined,
-  tx: number, ty: number, cell: number, origin: number,
-  walls: Set<string> | null,
+  tx: number, ty: number,
+  iso: Iso,
+  onSpriteReady: () => void,
   forceStroke?: string,
 ) {
   if (!p) return;
   const style = styleOf(p.category);
+  const f = footprint(iso, tx, ty, p.size[0], p.size[1]);
+  const alpha = g.globalAlpha;
 
-  if (p.category === 'wall') {
-    drawWall(g, style, tx, ty, cell, origin, walls, forceStroke);
-    return;
-  }
-
-  const x = origin + tx * cell;
-  const y = origin + ty * cell;
-  const w = p.size[0] * cell;
-  const h = p.size[1] * cell;
-  const pad = Math.max(0.5, cell * 0.06);
-  const r = Math.min(cell * 0.3, w / 6);
-
-  // Footprint plate: the icon says what it is, the plate says which tiles it
-  // takes. Both matter here — this is a placement tool, not a picture.
-  roundRect(g, x + pad, y + pad, w - pad * 2, h - pad * 2, r);
+  // The plate is what makes this a placement tool rather than a picture: it is
+  // the only thing that says exactly which tiles are taken.
+  trace(g, f.points.map((q) => [...q]));
   g.fillStyle = style.plate;
   g.fill();
   g.strokeStyle = forceStroke ?? style.edge;
-  g.lineWidth = Math.max(1, cell * 0.06);
+  g.lineWidth = forceStroke ? 2.5 : 1.5;
   g.stroke();
 
-  const inset = Math.min(w, h) * 0.08;
-  if (drawIcon(g, p.id, x + inset, y + inset, Math.min(w, h) - inset * 2, style.ink)) return;
+  const img = sprite(p.id, onSpriteReady);
+  if (img && img.naturalWidth > 0) {
+    // Slightly narrower than the diamond. The art carries its own margin and
+    // shadow, so drawing it at full width makes neighbours a tile apart look
+    // like they are touching.
+    const w = f.halfW * 2 * 0.94;
+    const h = w * (img.naturalHeight / img.naturalWidth);
+    g.drawImage(img, f.cx - w / 2, f.baseY - h, w, h);
+    // Re-trace the outline over the art. The plate underneath is completely
+    // hidden by the sprite, and without this there is no way to see which tiles
+    // a structure actually occupies — which is the whole job of the tool.
+    trace(g, f.points.map((q) => [...q]));
+    g.strokeStyle = forceStroke ?? style.edge;
+    g.globalAlpha *= forceStroke ? 1 : 0.35;
+    g.lineWidth = forceStroke ? 2.5 : 1.25;
+    g.stroke();
+    g.globalAlpha = alpha;
+    return;
+  }
 
-  // No icon for this id: fall back to initials so a newly added building still
-  // renders as something a person can identify.
+  // Sprite still loading, or missing: the vector icon keeps the board readable
+  // instead of leaving a hole.
+  const box = Math.min(f.halfW, f.halfH * 2) * 1.1;
+  if (drawIcon(g, p.id, f.cx - box / 2, f.cy - box / 2, box, style.ink)) return;
+
   g.fillStyle = style.ink.accent;
-  g.font = `700 ${Math.max(7, cell * (p.size[0] >= 4 ? 0.7 : 0.55))}px ${FONT}`;
+  g.font = `700 ${Math.max(8, f.halfW * 0.5)}px ${FONT}`;
   g.textAlign = 'center';
   g.textBaseline = 'middle';
-  g.fillText(abbrev(p.name), x + w / 2, y + h / 2);
-}
-
-function roundRect(g: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
-  g.beginPath();
-  g.moveTo(x + r, y);
-  g.arcTo(x + w, y, x + w, y + h, r);
-  g.arcTo(x + w, y + h, x, y + h, r);
-  g.arcTo(x, y + h, x, y, r);
-  g.arcTo(x, y, x + w, y, r);
-  g.closePath();
-}
-
-/** The same icon as the canvas, at chip size, so the list and board agree. */
-function IconChip({ entry }: { entry: PaletteEntry }) {
-  const [c, setC] = useState<HTMLCanvasElement | null>(null);
-  useEffect(() => {
-    const g = c?.getContext('2d');
-    if (!g) return;
-    const style = styleOf(entry.category);
-    g.clearRect(0, 0, 40, 40);
-    roundRect(g, 1, 1, 38, 38, 9);
-    g.fillStyle = style.plate;
-    g.fill();
-    g.strokeStyle = style.edge;
-    g.lineWidth = 2;
-    g.stroke();
-    if (!drawIcon(g, entry.id, 4, 4, 32, style.ink)) {
-      g.fillStyle = style.ink.accent;
-      g.font = `700 15px ${FONT}`;
-      g.textAlign = 'center';
-      g.textBaseline = 'middle';
-      g.fillText(abbrev(entry.name), 20, 21);
-    }
-  }, [c, entry]);
-  return <canvas ref={setC} width={40} height={40} aria-hidden className="h-5 w-5 shrink-0" />;
+  g.fillText(abbrev(p.name), f.cx, f.cy);
 }
 
 function PaletteRow({ entry, used, active, onSelect }: {
@@ -550,7 +512,13 @@ function PaletteRow({ entry, used, active, onSelect }: {
         active ? 'border-gold/50 bg-panel-3' : 'border-transparent hover:bg-panel-2'
       } ${full ? 'opacity-45' : ''}`}
     >
-      <IconChip entry={entry} />
+      <Image
+        src={spriteUrl(entry.id)}
+        alt=""
+        width={28}
+        height={28}
+        className="h-7 w-7 shrink-0 object-contain"
+      />
       <span className="flex-1 truncate text-[12px]">{entry.name}</span>
       <span className={`num text-[11px] ${full ? 'text-ok' : 'text-muted'}`}>{used}/{entry.limit}</span>
       <span className="num text-[10px] text-faint">{entry.size[0]}×{entry.size[1]}</span>
