@@ -1,4 +1,5 @@
 import { Bar, Chip, Res, pctTone } from './primitives';
+import { GameIcon } from './GameIcon';
 import { fmtDuration } from '@/lib/format';
 import type { UnitProgress } from '@/lib/game/progress';
 
@@ -22,6 +23,7 @@ export function UnitTable({ rows, th }: { rows: UnitProgress[]; th: number }) {
             <tr key={r.id} className="border-b border-line/40 last:border-0 hover:bg-panel-2">
               <td className="px-3 py-2">
                 <div className="flex items-center gap-2">
+                  <GameIcon kind="unit" id={r.id} size={26} />
                   <span className={r.level >= r.maxHere ? 'text-ok' : undefined}>{r.name}</span>
                   {r.rushed && (
                     <Chip tone="bad" title={`Below the TH${th - 1} ceiling of ${r.prevMax}`}>rushed</Chip>

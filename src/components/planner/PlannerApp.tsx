@@ -12,6 +12,7 @@ import type { Lane, QueueItem, Resource } from '@/lib/game/types';
 import { usePlannerState } from '@/lib/store';
 import { fmtDuration, fmtResource } from '@/lib/format';
 import { Banner, Chip, Empty, Panel, Res, Stat } from '@/components/primitives';
+import { GameIcon } from '@/components/GameIcon';
 import { Timeline } from './Timeline';
 import { BucketEditor } from './BucketEditor';
 
@@ -228,6 +229,9 @@ export function PlannerApp() {
                       <td className="num px-3 py-2 text-right text-faint">{i + 1}</td>
                       <td className="px-3 py-2">
                         <div className="flex flex-wrap items-center gap-2">
+                          {/* The level you have now, not the one queued — the
+                              art should match the village you can go look at. */}
+                          <GameIcon kind={it.kind} id={it.id} level={it.from} size={24} />
                           <span>{it.name}</span>
                           <Chip>{it.from} → {it.to}</Chip>
                           <Chip tone={it.laneType === 'lab' ? 'info' : it.laneType === 'hero' ? 'gold' : 'plain'}>
@@ -292,6 +296,7 @@ export function PlannerApp() {
                 <tr key={`${r.type}-${r.id}`} className="border-b border-line/40 last:border-0 hover:bg-panel-2">
                   <td className="px-3 py-2">
                     <div className="flex flex-wrap items-center gap-2">
+                      <GameIcon kind={r.type} id={r.id} level={r.current} size={26} />
                       <span>{r.name}</span>
                       <Chip>{CAT_LABEL[r.category] ?? r.category}</Chip>
                       {r.type === 'building' && r.countHere > 1 && (
@@ -341,6 +346,7 @@ export function PlannerApp() {
                   <tr key={r.id} className="border-b border-line/40 last:border-0 hover:bg-panel-2">
                     <td className="px-3 py-2">
                       <div className="flex items-center gap-2">
+                        <GameIcon kind="building" id={r.id} level={r.current} size={26} />
                         <span>{r.name}</span><Chip>{CAT_LABEL[r.category] ?? r.category}</Chip>
                       </div>
                     </td>

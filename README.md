@@ -137,12 +137,22 @@ renders it **per level**: a structure is drawn at the level the selected Town
 Hall can reach, so a TH4 cannon is the stubby one and a TH14 cannon is not.
 `src/lib/game/buildings.ts` supplies that ceiling.
 
-Files live in `public/sprites/`, named by content hash and shared between levels
-whose art is identical — 370 files covering 405 structure-levels. Which file a
-structure and level resolve to is `src/lib/base/sprite-index.json`; a level with
-no entry of its own uses the highest entry below it, which is why the index is
-smaller than the number of levels. `public/sprites/credits.json` records the
-provenance.
+Units get art too — the player pages and the planner show the same portraits the
+game's own Laboratory and Army screens do. Structures are indexed per **level**
+and units are not, and that asymmetry is deliberate: the village shows a
+structure at the level it is, while the Lab shows a fixed portrait no matter how
+far a troop is upgraded.
+
+| | where | index | keyed by |
+| --- | --- | --- | --- |
+| Structures | `public/sprites/` | `src/lib/sprites/buildings.json` | id + level |
+| Units | `public/sprites/units/` | `src/lib/sprites/units.json` | village + id |
+
+Files are named by content hash and shared wherever the art is identical: 370
+files cover 405 structure-levels, and a level with no entry of its own uses the
+highest entry below it. Units are keyed by village because the two villages
+share ids — there is a Baby Dragon in both — but not their art.
+`public/sprites/credits.json` records the provenance of everything.
 
 Picking "highest numbered file on the wiki" is not safe on its own — it yields
 `Archer_Tower109.png` and `Air_Defense2012.png`, a typo and a year — so the
@@ -162,7 +172,7 @@ src/lib/theme.ts   three-state theme store (system / light / dark)
 src/lib/base/      base layout rules — collision, count limits, drag painting
 src/lib/base/iso.ts      isometric projection, its inverse, and the zoom/pan camera
 src/lib/base/terrain.ts  the village ground, painted once and cached
-src/lib/base/sprites.ts  per-level sprite resolution and lazy loading
+src/lib/sprites/   official art: per-level structures, per-unit portraits
 src/lib/coc/       Supercell client, tag handling, key rotation, mock generator
 src/lib/data/      read paths — Postgres only, never upstream
 src/lib/ingest/    the only code that calls Supercell

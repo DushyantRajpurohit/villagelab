@@ -14,7 +14,7 @@ import {
   depth, footprint, initialCamera, isoCanvas, panBy, toLayer, toTile, tileDiamond,
   trace, viewport, zoomAt, MAX_SCALE, MIN_SCALE, type Camera, type Iso,
 } from '@/lib/base/iso';
-import { sprite, spriteUrl } from '@/lib/base/sprites';
+import { buildingSprite, buildingSpriteUrl } from '@/lib/sprites';
 import { MAX_TH } from '@/lib/game/town-halls';
 import { usePlannerState } from '@/lib/store';
 import { useResolvedTheme } from '@/lib/theme';
@@ -595,7 +595,7 @@ function drawStructure(
   g.lineWidth = forceStroke ? 2.5 : 1.5;
   g.stroke();
 
-  const img = sprite(p.id, p.level, onSpriteReady);
+  const img = buildingSprite(p.id, p.level, onSpriteReady);
   if (img && img.naturalWidth > 0) {
     // Slightly narrower than the diamond. The art carries its own margin and
     // shadow, so drawing it at full width makes neighbours a tile apart look
@@ -629,7 +629,7 @@ function drawStructure(
 
 /** The structure's own art at the level this Town Hall reaches. */
 function SpriteChip({ entry }: { entry: PaletteEntry }) {
-  const url = spriteUrl(entry.id, entry.level);
+  const url = buildingSpriteUrl(entry.id, entry.level);
   if (!url) {
     const col = styleOf(entry.category);
     return (

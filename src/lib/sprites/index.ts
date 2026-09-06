@@ -1,5 +1,5 @@
 /**
- * Official structure art, per level, loaded on demand.
+ * Official Clash of Clans art: structures per level, units as portraits.
  *
  * Sprites come from the Clash of Clans community wiki and are used under
  * Supercell's Fan Content Policy — see README. A structure's appearance changes
@@ -16,10 +16,12 @@
  * art arrives, rather than blocking the first frame on hundreds of requests.
  */
 
-import index from './sprite-index.json';
+import buildings from './buildings.json';
+import units from './units.json';
 
 type SpriteIndex = Record<string, Record<string, string>>;
-const INDEX: SpriteIndex = index as SpriteIndex;
+const BUILDINGS: SpriteIndex = buildings as SpriteIndex;
+const UNITS: Record<string, string> = units as Record<string, string>;
 
 /**
  * The file for a structure at a level, or null if it has no art at all.
@@ -28,8 +30,8 @@ const INDEX: SpriteIndex = index as SpriteIndex;
  * the index only stores a level where the art actually changed, so a level 12
  * cannon legitimately resolves to the level 11 file.
  */
-export function spriteFile(id: string, level: number): string | null {
-  const byLevel = INDEX[id];
+export function buildingSpriteFile(id: string, level: number): string | null {
+  const byLevel = BUILDINGS[id];
   if (!byLevel) return null;
 
   const exact = byLevel[String(level)];
@@ -42,8 +44,8 @@ export function spriteFile(id: string, level: number): string | null {
   return byLevel[String(best)] ?? null;
 }
 
-export function spriteUrl(id: string, level: number): string | null {
-  const file = spriteFile(id, level);
+export function buildingSpriteUrl(id: string, level: number): string | null {
+  const file = buildingSpriteFile(id, level);
   return file ? `/sprites/${file}` : null;
 }
 
@@ -60,8 +62,8 @@ const cache = new Map<string, Entry>();
  * arrives. Callers fall back to the vector icon, so missing art degrades the
  * board rather than leaving a hole in it.
  */
-export function sprite(id: string, level: number, onReady: () => void): HTMLImageElement | null {
-  const file = spriteFile(id, level);
+export function buildingSprite(id: string, level: number, onReady: () => void): HTMLImageElement | null {
+  const file = buildingSpriteFile(id, level);
   if (!file) return null;
 
   const hit = cache.get(file);
@@ -74,4 +76,26 @@ export function sprite(id: string, level: number, onReady: () => void): HTMLImag
   img.onerror = () => { cache.set(file, { state: 'failed' }); };
   img.src = `/sprites/${file}`;
   return null;
+}
+
+/* ------------------------------------------------------------------ units */
+
+/**
+ * Which village a unit belongs to. The two share ids — a Baby Dragon exists in
+ * both — but they are different creatures, so the village is part of the key.
+ */
+export type Village = 'home' | 'builder';
+
+/**
+ * A unit's portrait.
+ *
+ * Units get one image each, not one per level, because that is what the game
+ * itself shows: the Laboratory and Army screens use a fixed portrait no matter
+ * what level the troop is. Structures are the opposite — the village shows
+ * them at their current level — which is why buildings are indexed by level
+ * and units are not.
+ */
+export function unitSpriteUrl(id: string, village: Village = 'home'): string | null {
+  const file = UNITS[`${village}:${id}`];
+  return file ? `/sprites/units/${file}` : null;
 }

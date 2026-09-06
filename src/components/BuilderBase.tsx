@@ -1,4 +1,5 @@
 import { Bar, Chip, Panel, Stat, pctTone } from './primitives';
+import { GameIcon } from './GameIcon';
 import { fmtInt } from '@/lib/format';
 import { BUILDER_CEILINGS_VERIFIED, MAX_BH } from '@/lib/game/builder-base';
 import type { BuilderProgressSummary, BuilderUnitProgress } from '@/lib/game/progress';
@@ -88,7 +89,14 @@ function BuilderTable({ rows }: { rows: BuilderUnitProgress[] }) {
         <tbody>
           {sorted.map((r) => (
             <tr key={r.id} className="border-b border-line/40 last:border-0 hover:bg-panel-2">
-              <td className={CELL}>{r.name}</td>
+              <td className={CELL}>
+                <div className="flex items-center gap-2">
+                  {/* Builder village: the two villages share unit ids but not
+                      their art, so the village has to be named explicitly. */}
+                  <GameIcon kind="unit" id={r.id} village="builder" size={26} />
+                  <span>{r.name}</span>
+                </div>
+              </td>
               <td className={`num ${CELL} text-right whitespace-nowrap`}>
                 <span className={r.level >= r.maxHere ? 'text-ok' : ''}>{r.level}</span>
                 <span className="text-faint"> / {r.maxHere}</span>

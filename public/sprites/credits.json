@@ -1,8 +1,9 @@
 {
- "_readme": "Structure art used under Supercell's Fan Content Policy. Sourced from the Clash of Clans community wiki (clashofclans.fandom.com) as 256px-wide thumbnails, which the CDN serves as WebP. Files are named by content hash and shared between levels whose art is identical. src/lib/base/sprite-index.json maps structure and level onto a file; a level with no entry uses the highest entry below it, which is why the index is smaller than the number of levels.",
+ "_readme": "Clash of Clans art used under Supercell's Fan Content Policy. Sourced from the community wiki (clashofclans.fandom.com) and served as WebP. Files are named by content hash and shared wherever the art is identical.",
  "_policy": "https://supercell.com/en/fan-content-policy/",
  "_source": "https://clashofclans.fandom.com",
- "_levels": "Levels are the ceiling each Town Hall reaches, from src/lib/game/buildings.ts. The wiki holds stray uploads (Archer_Tower109, Air_Defense2012 - a typo and a year), so the game data caps which files are considered.",
+ "_structures": "public/sprites/*.webp, indexed by src/lib/sprites/buildings.json. Indexed per LEVEL, because the village shows a structure at the level it is. Levels are the ceiling each Town Hall reaches, from src/lib/game/buildings.ts; the wiki holds stray uploads (Archer_Tower109, Air_Defense2012 - a typo and a year), so the game data caps which files are considered. A level with no entry uses the highest entry below it.",
+ "_units": "public/sprites/units/*.webp, indexed by src/lib/sprites/units.json. ONE portrait per unit, not one per level, because that is what the game's own Laboratory and Army screens show. Keyed 'village:id' - the home and Builder Base villages share unit ids (Baby Dragon) but not necessarily their art.",
  "structures": {
   "__townhall": {
    "levels": [
@@ -672,6 +673,328 @@
    ],
    "maxLevel": 11,
    "files": 2
+  }
+ },
+ "units": {
+  "builder:baby_dragon": {
+   "name": "Baby Dragon",
+   "kind": "troop"
+  },
+  "builder:battle_copter": {
+   "name": "Battle Copter",
+   "kind": "hero"
+  },
+  "builder:battle_machine": {
+   "name": "Battle Machine",
+   "kind": "hero"
+  },
+  "builder:beta_minion": {
+   "name": "Beta Minion",
+   "kind": "troop"
+  },
+  "builder:bomber": {
+   "name": "Bomber",
+   "kind": "troop"
+  },
+  "builder:boxer_giant": {
+   "name": "Boxer Giant",
+   "kind": "troop"
+  },
+  "builder:cannon_cart": {
+   "name": "Cannon Cart",
+   "kind": "troop"
+  },
+  "builder:drop_ship": {
+   "name": "Drop Ship",
+   "kind": "troop"
+  },
+  "builder:electrofire_wizard": {
+   "name": "Electrofire Wizard",
+   "kind": "troop"
+  },
+  "builder:hog_glider": {
+   "name": "Hog Glider",
+   "kind": "troop"
+  },
+  "builder:night_witch": {
+   "name": "Night Witch",
+   "kind": "troop"
+  },
+  "builder:power_pekka": {
+   "name": "Power P.E.K.K.A",
+   "kind": "troop"
+  },
+  "builder:raged_barbarian": {
+   "name": "Raged Barbarian",
+   "kind": "troop"
+  },
+  "builder:sneaky_archer": {
+   "name": "Sneaky Archer",
+   "kind": "troop"
+  },
+  "home:angry_jelly": {
+   "name": "Angry Jelly",
+   "kind": "pet"
+  },
+  "home:apprentice_warden": {
+   "name": "Apprentice Warden",
+   "kind": "troop"
+  },
+  "home:archer": {
+   "name": "Archer",
+   "kind": "troop"
+  },
+  "home:archer_queen": {
+   "name": "Archer Queen",
+   "kind": "hero"
+  },
+  "home:baby_dragon": {
+   "name": "Baby Dragon",
+   "kind": "troop"
+  },
+  "home:balloon": {
+   "name": "Balloon",
+   "kind": "troop"
+  },
+  "home:barbarian": {
+   "name": "Barbarian",
+   "kind": "troop"
+  },
+  "home:barbarian_king": {
+   "name": "Barbarian King",
+   "kind": "hero"
+  },
+  "home:bat": {
+   "name": "Bat Spell",
+   "kind": "spell"
+  },
+  "home:battle_blimp": {
+   "name": "Battle Blimp",
+   "kind": "siege"
+  },
+  "home:battle_drill": {
+   "name": "Battle Drill",
+   "kind": "siege"
+  },
+  "home:bowler": {
+   "name": "Bowler",
+   "kind": "troop"
+  },
+  "home:clone": {
+   "name": "Clone Spell",
+   "kind": "spell"
+  },
+  "home:diggy": {
+   "name": "Diggy",
+   "kind": "pet"
+  },
+  "home:dragon": {
+   "name": "Dragon",
+   "kind": "troop"
+  },
+  "home:dragon_rider": {
+   "name": "Dragon Rider",
+   "kind": "troop"
+  },
+  "home:druid": {
+   "name": "Druid",
+   "kind": "troop"
+  },
+  "home:earthquake": {
+   "name": "Earthquake Spell",
+   "kind": "spell"
+  },
+  "home:electro_dragon": {
+   "name": "Electro Dragon",
+   "kind": "troop"
+  },
+  "home:electro_owl": {
+   "name": "Electro Owl",
+   "kind": "pet"
+  },
+  "home:electro_titan": {
+   "name": "Electro Titan",
+   "kind": "troop"
+  },
+  "home:flame_flinger": {
+   "name": "Flame Flinger",
+   "kind": "siege"
+  },
+  "home:freeze": {
+   "name": "Freeze Spell",
+   "kind": "spell"
+  },
+  "home:frosty": {
+   "name": "Frosty",
+   "kind": "pet"
+  },
+  "home:giant": {
+   "name": "Giant",
+   "kind": "troop"
+  },
+  "home:goblin": {
+   "name": "Goblin",
+   "kind": "troop"
+  },
+  "home:golem": {
+   "name": "Golem",
+   "kind": "troop"
+  },
+  "home:grand_warden": {
+   "name": "Grand Warden",
+   "kind": "hero"
+  },
+  "home:haste": {
+   "name": "Haste Spell",
+   "kind": "spell"
+  },
+  "home:headhunter": {
+   "name": "Headhunter",
+   "kind": "troop"
+  },
+  "home:healer": {
+   "name": "Healer",
+   "kind": "troop"
+  },
+  "home:healing": {
+   "name": "Healing Spell",
+   "kind": "spell"
+  },
+  "home:hog_rider": {
+   "name": "Hog Rider",
+   "kind": "troop"
+  },
+  "home:ice_golem": {
+   "name": "Ice Golem",
+   "kind": "troop"
+  },
+  "home:invisibility": {
+   "name": "Invisibility Spell",
+   "kind": "spell"
+  },
+  "home:jump": {
+   "name": "Jump Spell",
+   "kind": "spell"
+  },
+  "home:lassi": {
+   "name": "L.A.S.S.I",
+   "kind": "pet"
+  },
+  "home:lava_hound": {
+   "name": "Lava Hound",
+   "kind": "troop"
+  },
+  "home:lightning": {
+   "name": "Lightning Spell",
+   "kind": "spell"
+  },
+  "home:log_launcher": {
+   "name": "Log Launcher",
+   "kind": "siege"
+  },
+  "home:mighty_yak": {
+   "name": "Mighty Yak",
+   "kind": "pet"
+  },
+  "home:miner": {
+   "name": "Miner",
+   "kind": "troop"
+  },
+  "home:minion": {
+   "name": "Minion",
+   "kind": "troop"
+  },
+  "home:minion_prince": {
+   "name": "Minion Prince",
+   "kind": "hero"
+  },
+  "home:pekka": {
+   "name": "P.E.K.K.A",
+   "kind": "troop"
+  },
+  "home:phoenix": {
+   "name": "Phoenix",
+   "kind": "pet"
+  },
+  "home:poison": {
+   "name": "Poison Spell",
+   "kind": "spell"
+  },
+  "home:poison_lizard": {
+   "name": "Poison Lizard",
+   "kind": "pet"
+  },
+  "home:rage": {
+   "name": "Rage Spell",
+   "kind": "spell"
+  },
+  "home:recall": {
+   "name": "Recall Spell",
+   "kind": "spell"
+  },
+  "home:revive": {
+   "name": "Revive Spell",
+   "kind": "spell"
+  },
+  "home:root_rider": {
+   "name": "Root Rider",
+   "kind": "troop"
+  },
+  "home:royal_champion": {
+   "name": "Royal Champion",
+   "kind": "hero"
+  },
+  "home:siege_barracks": {
+   "name": "Siege Barracks",
+   "kind": "siege"
+  },
+  "home:skeleton": {
+   "name": "Skeleton Spell",
+   "kind": "spell"
+  },
+  "home:spirit_fox": {
+   "name": "Spirit Fox",
+   "kind": "pet"
+  },
+  "home:stone_slammer": {
+   "name": "Stone Slammer",
+   "kind": "siege"
+  },
+  "home:thrower": {
+   "name": "Thrower",
+   "kind": "troop"
+  },
+  "home:troop_launcher": {
+   "name": "Troop Launcher",
+   "kind": "siege"
+  },
+  "home:unicorn": {
+   "name": "Unicorn",
+   "kind": "pet"
+  },
+  "home:valkyrie": {
+   "name": "Valkyrie",
+   "kind": "troop"
+  },
+  "home:wall_breaker": {
+   "name": "Wall Breaker",
+   "kind": "troop"
+  },
+  "home:wall_wrecker": {
+   "name": "Wall Wrecker",
+   "kind": "siege"
+  },
+  "home:witch": {
+   "name": "Witch",
+   "kind": "troop"
+  },
+  "home:wizard": {
+   "name": "Wizard",
+   "kind": "troop"
+  },
+  "home:yeti": {
+   "name": "Yeti",
+   "kind": "troop"
   }
  }
 }
