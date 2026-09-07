@@ -8,6 +8,7 @@ import { Bar, Chip, Panel, Res, Stat, pctTone } from '@/components/primitives';
 import { RESOURCE_NAME } from '@/components/GameIcon';
 import { UnitTable } from '@/components/UnitTable';
 import { HeroRoster } from '@/components/HeroRoster';
+import { HomeVillageBuildings } from '@/components/player/VillageBuildings';
 import {
   MockBanner, PlayerFrame, PlayerIdentity, PlayerNotFound, PlayerQueued,
 } from '@/components/player/PlayerFrame';
@@ -132,6 +133,10 @@ export default async function PlayerPage({ params }: Params) {
           </Panel>
         );
       })}
+
+      {/* What the hall permits, not what the account has — the API carries no
+          building levels for either village. */}
+      <HomeVillageBuildings th={th} />
     </PlayerFrame>
   );
 }

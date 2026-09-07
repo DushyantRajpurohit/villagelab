@@ -60,7 +60,7 @@ export function BuilderVillage({ bh, summary }: {
                 <div className="text-[11px] uppercase tracking-[.06em] text-muted">
                   Builder {RESOURCE_NAME[k]}
                 </div>
-                <div className="text-[22px] font-semibold"><Res amount={summary.cost[k]} kind={k} /></div>
+                <div className="text-[22px] font-semibold"><Res amount={summary.cost[k]} kind={k} village="builder" /></div>
               </div>
             ))}
         </div>
@@ -134,7 +134,7 @@ function BuilderTable({ rows }: { rows: BuilderUnitProgress[] }) {
                 <Bar pct={r.pct} tone={pctTone(r.pct)} />
               </td>
               <td className={`${CELL} text-right`}>
-                {r.remainingCost ? <Res amount={r.remainingCost} kind={r.resource} /> : <span className="text-faint">—</span>}
+                {r.remainingCost ? <Res amount={r.remainingCost} kind={r.resource} village="builder" /> : <span className="text-faint">—</span>}
               </td>
               <td className={`num ${CELL} text-right text-muted`}>
                 {r.remainingHours ? fmtDuration(r.remainingHours) : '—'}

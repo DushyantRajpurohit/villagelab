@@ -4,7 +4,7 @@
  "_source": "https://clashofclans.fandom.com",
  "_structures": "public/sprites/*.webp, indexed by src/lib/sprites/buildings.json. Indexed per LEVEL, because the village shows a structure at the level it is. Levels are the ceiling each Town Hall reaches, from src/lib/game/buildings.ts; the wiki holds stray uploads (Archer_Tower109, Air_Defense2012 - a typo and a year), so the game data caps which files are considered. A level with no entry uses the highest entry below it.",
  "_units": "public/sprites/units/*.webp, indexed by src/lib/sprites/units.json. ONE portrait per unit, not one per level, because that is what the game's own Laboratory and Army screens show. Keyed 'village:id' - the home and Builder Base villages share unit ids (Baby Dragon) but not necessarily their art.",
- "_resources": "public/sprites/resources/*.webp, indexed by src/lib/sprites/resources.json. ONE badge per resource, no levels - the game's own Gold, Elixir and Dark Elixir icons. A badge marks a COST; an amount already banked is marked with the storage that holds it (gold_storage, elixir_storage, dark_storage), which is a structure and so indexed per level.",
+ "_resources": "public/sprites/resources/*.webp, indexed by src/lib/sprites/resources.json. ONE badge per resource per village, no levels. Keyed 'village:kind' because Builder Gold and Builder Elixir are SEPARATE currencies from the home village's - they cannot be moved between villages and the game draws them differently (a gold plate, a violet drop). The Builder Base has no dark elixir, so that key has no builder entry. A badge marks a COST; an amount already banked is marked with the storage that holds it, which is a structure and indexed per level.",
  "_builder": "public/sprites/builder/*.webp, indexed by src/lib/sprites/builder-buildings.json. Builder Base structure art, indexed per LEVEL like the Home Village's. Kept in a separate index rather than under prefixed ids because the two villages share structure names - both have a Cannon, a Gold Storage and an Army Camp - and look nothing alike; separate indexes mean a missing Builder Base sprite can never resolve to the Home Village one. The wiki files these with a 'B' suffix (Cannon7B.png), sometimes with a _Ground/_Air state, and files the B.O.B Control under its old name, O.T.T.O Hut.",
  "structures": {
   "__townhall": {
@@ -1000,17 +1000,25 @@
   }
  },
  "resources": {
-  "gold": {
+  "home:gold": {
    "name": "Gold",
    "source": "File:Gold.png"
   },
-  "elixir": {
+  "home:elixir": {
    "name": "Elixir",
    "source": "File:Elixir.png"
   },
-  "dark": {
+  "home:dark": {
    "name": "Dark Elixir",
    "source": "File:Dark_Elixir.png"
+  },
+  "builder:gold": {
+   "name": "Builder Gold",
+   "source": "File:GoldB.png"
+  },
+  "builder:elixir": {
+   "name": "Builder Elixir",
+   "source": "File:ElixirB.png"
   }
  },
  "builderStructures": {

@@ -9,6 +9,7 @@ import {
   MockBanner, PlayerFrame, PlayerIdentity, PlayerNotFound, PlayerQueued,
 } from '@/components/player/PlayerFrame';
 import { BuilderVillage } from '@/components/player/BuilderVillage';
+import { BuilderVillageBuildings } from '@/components/player/VillageBuildings';
 
 /**
  * The second village, on its own URL.
@@ -62,7 +63,13 @@ export default async function BuilderBasePage({ params }: Params) {
       <PlayerIdentity p={p} active="builder" />
 
       {bh ? (
-        <BuilderVillage bh={bh} summary={summariseBuilder(analyseBuilderUnits(p))} />
+        <>
+          <BuilderVillage bh={bh} summary={summariseBuilder(analyseBuilderUnits(p))} />
+          {/* The hall's own allowance. Units come from the account; buildings
+              cannot — the API has no building levels — so this is framed as
+              what the hall permits rather than what the player has. */}
+          <BuilderVillageBuildings bh={bh} />
+        </>
       ) : (
         <Banner>
           <span>

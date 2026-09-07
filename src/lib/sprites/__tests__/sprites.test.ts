@@ -111,6 +111,25 @@ describe('resource badges', () => {
     expect(new Set(RESOURCES.map((k) => resourceSpriteUrl(k))).size).toBe(RESOURCES.length);
   });
 
+  it('draws Builder Base currency with its own art, not the home village\'s', () => {
+    // Builder Gold and Builder Elixir are separate currencies that cannot be
+    // moved between villages. Sharing the home village's coin and drop would
+    // say they spend from the same pile.
+    for (const k of ['gold', 'elixir'] as Resource[]) {
+      const home = resourceSpriteUrl(k, 'home');
+      const builder = resourceSpriteUrl(k, 'builder');
+      expect(builder, k).toMatch(/^\/sprites\/resources\/[0-9a-f]+\.webp$/);
+      expect(builder, k).not.toBe(home);
+    }
+  });
+
+  it('has no dark elixir in the Builder Base', () => {
+    // That village has two currencies. Falling back to the home village's dark
+    // elixir badge would invent a third.
+    expect(resourceSpriteUrl('dark', 'builder')).toBeNull();
+    expect(resourceSpriteUrl('dark', 'home')).toBeTruthy();
+  });
+
   it('names a real storage for each resource, with art at every Town Hall it exists at', () => {
     // An amount on hand is marked with the storage that banks it, so a gap here
     // shows up as a missing icon next to a number the user typed themselves.

@@ -225,13 +225,32 @@ body {
   opacity: .5;
 }
 
-/* The figure lifts out of its niche on hover — one authored moment, and the
-   only motion on the card. */
-.hero-figure {
+/* The hall is alive: each hero breathes in place, the way they idle in the
+   game rather than standing frozen. Small amplitude and a slow, uneven period
+   — a big bob reads as a bouncing sticker, and a synchronised one reads as a
+   machine. Each card is given its own delay so the five drift out of phase.
+
+   Two nested transforms on purpose: the stage carries the hover lift and the
+   figure carries the idle, so neither overwrites the other. */
+.hero-stage {
   transition: transform .22s cubic-bezier(.22, .9, .3, 1);
+}
+.hero-card:hover .hero-stage { transform: translateY(-4px) scale(1.03); }
+
+.hero-figure {
+  animation: hero-idle 4.4s ease-in-out infinite;
+  animation-delay: var(--idle-delay, 0s);
+  transform-origin: 50% 100%;
   will-change: transform;
 }
-.hero-card:hover .hero-figure { transform: translateY(-4px) scale(1.03); }
+
+@keyframes hero-idle {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  50%      { transform: translateY(-3px) scaleY(1.012); }
+}
+
+/* An unlit niche holds no one, so nothing in it breathes. */
+.hero-alcove[data-locked='true'] .hero-figure { animation: none; }
 
 /* The level, where the game puts it: at the hero's feet, straddling the floor
    line so it reads as standing in front of the niche rather than inside it. */
@@ -265,6 +284,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-figure { transition: none; }
-  .hero-card:hover .hero-figure { transform: none; }
+  .hero-stage { transition: none; }
+  .hero-card:hover .hero-stage { transform: none; }
+  .hero-figure { animation: none; }
 }

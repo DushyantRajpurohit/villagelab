@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import type { Resource } from '@/lib/game/types';
 import { fmtResource } from '@/lib/format';
 import { ResourceIcon } from '@/components/GameIcon';
+import type { Village } from '@/lib/sprites';
 
 export function Panel({ title, action, children, tight }: {
   title?: ReactNode; action?: ReactNode; children: ReactNode; tight?: boolean;
@@ -61,11 +62,17 @@ const RES_COLOR: Record<Resource, string> = {
  *
  * Always a cost, never a balance: an amount you already hold is marked with the
  * storage that banks it. Same colour, different noun.
+ *
+ * `village` picks the currency's own art. Builder Gold and Builder Elixir are
+ * different currencies from the home village's, not the same ones earned
+ * elsewhere, and the game draws them differently.
  */
-export function Res({ amount, kind, est }: { amount: number; kind: Resource; est?: boolean }) {
+export function Res({ amount, kind, est, village = 'home' }: {
+  amount: number; kind: Resource; est?: boolean; village?: Village;
+}) {
   return (
     <span className={`num inline-flex items-center gap-1 whitespace-nowrap ${RES_COLOR[kind]}`}>
-      <ResourceIcon kind={kind} />
+      <ResourceIcon kind={kind} village={village} />
       <span>
         {est && (
           <span className="est-mark" title="Interpolated estimate — not a verified in-game value">≈</span>

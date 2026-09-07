@@ -247,7 +247,7 @@ export function VillagePlanner({ config }: { config: PlannerConfig }) {
         {config.resources.map((k) => (
           <Panel key={k}>
             <Stat label={`${config.resourceLabel[k]} needed`}
-              value={<Res amount={toMax.acc[k]} kind={k} est={toMax.est} />} />
+              value={<Res amount={toMax.acc[k]} kind={k} est={toMax.est} village={config.sprites} />} />
           </Panel>
         ))}
       </div>
@@ -271,7 +271,7 @@ export function VillagePlanner({ config }: { config: PlannerConfig }) {
                 sub={`${state.builders} builder${state.builders === 1 ? '' : 's'} + ${config.labName.toLowerCase()} + heroes`} />
               {config.resources.map((k) => (
                 <Stat key={k} label={config.resourceLabel[k]}
-                  value={<Res amount={queueTotals.acc[k]} kind={k} est={queueTotals.est} />} />
+                  value={<Res amount={queueTotals.acc[k]} kind={k} est={queueTotals.est} village={config.sprites} />} />
               ))}
             </div>
 
@@ -318,7 +318,7 @@ export function VillagePlanner({ config }: { config: PlannerConfig }) {
                           </Chip>
                         </div>
                       </td>
-                      <td className="px-3 py-2 text-right"><Res amount={it.cost} kind={it.resource} est={it.est} /></td>
+                      <td className="px-3 py-2 text-right"><Res amount={it.cost} kind={it.resource} est={it.est} village={config.sprites} /></td>
                       <td className="num px-3 py-2 text-right">{fmtDuration(it.hours)}</td>
                       <td className="num px-3 py-2 text-right text-muted">{fmtDuration(it.end)}</td>
                       <td className="px-3 py-2 text-right">
@@ -385,9 +385,9 @@ export function VillagePlanner({ config }: { config: PlannerConfig }) {
                   </td>
                   <td className="num px-3 py-2 text-right">{r.current} → {r.current + 1}</td>
                   <td className="num px-3 py-2 text-right text-muted">{r.cap}</td>
-                  <td className="px-3 py-2 text-right"><Res amount={r.next!.cost} kind={r.resource} est={r.next!.est} /></td>
+                  <td className="px-3 py-2 text-right"><Res amount={r.next!.cost} kind={r.resource} est={r.next!.est} village={config.sprites} /></td>
                   <td className="num px-3 py-2 text-right">{fmtDuration(r.next!.hours)}</td>
-                  <td className="px-3 py-2 text-right"><Res amount={r.cost} kind={r.resource} est={r.est} /></td>
+                  <td className="px-3 py-2 text-right"><Res amount={r.cost} kind={r.resource} est={r.est} village={config.sprites} /></td>
                   <td className="px-3 py-2 text-right">
                     <button type="button" onClick={() => addToQueue(r)}
                       className="rounded-md border border-line px-2.5 py-1 text-xs font-medium hover:bg-panel-3">
@@ -443,7 +443,7 @@ export function VillagePlanner({ config }: { config: PlannerConfig }) {
                     <td className={`num px-3 py-2 text-right ${r.pending ? 'text-warn' : 'text-ok'}`}>
                       {r.pending || 'max'}
                     </td>
-                    <td className="px-3 py-2 text-right"><Res amount={r.cost} kind={r.resource} est={r.est} /></td>
+                    <td className="px-3 py-2 text-right"><Res amount={r.cost} kind={r.resource} est={r.est} village={config.sprites} /></td>
                   </tr>
                 ))}
             </tbody>

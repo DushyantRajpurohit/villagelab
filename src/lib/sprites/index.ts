@@ -130,15 +130,22 @@ export function unitSpriteUrl(id: string, village: Village = 'home'): string | n
 /* -------------------------------------------------------------- resources */
 
 /**
- * The currency badge for a resource: the coin, the elixir drop, the dark drop.
+ * The currency badge for a resource, per village.
  *
- * These are the game's own icons for the resources themselves, and unlike
- * structures they have no level and no variants — one file each, forever. They
- * mark a *cost*. What you have banked is marked by the storage that holds it,
- * which is a structure and so goes through `buildingSpriteUrl`.
+ * Builder Gold and Builder Elixir are not the home village's gold and elixir —
+ * they are separate currencies that cannot be moved between villages, and the
+ * game draws them differently: a gold plate rather than a coin, a violet drop
+ * rather than a magenta one. Showing the home icons on a Builder Base cost
+ * would say the two spend from the same pile.
+ *
+ * A badge marks a *cost*. What you have banked is marked by the storage that
+ * holds it, which is a structure and so goes through `buildingSpriteUrl`.
+ *
+ * The Builder Base has no dark elixir, so that key has no builder entry and
+ * resolves to null rather than falling back to the home village's.
  */
-export function resourceSpriteUrl(kind: Resource): string | null {
-  const file = RESOURCES[kind];
+export function resourceSpriteUrl(kind: Resource, village: Village = 'home'): string | null {
+  const file = RESOURCES[`${village}:${kind}`];
   return file ? `/sprites/resources/${file}` : null;
 }
 

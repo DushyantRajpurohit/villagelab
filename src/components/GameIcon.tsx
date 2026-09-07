@@ -66,13 +66,15 @@ export const RESOURCE_NAME: Record<Resource, string> = {
  * not decorative: in a cost column the colour is otherwise the only thing
  * separating gold from elixir, and colour alone is not a label.
  */
-export function ResourceIcon({ kind, em = 1.05 }: { kind: Resource; em?: number }) {
-  const url = resourceSpriteUrl(kind);
+export function ResourceIcon({ kind, em = 1.05, village = 'home' }: {
+  kind: Resource; em?: number; village?: Village;
+}) {
+  const url = resourceSpriteUrl(kind, village);
   if (!url) return null;
   return (
     <Image
       src={url}
-      alt={RESOURCE_NAME[kind]}
+      alt={village === 'builder' ? `Builder ${RESOURCE_NAME[kind].toLowerCase()}` : RESOURCE_NAME[kind]}
       width={40}
       height={40}
       className="shrink-0 object-contain"
@@ -97,7 +99,7 @@ export function StorageIcon({ kind, level, size = 22, village = 'home' }: {
   village?: Village;
 }) {
   const url = level == null ? null : buildingSpriteUrl(STORAGE_ID[kind], level, village);
-  if (!url) return <ResourceIcon kind={kind} em={size / 16} />;
+  if (!url) return <ResourceIcon kind={kind} em={size / 16} village={village} />;
   return (
     <Image
       src={url}
