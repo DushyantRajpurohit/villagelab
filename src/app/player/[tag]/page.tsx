@@ -5,6 +5,7 @@ import { analyseBuilderUnits, analyseUnits, summarise, summariseBuilder } from '
 import { normalizeTag } from '@/lib/coc/tags';
 import { fmtDuration, fmtInt } from '@/lib/format';
 import { Banner, Bar, Chip, Empty, Panel, Res, Stat, pctTone } from '@/components/primitives';
+import { RESOURCE_NAME } from '@/components/GameIcon';
 import { UnitTable } from '@/components/UnitTable';
 import { BuilderBase } from '@/components/BuilderBase';
 import { TagSearch } from '@/components/TagSearch';
@@ -146,7 +147,7 @@ export default async function PlayerPage({ params }: Params) {
             .map((k) => (
               <div key={k}>
                 <div className="text-[11px] uppercase tracking-[.06em] text-muted">
-                  {k === 'dark' ? 'Dark elixir' : k}
+                  {RESOURCE_NAME[k]}
                 </div>
                 <div className="text-[22px] font-semibold"><Res amount={s.cost[k]} kind={k} est={s.est} /></div>
               </div>

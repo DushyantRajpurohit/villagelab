@@ -11,13 +11,13 @@ import {
 import type { Lane, QueueItem, Resource } from '@/lib/game/types';
 import { usePlannerState } from '@/lib/store';
 import { fmtDuration, fmtResource } from '@/lib/format';
+import { STORAGE_ID } from '@/lib/sprites';
 import { Banner, Chip, Empty, Panel, Res, Stat } from '@/components/primitives';
-import { GameIcon } from '@/components/GameIcon';
+import { GameIcon, RESOURCE_NAME, StorageIcon } from '@/components/GameIcon';
 import { Timeline } from './Timeline';
 import { BucketEditor } from './BucketEditor';
 
 const RESOURCES: Resource[] = ['gold', 'elixir', 'dark'];
-const RES_LABEL: Record<Resource, string> = { gold: 'Gold', elixir: 'Elixir', dark: 'Dark elixir' };
 
 const CATEGORIES = [
   'all', 'defense', 'trap', 'resource', 'army', 'wall',
@@ -85,6 +85,21 @@ export function PlannerApp() {
     return { acc, pending, est };
   }, [rows]);
 
+  /**
+   * The level each storage reaches at this Town Hall, or null where the Town
+   * Hall has no such storage — Dark Elixir Storage does not exist below TH7,
+   * and the field for it is still shown. Drawn at the ceiling rather than the
+   * recorded level so the icon matches the base builder, which draws every
+   * structure at the level the selected Town Hall can reach.
+   */
+  const storageLevel = useMemo(() => {
+    const capOf = (id: string) =>
+      rows.find((r) => r.type === 'building' && r.id === id)?.cap ?? null;
+    return Object.fromEntries(
+      RESOURCES.map((k) => [k, capOf(STORAGE_ID[k])]),
+    ) as Record<Resource, number | null>;
+  }, [rows]);
+
   const sched = useMemo(() => schedule(state.queue, state.builders), [state.queue, state.builders]);
 
   const queueTotals = useMemo(() => {
@@ -146,7 +161,11 @@ export function PlannerApp() {
 
           {RESOURCES.map((k) => (
             <label key={k} className="flex flex-col gap-1.5 text-xs text-muted">
-              {RES_LABEL[k]} on hand
+              {/* Banked, not owed — so the storage that holds it, not the coin. */}
+              <span className="flex items-center gap-1.5">
+                <StorageIcon kind={k} level={storageLevel[k]} size={20} />
+                {RESOURCE_NAME[k]} on hand
+              </span>
               <input
                 type="number" min={0} value={state.resources[k]}
                 onChange={(e) => setState({
@@ -172,7 +191,7 @@ export function PlannerApp() {
         <Panel><Stat label={`Everything left at TH${th}`} value={String(toMax.pending)} sub="upgrades outstanding" /></Panel>
         {RESOURCES.map((k) => (
           <Panel key={k}>
-            <Stat label={`${RES_LABEL[k]} needed`} value={<Res amount={toMax.acc[k]} kind={k} est={toMax.est} />} />
+            <Stat label={`${RESOURCE_NAME[k]} needed`} value={<Res amount={toMax.acc[k]} kind={k} est={toMax.est} />} />
           </Panel>
         ))}
       </div>
@@ -195,7 +214,7 @@ export function PlannerApp() {
               <Stat label="Finishes in" value={fmtDuration(sched.finishHours)}
                 sub={`${state.builders} builder${state.builders === 1 ? '' : 's'} + lab + heroes`} />
               {RESOURCES.map((k) => (
-                <Stat key={k} label={RES_LABEL[k]} value={<Res amount={queueTotals.acc[k]} kind={k} est={queueTotals.est} />} />
+                <Stat key={k} label={RESOURCE_NAME[k]} value={<Res amount={queueTotals.acc[k]} kind={k} est={queueTotals.est} />} />
               ))}
             </div>
 
@@ -203,7 +222,7 @@ export function PlannerApp() {
               <Banner tone="warn">
                 <span><b className="text-text">Short on resources: </b>
                   {deficits.map((d, i) => (
-                    <span key={d.k}>{i ? ', ' : ''}{fmtResource(d.need - d.have)} more {RES_LABEL[d.k].toLowerCase()}</span>
+                    <span key={d.k}>{i ? ', ' : ''}{fmtResource(d.need - d.have)} more {RESOURCE_NAME[d.k].toLowerCase()}</span>
                   ))}
                 </span>
               </Banner>

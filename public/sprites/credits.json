@@ -4,6 +4,7 @@
  "_source": "https://clashofclans.fandom.com",
  "_structures": "public/sprites/*.webp, indexed by src/lib/sprites/buildings.json. Indexed per LEVEL, because the village shows a structure at the level it is. Levels are the ceiling each Town Hall reaches, from src/lib/game/buildings.ts; the wiki holds stray uploads (Archer_Tower109, Air_Defense2012 - a typo and a year), so the game data caps which files are considered. A level with no entry uses the highest entry below it.",
  "_units": "public/sprites/units/*.webp, indexed by src/lib/sprites/units.json. ONE portrait per unit, not one per level, because that is what the game's own Laboratory and Army screens show. Keyed 'village:id' - the home and Builder Base villages share unit ids (Baby Dragon) but not necessarily their art.",
+ "_resources": "public/sprites/resources/*.webp, indexed by src/lib/sprites/resources.json. ONE badge per resource, no levels - the game's own Gold, Elixir and Dark Elixir icons. A badge marks a COST; an amount already banked is marked with the storage that holds it (gold_storage, elixir_storage, dark_storage), which is a structure and so indexed per level.",
  "structures": {
   "__townhall": {
    "levels": [
@@ -995,6 +996,20 @@
   "home:yeti": {
    "name": "Yeti",
    "kind": "troop"
+  }
+ },
+ "resources": {
+  "gold": {
+   "name": "Gold",
+   "source": "File:Gold.png"
+  },
+  "elixir": {
+   "name": "Elixir",
+   "source": "File:Elixir.png"
+  },
+  "dark": {
+   "name": "Dark Elixir",
+   "source": "File:Dark_Elixir.png"
   }
  }
 }

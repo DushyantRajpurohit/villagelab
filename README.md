@@ -143,15 +143,24 @@ and units are not, and that asymmetry is deliberate: the village shows a
 structure at the level it is, while the Lab shows a fixed portrait no matter how
 far a troop is upgraded.
 
+Resources get the game's own badges — the coin, the elixir drop, the dark drop.
+Every cost in the app is stamped with one, which is what makes a cost column
+readable without relying on colour alone. An amount you already **hold** is
+marked differently, with the storage that banks it: the planner's "on hand"
+fields carry Gold, Elixir and Dark Elixir Storage art at the level the selected
+Town Hall reaches. Cost is a badge, balance is a building.
+
 | | where | index | keyed by |
 | --- | --- | --- | --- |
 | Structures | `public/sprites/` | `src/lib/sprites/buildings.json` | id + level |
 | Units | `public/sprites/units/` | `src/lib/sprites/units.json` | village + id |
+| Resources | `public/sprites/resources/` | `src/lib/sprites/resources.json` | resource |
 
 Files are named by content hash and shared wherever the art is identical: 370
 files cover 405 structure-levels, and a level with no entry of its own uses the
 highest entry below it. Units are keyed by village because the two villages
-share ids — there is a Baby Dragon in both — but not their art.
+share ids — there is a Baby Dragon in both — but not their art. Resources have
+no level and no variants, so they are keyed by nothing but themselves.
 `public/sprites/credits.json` records the provenance of everything.
 
 Picking "highest numbered file on the wiki" is not safe on its own — it yields

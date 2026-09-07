@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import type { Resource } from '@/lib/game/types';
 import { fmtResource } from '@/lib/format';
+import { ResourceIcon } from '@/components/GameIcon';
 
 export function Panel({ title, action, children, tight }: {
   title?: ReactNode; action?: ReactNode; children: ReactNode; tight?: boolean;
@@ -54,16 +55,23 @@ const RES_COLOR: Record<Resource, string> = {
 };
 
 /**
- * A resource-coloured amount. `est` renders the "≈" that marks every value
- * interpolated rather than anchored — see src/lib/game/curve.ts.
+ * A cost, badged with the game's own icon for the resource and coloured to
+ * match. `est` renders the "≈" that marks every value interpolated rather than
+ * anchored — see src/lib/game/curve.ts.
+ *
+ * Always a cost, never a balance: an amount you already hold is marked with the
+ * storage that banks it. Same colour, different noun.
  */
 export function Res({ amount, kind, est }: { amount: number; kind: Resource; est?: boolean }) {
   return (
-    <span className={`num whitespace-nowrap ${RES_COLOR[kind]}`}>
-      {est && (
-        <span className="est-mark" title="Interpolated estimate — not a verified in-game value">≈</span>
-      )}
-      {fmtResource(amount)}
+    <span className={`num inline-flex items-center gap-1 whitespace-nowrap ${RES_COLOR[kind]}`}>
+      <ResourceIcon kind={kind} />
+      <span>
+        {est && (
+          <span className="est-mark" title="Interpolated estimate — not a verified in-game value">≈</span>
+        )}
+        {fmtResource(amount)}
+      </span>
     </span>
   );
 }

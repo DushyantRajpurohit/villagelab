@@ -1,5 +1,6 @@
 /**
- * Official Clash of Clans art: structures per level, units as portraits.
+ * Official Clash of Clans art: structures per level, units as portraits, and
+ * the three resource badges.
  *
  * Sprites come from the Clash of Clans community wiki and are used under
  * Supercell's Fan Content Policy — see README. A structure's appearance changes
@@ -11,17 +12,24 @@
  * identical, which is most of them — an X-Bow looks the same across nine
  * levels. `sprite-index.json` maps structure and level onto a file.
  *
+ * Resources are the simple case — one badge each, no levels — but they carry a
+ * rule of their own: the badge means a *cost*, and an amount you already hold is
+ * marked with the storage that banks it instead. See `STORAGE_ID`.
+ *
  * Loading is lazy and cached: a village at TH3 has no reason to fetch Eagle
  * Artillery art. `onReady` fires once per image so the board can repaint as
  * art arrives, rather than blocking the first frame on hundreds of requests.
  */
 
+import type { Resource } from '@/lib/game/types';
 import buildings from './buildings.json';
+import resources from './resources.json';
 import units from './units.json';
 
 type SpriteIndex = Record<string, Record<string, string>>;
 const BUILDINGS: SpriteIndex = buildings as SpriteIndex;
 const UNITS: Record<string, string> = units as Record<string, string>;
+const RESOURCES: Record<string, string> = resources as Record<string, string>;
 
 /**
  * The file for a structure at a level, or null if it has no art at all.
@@ -99,3 +107,25 @@ export function unitSpriteUrl(id: string, village: Village = 'home'): string | n
   const file = UNITS[`${village}:${id}`];
   return file ? `/sprites/units/${file}` : null;
 }
+
+/* -------------------------------------------------------------- resources */
+
+/**
+ * The currency badge for a resource: the coin, the elixir drop, the dark drop.
+ *
+ * These are the game's own icons for the resources themselves, and unlike
+ * structures they have no level and no variants — one file each, forever. They
+ * mark a *cost*. What you have banked is marked by the storage that holds it,
+ * which is a structure and so goes through `buildingSpriteUrl`.
+ */
+export function resourceSpriteUrl(kind: Resource): string | null {
+  const file = RESOURCES[kind];
+  return file ? `/sprites/resources/${file}` : null;
+}
+
+/** The structure that banks a resource — the icon for an amount on hand. */
+export const STORAGE_ID: Record<Resource, string> = {
+  gold: 'gold_storage',
+  elixir: 'elixir_storage',
+  dark: 'dark_storage',
+};

@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { buildingSpriteFile, buildingSpriteUrl, unitSpriteUrl } from '@/lib/sprites';
+import {
+  buildingSpriteFile, buildingSpriteUrl, resourceSpriteUrl, unitSpriteUrl, STORAGE_ID,
+} from '@/lib/sprites';
 import { ALL_UNITS } from '@/lib/game/army';
+import { buildingsAtTH } from '@/lib/game/buildings';
+import type { Resource } from '@/lib/game/types';
 import { BUILDER_UNITS } from '@/lib/game/builder-base';
 import { paletteFor, TOWN_HALL_ID, type PaletteEntry } from '@/lib/base/layout';
 import { MAX_TH } from '@/lib/game/town-halls';
@@ -90,5 +94,39 @@ describe('unit portraits', () => {
     for (const u of ALL_UNITS) {
       expect(unitSpriteUrl(u.id)).toMatch(/^\/sprites\/units\/[0-9a-f]+\.webp$/);
     }
+  });
+});
+
+describe('resource badges', () => {
+  const RESOURCES: Resource[] = ['gold', 'elixir', 'dark'];
+
+  it('has a badge for every resource, under /sprites/resources', () => {
+    for (const k of RESOURCES) {
+      expect(resourceSpriteUrl(k)).toMatch(/^\/sprites\/resources\/[0-9a-f]+\.webp$/);
+    }
+  });
+
+  it('gives each resource its own badge', () => {
+    expect(new Set(RESOURCES.map((k) => resourceSpriteUrl(k))).size).toBe(RESOURCES.length);
+  });
+
+  it('names a real storage for each resource, with art at every Town Hall it exists at', () => {
+    // An amount on hand is marked with the storage that banks it, so a gap here
+    // shows up as a missing icon next to a number the user typed themselves.
+    const gaps: string[] = [];
+    for (let th = 1; th <= MAX_TH; th++) {
+      const here = buildingsAtTH(th);
+      for (const k of RESOURCES) {
+        const b = here.find((x) => x.id === STORAGE_ID[k]);
+        if (b && !buildingSpriteFile(b.id, b.maxHere)) gaps.push(`TH${th} ${b.id}@${b.maxHere}`);
+      }
+    }
+    expect(gaps).toEqual([]);
+  });
+
+  it('has no Dark Elixir Storage below TH7, which is why the icon falls back', () => {
+    const at = (th: number) => buildingsAtTH(th).some((b) => b.id === STORAGE_ID.dark);
+    expect(at(6)).toBe(false);
+    expect(at(7)).toBe(true);
   });
 });
