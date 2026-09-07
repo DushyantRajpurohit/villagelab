@@ -48,7 +48,7 @@ fresh clone is fully usable and CI needs no secrets.
 | Script | |
 | --- | --- |
 | `npm run dev` | Dev server |
-| `npm test` | Vitest — 606 tests |
+| `npm test` | Vitest — 625 tests |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run lint` | ESLint |
 | `npm run db:generate` | Generate a Drizzle migration |
@@ -96,11 +96,32 @@ key, point the worker at a fixed-IP host, and nothing else changes.
 ## Data accuracy
 
 The API exposes unit levels but **no building levels and no upgrade costs**, so
-`src/lib/game/` carries a curated dataset: 17 Town Halls, 43 buildings, 66 units.
+`src/lib/game/` carries a curated dataset: 18 Town Halls, 43 buildings, 67 units.
 
 Costs and times are stored as **anchors** — levels whose real values are known —
 with the gaps filled by geometric interpolation. Roughly **24% of levels are
 anchored and 76% interpolated.**
+
+The Town Hall table itself is now the exception: all 18 levels are transcribed
+from the game's own table rather than interpolated, so none of them is an
+estimate. That correction mattered — the old curated guesses had Town Hall 17 at
+528 hours and 20M gold against a real 240 hours and 16M, because a geometric
+guess kept doubling where the game had flattened out.
+
+### Known gap: Town Hall 18 buildings
+
+Town Hall 18 exists here — the hall's own cost, time, hitpoints and art, and a
+ceiling for all six heroes — but **the 43 buildings still carry their Town Hall
+17 counts and ceilings**. Nothing is invented: a structure simply keeps its
+TH17 limits at TH18 until the real ones are transcribed, so figures are
+incomplete rather than wrong.
+
+They are not filled in yet because the Town Hall page's building tables use
+merged cells spanning several hall levels, and a naive read silently shifts
+columns — handing the Cannon the Eagle Artillery's numbers. Wrong ceilings
+presented confidently are worse than absent ones, so the safe route is the one
+the Builder Base dataset already uses: each structure's own page, which
+publishes a clean per-level table. That is the next piece of work.
 
 Every interpolated value renders with a `≈` and is flagged `est: true`. Nothing
 here should be read as a wiki-accurate figure until its anchor is verified.

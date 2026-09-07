@@ -199,28 +199,48 @@ export const SIEGES: Unit[] = [
     costs: { 2: 12500000, 3: 15000000 }, times: { 2: 276, 3: 336 } }),
 ];
 
-/** Heroes (Hero Hall / altars — upgraded outside the Laboratory, one at a time). */
+/**
+ * Heroes (Hero Hall — upgraded outside the Laboratory, one at a time).
+ *
+ * Ceilings are derived from the Hero Hall's own table rather than guessed: it
+ * publishes a maximum per hero per Hero Hall level, and the Hero Hall page maps
+ * each of its levels onto the Town Hall that unlocks it (Hero Hall 12 needs
+ * Town Hall 18). Reading them that way corrected several that had drifted — the
+ * Barbarian King reaches 85 at TH14, not 80, and the Grand Warden 60, not 55.
+ *
+ * The Hero Hall replaced the individual altars, and with it the Barbarian King
+ * now arrives far earlier than the old TH7 altar allowed.
+ */
 export const HEROES: Unit[] = [
   unit({ id: 'barbarian_king', name: 'Barbarian King', kind: 'hero', resource: 'dark', housing: 0,
-    max: { 7: 5, 8: 10, 9: 30, 10: 40, 11: 50, 12: 65, 13: 75, 14: 80, 15: 90, 16: 95, 17: 100 },
-    costs: { 2: 10000, 20: 60000, 40: 130000, 60: 210000, 80: 290000, 100: 400000 },
-    times: { 2: 12, 20: 84, 40: 156, 60: 204, 80: 252, 100: 312 } }),
+    max: { 4: 10, 8: 20, 9: 30, 10: 40, 11: 50, 12: 65, 13: 75, 14: 85, 15: 90, 16: 95, 17: 100, 18: 110 },
+    costs: { 2: 10000, 20: 60000, 40: 130000, 60: 210000, 80: 290000, 100: 400000, 110: 460000 },
+    times: { 2: 12, 20: 84, 40: 156, 60: 204, 80: 252, 100: 312, 110: 336 } }),
   unit({ id: 'archer_queen', name: 'Archer Queen', kind: 'hero', resource: 'dark', housing: 0,
-    max: { 9: 30, 10: 40, 11: 50, 12: 65, 13: 75, 14: 80, 15: 90, 16: 95, 17: 100 },
-    costs: { 2: 12000, 20: 65000, 40: 140000, 60: 220000, 80: 300000, 100: 410000 },
-    times: { 2: 12, 20: 90, 40: 162, 60: 210, 80: 258, 100: 312 } }),
+    max: { 8: 10, 9: 30, 10: 40, 11: 50, 12: 65, 13: 75, 14: 85, 15: 90, 16: 95, 17: 100, 18: 110 },
+    costs: { 2: 12000, 20: 65000, 40: 140000, 60: 220000, 80: 300000, 100: 410000, 110: 470000 },
+    times: { 2: 12, 20: 90, 40: 162, 60: 210, 80: 258, 100: 312, 110: 336 } }),
   unit({ id: 'minion_prince', name: 'Minion Prince', kind: 'hero', resource: 'dark', housing: 0,
-    max: { 9: 20, 10: 30, 11: 40, 12: 50, 13: 60, 14: 65, 15: 75, 16: 85, 17: 90 },
-    costs: { 2: 12000, 20: 70000, 45: 160000, 70: 260000, 90: 380000 },
-    times: { 2: 12, 20: 90, 45: 168, 70: 228, 90: 300 } }),
+    max: { 9: 10, 10: 20, 11: 30, 12: 40, 13: 50, 14: 60, 15: 70, 16: 80, 17: 90, 18: 95 },
+    costs: { 2: 12000, 20: 70000, 45: 160000, 70: 260000, 90: 380000, 95: 400000 },
+    times: { 2: 12, 20: 90, 45: 168, 70: 228, 90: 300, 95: 312 } }),
   unit({ id: 'grand_warden', name: 'Grand Warden', kind: 'hero', resource: 'elixir', housing: 0,
-    max: { 11: 20, 12: 40, 13: 50, 14: 55, 15: 65, 16: 70, 17: 75 },
-    costs: { 2: 3000000, 20: 7000000, 40: 11000000, 60: 14500000, 75: 17000000 },
-    times: { 2: 24, 20: 120, 40: 192, 60: 252, 75: 300 } }),
+    max: { 11: 20, 12: 40, 13: 50, 14: 60, 15: 65, 16: 70, 17: 75, 18: 85 },
+    costs: { 2: 3000000, 20: 7000000, 40: 11000000, 60: 14500000, 75: 17000000, 85: 19000000 },
+    times: { 2: 24, 20: 120, 40: 192, 60: 252, 75: 300, 85: 324 } }),
   unit({ id: 'royal_champion', name: 'Royal Champion', kind: 'hero', resource: 'dark', housing: 0,
-    max: { 13: 25, 14: 30, 15: 40, 16: 45, 17: 50 },
-    costs: { 2: 60000, 15: 140000, 30: 250000, 50: 400000 },
-    times: { 2: 60, 15: 132, 30: 204, 50: 300 } }),
+    max: { 13: 25, 14: 30, 15: 40, 16: 45, 17: 50, 18: 55 },
+    costs: { 2: 60000, 15: 140000, 30: 250000, 50: 400000, 55: 430000 },
+    times: { 2: 60, 15: 132, 30: 204, 50: 300, 55: 312 } }),
+  /**
+   * The sixth hero, and the only one whose cost curve is fully anchored: its
+   * table is short enough that every level is a published figure rather than an
+   * interpolation between them.
+   */
+  unit({ id: 'dragon_duke', name: 'Dragon Duke', kind: 'hero', resource: 'dark', housing: 0,
+    max: { 15: 10, 16: 15, 17: 20, 18: 25 },
+    costs: { 2: 50000, 5: 80000, 8: 110000, 11: 150000, 14: 225000, 17: 300000, 20: 375000, 22: 420000, 25: 480000 },
+    times: { 2: 6, 5: 24, 8: 48, 11: 96, 14: 144, 17: 168, 20: 192, 25: 192 } }),
 ];
 
 /** Hero pets (Pet House). */

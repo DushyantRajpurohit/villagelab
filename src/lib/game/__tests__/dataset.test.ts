@@ -78,3 +78,39 @@ describe('estimate coverage', () => {
     console.log(`dataset: ${total} levels, ${total - est} anchored, ${est} interpolated`);
   });
 });
+
+describe('town hall 18 and the sixth hero', () => {
+  it('runs to Town Hall 18', () => {
+    expect(MAX_TH).toBe(18);
+    expect(TOWN_HALLS[18]).toBeTruthy();
+    expect(TOWN_HALLS[18]!.cost).toBeGreaterThan(TOWN_HALLS[17]!.cost);
+  });
+
+  it('has no estimated Town Hall left', () => {
+    // Every level is now transcribed from the game's own table. The old
+    // curated guesses had TH17 at 528 hours against a real 240 — a geometric
+    // guess that kept doubling where the game had flattened out.
+    for (let th = 1; th <= MAX_TH; th++) {
+      expect(TOWN_HALLS[th]!.verified, `TH${th}`).toBe(true);
+    }
+  });
+
+  it('gives every hero a ceiling at Town Hall 18', () => {
+    const heroes = ALL_UNITS.filter((u) => u.kind === 'hero');
+    expect(heroes).toHaveLength(6);
+    for (const h of heroes) {
+      expect(h.max[18], h.id).toBeGreaterThan(0);
+      expect(h.max[18], h.id).toBeGreaterThanOrEqual(h.max[17]);
+    }
+  });
+
+  it('unlocks the Dragon Duke at Town Hall 15, not 18', () => {
+    // The newest hero, but not a Town Hall 18 exclusive — the Hero Hall level
+    // that unlocks it is reachable at TH15.
+    const dd = ALL_UNITS.find((u) => u.id === 'dragon_duke')!;
+    expect(dd.kind).toBe('hero');
+    expect(dd.unlockTH).toBe(15);
+    expect(dd.max[14]).toBe(0);
+    expect(dd.max[18]).toBe(25);
+  });
+});

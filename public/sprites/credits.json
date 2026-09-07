@@ -794,6 +794,10 @@
    "name": "Dragon",
    "kind": "troop"
   },
+  "home:dragon_duke": {
+   "name": "Dragon Duke",
+   "kind": "hero"
+  },
   "home:dragon_rider": {
    "name": "Dragon Rider",
    "kind": "troop"

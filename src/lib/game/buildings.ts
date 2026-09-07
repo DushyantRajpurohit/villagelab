@@ -49,6 +49,14 @@ function building(def: BuildingDef): Building {
   };
 }
 
+/**
+ * Town Hall 18 note: every structure below still carries its TH17 `count` and
+ * `max`, because `byTH` holds the last value forward. That is incomplete, not
+ * wrong — a TH18 village is shown its TH17 limits — and it is deliberate: the
+ * Town Hall page's building tables use cells merged across several hall levels,
+ * and reading them positionally shifts columns silently. Filling these in wants
+ * the per-structure pages, the way builder-base.json was built. See README.
+ */
 export const BUILDINGS: Building[] = [
   // ---------------------------------------------------------------- defenses
   building({
