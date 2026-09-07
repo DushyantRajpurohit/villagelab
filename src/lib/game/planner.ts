@@ -1,4 +1,27 @@
-import type { Building, Lane, QueueItem, ScheduledItem, Unit } from './types';
+import type { LevelStep } from './curve';
+import type { Lane, QueueItem, ScheduledItem } from './types';
+
+/**
+ * The engine is village-agnostic on purpose.
+ *
+ * It asks for the two things an upgrade calculation actually needs — a ceiling
+ * per hall level and a dense cost table — rather than for a Home Village
+ * `Building`. That is what lets the Builder Base, whose dataset is a different
+ * shape with different currencies, be planned by this same code instead of by a
+ * parallel copy of it that would drift.
+ */
+export interface Upgradable {
+  /** Highest reachable level at each hall level; index === hall level. */
+  max: number[];
+  /** Dense per-level costs; index === level, 0 unused. */
+  levels: (LevelStep | null)[];
+}
+
+/** An `Upgradable` you can own several of, like a Cannon. */
+export interface Countable extends Upgradable {
+  /** How many exist at each hall level; index === hall level. */
+  count: number[];
+}
 
 /* ==========================================================================
    Village state is stored as *level buckets* — { 14: 3, 15: 4 } means three
@@ -46,7 +69,7 @@ export function rebalance(buckets: Buckets, count: number): Buckets {
 /** Buckets for a building at a Town Hall, defaulting to the previous TH ceiling. */
 export function bucketsFor(
   saved: Buckets | undefined,
-  b: Building,
+  b: Countable,
   th: number,
 ): Buckets {
   const count = b.count[th];
@@ -65,7 +88,7 @@ export interface Remaining {
   cap: number;
 }
 
-export function buildingRemaining(b: Building, buckets: Buckets, th: number): Remaining {
+export function buildingRemaining(b: Countable, buckets: Buckets, th: number): Remaining {
   const cap = b.max[th];
   let cost = 0, hours = 0, est = false, pending = 0;
   for (const [lvlStr, n] of Object.entries(buckets)) {
@@ -82,7 +105,7 @@ export function buildingRemaining(b: Building, buckets: Buckets, th: number): Re
   return { cost, hours, est, pending, cap };
 }
 
-export function unitRemaining(u: Unit, level: number, th: number): Remaining {
+export function unitRemaining(u: Upgradable, level: number, th: number): Remaining {
   const cap = u.max[th];
   let cost = 0, hours = 0, est = false;
   for (let l = level + 1; l <= cap; l++) {

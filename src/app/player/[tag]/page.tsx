@@ -1,17 +1,24 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getPlayer } from '@/lib/data/players';
-import { analyseBuilderUnits, analyseUnits, summarise, summariseBuilder } from '@/lib/game/progress';
+import { analyseUnits, summarise } from '@/lib/game/progress';
 import { normalizeTag } from '@/lib/coc/tags';
 import { fmtDuration, fmtInt } from '@/lib/format';
-import { Banner, Bar, Chip, Empty, Panel, Res, Stat, pctTone } from '@/components/primitives';
+import { Bar, Chip, Panel, Res, Stat, pctTone } from '@/components/primitives';
 import { RESOURCE_NAME } from '@/components/GameIcon';
 import { UnitTable } from '@/components/UnitTable';
-import { BuilderBase } from '@/components/BuilderBase';
-import { TagSearch } from '@/components/TagSearch';
+import { HeroRoster } from '@/components/HeroRoster';
+import {
+  MockBanner, PlayerFrame, PlayerIdentity, PlayerNotFound, PlayerQueued,
+} from '@/components/player/PlayerFrame';
 
 /**
- * Public, server-rendered player page.
+ * Public, server-rendered player page — the Home Village.
+ *
+ * The second village lives at `/builder` rather than further down this page.
+ * They are separate villages with separate halls, separate currencies and
+ * separate progress, and interleaving them made one long page where the
+ * Builder Base sat between two Home Village sections.
  *
  * Reads only from our own store — see src/lib/data/players.ts for why a cache
  * miss enqueues rather than fetching upstream.
@@ -46,78 +53,23 @@ export default async function PlayerPage({ params }: Params) {
   const result = await getPlayer(tag);
 
   if (result.status === 'invalid') notFound();
-
   if (result.status === 'not_found') {
-    return (
-      <Shell tag={normalizeTag(tag)}>
-        <Banner tone="warn">
-          No player exists with tag <code className="num mx-1">{normalizeTag(tag)}</code>. Tags are on
-          the in-game profile screen, under your name.
-        </Banner>
-      </Shell>
-    );
+    return <PlayerFrame tag={normalizeTag(tag)}><PlayerNotFound tag={normalizeTag(tag)} /></PlayerFrame>;
   }
-
   if (result.status === 'queued') {
-    return (
-      <Shell tag={normalizeTag(tag)}>
-        <Panel>
-          <Empty title="Looking this player up">
-            <p className="mx-auto max-w-[52ch]">
-              We haven&rsquo;t seen <code className="num">{normalizeTag(tag)}</code> before, so it has
-              been queued for the next ingestion run. Reload in a minute or two.
-            </p>
-          </Empty>
-        </Panel>
-      </Shell>
-    );
+    return <PlayerFrame tag={normalizeTag(tag)}><PlayerQueued tag={normalizeTag(tag)} /></PlayerFrame>;
   }
 
   const p = result.player;
   const rows = analyseUnits(p);
   const s = summarise(rows);
-  const builder = summariseBuilder(analyseBuilderUnits(p));
   const th = p.townHallLevel;
   const rushed = rows.filter((r) => r.rushed);
 
   return (
-    <Shell tag={p.tag}>
-      {result.mock && (
-        <Banner tone="warn">
-          <span>
-            <b className="text-text">Mock data.</b> Generated deterministically from the tag so the app
-            works with no credentials. Set <code>DATABASE_URL</code> and run the ingestion worker for
-            real profiles.
-          </span>
-        </Banner>
-      )}
-
-      <Panel>
-        <div className="flex flex-wrap items-center gap-5">
-          <div>
-            <div className="flex items-center gap-2.5">
-              <h1 className="display text-[22px]">{p.name}</h1>
-              <Chip tone="gold">TH{th}</Chip>
-              {p.role && <Chip>{prettyRole(p.role)}</Chip>}
-            </div>
-            <div className="mt-1 flex flex-wrap items-center gap-2 text-muted">
-              <code className="num">{p.tag}</code>
-              <span>· {p.clan ? p.clan.name || 'in a clan' : 'no clan'}</span>
-              <span>· XP {p.expLevel}</span>
-            </div>
-          </div>
-          <div className="flex-1" />
-          <div className="flex flex-wrap items-center gap-7">
-            <Stat label="Trophies" value={fmtInt(p.trophies)} sub={p.league?.name ?? 'Unranked'} />
-            <Stat label="Best" value={fmtInt(p.bestTrophies)} />
-            <Stat label="Donated" value={fmtInt(p.donations)} sub={`${fmtInt(p.donationsReceived)} received`} />
-            <div className="min-w-[140px]">
-              <Stat label="Maxed for TH" value={`${s.overallPct.toFixed(0)}%`} />
-              <div className="mt-1.5"><Bar pct={s.overallPct} tone={pctTone(s.overallPct)} /></div>
-            </div>
-          </div>
-        </div>
-      </Panel>
+    <PlayerFrame tag={p.tag}>
+      {result.mock && <MockBanner />}
+      <PlayerIdentity p={p} active="home" />
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <Panel>
@@ -166,52 +118,24 @@ export default async function PlayerPage({ params }: Params) {
         </Panel>
       )}
 
-      {/* Only for accounts that have actually unlocked the second village. */}
-      {p.builderHallLevel ? (
-        <BuilderBase
-          bh={p.builderHallLevel}
-          trophies={p.builderBaseTrophies}
-          bestTrophies={p.bestBuilderBaseTrophies}
-          summary={builder}
-        />
-      ) : null}
-
       {KIND_ORDER.filter((k) => rows.some((r) => r.kind === k)).map((kind) => {
         const group = rows.filter((r) => r.kind === kind);
         const done = group.filter((r) => r.level >= r.maxHere).length;
         return (
           <Panel key={kind} title={KIND_LABEL[kind]} tight
             action={<Chip tone={done === group.length ? 'ok' : 'plain'}>{done}/{group.length} maxed</Chip>}>
-            <UnitTable rows={sortBy(group, (r) => r.pct)} th={th} />
+            {/* Heroes get the hall treatment; everything else is a table,
+                because forty troops are a list and five heroes are a cast. */}
+            {kind === 'hero'
+              ? <HeroRoster heroes={group} hall={th} />
+              : <UnitTable rows={sortBy(group, (r) => r.pct)} th={th} />}
           </Panel>
         );
       })}
-    </Shell>
+    </PlayerFrame>
   );
 }
 
 function sortBy<T>(rows: T[], key: (r: T) => number): T[] {
   return [...rows].sort((a, b) => key(a) - key(b));
-}
-
-const prettyRole = (r: string) =>
-  ({ member: 'Member', admin: 'Elder', coLeader: 'Co-leader', leader: 'Leader' })[r] ?? r;
-
-function Shell({ tag, children }: { tag: string; children: React.ReactNode }) {
-  return (
-    <main className="mx-auto w-full max-w-[1400px] p-5">
-      <div className="mb-5 flex flex-wrap items-end gap-4">
-        <div>
-          <h1 className="display text-[22px]">Player dashboard</h1>
-          <p className="mt-1 max-w-[62ch] text-[13px] text-muted">
-            How close an account is to the ceiling for its Town Hall, what closing the gap costs, and
-            whether it is rushed.
-          </p>
-        </div>
-        <div className="flex-1" />
-        <TagSearch initial={tag} basePath="/player" />
-      </div>
-      <div className="grid gap-4">{children}</div>
-    </main>
-  );
 }

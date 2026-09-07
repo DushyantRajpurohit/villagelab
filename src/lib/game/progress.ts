@@ -1,6 +1,6 @@
 import type { Building, Resource, Unit } from './types';
 import { ALL_UNITS } from './army';
-import { BUILDER_UNITS, type BuilderUnit } from './builder-base';
+import { BUILDER_UNITS, type BuilderResource, type BuilderUnit } from './builder-base';
 
 /**
  * Merge a player's API unit levels with the curated max-per-Town-Hall data.
@@ -129,19 +129,26 @@ export function buildingProgressPct(b: Building, buckets: Record<number, number>
  * Kept as a separate function rather than a flag on analyseUnits: the two
  * villages share no units, no currencies and no ceilings, and folding them
  * together is how a Builder Base level ends up counted against a Town Hall
- * maximum. There is no cost arithmetic here — see builder-base.ts for why.
+ * maximum.
+ *
+ * The costs here are Builder Elixir, which is not the Home Village's elixir. It
+ * is reported separately for that reason and never added to `summarise`'s
+ * totals; the two are different currencies that happen to share a name.
  */
 export interface BuilderUnitProgress {
   unit: BuilderUnit;
   id: string;
   name: string;
   kind: BuilderUnit['kind'];
+  resource: BuilderResource;
   level: number;
   maxHere: number;
   prevMax: number;
   pct: number;
   rushed: boolean;
   found: boolean;
+  remainingCost: number;
+  remainingHours: number;
 }
 
 export interface BuilderProgressSummary {
@@ -149,6 +156,9 @@ export interface BuilderProgressSummary {
   overallPct: number;
   maxedCount: number;
   rushedCount: number;
+  totalHours: number;
+  /** Builder Gold and Builder Elixir — never the home village's. */
+  cost: Record<BuilderResource, number>;
 }
 
 export interface BuilderPlayerLevels {
@@ -175,17 +185,33 @@ export function analyseBuilderUnits(player: BuilderPlayerLevels): BuilderUnitPro
     const prevMax = bh > 1 ? u.max[bh - 1] : 0;
     const level = levels.get(nameKey(u.name)) ?? 0;
 
+    let remainingCost = 0, remainingHours = 0;
+    for (let l = level + 1; l <= maxHere; l++) {
+      const step = u.levels[l];
+      if (!step) continue;
+      remainingCost += step.cost;
+      remainingHours += step.hours;
+    }
+
     return {
-      unit: u, id: u.id, name: u.name, kind: u.kind,
+      unit: u, id: u.id, name: u.name, kind: u.kind, resource: u.resource,
       level, maxHere, prevMax,
       pct: maxHere ? (level / maxHere) * 100 : 0,
       rushed: prevMax > 0 && level < prevMax,
       found: levels.has(nameKey(u.name)),
+      remainingCost, remainingHours,
     };
   });
 }
 
 export function summariseBuilder(rows: BuilderUnitProgress[]): BuilderProgressSummary {
+  const cost: Record<BuilderResource, number> = { gold: 0, elixir: 0 };
+  let totalHours = 0;
+  for (const r of rows) {
+    cost[r.resource] += r.remainingCost;
+    totalHours += r.remainingHours;
+  }
+
   return {
     rows,
     overallPct: rows.length
@@ -193,5 +219,7 @@ export function summariseBuilder(rows: BuilderUnitProgress[]): BuilderProgressSu
       : 0,
     maxedCount: rows.filter((r) => r.maxHere > 0 && r.level >= r.maxHere).length,
     rushedCount: rows.filter((r) => r.rushed).length,
+    totalHours,
+    cost,
   };
 }

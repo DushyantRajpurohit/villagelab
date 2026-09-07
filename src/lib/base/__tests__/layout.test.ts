@@ -127,12 +127,12 @@ describe('stats', () => {
     expect(s.placed).toBe(1);
     expect(s.tilesUsed).toBe(16);
     expect(s.coverage).toBeCloseTo((16 / (GRID * GRID)) * 100);
-    expect(s.hasTownHall).toBe(true);
+    expect(s.hasHall).toBe(true);
   });
 
   it('is empty-safe', () => {
     const s = statsFor(palette, entries, []);
-    expect(s).toMatchObject({ placed: 0, tilesUsed: 0, coverage: 0, hasTownHall: false });
+    expect(s).toMatchObject({ placed: 0, tilesUsed: 0, coverage: 0, hasHall: false });
     expect(s.available).toBeGreaterThan(0);
   });
 });

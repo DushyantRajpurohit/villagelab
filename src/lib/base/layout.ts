@@ -1,6 +1,7 @@
 import { buildingsAtTH } from '../game/buildings';
+import { builderBuildingsAtBH } from '../game/builder-base';
 import { GRID } from '../game/town-halls';
-import type { BuildingCategory } from '../game/types';
+import type { BuildingCategory, VillageId } from '../game/types';
 
 /**
  * Base layout rules — pure, so the placement invariants can be tested without a
@@ -12,10 +13,27 @@ import type { BuildingCategory } from '../game/types';
  * overlaps, nothing hangs off the grid, nothing exceeds its per-TH count.
  */
 
+/**
+ * Both villages are laid out on the same grid.
+ *
+ * The Home Village's 44×44 is well established. The Builder Base's buildable
+ * area is not published anywhere I could verify, so it borrows that figure
+ * rather than inventing a different one: a wrong-but-generous board lets you
+ * draw a layout that is slightly more spread out than the game allows, while a
+ * wrong-but-tight one would refuse placements that are legal. Every count and
+ * footprint limit is real either way, which is what makes a layout buildable.
+ */
 export { GRID };
 
-/** The Town Hall is not in the building table, so it gets a reserved id. */
+/** The hall is not in either building table, so each gets a reserved id. */
 export const TOWN_HALL_ID = '__townhall';
+export const BUILDER_HALL_ID = '__builderhall';
+
+/** The structure every layout is built around, per village. */
+export const HALL_ID: Record<VillageId, string> = {
+  home: TOWN_HALL_ID,
+  builder: BUILDER_HALL_ID,
+};
 
 export type PaletteCategory = BuildingCategory | 'townhall';
 
@@ -43,17 +61,45 @@ export interface Tile {
 export interface BaseLayout {
   id: string;
   name: string;
-  th: number;
+  /** Town Hall or Builder Hall level, depending on the village. */
+  hall: number;
+  /**
+   * Which village it belongs to. Layouts are stored per village anyway, so this
+   * is belt and braces — but a layout is a file people copy between browsers,
+   * and one that does not say which village it is for is one that can be opened
+   * against the wrong palette.
+   */
+  village: VillageId;
   tiles: Tile[];
   updated: string;
 }
 
 export type Palette = Map<string, PaletteEntry>;
 
-export function paletteFor(th: number): PaletteEntry[] {
+/**
+ * What a hall can place, for either village.
+ *
+ * The two villages have different structures, different counts and different
+ * ceilings, but the same rules — so they differ by the table this reads, not by
+ * the code that reads it. The Builder Base's own dataset supplies its half.
+ */
+export function paletteFor(hall: number, village: VillageId = 'home'): PaletteEntry[] {
+  if (village === 'builder') {
+    return [
+      { id: BUILDER_HALL_ID, name: `Builder Hall ${hall}`, category: 'townhall',
+        size: [4, 4] as const, limit: 1, level: hall },
+      ...builderBuildingsAtBH(hall)
+        // The hall is drawn from the entry above; the dataset carries it too.
+        .filter((b) => b.id !== 'builder_hall')
+        .map((b) => ({
+          id: b.id, name: b.name, category: b.category as PaletteCategory,
+          size: b.size, limit: b.countHere, level: Math.max(1, b.maxHere),
+        })),
+    ];
+  }
   return [
-    { id: TOWN_HALL_ID, name: `Town Hall ${th}`, category: 'townhall', size: [4, 4] as const, limit: 1, level: th },
-    ...buildingsAtTH(th).map((b) => ({
+    { id: TOWN_HALL_ID, name: `Town Hall ${hall}`, category: 'townhall', size: [4, 4] as const, limit: 1, level: hall },
+    ...buildingsAtTH(hall).map((b) => ({
       id: b.id, name: b.name, category: b.category as PaletteCategory,
       size: b.size, limit: b.countHere, level: b.maxHere,
     })),
@@ -127,7 +173,8 @@ export interface LayoutStats {
   available: number;
   tilesUsed: number;
   coverage: number;
-  hasTownHall: boolean;
+  /** Whether this village's hall is on the board. */
+  hasHall: boolean;
 }
 
 export function statsFor(palette: Palette, entries: PaletteEntry[], tiles: Tile[]): LayoutStats {
@@ -141,7 +188,7 @@ export function statsFor(palette: Palette, entries: PaletteEntry[], tiles: Tile[
     available: entries.reduce((a, e) => a + e.limit, 0),
     tilesUsed,
     coverage: (tilesUsed / (GRID * GRID)) * 100,
-    hasTownHall: tiles.some((t) => t.id === TOWN_HALL_ID),
+    hasHall: tiles.some((t) => t.id === TOWN_HALL_ID || t.id === BUILDER_HALL_ID),
   };
 }
 

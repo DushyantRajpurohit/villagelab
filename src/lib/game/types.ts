@@ -1,5 +1,14 @@
 import type { LevelStep } from './curve';
 
+/**
+ * The two villages an account has.
+ *
+ * Defined here rather than in the store or the sprite index because almost
+ * everything is now keyed by it — state, layouts, palettes, art — and those
+ * modules should not have to import each other to agree on the word.
+ */
+export type VillageId = 'home' | 'builder';
+
 export type Resource = 'gold' | 'elixir' | 'dark';
 
 export type BuildingCategory =

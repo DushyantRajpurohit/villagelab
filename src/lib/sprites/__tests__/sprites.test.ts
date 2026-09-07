@@ -6,7 +6,8 @@ import { ALL_UNITS } from '@/lib/game/army';
 import { buildingsAtTH } from '@/lib/game/buildings';
 import type { Resource } from '@/lib/game/types';
 import { BUILDER_UNITS } from '@/lib/game/builder-base';
-import { paletteFor, TOWN_HALL_ID, type PaletteEntry } from '@/lib/base/layout';
+import { BUILDER_HALL_ID, paletteFor, TOWN_HALL_ID, type PaletteEntry } from '@/lib/base/layout';
+import { MAX_BH } from '@/lib/game/builder-base';
 import { MAX_TH } from '@/lib/game/town-halls';
 import index from '@/lib/sprites/buildings.json';
 
@@ -128,5 +129,55 @@ describe('resource badges', () => {
     const at = (th: number) => buildingsAtTH(th).some((b) => b.id === STORAGE_ID.dark);
     expect(at(6)).toBe(false);
     expect(at(7)).toBe(true);
+  });
+});
+
+describe('builder base structure art', () => {
+  it('has art for every structure the builder palette can place, at every hall', () => {
+    const gaps: string[] = [];
+    for (let bh = 1; bh <= MAX_BH; bh++) {
+      for (const e of paletteFor(bh, 'builder')) {
+        if (!buildingSpriteFile(e.id, e.level, 'builder')) gaps.push(`BH${bh} ${e.id}@${e.level}`);
+      }
+    }
+    expect(gaps).toEqual([]);
+  });
+
+  it('serves builder art from its own directory', () => {
+    expect(buildingSpriteUrl('cannon', 5, 'builder'))
+      .toMatch(/^\/sprites\/builder\/[0-9a-f]+\.webp$/);
+    expect(buildingSpriteUrl('cannon', 5, 'home')).toMatch(/^\/sprites\/[0-9a-f]+\.webp$/);
+  });
+
+  it('never resolves a builder structure to the home village one', () => {
+    // Both villages have a Cannon, a Gold Storage and an Army Camp, and they
+    // look nothing alike. Separate indexes are what stop a missing sprite in
+    // one from quietly borrowing the other's.
+    for (const id of ['cannon', 'archer_tower', 'gold_storage', 'army_camp', 'hidden_tesla']) {
+      const home = buildingSpriteFile(id, 5, 'home');
+      const builder = buildingSpriteFile(id, 5, 'builder');
+      expect(builder, id).toBeTruthy();
+      expect(builder, id).not.toBe(home);
+    }
+  });
+
+  it('has no art for a home-only structure asked for in the builder village', () => {
+    expect(buildingSpriteFile('eagle_artillery', 1, 'builder')).toBeNull();
+    expect(buildingSpriteFile('dark_storage', 1, 'builder')).toBeNull();
+  });
+
+  it('gives the Builder Hall its own art per level', () => {
+    const seen = new Set<string>();
+    for (let bh = 1; bh <= MAX_BH; bh++) {
+      seen.add(buildingSpriteFile('builder_hall', bh, 'builder') ?? '');
+    }
+    expect(seen.size).toBe(MAX_BH);
+    expect(seen.has('')).toBe(false);
+  });
+
+  it('uses the reserved hall id in the builder palette', () => {
+    const p = paletteFor(6, 'builder');
+    expect(p[0].id).toBe(BUILDER_HALL_ID);
+    expect(p.some((e) => e.id === TOWN_HALL_ID)).toBe(false);
   });
 });

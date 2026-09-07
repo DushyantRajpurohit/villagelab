@@ -21,13 +21,34 @@
  * art arrives, rather than blocking the first frame on hundreds of requests.
  */
 
-import type { Resource } from '@/lib/game/types';
+import type { Resource, VillageId } from '@/lib/game/types';
 import buildings from './buildings.json';
+import builderBuildings from './builder-buildings.json';
 import resources from './resources.json';
 import units from './units.json';
 
+/**
+ * Which village art belongs to. The two share ids — a Baby Dragon and a Cannon
+ * exist in both — but they are different things, so the village is part of the
+ * key for structures and units alike.
+ */
+export type Village = VillageId;
+
 type SpriteIndex = Record<string, Record<string, string>>;
-const BUILDINGS: SpriteIndex = buildings as SpriteIndex;
+
+/**
+ * Structure art, per village.
+ *
+ * The two villages share structure ids — both have a Cannon, both have a Gold
+ * Storage — and they look nothing alike, so the village is part of the key
+ * exactly as it already is for units. Keeping them in separate indexes rather
+ * than prefixing ids means a missing Builder Base sprite can never silently
+ * resolve to the Home Village one.
+ */
+const BUILDINGS: Record<Village, SpriteIndex> = {
+  home: buildings as SpriteIndex,
+  builder: builderBuildings as SpriteIndex,
+};
 const UNITS: Record<string, string> = units as Record<string, string>;
 const RESOURCES: Record<string, string> = resources as Record<string, string>;
 
@@ -38,8 +59,8 @@ const RESOURCES: Record<string, string> = resources as Record<string, string>;
  * the index only stores a level where the art actually changed, so a level 12
  * cannon legitimately resolves to the level 11 file.
  */
-export function buildingSpriteFile(id: string, level: number): string | null {
-  const byLevel = BUILDINGS[id];
+export function buildingSpriteFile(id: string, level: number, village: Village = 'home'): string | null {
+  const byLevel = BUILDINGS[village][id];
   if (!byLevel) return null;
 
   const exact = byLevel[String(level)];
@@ -52,9 +73,11 @@ export function buildingSpriteFile(id: string, level: number): string | null {
   return byLevel[String(best)] ?? null;
 }
 
-export function buildingSpriteUrl(id: string, level: number): string | null {
-  const file = buildingSpriteFile(id, level);
-  return file ? `/sprites/${file}` : null;
+const dir = (village: Village) => (village === 'builder' ? '/sprites/builder' : '/sprites');
+
+export function buildingSpriteUrl(id: string, level: number, village: Village = 'home'): string | null {
+  const file = buildingSpriteFile(id, level, village);
+  return file ? `${dir(village)}/${file}` : null;
 }
 
 type Entry =
@@ -70,8 +93,10 @@ const cache = new Map<string, Entry>();
  * arrives. Callers fall back to the vector icon, so missing art degrades the
  * board rather than leaving a hole in it.
  */
-export function buildingSprite(id: string, level: number, onReady: () => void): HTMLImageElement | null {
-  const file = buildingSpriteFile(id, level);
+export function buildingSprite(
+  id: string, level: number, onReady: () => void, village: Village = 'home',
+): HTMLImageElement | null {
+  const file = buildingSpriteFile(id, level, village);
   if (!file) return null;
 
   const hit = cache.get(file);
@@ -82,17 +107,11 @@ export function buildingSprite(id: string, level: number, onReady: () => void): 
   img.decoding = 'async';
   img.onload = () => { cache.set(file, { state: 'ready', img }); onReady(); };
   img.onerror = () => { cache.set(file, { state: 'failed' }); };
-  img.src = `/sprites/${file}`;
+  img.src = `${dir(village)}/${file}`;
   return null;
 }
 
 /* ------------------------------------------------------------------ units */
-
-/**
- * Which village a unit belongs to. The two share ids — a Baby Dragon exists in
- * both — but they are different creatures, so the village is part of the key.
- */
-export type Village = 'home' | 'builder';
 
 /**
  * A unit's portrait.

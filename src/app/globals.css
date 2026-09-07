@@ -182,3 +182,89 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .raised, .raised:active:not(:disabled) { transition: none; transform: none; }
 }
+
+/* --- the hero hall --------------------------------------------------------
+   Heroes are characters, not rows. The game stands them in lit niches, so
+   these do too: a warm pool of light behind the figure, a darker floor it
+   stands on, and a level badge at its feet. The alcove is what stops five
+   portraits reading as five stickers on five cards. */
+.hero-alcove {
+  position: relative;
+  background:
+    radial-gradient(120% 80% at 50% 12%,
+      color-mix(in srgb, var(--color-gold) 22%, transparent) 0%,
+      transparent 62%),
+    linear-gradient(to bottom, var(--color-panel-3), var(--color-panel-2));
+  border: 1px solid var(--color-line);
+  border-bottom-color: var(--color-line-2);
+  border-radius: 12px;
+  box-shadow:
+    0 1px 0 var(--bevel) inset,
+    0 -14px 22px -14px rgba(0, 0, 0, .38) inset;
+  overflow: hidden;
+}
+
+/* The floor the figure stands on. A gradient, not a border: a hard line under
+   a sprite with a soft shadow makes the sprite look pasted on. */
+.hero-alcove::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 34%;
+  background: linear-gradient(to top,
+    color-mix(in srgb, var(--color-line-2) 34%, transparent), transparent);
+  pointer-events: none;
+}
+
+/* A hero not yet unlocked is present but unlit — the niche is waiting. */
+.hero-alcove[data-locked='true'] {
+  background: linear-gradient(to bottom, var(--color-panel-2), var(--color-panel-2));
+}
+.hero-alcove[data-locked='true'] img {
+  filter: grayscale(1) brightness(.62) contrast(.9);
+  opacity: .5;
+}
+
+/* The figure lifts out of its niche on hover — one authored moment, and the
+   only motion on the card. */
+.hero-figure {
+  transition: transform .22s cubic-bezier(.22, .9, .3, 1);
+  will-change: transform;
+}
+.hero-card:hover .hero-figure { transform: translateY(-4px) scale(1.03); }
+
+/* The level, where the game puts it: at the hero's feet, straddling the floor
+   line so it reads as standing in front of the niche rather than inside it. */
+.hero-badge {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink);
+  background: linear-gradient(to bottom, var(--color-gold), var(--color-gold-2));
+  border: 1px solid var(--color-gold-2);
+  border-radius: 999px;
+  box-shadow: 0 2px 0 var(--color-gold-2), 0 3px 8px rgba(0, 0, 0, .35);
+}
+.hero-badge[data-tone='max']  {
+  background: linear-gradient(to bottom, var(--color-ok), color-mix(in srgb, var(--color-ok) 70%, #000));
+  border-color: color-mix(in srgb, var(--color-ok) 70%, #000);
+  box-shadow: 0 2px 0 color-mix(in srgb, var(--color-ok) 70%, #000), 0 3px 8px rgba(0, 0, 0, .35);
+  color: #fff;
+}
+.hero-badge[data-tone='bad'] {
+  background: linear-gradient(to bottom, var(--color-bad), color-mix(in srgb, var(--color-bad) 70%, #000));
+  border-color: color-mix(in srgb, var(--color-bad) 70%, #000);
+  box-shadow: 0 2px 0 color-mix(in srgb, var(--color-bad) 70%, #000), 0 3px 8px rgba(0, 0, 0, .35);
+  color: #fff;
+}
+.hero-badge[data-tone='locked'] {
+  background: var(--color-panel-3);
+  border-color: var(--color-line);
+  box-shadow: 0 2px 0 var(--color-line), 0 3px 8px rgba(0, 0, 0, .25);
+  color: var(--color-faint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-figure { transition: none; }
+  .hero-card:hover .hero-figure { transform: none; }
+}

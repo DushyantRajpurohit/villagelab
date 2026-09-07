@@ -6,17 +6,32 @@ Next.js 16 · TypeScript · Postgres · deployed free.
 
 | Route | |
 | --- | --- |
-| `/player/[tag]` | Unit levels against the Town Hall ceiling; rushed detection |
+| `/player/[tag]` | Home Village: unit levels against the Town Hall ceiling; rushed detection |
+| `/player/[tag]/builder` | Builder Base: the same, against the Builder Hall |
 | `/planner` | Upgrade queue scheduled across builder, lab and hero lanes |
 | `/clan/[tag]` | Roster health, donation ratios, Town Hall spread |
 | `/clan/[tag]/war` | Live war: scoreline, matchup, attacks still owed |
 | `/clan/[tag]/log` | War history: record, win rate, average stars |
-| `/base` | Isometric 44×44 editor with the game's own art, placement limits per Town Hall |
+| `/base` | Isometric 44×44 editor with the game's own art, placement limits per hall |
 
-The player page also covers the **Builder Base** — hall level, builder trophies
-and troop progress against the hall's ceiling. Levels only, no costs: see
-`src/lib/game/builder-base.ts` for why inventing a second cost table would have
-made the accuracy problem below worse rather than better.
+## Two villages, kept apart
+
+An account is two villages. They have separate halls, separate currencies,
+separate troops, separate trophies and separate layouts, and the game never
+mixes them — so neither does this. Every surface carries a **Home Village /
+Builder Base** switch:
+
+| | Home Village | Builder Base |
+| --- | --- | --- |
+| Player | `/player/[tag]` | `/player/[tag]/builder` |
+| Planner | Town Hall, 6 builders, gold · elixir · dark | Builder Hall, 2 builders, builder gold · builder elixir |
+| Base builder | Town Hall palette and layouts | Builder Hall palette and layouts |
+
+The separation is structural rather than a matter of care at each call site: the
+planner state is one slice per village, so a Builder Base cost has no path into
+a Home Village total. The planner engine itself is village-agnostic — it asks
+for a ceiling table and a cost table, not for a Town Hall — which is what lets
+one implementation serve both instead of two that drift.
 
 Light and dark are both first-class, following the system preference until the
 visitor picks one. The choice is applied by an inline script before first paint,
@@ -33,7 +48,7 @@ fresh clone is fully usable and CI needs no secrets.
 | Script | |
 | --- | --- |
 | `npm run dev` | Dev server |
-| `npm test` | Vitest — 561 tests |
+| `npm test` | Vitest — 606 tests |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run lint` | ESLint |
 | `npm run db:generate` | Generate a Drizzle migration |
@@ -94,6 +109,28 @@ Adding a real value is a one-line edit:
 ```ts
 costs: { 1: 270, 5: 12000, 8: 400000, /* add: */ 9: 620000 },
 ```
+
+### The Builder Base dataset is exact
+
+The Home Village table above is ~76% interpolated. The Builder Base's is not
+interpolated at all: the game publishes every Builder Base level individually,
+so `src/lib/game/builder-base.json` carries the real cost and build time for
+each of them — 35 structures and 14 units, with footprints, per-hall counts and
+per-hall ceilings. The "≈" that marks an estimate never appears on a Builder
+Base figure, and a test asserts it cannot.
+
+Two independent tables agree, which is what makes it trustworthy rather than
+transcribed: counts and ceilings come from the Builder Hall page, costs and
+times from each structure's own page, and a structure's highest priced level is
+exactly its ceiling at Builder Hall 10.
+
+Replacing the old guessed ceilings corrected 13 of 14 units. The previous table
+assumed "two levels per hall after unlocking" and had, for instance, the
+Electrofire Wizard maxing at level 4; it maxes at 20. It also surfaced a rule
+the Home Village has no equivalent for: a Builder Base troop that unlocks late
+**arrives part-levelled** — the Electrofire Wizard is handed to you at level 17
+— so `startLevel` records that, and the levels below it are absent rather than
+free.
 
 ### Why the tests exist
 

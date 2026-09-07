@@ -5,6 +5,7 @@
  "_structures": "public/sprites/*.webp, indexed by src/lib/sprites/buildings.json. Indexed per LEVEL, because the village shows a structure at the level it is. Levels are the ceiling each Town Hall reaches, from src/lib/game/buildings.ts; the wiki holds stray uploads (Archer_Tower109, Air_Defense2012 - a typo and a year), so the game data caps which files are considered. A level with no entry uses the highest entry below it.",
  "_units": "public/sprites/units/*.webp, indexed by src/lib/sprites/units.json. ONE portrait per unit, not one per level, because that is what the game's own Laboratory and Army screens show. Keyed 'village:id' - the home and Builder Base villages share unit ids (Baby Dragon) but not necessarily their art.",
  "_resources": "public/sprites/resources/*.webp, indexed by src/lib/sprites/resources.json. ONE badge per resource, no levels - the game's own Gold, Elixir and Dark Elixir icons. A badge marks a COST; an amount already banked is marked with the storage that holds it (gold_storage, elixir_storage, dark_storage), which is a structure and so indexed per level.",
+ "_builder": "public/sprites/builder/*.webp, indexed by src/lib/sprites/builder-buildings.json. Builder Base structure art, indexed per LEVEL like the Home Village's. Kept in a separate index rather than under prefixed ids because the two villages share structure names - both have a Cannon, a Gold Storage and an Army Camp - and look nothing alike; separate indexes mean a missing Builder Base sprite can never resolve to the Home Village one. The wiki files these with a 'B' suffix (Cannon7B.png), sometimes with a _Ground/_Air state, and files the B.O.B Control under its old name, O.T.T.O Hut.",
  "structures": {
   "__townhall": {
    "levels": [
@@ -1010,6 +1011,511 @@
   "dark": {
    "name": "Dark Elixir",
    "source": "File:Dark_Elixir.png"
+  }
+ },
+ "builderStructures": {
+  "air_bombs": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "Air Bombs/Builder Base"
+  },
+  "archer_tower": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "Archer Tower/Builder Base"
+  },
+  "army_camp": {
+   "levels": [
+    1
+   ],
+   "files": 1,
+   "page": "Army Camp/Builder Base"
+  },
+  "battle_copter_altar": {
+   "levels": [
+    1
+   ],
+   "files": 1,
+   "page": "Battle Copter Altar"
+  },
+  "battle_machine_altar": {
+   "levels": [
+    1
+   ],
+   "files": 1,
+   "page": "Battle Machine Altar"
+  },
+  "bob_control": {
+   "levels": [
+    1
+   ],
+   "files": 1,
+   "page": "B.O.B Control"
+  },
+  "builder_barracks": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+   ],
+   "files": 12,
+   "page": "Builder Barracks"
+  },
+  "builder_hall": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "Builder Hall"
+  },
+  "cannon": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "Cannon/Builder Base"
+  },
+  "clock_tower": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "Clock Tower"
+  },
+  "crusher": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "Crusher/Builder Base"
+  },
+  "double_cannon": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "Double Cannon"
+  },
+  "elixir_collector": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "Elixir Collector/Builder Base"
+  },
+  "elixir_storage": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "Elixir Storage/Builder Base"
+  },
+  "firecrackers": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "Firecrackers"
+  },
+  "gem_mine": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "Gem Mine"
+  },
+  "giant_cannon": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "Giant Cannon/Builder Base"
+  },
+  "gold_mine": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "Gold Mine/Builder Base"
+  },
+  "gold_storage": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "Gold Storage/Builder Base"
+  },
+  "guard_post": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "Guard Post"
+  },
+  "healing_hut": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "files": 6,
+   "page": "Healing Hut"
+  },
+  "hidden_tesla": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "Hidden Tesla/Builder Base"
+  },
+  "lava_launcher": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 7,
+   "page": "Lava Launcher/Builder Base"
+  },
+  "mega_mine": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "Mega Mine/Builder Base"
+  },
+  "mega_tesla": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "Mega Tesla"
+  },
+  "mine": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "Mine/Builder Base"
+  },
+  "multi_mortar": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "Multi Mortar/Builder Base"
+  },
+  "ottos_outpost": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "O.T.T.O's Outpost"
+  },
+  "push_trap": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "Push Trap"
+  },
+  "reinforcement_camp": {
+   "levels": [
+    1
+   ],
+   "files": 1,
+   "page": "Reinforcement Camp"
+  },
+  "roaster": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "Roaster/Builder Base"
+  },
+  "spring_trap": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "files": 3,
+   "page": "Spring Trap/Builder Base"
+  },
+  "star_laboratory": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "Star Laboratory"
+  },
+  "walls": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "files": 10,
+   "page": "Wall/Builder Base"
+  },
+  "x_bow": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "files": 5,
+   "page": "X-Bow/Builder Base"
   }
  }
 }

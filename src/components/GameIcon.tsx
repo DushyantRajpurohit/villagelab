@@ -11,6 +11,9 @@ import {
  * get their fixed portrait, the same one the Laboratory shows. See
  * src/lib/sprites for why the two are indexed differently.
  *
+ * `village` selects the art set for both: the Home Village and the Builder Base
+ * share ids for a Cannon and a Baby Dragon alike, and look nothing alike.
+ *
  * Art can be missing — a unit added to the tables before its sprite is fetched
  * — so this always renders a box of the same size. A row that silently loses
  * its icon would shift every column beside it.
@@ -25,7 +28,7 @@ export function GameIcon({ kind, id, level, village = 'home', size = 26, alt = '
   alt?: string;
 }) {
   const url = kind === 'building'
-    ? buildingSpriteUrl(id, level ?? 1)
+    ? buildingSpriteUrl(id, level ?? 1, village)
     : unitSpriteUrl(id, village);
 
   if (!url) {
@@ -86,13 +89,14 @@ export function ResourceIcon({ kind, em = 1.05 }: { kind: Resource; em?: number 
  * built yet, so this falls back to the resource badge rather than leaving a
  * hole where a label's icon should be.
  */
-export function StorageIcon({ kind, level, size = 22 }: {
+export function StorageIcon({ kind, level, size = 22, village = 'home' }: {
   kind: Resource;
-  /** The storage's level, or null where the Town Hall has no such storage. */
+  /** The storage's level, or null where the hall has no such storage. */
   level: number | null;
   size?: number;
+  village?: Village;
 }) {
-  const url = level == null ? null : buildingSpriteUrl(STORAGE_ID[kind], level);
+  const url = level == null ? null : buildingSpriteUrl(STORAGE_ID[kind], level, village);
   if (!url) return <ResourceIcon kind={kind} em={size / 16} />;
   return (
     <Image

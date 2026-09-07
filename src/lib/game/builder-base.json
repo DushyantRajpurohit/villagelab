@@ -1,0 +1,3782 @@
+{
+ "_readme": "Builder Base dataset: per-Builder-Hall counts and ceilings, footprints, build currency, and EXACT cost and build time for every level. Unlike the Home Village table in src/lib/game/buildings.ts, nothing here is interpolated - the wiki publishes every Builder Base level individually, so every number is anchored and no value is an estimate.",
+ "_source": "https://clashofclans.fandom.com - each entry records the page it came from.",
+ "_derivation": "Counts and ceilings per Builder Hall come from the Builder Hall page's own tables; costs, times and footprints from each structure's or troop's page. The two agree: a structure's highest priced level equals its ceiling at Builder Hall 10. Troop ceilings are derived from the Star Laboratory level each level requires (Star Laboratory level equals Builder Hall level), and unlocks from the Builder Barracks level that unlocks the troop. A unit or structure that unlocks late arrives part-levelled - the Electrofire Wizard is given at level 17, not 1 - so startLevel records the level it arrives at, and every level at or below it is null rather than a zero-cost step.",
+ "buildings": {
+  "air_bombs": {
+   "name": "Air Bombs",
+   "category": "defense",
+   "resource": "gold",
+   "size": [
+    3,
+    3
+   ],
+   "count": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 300000,
+     "hours": 6.0
+    },
+    {
+     "cost": 320000,
+     "hours": 12.0
+    },
+    {
+     "cost": 340000,
+     "hours": 24.0
+    },
+    {
+     "cost": 360000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1200000,
+     "hours": 72.0
+    },
+    {
+     "cost": 1500000,
+     "hours": 120.0
+    },
+    {
+     "cost": 2400000,
+     "hours": 168.0
+    },
+    {
+     "cost": 3400000,
+     "hours": 192.0
+    },
+    {
+     "cost": 4400000,
+     "hours": 240.0
+    },
+    {
+     "cost": 5400000,
+     "hours": 288.0
+    }
+   ],
+   "page": "Air Bombs/Builder Base"
+  },
+  "archer_tower": {
+   "name": "Archer Tower",
+   "category": "defense",
+   "resource": "gold",
+   "size": [
+    3,
+    3
+   ],
+   "count": [
+    0,
+    0,
+    1,
+    1,
+    2,
+    2,
+    3,
+    3,
+    3,
+    3,
+    3
+   ],
+   "max": [
+    0,
+    0,
+    1,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 12000,
+     "hours": 0.0833
+    },
+    {
+     "cost": 30000,
+     "hours": 0.25
+    },
+    {
+     "cost": 60000,
+     "hours": 2.0
+    },
+    {
+     "cost": 250000,
+     "hours": 8.0
+    },
+    {
+     "cost": 800000,
+     "hours": 24.0
+    },
+    {
+     "cost": 1200000,
+     "hours": 48.0
+    },
+    {
+     "cost": 2000000,
+     "hours": 96.0
+    },
+    {
+     "cost": 2800000,
+     "hours": 144.0
+    },
+    {
+     "cost": 3600000,
+     "hours": 192.0
+    },
+    {
+     "cost": 4600000,
+     "hours": 216.0
+    }
+   ],
+   "page": "Archer Tower/Builder Base"
+  },
+  "army_camp": {
+   "name": "Army Camp",
+   "category": "army",
+   "resource": "elixir",
+   "size": [
+    3,
+    3
+   ],
+   "count": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    4,
+    5,
+    6,
+    6,
+    6,
+    6
+   ],
+   "max": [
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 12000,
+     "hours": 0.0833
+    }
+   ],
+   "page": "Army Camp/Builder Base"
+  },
+  "battle_copter_altar": {
+   "name": "Battle Copter Altar",
+   "category": "army",
+   "resource": "elixir",
+   "size": [
+    3,
+    3
+   ],
+   "count": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1
+   ],
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 2500000,
+     "hours": 0.0
+    }
+   ],
+   "page": "Battle Copter Altar"
+  },
+  "battle_machine_altar": {
+   "name": "Battle Machine Altar",
+   "category": "army",
+   "resource": "elixir",
+   "size": [
+    3,
+    3
+   ],
+   "count": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 900000,
+     "hours": 12.0
+    }
+   ],
+   "page": "Battle Machine Altar"
+  },
+  "bob_control": {
+   "name": "B.O.B Control",
+   "category": "army",
+   "resource": "gold",
+   "size": [
+    2,
+    2
+   ],
+   "count": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1
+   ],
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 100000,
+     "hours": 0.0
+    }
+   ],
+   "page": "B.O.B Control",
+   "note": "Published as a single build; the Builder Hall table's 5 counts O.T.T.O's tasks, not upgrades of the structure."
+  },
+  "builder_barracks": {
+   "name": "Builder Barracks",
+   "category": "army",
+   "resource": "elixir",
+   "size": [
+    3,
+    3
+   ],
+   "count": [
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "max": [
+    0,
+    1,
+    2,
+    4,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+   ],
+   "startLevel": 1,
+   "levels": [
+    null,
+    {
+     "cost": 4000,
+     "hours": 0.0167
+    },
+    {
+     "cost": 10000,
+     "hours": 0.1667
+    },
+    {
+     "cost": 25000,
+     "hours": 0.5
+    },
+    {
+     "cost": 100000,
+     "hours": 3.0
+    },
+    {
+     "cost": 150000,
+     "hours": 6.0
+    },
+    {
+     "cost": 300000,
+     "hours": 9.0
+    },
+    {
+     "cost": 500000,
+     "hours": 24.0
+    },
+    {
+     "cost": 1000000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1500000,
+     "hours": 72.0
+    },
+    {
+     "cost": 2000000,
+     "hours": 96.0
+    },
+    {
+     "cost": 3000000,
+     "hours": 120.0
+    }
+   ],
+   "page": "Builder Barracks"
+  },
+  "builder_hall": {
+   "name": "Builder Hall",
+   "category": "army",
+   "resource": "gold",
+   "size": [
+    4,
+    4
+   ],
+   "count": [
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "max": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 1,
+   "levels": [
+    null,
+    {
+     "cost": 3500,
+     "hours": 0.0014
+    },
+    {
+     "cost": 30000,
+     "hours": 1.0
+    },
+    {
+     "cost": 200000,
+     "hours": 24.0
+    },
+    {
+     "cost": 400000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1200000,
+     "hours": 72.0
+    },
+    {
+     "cost": 1800000,
+     "hours": 96.0
+    },
+    {
+     "cost": 2800000,
+     "hours": 120.0
+    },
+    {
+     "cost": 3800000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4800000,
+     "hours": 168.0
+    }
+   ],
+   "page": "Builder Hall"
+  },
+  "cannon": {
+   "name": "Cannon",
+   "category": "defense",
+   "resource": "gold",
+   "size": [
+    3,
+    3
+   ],
+   "count": [
+    0,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    3,
+    3,
+    3,
+    3
+   ],
+   "max": [
+    0,
+    1,
+    1,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 10000,
+     "hours": 0.0167
+    },
+    {
+     "cost": 20000,
+     "hours": 0.0833
+    },
+    {
+     "cost": 50000,
+     "hours": 2.0
+    },
+    {
+     "cost": 200000,
+     "hours": 8.0
+    },
+    {
+     "cost": 600000,
+     "hours": 24.0
+    },
+    {
+     "cost": 1000000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1800000,
+     "hours": 96.0
+    },
+    {
+     "cost": 2500000,
+     "hours": 144.0
+    },
+    {
+     "cost": 3300000,
+     "hours": 192.0
+    },
+    {
+     "cost": 4500000,
+     "hours": 216.0
+    }
+   ],
+   "page": "Cannon/Builder Base"
+  },
+  "clock_tower": {
+   "name": "Clock Tower",
+   "category": "resource",
+   "resource": "gold",
+   "size": [
+    4,
+    4
+   ],
+   "count": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 150000,
+     "hours": 2.0
+    },
+    {
+     "cost": 180000,
+     "hours": 3.0
+    },
+    {
+     "cost": 220000,
+     "hours": 4.0
+    },
+    {
+     "cost": 300000,
+     "hours": 6.0
+    },
+    {
+     "cost": 700000,
+     "hours": 12.0
+    },
+    {
+     "cost": 1200000,
+     "hours": 24.0
+    },
+    {
+     "cost": 1700000,
+     "hours": 48.0
+    },
+    {
+     "cost": 2200000,
+     "hours": 72.0
+    },
+    {
+     "cost": 2700000,
+     "hours": 96.0
+    },
+    {
+     "cost": 3700000,
+     "hours": 120.0
+    }
+   ],
+   "page": "Clock Tower"
+  },
+  "crusher": {
+   "name": "Crusher",
+   "category": "defense",
+   "resource": "gold",
+   "size": [
+    3,
+    3
+   ],
+   "count": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    2
+   ],
+   "max": [
+    0,
+    0,
+    0,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 120000,
+     "hours": 2.0
+    },
+    {
+     "cost": 180000,
+     "hours": 5.0
+    },
+    {
+     "cost": 220000,
+     "hours": 12.0
+    },
+    {
+     "cost": 350000,
+     "hours": 24.0
+    },
+    {
+     "cost": 1200000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1500000,
+     "hours": 96.0
+    },
+    {
+     "cost": 2400000,
+     "hours": 144.0
+    },
+    {
+     "cost": 3400000,
+     "hours": 192.0
+    },
+    {
+     "cost": 4400000,
+     "hours": 240.0
+    },
+    {
+     "cost": 5400000,
+     "hours": 288.0
+    }
+   ],
+   "page": "Crusher/Builder Base"
+  },
+  "double_cannon": {
+   "name": "Double Cannon",
+   "category": "defense",
+   "resource": "gold",
+   "size": [
+    3,
+    3
+   ],
+   "count": [
+    0,
+    0,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    3,
+    3,
+    3
+   ],
+   "max": [
+    0,
+    0,
+    1,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 20000,
+     "hours": 0.1667
+    },
+    {
+     "cost": 50000,
+     "hours": 1.0
+    },
+    {
+     "cost": 80000,
+     "hours": 3.0
+    },
+    {
+     "cost": 300000,
+     "hours": 12.0
+    },
+    {
+     "cost": 900000,
+     "hours": 24.0
+    },
+    {
+     "cost": 1400000,
+     "hours": 48.0
+    },
+    {
+     "cost": 2200000,
+     "hours": 96.0
+    },
+    {
+     "cost": 3200000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4200000,
+     "hours": 192.0
+    },
+    {
+     "cost": 5200000,
+     "hours": 240.0
+    }
+   ],
+   "page": "Double Cannon"
+  },
+  "elixir_collector": {
+   "name": "Elixir Collector",
+   "category": "resource",
+   "resource": "gold",
+   "size": [
+    3,
+    3
+   ],
+   "count": [
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    2,
+    2,
+    3,
+    3,
+    3
+   ],
+   "max": [
+    0,
+    1,
+    1,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 1000,
+     "hours": 0.1667
+    },
+    {
+     "cost": 5000,
+     "hours": 0.3333
+    },
+    {
+     "cost": 10000,
+     "hours": 0.6667
+    },
+    {
+     "cost": 30000,
+     "hours": 2.0
+    },
+    {
+     "cost": 60000,
+     "hours": 6.0
+    },
+    {
+     "cost": 100000,
+     "hours": 24.0
+    },
+    {
+     "cost": 200000,
+     "hours": 36.0
+    },
+    {
+     "cost": 300000,
+     "hours": 48.0
+    },
+    {
+     "cost": 400000,
+     "hours": 60.0
+    },
+    {
+     "cost": 800000,
+     "hours": 72.0
+    }
+   ],
+   "page": "Elixir Collector/Builder Base"
+  },
+  "elixir_storage": {
+   "name": "Elixir Storage",
+   "category": "resource",
+   "resource": "gold",
+   "size": [
+    3,
+    3
+   ],
+   "count": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    2
+   ],
+   "max": [
+    0,
+    0,
+    0,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 20000,
+     "hours": 0.5
+    },
+    {
+     "cost": 80000,
+     "hours": 1.0
+    },
+    {
+     "cost": 200000,
+     "hours": 3.0
+    },
+    {
+     "cost": 300000,
+     "hours": 6.0
+    },
+    {
+     "cost": 600000,
+     "hours": 12.0
+    },
+    {
+     "cost": 1000000,
+     "hours": 24.0
+    },
+    {
+     "cost": 1500000,
+     "hours": 48.0
+    },
+    {
+     "cost": 2000000,
+     "hours": 72.0
+    },
+    {
+     "cost": 2500000,
+     "hours": 96.0
+    },
+    {
+     "cost": 3200000,
+     "hours": 120.0
+    }
+   ],
+   "page": "Elixir Storage/Builder Base"
+  },
+  "firecrackers": {
+   "name": "Firecrackers",
+   "category": "defense",
+   "resource": "gold",
+   "size": [
+    2,
+    2
+   ],
+   "count": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    2,
+    2,
+    3,
+    4,
+    5,
+    5
+   ],
+   "max": [
+    0,
+    0,
+    0,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 40000,
+     "hours": 0.25
+    },
+    {
+     "cost": 80000,
+     "hours": 2.0
+    },
+    {
+     "cost": 120000,
+     "hours": 4.0
+    },
+    {
+     "cost": 300000,
+     "hours": 12.0
+    },
+    {
+     "cost": 800000,
+     "hours": 24.0
+    },
+    {
+     "cost": 1200000,
+     "hours": 48.0
+    },
+    {
+     "cost": 2000000,
+     "hours": 96.0
+    },
+    {
+     "cost": 3000000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4000000,
+     "hours": 192.0
+    },
+    {
+     "cost": 5000000,
+     "hours": 216.0
+    }
+   ],
+   "page": "Firecrackers"
+  },
+  "gem_mine": {
+   "name": "Gem Mine",
+   "category": "resource",
+   "resource": "elixir",
+   "size": [
+    3,
+    3
+   ],
+   "count": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "max": [
+    0,
+    0,
+    0,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 120000,
+     "hours": 1.0
+    },
+    {
+     "cost": 180000,
+     "hours": 2.0
+    },
+    {
+     "cost": 240000,
+     "hours": 6.0
+    },
+    {
+     "cost": 450000,
+     "hours": 8.0
+    },
+    {
+     "cost": 1000000,
+     "hours": 12.0
+    },
+    {
+     "cost": 1500000,
+     "hours": 24.0
+    },
+    {
+     "cost": 2500000,
+     "hours": 48.0
+    },
+    {
+     "cost": 3500000,
+     "hours": 96.0
+    },
+    {
+     "cost": 4500000,
+     "hours": 144.0
+    },
+    {
+     "cost": 5500000,
+     "hours": 192.0
+    }
+   ],
+   "page": "Gem Mine"
+  },
+  "giant_cannon": {
+   "name": "Giant Cannon",
+   "category": "defense",
+   "resource": "gold",
+   "size": [
+    3,
+    3
+   ],
+   "count": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1
+   ],
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    7,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 2000000,
+     "hours": 24.0
+    },
+    {
+     "cost": 2100000,
+     "hours": 48.0
+    },
+    {
+     "cost": 2200000,
+     "hours": 72.0
+    },
+    {
+     "cost": 2300000,
+     "hours": 96.0
+    },
+    {
+     "cost": 2400000,
+     "hours": 120.0
+    },
+    {
+     "cost": 2500000,
+     "hours": 144.0
+    },
+    {
+     "cost": 2700000,
+     "hours": 192.0
+    },
+    {
+     "cost": 3800000,
+     "hours": 240.0
+    },
+    {
+     "cost": 4700000,
+     "hours": 264.0
+    },
+    {
+     "cost": 5700000,
+     "hours": 288.0
+    }
+   ],
+   "page": "Giant Cannon/Builder Base"
+  },
+  "gold_mine": {
+   "name": "Gold Mine",
+   "category": "resource",
+   "resource": "elixir",
+   "size": [
+    3,
+    3
+   ],
+   "count": [
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    2,
+    2,
+    3,
+    3,
+    3
+   ],
+   "max": [
+    0,
+    1,
+    1,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 1000,
+     "hours": 0.1667
+    },
+    {
+     "cost": 5000,
+     "hours": 0.3333
+    },
+    {
+     "cost": 10000,
+     "hours": 0.6667
+    },
+    {
+     "cost": 30000,
+     "hours": 2.0
+    },
+    {
+     "cost": 60000,
+     "hours": 6.0
+    },
+    {
+     "cost": 100000,
+     "hours": 24.0
+    },
+    {
+     "cost": 200000,
+     "hours": 36.0
+    },
+    {
+     "cost": 300000,
+     "hours": 48.0
+    },
+    {
+     "cost": 400000,
+     "hours": 60.0
+    },
+    {
+     "cost": 800000,
+     "hours": 72.0
+    }
+   ],
+   "page": "Gold Mine/Builder Base"
+  },
+  "gold_storage": {
+   "name": "Gold Storage",
+   "category": "resource",
+   "resource": "elixir",
+   "size": [
+    3,
+    3
+   ],
+   "count": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    2
+   ],
+   "max": [
+    0,
+    0,
+    0,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 20000,
+     "hours": 0.5
+    },
+    {
+     "cost": 80000,
+     "hours": 1.0
+    },
+    {
+     "cost": 200000,
+     "hours": 3.0
+    },
+    {
+     "cost": 300000,
+     "hours": 6.0
+    },
+    {
+     "cost": 600000,
+     "hours": 12.0
+    },
+    {
+     "cost": 1000000,
+     "hours": 24.0
+    },
+    {
+     "cost": 1500000,
+     "hours": 48.0
+    },
+    {
+     "cost": 2000000,
+     "hours": 72.0
+    },
+    {
+     "cost": 2500000,
+     "hours": 96.0
+    },
+    {
+     "cost": 3200000,
+     "hours": 120.0
+    }
+   ],
+   "page": "Gold Storage/Builder Base"
+  },
+  "guard_post": {
+   "name": "Guard Post",
+   "category": "defense",
+   "resource": "gold",
+   "size": [
+    2,
+    2
+   ],
+   "count": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 200000,
+     "hours": 4.0
+    },
+    {
+     "cost": 240000,
+     "hours": 8.0
+    },
+    {
+     "cost": 280000,
+     "hours": 12.0
+    },
+    {
+     "cost": 320000,
+     "hours": 24.0
+    },
+    {
+     "cost": 1000000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1400000,
+     "hours": 96.0
+    },
+    {
+     "cost": 2300000,
+     "hours": 144.0
+    },
+    {
+     "cost": 3200000,
+     "hours": 192.0
+    },
+    {
+     "cost": 4100000,
+     "hours": 240.0
+    },
+    {
+     "cost": 5100000,
+     "hours": 288.0
+    }
+   ],
+   "page": "Guard Post"
+  },
+  "healing_hut": {
+   "name": "Healing Hut",
+   "category": "army",
+   "resource": "elixir",
+   "size": [
+    3,
+    3
+   ],
+   "count": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 1500000,
+     "hours": 30.0
+    },
+    {
+     "cost": 2000000,
+     "hours": 48.0
+    },
+    {
+     "cost": 2500000,
+     "hours": 72.0
+    },
+    {
+     "cost": 3250000,
+     "hours": 96.0
+    },
+    {
+     "cost": 4000000,
+     "hours": 120.0
+    },
+    {
+     "cost": 5000000,
+     "hours": 144.0
+    }
+   ],
+   "page": "Healing Hut"
+  },
+  "hidden_tesla": {
+   "name": "Hidden Tesla",
+   "category": "defense",
+   "resource": "gold",
+   "size": [
+    2,
+    2
+   ],
+   "count": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    2,
+    3,
+    3,
+    3,
+    3
+   ],
+   "max": [
+    0,
+    0,
+    0,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 50000,
+     "hours": 0.5
+    },
+    {
+     "cost": 100000,
+     "hours": 3.0
+    },
+    {
+     "cost": 150000,
+     "hours": 5.0
+    },
+    {
+     "cost": 280000,
+     "hours": 10.0
+    },
+    {
+     "cost": 700000,
+     "hours": 24.0
+    },
+    {
+     "cost": 1300000,
+     "hours": 48.0
+    },
+    {
+     "cost": 2100000,
+     "hours": 96.0
+    },
+    {
+     "cost": 3100000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4100000,
+     "hours": 192.0
+    },
+    {
+     "cost": 5100000,
+     "hours": 240.0
+    }
+   ],
+   "page": "Hidden Tesla/Builder Base"
+  },
+  "lava_launcher": {
+   "name": "Lava Launcher",
+   "category": "defense",
+   "resource": "gold",
+   "size": [
+    3,
+    3
+   ],
+   "count": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1
+   ],
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    9,
+    10
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 3000000,
+     "hours": 48.0
+    },
+    {
+     "cost": 3100000,
+     "hours": 72.0
+    },
+    {
+     "cost": 3200000,
+     "hours": 96.0
+    },
+    {
+     "cost": 3400000,
+     "hours": 120.0
+    },
+    {
+     "cost": 3700000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4000000,
+     "hours": 168.0
+    },
+    {
+     "cost": 4300000,
+     "hours": 192.0
+    },
+    {
+     "cost": 4600000,
+     "hours": 240.0
+    },
+    {
+     "cost": 4900000,
+     "hours": 264.0
+    },
+    {
+     "cost": 5900000,
+     "hours": 288.0
+    }
+   ],
+   "page": "Lava Launcher/Builder Base"
+  },
+  "mega_mine": {
+   "name": "Mega Mine",
+   "category": "trap",
+   "resource": "gold",
+   "size": [
+    2,
+    2
+   ],
+   "count": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    2,
+    2,
+    3,
+    4,
+    4
+   ],
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 30000,
+     "hours": 0.0
+    },
+    {
+     "cost": 40000,
+     "hours": 1.0
+    },
+    {
+     "cost": 50000,
+     "hours": 3.0
+    },
+    {
+     "cost": 80000,
+     "hours": 6.0
+    },
+    {
+     "cost": 120000,
+     "hours": 12.0
+    },
+    {
+     "cost": 300000,
+     "hours": 24.0
+    },
+    {
+     "cost": 600000,
+     "hours": 36.0
+    },
+    {
+     "cost": 1000000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1400000,
+     "hours": 72.0
+    },
+    {
+     "cost": 2500000,
+     "hours": 96.0
+    }
+   ],
+   "page": "Mega Mine/Builder Base"
+  },
+  "mega_tesla": {
+   "name": "Mega Tesla",
+   "category": "defense",
+   "resource": "gold",
+   "size": [
+    3,
+    3
+   ],
+   "count": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1
+   ],
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 3000000,
+     "hours": 48.0
+    },
+    {
+     "cost": 3100000,
+     "hours": 72.0
+    },
+    {
+     "cost": 3200000,
+     "hours": 96.0
+    },
+    {
+     "cost": 3300000,
+     "hours": 120.0
+    },
+    {
+     "cost": 3400000,
+     "hours": 144.0
+    },
+    {
+     "cost": 3600000,
+     "hours": 168.0
+    },
+    {
+     "cost": 3800000,
+     "hours": 192.0
+    },
+    {
+     "cost": 4000000,
+     "hours": 240.0
+    },
+    {
+     "cost": 4800000,
+     "hours": 264.0
+    },
+    {
+     "cost": 5800000,
+     "hours": 288.0
+    }
+   ],
+   "page": "Mega Tesla"
+  },
+  "mine": {
+   "name": "Mine",
+   "category": "trap",
+   "resource": "gold",
+   "size": [
+    1,
+    1
+   ],
+   "count": [
+    0,
+    0,
+    0,
+    2,
+    3,
+    4,
+    5,
+    5,
+    5,
+    5,
+    6
+   ],
+   "max": [
+    0,
+    0,
+    0,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 5000,
+     "hours": 0.0
+    },
+    {
+     "cost": 10000,
+     "hours": 0.5
+    },
+    {
+     "cost": 15000,
+     "hours": 1.0
+    },
+    {
+     "cost": 25000,
+     "hours": 2.0
+    },
+    {
+     "cost": 50000,
+     "hours": 6.0
+    },
+    {
+     "cost": 80000,
+     "hours": 12.0
+    },
+    {
+     "cost": 120000,
+     "hours": 24.0
+    },
+    {
+     "cost": 250000,
+     "hours": 36.0
+    },
+    {
+     "cost": 500000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1500000,
+     "hours": 60.0
+    }
+   ],
+   "page": "Mine/Builder Base"
+  },
+  "multi_mortar": {
+   "name": "Multi Mortar",
+   "category": "defense",
+   "resource": "gold",
+   "size": [
+    3,
+    3
+   ],
+   "count": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 600000,
+     "hours": 8.0
+    },
+    {
+     "cost": 700000,
+     "hours": 12.0
+    },
+    {
+     "cost": 800000,
+     "hours": 24.0
+    },
+    {
+     "cost": 1000000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1200000,
+     "hours": 72.0
+    },
+    {
+     "cost": 1600000,
+     "hours": 120.0
+    },
+    {
+     "cost": 2500000,
+     "hours": 168.0
+    },
+    {
+     "cost": 3500000,
+     "hours": 216.0
+    },
+    {
+     "cost": 4500000,
+     "hours": 264.0
+    },
+    {
+     "cost": 5500000,
+     "hours": 288.0
+    }
+   ],
+   "page": "Multi Mortar/Builder Base"
+  },
+  "ottos_outpost": {
+   "name": "O.T.T.O's Outpost",
+   "category": "defense",
+   "resource": "gold",
+   "size": [
+    4,
+    4
+   ],
+   "count": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 1,
+   "levels": [
+    null,
+    {
+     "cost": 1000000,
+     "hours": 24.0
+    },
+    {
+     "cost": 1250000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1500000,
+     "hours": 72.0
+    },
+    {
+     "cost": 1750000,
+     "hours": 96.0
+    },
+    {
+     "cost": 2000000,
+     "hours": 120.0
+    },
+    {
+     "cost": 3000000,
+     "hours": 168.0
+    },
+    {
+     "cost": 4000000,
+     "hours": 216.0
+    },
+    {
+     "cost": 5000000,
+     "hours": 240.0
+    },
+    {
+     "cost": 6000000,
+     "hours": 264.0
+    }
+   ],
+   "page": "O.T.T.O's Outpost"
+  },
+  "push_trap": {
+   "name": "Push Trap",
+   "category": "trap",
+   "resource": "gold",
+   "size": [
+    2,
+    2
+   ],
+   "count": [
+    0,
+    0,
+    1,
+    2,
+    3,
+    4,
+    4,
+    4,
+    5,
+    5,
+    5
+   ],
+   "max": [
+    0,
+    0,
+    1,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 1000,
+     "hours": 0.0
+    },
+    {
+     "cost": 3000,
+     "hours": 0.0833
+    },
+    {
+     "cost": 10000,
+     "hours": 0.3333
+    },
+    {
+     "cost": 20000,
+     "hours": 2.0
+    },
+    {
+     "cost": 40000,
+     "hours": 4.0
+    },
+    {
+     "cost": 60000,
+     "hours": 12.0
+    },
+    {
+     "cost": 100000,
+     "hours": 16.0
+    },
+    {
+     "cost": 200000,
+     "hours": 24.0
+    },
+    {
+     "cost": 300000,
+     "hours": 36.0
+    },
+    {
+     "cost": 500000,
+     "hours": 48.0
+    }
+   ],
+   "page": "Push Trap"
+  },
+  "reinforcement_camp": {
+   "name": "Reinforcement Camp",
+   "category": "army",
+   "resource": "elixir",
+   "size": [
+    3,
+    3
+   ],
+   "count": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    2,
+    2
+   ],
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 4000000,
+     "hours": 240.0
+    }
+   ],
+   "page": "Reinforcement Camp"
+  },
+  "roaster": {
+   "name": "Roaster",
+   "category": "defense",
+   "resource": "gold",
+   "size": [
+    3,
+    3
+   ],
+   "count": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 1000000,
+     "hours": 24.0
+    },
+    {
+     "cost": 1200000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1400000,
+     "hours": 72.0
+    },
+    {
+     "cost": 1500000,
+     "hours": 96.0
+    },
+    {
+     "cost": 1600000,
+     "hours": 120.0
+    },
+    {
+     "cost": 1700000,
+     "hours": 144.0
+    },
+    {
+     "cost": 2600000,
+     "hours": 192.0
+    },
+    {
+     "cost": 3600000,
+     "hours": 240.0
+    },
+    {
+     "cost": 4600000,
+     "hours": 264.0
+    },
+    {
+     "cost": 5600000,
+     "hours": 288.0
+    }
+   ],
+   "page": "Roaster/Builder Base"
+  },
+  "spring_trap": {
+   "name": "Spring Trap",
+   "category": "trap",
+   "resource": "gold",
+   "size": [
+    1,
+    1
+   ],
+   "count": [
+    0,
+    0,
+    0,
+    2,
+    2,
+    3,
+    3,
+    4,
+    5,
+    6,
+    6
+   ],
+   "max": [
+    0,
+    0,
+    0,
+    1,
+    2,
+    2,
+    3,
+    3,
+    4,
+    4,
+    5
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 10000,
+     "hours": 0.0
+    },
+    {
+     "cost": 30000,
+     "hours": 1.0
+    },
+    {
+     "cost": 100000,
+     "hours": 24.0
+    },
+    {
+     "cost": 300000,
+     "hours": 48.0
+    },
+    {
+     "cost": 500000,
+     "hours": 72.0
+    }
+   ],
+   "page": "Spring Trap/Builder Base"
+  },
+  "star_laboratory": {
+   "name": "Star Laboratory",
+   "category": "army",
+   "resource": "elixir",
+   "size": [
+    4,
+    4
+   ],
+   "count": [
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "max": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 1,
+   "levels": [
+    null,
+    {
+     "cost": 15000,
+     "hours": 0.1667
+    },
+    {
+     "cost": 50000,
+     "hours": 0.5
+    },
+    {
+     "cost": 300000,
+     "hours": 8.0
+    },
+    {
+     "cost": 700000,
+     "hours": 12.0
+    },
+    {
+     "cost": 1000000,
+     "hours": 48.0
+    },
+    {
+     "cost": 2000000,
+     "hours": 96.0
+    },
+    {
+     "cost": 3000000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4000000,
+     "hours": 192.0
+    },
+    {
+     "cost": 5000000,
+     "hours": 240.0
+    }
+   ],
+   "page": "Star Laboratory"
+  },
+  "walls": {
+   "name": "Wall",
+   "category": "wall",
+   "resource": "gold",
+   "size": [
+    1,
+    1
+   ],
+   "count": [
+    0,
+    10,
+    20,
+    50,
+    75,
+    100,
+    120,
+    140,
+    160,
+    180,
+    180
+   ],
+   "max": [
+    0,
+    1,
+    1,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "startLevel": 1,
+   "levels": [
+    null,
+    {
+     "cost": 2000,
+     "hours": 0.0
+    },
+    {
+     "cost": 10000,
+     "hours": 0.0
+    },
+    {
+     "cost": 50000,
+     "hours": 0.0
+    },
+    {
+     "cost": 150000,
+     "hours": 0.0
+    },
+    {
+     "cost": 240000,
+     "hours": 0.0
+    },
+    {
+     "cost": 400000,
+     "hours": 0.0
+    },
+    {
+     "cost": 600000,
+     "hours": 0.0
+    },
+    {
+     "cost": 800000,
+     "hours": 0.0
+    },
+    {
+     "cost": 1000000,
+     "hours": 0.0
+    }
+   ],
+   "page": "Wall/Builder Base"
+  },
+  "x_bow": {
+   "name": "X-Bow",
+   "category": "defense",
+   "resource": "gold",
+   "size": [
+    3,
+    3
+   ],
+   "count": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1
+   ],
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    5
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 4400000,
+     "hours": 168.0
+    },
+    {
+     "cost": 4800000,
+     "hours": 192.0
+    },
+    {
+     "cost": 5200000,
+     "hours": 240.0
+    },
+    {
+     "cost": 5600000,
+     "hours": 264.0
+    },
+    {
+     "cost": 6000000,
+     "hours": 288.0
+    }
+   ],
+   "page": "X-Bow/Builder Base"
+  }
+ },
+ "units": {
+  "baby_dragon": {
+   "name": "Baby Dragon",
+   "kind": "troop",
+   "resource": "elixir",
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    8,
+    10,
+    12,
+    14,
+    16,
+    18,
+    20
+   ],
+   "startLevel": 5,
+   "levels": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    {
+     "cost": 360000,
+     "hours": 16.0
+    },
+    {
+     "cost": 380000,
+     "hours": 20.0
+    },
+    {
+     "cost": 400000,
+     "hours": 24.0
+    },
+    {
+     "cost": 1000000,
+     "hours": 36.0
+    },
+    {
+     "cost": 1200000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1400000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1600000,
+     "hours": 60.0
+    },
+    {
+     "cost": 2400000,
+     "hours": 84.0
+    },
+    {
+     "cost": 2600000,
+     "hours": 108.0
+    },
+    {
+     "cost": 3400000,
+     "hours": 132.0
+    },
+    {
+     "cost": 3600000,
+     "hours": 132.0
+    },
+    {
+     "cost": 4100000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4300000,
+     "hours": 144.0
+    },
+    {
+     "cost": 5100000,
+     "hours": 156.0
+    },
+    {
+     "cost": 5500000,
+     "hours": 156.0
+    }
+   ],
+   "unlockBH": 4,
+   "page": "Baby Dragon/Builder Base"
+  },
+  "battle_copter": {
+   "name": "Battle Copter",
+   "kind": "hero",
+   "resource": "elixir",
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    25,
+    30,
+    35
+   ],
+   "startLevel": 14,
+   "levels": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    {
+     "cost": 2500000,
+     "hours": 0.0
+    },
+    {
+     "cost": 2600000,
+     "hours": 120.0
+    },
+    {
+     "cost": 2700000,
+     "hours": 120.0
+    },
+    {
+     "cost": 2800000,
+     "hours": 120.0
+    },
+    {
+     "cost": 2900000,
+     "hours": 120.0
+    },
+    {
+     "cost": 3000000,
+     "hours": 120.0
+    },
+    {
+     "cost": 3100000,
+     "hours": 120.0
+    },
+    {
+     "cost": 3200000,
+     "hours": 120.0
+    },
+    {
+     "cost": 3300000,
+     "hours": 120.0
+    },
+    {
+     "cost": 3400000,
+     "hours": 120.0
+    },
+    {
+     "cost": 3500000,
+     "hours": 120.0
+    },
+    {
+     "cost": 3600000,
+     "hours": 144.0
+    },
+    {
+     "cost": 3700000,
+     "hours": 144.0
+    },
+    {
+     "cost": 3800000,
+     "hours": 144.0
+    },
+    {
+     "cost": 3900000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4000000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4100000,
+     "hours": 168.0
+    },
+    {
+     "cost": 4200000,
+     "hours": 168.0
+    },
+    {
+     "cost": 4300000,
+     "hours": 168.0
+    },
+    {
+     "cost": 4400000,
+     "hours": 168.0
+    },
+    {
+     "cost": 4500000,
+     "hours": 168.0
+    }
+   ],
+   "unlockBH": 8,
+   "page": "Battle Copter"
+  },
+  "battle_machine": {
+   "name": "Battle Machine",
+   "kind": "hero",
+   "resource": "elixir",
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    5,
+    10,
+    20,
+    25,
+    30,
+    35
+   ],
+   "startLevel": 0,
+   "levels": [
+    {
+     "cost": 900000,
+     "hours": 12.0
+    },
+    {
+     "cost": 1000000,
+     "hours": 12.0
+    },
+    {
+     "cost": 1100000,
+     "hours": 12.0
+    },
+    {
+     "cost": 1200000,
+     "hours": 24.0
+    },
+    {
+     "cost": 1300000,
+     "hours": 24.0
+    },
+    {
+     "cost": 1500000,
+     "hours": 36.0
+    },
+    {
+     "cost": 1600000,
+     "hours": 36.0
+    },
+    {
+     "cost": 1700000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1800000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1900000,
+     "hours": 60.0
+    },
+    {
+     "cost": 2100000,
+     "hours": 60.0
+    },
+    {
+     "cost": 2200000,
+     "hours": 72.0
+    },
+    {
+     "cost": 2300000,
+     "hours": 72.0
+    },
+    {
+     "cost": 2400000,
+     "hours": 84.0
+    },
+    {
+     "cost": 2500000,
+     "hours": 84.0
+    },
+    {
+     "cost": 2600000,
+     "hours": 96.0
+    },
+    {
+     "cost": 2700000,
+     "hours": 96.0
+    },
+    {
+     "cost": 2800000,
+     "hours": 96.0
+    },
+    {
+     "cost": 2900000,
+     "hours": 96.0
+    },
+    {
+     "cost": 3000000,
+     "hours": 96.0
+    },
+    {
+     "cost": 3100000,
+     "hours": 120.0
+    },
+    {
+     "cost": 3200000,
+     "hours": 120.0
+    },
+    {
+     "cost": 3300000,
+     "hours": 120.0
+    },
+    {
+     "cost": 3400000,
+     "hours": 120.0
+    },
+    {
+     "cost": 3500000,
+     "hours": 120.0
+    },
+    {
+     "cost": 3600000,
+     "hours": 144.0
+    },
+    {
+     "cost": 3700000,
+     "hours": 144.0
+    },
+    {
+     "cost": 3800000,
+     "hours": 144.0
+    },
+    {
+     "cost": 3900000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4000000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4100000,
+     "hours": 168.0
+    },
+    {
+     "cost": 4200000,
+     "hours": 168.0
+    },
+    {
+     "cost": 4300000,
+     "hours": 168.0
+    },
+    {
+     "cost": 4400000,
+     "hours": 168.0
+    },
+    {
+     "cost": 4500000,
+     "hours": 168.0
+    }
+   ],
+   "unlockBH": 5,
+   "page": "Battle Machine"
+  },
+  "beta_minion": {
+   "name": "Beta Minion",
+   "kind": "troop",
+   "resource": "elixir",
+   "max": [
+    0,
+    0,
+    0,
+    6,
+    8,
+    10,
+    12,
+    14,
+    16,
+    18,
+    20
+   ],
+   "startLevel": 3,
+   "levels": [
+    null,
+    null,
+    null,
+    {
+     "cost": 50000,
+     "hours": 4.0
+    },
+    {
+     "cost": 110000,
+     "hours": 8.0
+    },
+    {
+     "cost": 220000,
+     "hours": 12.0
+    },
+    {
+     "cost": 330000,
+     "hours": 18.0
+    },
+    {
+     "cost": 360000,
+     "hours": 24.0
+    },
+    {
+     "cost": 900000,
+     "hours": 36.0
+    },
+    {
+     "cost": 1100000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1300000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1500000,
+     "hours": 60.0
+    },
+    {
+     "cost": 2300000,
+     "hours": 84.0
+    },
+    {
+     "cost": 2500000,
+     "hours": 108.0
+    },
+    {
+     "cost": 3300000,
+     "hours": 132.0
+    },
+    {
+     "cost": 3500000,
+     "hours": 132.0
+    },
+    {
+     "cost": 4000000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4200000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4800000,
+     "hours": 156.0
+    },
+    {
+     "cost": 5400000,
+     "hours": 156.0
+    }
+   ],
+   "unlockBH": 3,
+   "page": "Beta Minion"
+  },
+  "bomber": {
+   "name": "Bomber",
+   "kind": "troop",
+   "resource": "elixir",
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    8,
+    10,
+    12,
+    14,
+    16,
+    18,
+    20
+   ],
+   "startLevel": 5,
+   "levels": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    {
+     "cost": 320000,
+     "hours": 16.0
+    },
+    {
+     "cost": 340000,
+     "hours": 20.0
+    },
+    {
+     "cost": 360000,
+     "hours": 24.0
+    },
+    {
+     "cost": 900000,
+     "hours": 36.0
+    },
+    {
+     "cost": 1000000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1200000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1400000,
+     "hours": 60.0
+    },
+    {
+     "cost": 2200000,
+     "hours": 84.0
+    },
+    {
+     "cost": 2400000,
+     "hours": 108.0
+    },
+    {
+     "cost": 3200000,
+     "hours": 132.0
+    },
+    {
+     "cost": 3400000,
+     "hours": 132.0
+    },
+    {
+     "cost": 3900000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4100000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4700000,
+     "hours": 156.0
+    },
+    {
+     "cost": 5300000,
+     "hours": 156.0
+    }
+   ],
+   "unlockBH": 4,
+   "page": "Bomber"
+  },
+  "boxer_giant": {
+   "name": "Boxer Giant",
+   "kind": "troop",
+   "resource": "elixir",
+   "max": [
+    0,
+    0,
+    0,
+    6,
+    8,
+    10,
+    12,
+    14,
+    16,
+    18,
+    20
+   ],
+   "startLevel": 3,
+   "levels": [
+    null,
+    null,
+    null,
+    {
+     "cost": 60000,
+     "hours": 5.0
+    },
+    {
+     "cost": 120000,
+     "hours": 10.0
+    },
+    {
+     "cost": 240000,
+     "hours": 16.0
+    },
+    {
+     "cost": 350000,
+     "hours": 20.0
+    },
+    {
+     "cost": 380000,
+     "hours": 24.0
+    },
+    {
+     "cost": 1000000,
+     "hours": 36.0
+    },
+    {
+     "cost": 1200000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1300000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1500000,
+     "hours": 60.0
+    },
+    {
+     "cost": 2300000,
+     "hours": 84.0
+    },
+    {
+     "cost": 2500000,
+     "hours": 108.0
+    },
+    {
+     "cost": 3300000,
+     "hours": 132.0
+    },
+    {
+     "cost": 3500000,
+     "hours": 132.0
+    },
+    {
+     "cost": 4000000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4200000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4800000,
+     "hours": 156.0
+    },
+    {
+     "cost": 5400000,
+     "hours": 156.0
+    }
+   ],
+   "unlockBH": 3,
+   "page": "Boxer Giant"
+  },
+  "cannon_cart": {
+   "name": "Cannon Cart",
+   "kind": "troop",
+   "resource": "elixir",
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    10,
+    12,
+    14,
+    16,
+    18,
+    20
+   ],
+   "startLevel": 7,
+   "levels": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    {
+     "cost": 1000000,
+     "hours": 24.0
+    },
+    {
+     "cost": 1100000,
+     "hours": 36.0
+    },
+    {
+     "cost": 1200000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1400000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1600000,
+     "hours": 60.0
+    },
+    {
+     "cost": 2400000,
+     "hours": 84.0
+    },
+    {
+     "cost": 2600000,
+     "hours": 108.0
+    },
+    {
+     "cost": 3400000,
+     "hours": 132.0
+    },
+    {
+     "cost": 3600000,
+     "hours": 132.0
+    },
+    {
+     "cost": 4100000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4300000,
+     "hours": 144.0
+    },
+    {
+     "cost": 5300000,
+     "hours": 156.0
+    },
+    {
+     "cost": 5700000,
+     "hours": 156.0
+    }
+   ],
+   "unlockBH": 5,
+   "page": "Cannon Cart"
+  },
+  "drop_ship": {
+   "name": "Drop Ship",
+   "kind": "troop",
+   "resource": "elixir",
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    14,
+    16,
+    18,
+    20
+   ],
+   "startLevel": 11,
+   "levels": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    {
+     "cost": 2400000,
+     "hours": 60.0
+    },
+    {
+     "cost": 2600000,
+     "hours": 84.0
+    },
+    {
+     "cost": 2800000,
+     "hours": 108.0
+    },
+    {
+     "cost": 3600000,
+     "hours": 132.0
+    },
+    {
+     "cost": 3800000,
+     "hours": 132.0
+    },
+    {
+     "cost": 4300000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4500000,
+     "hours": 144.0
+    },
+    {
+     "cost": 5500000,
+     "hours": 156.0
+    },
+    {
+     "cost": 5700000,
+     "hours": 156.0
+    }
+   ],
+   "unlockBH": 7,
+   "page": "Drop Ship"
+  },
+  "electrofire_wizard": {
+   "name": "Electrofire Wizard",
+   "kind": "troop",
+   "resource": "elixir",
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    20
+   ],
+   "startLevel": 17,
+   "levels": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    {
+     "cost": 4400000,
+     "hours": 144.0
+    },
+    {
+     "cost": 5400000,
+     "hours": 156.0
+    },
+    {
+     "cost": 5800000,
+     "hours": 156.0
+    }
+   ],
+   "unlockBH": 10,
+   "page": "Electrofire Wizard"
+  },
+  "hog_glider": {
+   "name": "Hog Glider",
+   "kind": "troop",
+   "resource": "elixir",
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    18,
+    20
+   ],
+   "startLevel": 15,
+   "levels": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    {
+     "cost": 4000000,
+     "hours": 132.0
+    },
+    {
+     "cost": 4200000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4400000,
+     "hours": 144.0
+    },
+    {
+     "cost": 5400000,
+     "hours": 156.0
+    },
+    {
+     "cost": 5800000,
+     "hours": 156.0
+    }
+   ],
+   "unlockBH": 9,
+   "page": "Hog Glider"
+  },
+  "night_witch": {
+   "name": "Night Witch",
+   "kind": "troop",
+   "resource": "elixir",
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    12,
+    14,
+    16,
+    18,
+    20
+   ],
+   "startLevel": 9,
+   "levels": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    {
+     "cost": 1400000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1600000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1800000,
+     "hours": 60.0
+    },
+    {
+     "cost": 2500000,
+     "hours": 84.0
+    },
+    {
+     "cost": 2700000,
+     "hours": 108.0
+    },
+    {
+     "cost": 3500000,
+     "hours": 132.0
+    },
+    {
+     "cost": 3700000,
+     "hours": 132.0
+    },
+    {
+     "cost": 4200000,
+     "hours": 0.0
+    },
+    {
+     "cost": 4400000,
+     "hours": 144.0
+    },
+    {
+     "cost": 5200000,
+     "hours": 156.0
+    },
+    {
+     "cost": 5600000,
+     "hours": 156.0
+    }
+   ],
+   "unlockBH": 6,
+   "page": "Night Witch"
+  },
+  "power_pekka": {
+   "name": "Power P.E.K.K.A",
+   "kind": "troop",
+   "resource": "elixir",
+   "max": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    16,
+    18,
+    20
+   ],
+   "startLevel": 13,
+   "levels": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    {
+     "cost": 3600000,
+     "hours": 108.0
+    },
+    {
+     "cost": 3800000,
+     "hours": 132.0
+    },
+    {
+     "cost": 4000000,
+     "hours": 132.0
+    },
+    {
+     "cost": 4600000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4800000,
+     "hours": 144.0
+    },
+    {
+     "cost": 5600000,
+     "hours": 156.0
+    },
+    {
+     "cost": 5800000,
+     "hours": 156.0
+    }
+   ],
+   "unlockBH": 8,
+   "page": "Power P.E.K.K.A/Builder Base"
+  },
+  "raged_barbarian": {
+   "name": "Raged Barbarian",
+   "kind": "troop",
+   "resource": "elixir",
+   "max": [
+    0,
+    2,
+    4,
+    6,
+    8,
+    10,
+    12,
+    14,
+    16,
+    18,
+    20
+   ],
+   "startLevel": 1,
+   "levels": [
+    null,
+    {
+     "cost": 3500,
+     "hours": 0.0083
+    },
+    {
+     "cost": 7000,
+     "hours": 0.0833
+    },
+    {
+     "cost": 10000,
+     "hours": 0.25
+    },
+    {
+     "cost": 90000,
+     "hours": 5.0
+    },
+    {
+     "cost": 180000,
+     "hours": 10.0
+    },
+    {
+     "cost": 300000,
+     "hours": 15.0
+    },
+    {
+     "cost": 330000,
+     "hours": 20.0
+    },
+    {
+     "cost": 700000,
+     "hours": 24.0
+    },
+    {
+     "cost": 900000,
+     "hours": 36.0
+    },
+    {
+     "cost": 1000000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1200000,
+     "hours": 60.0
+    },
+    {
+     "cost": 2000000,
+     "hours": 84.0
+    },
+    {
+     "cost": 2200000,
+     "hours": 108.0
+    },
+    {
+     "cost": 3000000,
+     "hours": 132.0
+    },
+    {
+     "cost": 3200000,
+     "hours": 132.0
+    },
+    {
+     "cost": 3800000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4000000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4600000,
+     "hours": 156.0
+    },
+    {
+     "cost": 5200000,
+     "hours": 156.0
+    }
+   ],
+   "unlockBH": 1,
+   "page": "Raged Barbarian"
+  },
+  "sneaky_archer": {
+   "name": "Sneaky Archer",
+   "kind": "troop",
+   "resource": "elixir",
+   "max": [
+    0,
+    0,
+    4,
+    6,
+    8,
+    10,
+    12,
+    14,
+    16,
+    18,
+    20
+   ],
+   "startLevel": 1,
+   "levels": [
+    null,
+    {
+     "cost": 5000,
+     "hours": 0.05
+    },
+    {
+     "cost": 8000,
+     "hours": 0.1667
+    },
+    {
+     "cost": 12000,
+     "hours": 0.5
+    },
+    {
+     "cost": 100000,
+     "hours": 6.0
+    },
+    {
+     "cost": 200000,
+     "hours": 11.0
+    },
+    {
+     "cost": 320000,
+     "hours": 16.0
+    },
+    {
+     "cost": 350000,
+     "hours": 21.0
+    },
+    {
+     "cost": 800000,
+     "hours": 24.0
+    },
+    {
+     "cost": 1000000,
+     "hours": 36.0
+    },
+    {
+     "cost": 1100000,
+     "hours": 48.0
+    },
+    {
+     "cost": 1300000,
+     "hours": 60.0
+    },
+    {
+     "cost": 2100000,
+     "hours": 84.0
+    },
+    {
+     "cost": 2300000,
+     "hours": 108.0
+    },
+    {
+     "cost": 3100000,
+     "hours": 132.0
+    },
+    {
+     "cost": 3300000,
+     "hours": 132.0
+    },
+    {
+     "cost": 3900000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4100000,
+     "hours": 144.0
+    },
+    {
+     "cost": 4700000,
+     "hours": 156.0
+    },
+    {
+     "cost": 5300000,
+     "hours": 156.0
+    }
+   ],
+   "unlockBH": 2,
+   "page": "Sneaky Archer/Builder Base"
+  }
+ }
+}

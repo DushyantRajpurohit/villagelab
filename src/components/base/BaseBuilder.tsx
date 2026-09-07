@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { PointerEvent as ReactPointerEvent } from 'react';
 import {
-  GRID, TOWN_HALL_ID, abbrev, canPlace, countOf, eraseAt, paletteFor,
+  GRID, HALL_ID, abbrev, canPlace, countOf, eraseAt, paletteFor,
   lineTiles, paletteIndex, place, sanitise, snapOrigin, statsFor,
   type BaseLayout, type Palette, type PaletteCategory, type PaletteEntry, type Tile,
 } from '@/lib/base/layout';
@@ -16,7 +16,9 @@ import {
 } from '@/lib/base/iso';
 import { buildingSprite, buildingSpriteUrl } from '@/lib/sprites';
 import { MAX_TH } from '@/lib/game/town-halls';
-import { usePlannerState } from '@/lib/store';
+import { MAX_BH } from '@/lib/game/builder-base';
+import { useVillageState } from '@/lib/store';
+import type { VillageId } from '@/lib/game/types';
 import { useResolvedTheme } from '@/lib/theme';
 import { Panel, Stat } from '@/components/primitives';
 
@@ -73,19 +75,23 @@ const styleOf = (c: PaletteCategory): CatStyle => STYLE[c] ?? STYLE.other;
 
 const UNDO_DEPTH = 40;
 
-export function BaseBuilder() {
-  const { state, setState, loaded } = usePlannerState();
+export function BaseBuilder({ village }: { village: VillageId }) {
+  const { state, setState, loaded } = useVillageState(village);
   const theme = useResolvedTheme();
-  const th = state.th;
+  const th = state.hall;
+  const hallId = HALL_ID[village];
+  const hallName = village === 'builder' ? 'Builder Hall' : 'Town Hall';
+  const hallShort = village === 'builder' ? 'BH' : 'TH';
+  const maxHall = village === 'builder' ? MAX_BH : MAX_TH;
 
-  const entries = useMemo(() => paletteFor(th), [th]);
+  const entries = useMemo(() => paletteFor(th, village), [th, village]);
   const palette = useMemo(() => paletteIndex(entries), [entries]);
 
   const [tiles, setTiles] = useState<Tile[]>([]);
   const [history, setHistory] = useState<Tile[][]>([]);
   const [layoutId, setLayoutId] = useState<string | null>(null);
   const [name, setName] = useState('');
-  const [selected, setSelected] = useState<string>(TOWN_HALL_ID);
+  const [selected, setSelected] = useState<string>(hallId);
   const [erasing, setErasing] = useState(false);
   const [hover, setHover] = useState<{ x: number; y: number } | null>(null);
   const [note, setNote] = useState<string | null>(null);
@@ -322,7 +328,7 @@ export function BaseBuilder() {
     });
     for (const t of order) {
       if (moving && t === moving.tile) continue;
-      drawStructure(g, palette.get(t.id), t.x, t.y, VIEW, onSpriteReady);
+      drawStructure(g, palette.get(t.id), t.x, t.y, VIEW, onSpriteReady, village);
     }
 
     if (moving) {
@@ -331,7 +337,7 @@ export function BaseBuilder() {
         const without = tiles.filter((t) => t !== moving.tile);
         const ok = canPlace(palette, without, moving.tile.id, moving.at.x, moving.at.y);
         g.globalAlpha = 0.75;
-        drawStructure(g, p, moving.at.x, moving.at.y, VIEW, onSpriteReady, ok ? undefined : '#ff5f56');
+        drawStructure(g, p, moving.at.x, moving.at.y, VIEW, onSpriteReady, village, ok ? undefined : '#ff5f56');
         g.globalAlpha = 1;
       }
     } else if (hover) {
@@ -355,22 +361,24 @@ export function BaseBuilder() {
           const at = snapOrigin(p.size, hover.x, hover.y);
           const ok = canPlace(palette, tiles, selected, at.x, at.y);
           g.globalAlpha = 0.65;
-          drawStructure(g, p, at.x, at.y, VIEW, onSpriteReady, ok ? undefined : '#ff5f56');
+          drawStructure(g, p, at.x, at.y, VIEW, onSpriteReady, village, ok ? undefined : '#ff5f56');
           g.globalAlpha = 1;
         }
       }
     }
     g.restore();
-  }, [canvas, tiles, hover, selected, erasing, palette, theme, spriteTick, onSpriteReady, cam, moving]);
+  }, [canvas, tiles, hover, selected, erasing, palette, theme, spriteTick, onSpriteReady, cam, moving, village]);
 
   /* --------------------------------------------------------- persistence */
 
   const layouts = state.layouts;
 
   function save() {
-    const label = name.trim() || `TH${th} layout`;
+    const label = name.trim() || `${hallShort}${th} layout`;
     const id = layoutId ?? `ly_${Date.now().toString(36)}`;
-    const record: BaseLayout = { id, name: label, th, tiles, updated: new Date().toISOString() };
+    const record: BaseLayout = {
+      id, name: label, hall: th, village, tiles, updated: new Date().toISOString(),
+    };
     setState((s) => ({
       layouts: s.layouts.some((l) => l.id === id)
         ? s.layouts.map((l) => (l.id === id ? record : l))
@@ -382,20 +390,20 @@ export function BaseBuilder() {
   }
 
   function open(l: BaseLayout) {
-    // Always filtered, never trusted — including when the layout's own Town
-    // Hall matches this one. Layouts live in localStorage and can be edited by
-    // hand, so `l.th` is a claim, not a guarantee: a layout tagged TH3 holding
-    // TH14 structures would otherwise load them all and report "110 placed of
-    // 77 available".
+    // Always filtered, never trusted — including when the layout's own hall
+    // matches this one. Layouts live in localStorage and can be edited by
+    // hand, so `l.hall` is a claim, not a guarantee: a layout tagged TH3
+    // holding TH14 structures would otherwise load them all and report "110
+    // placed of 77 available".
     const kept = sanitise(palette, l.tiles);
     const dropped = l.tiles.length - kept.length;
     commit(kept);
     setLayoutId(l.id);
     setName(l.name);
     setNote(dropped === 0 ? null
-      : l.th === th
-        ? `${dropped} structures TH${th} cannot build were dropped.`
-        : `Built for TH${l.th}: ${dropped} structures TH${th} cannot build were dropped.`);
+      : l.hall === th
+        ? `${dropped} structures ${hallShort}${th} cannot build were dropped.`
+        : `Built for ${hallShort}${l.hall}: ${dropped} structures ${hallShort}${th} cannot build were dropped.`);
   }
 
   function remove(id: string) {
@@ -403,12 +411,12 @@ export function BaseBuilder() {
     if (layoutId === id) setLayoutId(null);
   }
 
-  function changeTh(next: number) {
-    const kept = sanitise(paletteIndex(paletteFor(next)), tiles);
-    setState({ th: next });
+  function changeHall(next: number) {
+    const kept = sanitise(paletteIndex(paletteFor(next, village)), tiles);
+    setState({ hall: next });
     commit(kept);
     setNote(kept.length < tiles.length
-      ? `${tiles.length - kept.length} structures dropped — TH${next} cannot build them.`
+      ? `${tiles.length - kept.length} structures dropped — ${hallShort}${next} cannot build them.`
       : null);
   }
 
@@ -453,8 +461,8 @@ export function BaseBuilder() {
           <Stat label="Placed" value={String(stats.placed)} sub={`of ${stats.available} available`} />
           <Stat label="Coverage" value={`${stats.coverage.toFixed(1)}%`}
             sub={`${stats.tilesUsed} of ${GRID * GRID} tiles`} />
-          <Stat label="Town Hall" value={stats.hasTownHall ? 'placed' : 'missing'}
-            tone={stats.hasTownHall ? 'ok' : 'bad'} />
+          <Stat label={hallName} value={stats.hasHall ? 'placed' : 'missing'}
+            tone={stats.hasHall ? 'ok' : 'bad'} />
         </div>
 
         {note && <p className="mt-3 rounded-md border border-warn/40 bg-warn/[.07] px-3 py-2 text-[13px] text-text-2">{note}</p>}
@@ -483,16 +491,16 @@ export function BaseBuilder() {
       </Panel>
 
       <div className="grid gap-4">
-        <Panel title="Town Hall" action={<span className="num text-[13px] text-gold">TH{th}</span>}>
+        <Panel title={hallName} action={<span className="num text-[13px] text-gold">{hallShort}{th}</span>}>
           <label className="flex items-center gap-2 text-[13px] text-muted">
             Placement limits for
             <select
               value={th}
-              onChange={(e) => changeTh(Number(e.target.value))}
+              onChange={(e) => changeHall(Number(e.target.value))}
               className="num rounded-md border border-line bg-panel-2 px-2 py-1 text-text outline-none focus:border-gold/50"
             >
-              {Array.from({ length: MAX_TH }, (_, i) => i + 1).map((n) => (
-                <option key={n} value={n}>TH{n}</option>
+              {Array.from({ length: maxHall }, (_, i) => i + 1).map((n) => (
+                <option key={n} value={n}>{hallShort}{n}</option>
               ))}
             </select>
           </label>
@@ -504,6 +512,7 @@ export function BaseBuilder() {
               <PaletteRow
                 key={p.id}
                 entry={p}
+                village={village}
                 used={countOf(tiles, p.id)}
                 active={selected === p.id && !erasing}
                 onSelect={() => { setSelected(p.id); setErasing(false); }}
@@ -539,7 +548,7 @@ export function BaseBuilder() {
               >
                 <div className="min-w-0 flex-1">
                   <div className="truncate text-[13px]">{l.name}</div>
-                  <div className="num text-[11px] text-faint">TH{l.th} · {l.tiles.length} structures</div>
+                  <div className="num text-[11px] text-faint">{hallShort}{l.hall} · {l.tiles.length} structures</div>
                 </div>
                 <Toolbtn onClick={() => open(l)}>Open</Toolbtn>
                 <Toolbtn onClick={() => remove(l.id)} danger>Delete</Toolbtn>
@@ -579,6 +588,7 @@ function drawStructure(
   tx: number, ty: number,
   iso: Iso,
   onSpriteReady: () => void,
+  village: VillageId,
   forceStroke?: string,
 ) {
   if (!p) return;
@@ -595,7 +605,7 @@ function drawStructure(
   g.lineWidth = forceStroke ? 2.5 : 1.5;
   g.stroke();
 
-  const img = buildingSprite(p.id, p.level, onSpriteReady);
+  const img = buildingSprite(p.id, p.level, onSpriteReady, village);
   if (img && img.naturalWidth > 0) {
     // Slightly narrower than the diamond. The art carries its own margin and
     // shadow, so drawing it at full width makes neighbours a tile apart look
@@ -627,9 +637,9 @@ function drawStructure(
   g.fillText(abbrev(p.name), f.cx, f.cy);
 }
 
-/** The structure's own art at the level this Town Hall reaches. */
-function SpriteChip({ entry }: { entry: PaletteEntry }) {
-  const url = buildingSpriteUrl(entry.id, entry.level);
+/** The structure's own art at the level this hall reaches. */
+function SpriteChip({ entry, village }: { entry: PaletteEntry; village: VillageId }) {
+  const url = buildingSpriteUrl(entry.id, entry.level, village);
   if (!url) {
     const col = styleOf(entry.category);
     return (
@@ -650,8 +660,8 @@ function SpriteChip({ entry }: { entry: PaletteEntry }) {
   );
 }
 
-function PaletteRow({ entry, used, active, onSelect }: {
-  entry: PaletteEntry; used: number; active: boolean; onSelect: () => void;
+function PaletteRow({ entry, used, active, onSelect, village }: {
+  entry: PaletteEntry; used: number; active: boolean; onSelect: () => void; village: VillageId;
 }) {
   const full = used >= entry.limit;
   return (
@@ -662,7 +672,7 @@ function PaletteRow({ entry, used, active, onSelect }: {
         active ? 'border-gold/50 bg-panel-3' : 'border-transparent hover:bg-panel-2'
       } ${full ? 'opacity-45' : ''}`}
     >
-      <SpriteChip entry={entry} />
+      <SpriteChip entry={entry} village={village} />
       <span className="flex-1 truncate text-[12px]">{entry.name}</span>
       <span className={`num text-[11px] ${full ? 'text-ok' : 'text-muted'}`}>{used}/{entry.limit}</span>
       <span className="num text-[10px] text-faint">{entry.size[0]}×{entry.size[1]}</span>
