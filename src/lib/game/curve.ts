@@ -1,13 +1,17 @@
 /**
  * Cost/time curve helper.
  *
- * Clash of Clans upgrade costs grow close to geometrically within a building's
- * level range, with occasional re-baselines when a new Town Hall introduces a
- * batch of levels. We therefore store *anchors* — levels whose real values are
- * known with confidence — and interpolate the gaps.
+ * **No dataset uses this any more.** Every level in both villages is now
+ * transcribed from its own published table, so `LevelStep` below is the live
+ * export and the interpolation under it is a fallback that nothing calls.
  *
- * Every generated (non-anchor) value is flagged `est: true` so the UI can render
- * it with a "≈" and nobody mistakes an interpolation for a wiki-accurate number.
+ * It is kept, with its tests, because new game content arrives half-documented
+ * — a Town Hall 19 troop with three known prices and nine unknown ones — and
+ * this is the honest way to show that: store the *anchors*, interpolate the
+ * gaps, and flag every generated value `est: true` so the UI renders it with a
+ * "≈". What it must never be used for again is a curve standing in for a table
+ * that exists. That put a level 21 Cannon at 22,500,000 gold against a real
+ * 3,000,000, and 46 of 67 units at the wrong maximum level.
  */
 
 /** Sparse map of level -> known value. */

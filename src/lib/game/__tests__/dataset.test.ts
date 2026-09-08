@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { MAX_TH, TOWN_HALLS } from '../town-halls';
 import { BUILDINGS, BUILDINGS_BY_ID, SUPERCHARGES } from '../buildings';
-import { ALL_UNITS } from '../army';
+import { ALL_UNITS, CAMP_CAPACITY, SPELL_CAPACITY, UNITS_BY_ID } from '../army';
 
 /**
  * These do not verify values against the wiki — they catch the mistakes that
@@ -78,22 +78,54 @@ describe.each(ALL_UNITS.map((u) => [u.name, u] as const))('unit: %s', (_name, u)
 });
 
 describe('estimate coverage', () => {
-  it('no Home Village building level is interpolated', () => {
-    // Every one of these is read from that structure's own published table.
-    // A single `est` here means someone reintroduced a curve.
-    const guessed = BUILDINGS.flatMap((b) =>
-      b.levels.map((l, i) => (l?.est ? `${b.id} lvl${i}` : null)).filter(Boolean));
+  it('nothing in the dataset is interpolated', () => {
+    // Every level in both villages is read from that entity's own published
+    // table. A single `est` here means someone reintroduced a curve — which is
+    // what put a level 21 Cannon at 7.5x its real price and the Lava Hound's
+    // cost-to-max at 158% over.
+    const all = [...BUILDINGS, ...ALL_UNITS];
+    const guessed = all.flatMap((x) =>
+      x.levels.map((l, i) => (l?.est ? `${x.id} lvl${i}` : null)).filter(Boolean));
     expect(guessed).toEqual([]);
+    const total = all.reduce((n, x) => n + x.maxLevel, 0);
+    console.log(`dataset: ${total} levels, all anchored`);
+  });
+});
+
+describe('units', () => {
+  it('does not unlock anything before its producing building exists', () => {
+    // The level table's first row is free and names no Laboratory level, so
+    // deriving the unlock from it put the Dragon at Town Hall 1.
+    expect(UNITS_BY_ID.dragon.unlockTH).toBe(7);
+    expect(UNITS_BY_ID.electro_titan.unlockTH).toBe(14);
+    expect(UNITS_BY_ID.barbarian.unlockTH).toBe(1);
+    for (const u of ALL_UNITS) {
+      expect(u.unlockTH, `${u.name} unlock`).toBeGreaterThan(0);
+      expect(u.max[u.unlockTH], `${u.name} has no level at its unlock`).toBeGreaterThan(0);
+    }
   });
 
-  it('reports how much of the dataset is interpolated', () => {
-    const all = [...BUILDINGS, ...ALL_UNITS];
-    const total = all.reduce((n, x) => n + x.maxLevel, 0);
-    const est = all.reduce((n, x) => n + x.levels.filter((l) => l?.est).length, 0);
-    // Guard-rail, not a target: if this jumps, someone deleted anchors. What is
-    // left is `army.ts` — troops, spells and heroes are still on anchors.
-    expect(est / total).toBeLessThan(0.6);
-    console.log(`dataset: ${total} levels, ${total - est} anchored, ${est} interpolated`);
+  it('holds values read off the wiki, not off a curve', () => {
+    // The Witch was listed at 10 levels against a real 8, and the Barbarian
+    // King's cost-to-max was 44% over.
+    expect(UNITS_BY_ID.witch.maxLevel).toBe(8);
+    expect(UNITS_BY_ID.healer.maxLevel).toBe(11);
+    const bk = UNITS_BY_ID.barbarian_king.levels.reduce((n, l) => n + (l?.cost ?? 0), 0);
+    expect(bk).toBe(15_211_500);
+    // A hero is bought, not handed over: the Grand Warden's level 1 is priced.
+    expect(UNITS_BY_ID.grand_warden.levels[1]!.cost).toBe(1_000_000);
+    // Everything else starts free.
+    expect(UNITS_BY_ID.barbarian.levels[1]!.cost).toBe(0);
+  });
+
+  it('has camp and spell capacity through the top hall', () => {
+    // Both were hand-written arrays that stopped at Town Hall 17.
+    expect(CAMP_CAPACITY[MAX_TH]).toBe(352);
+    expect(SPELL_CAPACITY[MAX_TH]).toBe(11);
+    for (let th = 2; th <= MAX_TH; th++) {
+      expect(CAMP_CAPACITY[th], `camp capacity TH${th}`).toBeGreaterThanOrEqual(CAMP_CAPACITY[th - 1]);
+      expect(SPELL_CAPACITY[th], `spell capacity TH${th}`).toBeGreaterThanOrEqual(SPELL_CAPACITY[th - 1]);
+    }
   });
 });
 

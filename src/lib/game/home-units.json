@@ -1,0 +1,5512 @@
+{
+ "barbarian": {
+  "name": "Barbarian",
+  "kind": "troop",
+  "resource": "elixir",
+  "housing": 1,
+  "max": {
+   "1": 1,
+   "3": 2,
+   "5": 3,
+   "7": 4,
+   "8": 5,
+   "9": 6,
+   "10": 7,
+   "11": 8,
+   "12": 9,
+   "14": 10,
+   "15": 11,
+   "16": 12,
+   "18": 13
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 10000,
+    "hours": 0.5
+   },
+   {
+    "cost": 50000,
+    "hours": 1.0
+   },
+   {
+    "cost": 130000,
+    "hours": 2.0
+   },
+   {
+    "cost": 300000,
+    "hours": 4.0
+   },
+   {
+    "cost": 800000,
+    "hours": 8.0
+   },
+   {
+    "cost": 1000000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1500000,
+    "hours": 24.0
+   },
+   {
+    "cost": 2500000,
+    "hours": 36.0
+   },
+   {
+    "cost": 4300000,
+    "hours": 48.0
+   },
+   {
+    "cost": 6000000,
+    "hours": 72.0
+   },
+   {
+    "cost": 8000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 24000000,
+    "hours": 300.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Barbarian/Home Village"
+ },
+ "archer": {
+  "name": "Archer",
+  "kind": "troop",
+  "resource": "elixir",
+  "housing": 1,
+  "max": {
+   "1": 1,
+   "3": 2,
+   "5": 3,
+   "7": 4,
+   "8": 5,
+   "9": 6,
+   "10": 7,
+   "11": 8,
+   "12": 9,
+   "14": 10,
+   "15": 11,
+   "16": 12,
+   "17": 13,
+   "18": 14
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 20000,
+    "hours": 1.0
+   },
+   {
+    "cost": 80000,
+    "hours": 2.0
+   },
+   {
+    "cost": 200000,
+    "hours": 3.0
+   },
+   {
+    "cost": 500000,
+    "hours": 8.0
+   },
+   {
+    "cost": 1000000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1500000,
+    "hours": 24.0
+   },
+   {
+    "cost": 2300000,
+    "hours": 36.0
+   },
+   {
+    "cost": 3000000,
+    "hours": 48.0
+   },
+   {
+    "cost": 4500000,
+    "hours": 72.0
+   },
+   {
+    "cost": 6500000,
+    "hours": 96.0
+   },
+   {
+    "cost": 9000000,
+    "hours": 108.0
+   },
+   {
+    "cost": 14000000,
+    "hours": 216.0
+   },
+   {
+    "cost": 25000000,
+    "hours": 324.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Archer"
+ },
+ "giant": {
+  "name": "Giant",
+  "kind": "troop",
+  "resource": "elixir",
+  "housing": 5,
+  "max": {
+   "1": 1,
+   "4": 2,
+   "6": 3,
+   "7": 4,
+   "8": 5,
+   "9": 6,
+   "10": 7,
+   "11": 8,
+   "12": 9,
+   "13": 10,
+   "15": 11,
+   "16": 12,
+   "17": 13,
+   "18": 14
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 40000,
+    "hours": 2.0
+   },
+   {
+    "cost": 150000,
+    "hours": 4.0
+   },
+   {
+    "cost": 400000,
+    "hours": 6.0
+   },
+   {
+    "cost": 800000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1500000,
+    "hours": 24.0
+   },
+   {
+    "cost": 2300000,
+    "hours": 36.0
+   },
+   {
+    "cost": 2600000,
+    "hours": 48.0
+   },
+   {
+    "cost": 3400000,
+    "hours": 54.0
+   },
+   {
+    "cost": 5000000,
+    "hours": 72.0
+   },
+   {
+    "cost": 7500000,
+    "hours": 96.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 120.0
+   },
+   {
+    "cost": 15000000,
+    "hours": 228.0
+   },
+   {
+    "cost": 25000000,
+    "hours": 324.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Giant"
+ },
+ "goblin": {
+  "name": "Goblin",
+  "kind": "troop",
+  "resource": "elixir",
+  "housing": 1,
+  "max": {
+   "2": 1,
+   "3": 2,
+   "5": 3,
+   "7": 4,
+   "8": 5,
+   "9": 6,
+   "10": 7,
+   "12": 8,
+   "15": 9,
+   "18": 10
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 45000,
+    "hours": 2.0
+   },
+   {
+    "cost": 100000,
+    "hours": 3.0
+   },
+   {
+    "cost": 500000,
+    "hours": 6.0
+   },
+   {
+    "cost": 700000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1600000,
+    "hours": 24.0
+   },
+   {
+    "cost": 2200000,
+    "hours": 36.0
+   },
+   {
+    "cost": 3700000,
+    "hours": 54.0
+   },
+   {
+    "cost": 8000000,
+    "hours": 120.0
+   },
+   {
+    "cost": 26000000,
+    "hours": 336.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Goblin"
+ },
+ "wall_breaker": {
+  "name": "Wall Breaker",
+  "kind": "troop",
+  "resource": "elixir",
+  "housing": 2,
+  "max": {
+   "3": 1,
+   "4": 2,
+   "6": 3,
+   "7": 4,
+   "8": 5,
+   "10": 6,
+   "11": 7,
+   "12": 8,
+   "13": 9,
+   "14": 10,
+   "15": 11,
+   "16": 12,
+   "17": 13,
+   "18": 14
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 80000,
+    "hours": 3.0
+   },
+   {
+    "cost": 200000,
+    "hours": 4.0
+   },
+   {
+    "cost": 450000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1000000,
+    "hours": 16.0
+   },
+   {
+    "cost": 2400000,
+    "hours": 24.0
+   },
+   {
+    "cost": 2800000,
+    "hours": 36.0
+   },
+   {
+    "cost": 3800000,
+    "hours": 60.0
+   },
+   {
+    "cost": 5200000,
+    "hours": 72.0
+   },
+   {
+    "cost": 6500000,
+    "hours": 120.0
+   },
+   {
+    "cost": 9500000,
+    "hours": 132.0
+   },
+   {
+    "cost": 11000000,
+    "hours": 144.0
+   },
+   {
+    "cost": 15500000,
+    "hours": 240.0
+   },
+   {
+    "cost": 26000000,
+    "hours": 336.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Wall Breaker"
+ },
+ "balloon": {
+  "name": "Balloon",
+  "kind": "troop",
+  "resource": "elixir",
+  "housing": 5,
+  "max": {
+   "4": 2,
+   "6": 3,
+   "7": 4,
+   "8": 5,
+   "9": 6,
+   "11": 7,
+   "12": 8,
+   "13": 9,
+   "14": 10,
+   "16": 11,
+   "17": 12,
+   "18": 13
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 100000,
+    "hours": 4.0
+   },
+   {
+    "cost": 400000,
+    "hours": 6.0
+   },
+   {
+    "cost": 720000,
+    "hours": 18.0
+   },
+   {
+    "cost": 1300000,
+    "hours": 24.0
+   },
+   {
+    "cost": 2750000,
+    "hours": 72.0
+   },
+   {
+    "cost": 4400000,
+    "hours": 78.0
+   },
+   {
+    "cost": 5000000,
+    "hours": 84.0
+   },
+   {
+    "cost": 7000000,
+    "hours": 108.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 14000000,
+    "hours": 204.0
+   },
+   {
+    "cost": 17500000,
+    "hours": 264.0
+   },
+   {
+    "cost": 28000000,
+    "hours": 354.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Balloon"
+ },
+ "wizard": {
+  "name": "Wizard",
+  "kind": "troop",
+  "resource": "elixir",
+  "housing": 4,
+  "max": {
+   "5": 2,
+   "6": 3,
+   "7": 4,
+   "8": 5,
+   "9": 6,
+   "10": 7,
+   "11": 8,
+   "12": 9,
+   "13": 10,
+   "15": 11,
+   "16": 12,
+   "17": 13,
+   "18": 14
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 120000,
+    "hours": 4.0
+   },
+   {
+    "cost": 300000,
+    "hours": 5.0
+   },
+   {
+    "cost": 600000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1200000,
+    "hours": 18.0
+   },
+   {
+    "cost": 2000000,
+    "hours": 36.0
+   },
+   {
+    "cost": 2500000,
+    "hours": 48.0
+   },
+   {
+    "cost": 3100000,
+    "hours": 54.0
+   },
+   {
+    "cost": 4000000,
+    "hours": 60.0
+   },
+   {
+    "cost": 5500000,
+    "hours": 84.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 132.0
+   },
+   {
+    "cost": 11500000,
+    "hours": 168.0
+   },
+   {
+    "cost": 16000000,
+    "hours": 252.0
+   },
+   {
+    "cost": 27000000,
+    "hours": 336.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Wizard"
+ },
+ "healer": {
+  "name": "Healer",
+  "kind": "troop",
+  "resource": "elixir",
+  "housing": 14,
+  "max": {
+   "6": 1,
+   "7": 2,
+   "8": 3,
+   "9": 4,
+   "11": 5,
+   "13": 6,
+   "14": 7,
+   "15": 8,
+   "16": 9,
+   "17": 10,
+   "18": 11
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 450000,
+    "hours": 12.0
+   },
+   {
+    "cost": 900000,
+    "hours": 24.0
+   },
+   {
+    "cost": 2500000,
+    "hours": 48.0
+   },
+   {
+    "cost": 4000000,
+    "hours": 72.0
+   },
+   {
+    "cost": 6000000,
+    "hours": 108.0
+   },
+   {
+    "cost": 9500000,
+    "hours": 156.0
+   },
+   {
+    "cost": 11000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 13000000,
+    "hours": 174.0
+   },
+   {
+    "cost": 17000000,
+    "hours": 264.0
+   },
+   {
+    "cost": 28500000,
+    "hours": 360.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Healer"
+ },
+ "dragon": {
+  "name": "Dragon",
+  "kind": "troop",
+  "resource": "elixir",
+  "housing": 20,
+  "max": {
+   "7": 2,
+   "8": 3,
+   "9": 4,
+   "10": 5,
+   "11": 6,
+   "12": 7,
+   "13": 8,
+   "14": 9,
+   "15": 10,
+   "16": 11,
+   "17": 12,
+   "18": 13
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 1000000,
+    "hours": 18.0
+   },
+   {
+    "cost": 2000000,
+    "hours": 36.0
+   },
+   {
+    "cost": 3000000,
+    "hours": 48.0
+   },
+   {
+    "cost": 3800000,
+    "hours": 72.0
+   },
+   {
+    "cost": 4900000,
+    "hours": 96.0
+   },
+   {
+    "cost": 5000000,
+    "hours": 108.0
+   },
+   {
+    "cost": 7500000,
+    "hours": 120.0
+   },
+   {
+    "cost": 10500000,
+    "hours": 168.0
+   },
+   {
+    "cost": 12000000,
+    "hours": 180.0
+   },
+   {
+    "cost": 14000000,
+    "hours": 204.0
+   },
+   {
+    "cost": 18500000,
+    "hours": 240.0
+   },
+   {
+    "cost": 28500000,
+    "hours": 360.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Dragon"
+ },
+ "pekka": {
+  "name": "P.E.K.K.A",
+  "kind": "troop",
+  "resource": "elixir",
+  "housing": 25,
+  "max": {
+   "8": 3,
+   "9": 4,
+   "10": 6,
+   "11": 7,
+   "12": 8,
+   "13": 9,
+   "15": 10,
+   "16": 11,
+   "17": 12,
+   "18": 13
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 600000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1300000,
+    "hours": 18.0
+   },
+   {
+    "cost": 2000000,
+    "hours": 24.0
+   },
+   {
+    "cost": 2100000,
+    "hours": 36.0
+   },
+   {
+    "cost": 2500000,
+    "hours": 48.0
+   },
+   {
+    "cost": 4500000,
+    "hours": 72.0
+   },
+   {
+    "cost": 5000000,
+    "hours": 84.0
+   },
+   {
+    "cost": 5800000,
+    "hours": 96.0
+   },
+   {
+    "cost": 10500000,
+    "hours": 132.0
+   },
+   {
+    "cost": 12000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 16000000,
+    "hours": 240.0
+   },
+   {
+    "cost": 28000000,
+    "hours": 348.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "P.E.K.K.A"
+ },
+ "baby_dragon": {
+  "name": "Baby Dragon",
+  "kind": "troop",
+  "resource": "elixir",
+  "housing": 10,
+  "max": {
+   "9": 2,
+   "10": 4,
+   "11": 5,
+   "12": 6,
+   "13": 7,
+   "14": 8,
+   "15": 9,
+   "16": 10,
+   "17": 11,
+   "18": 12
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 1500000,
+    "hours": 24.0
+   },
+   {
+    "cost": 2000000,
+    "hours": 36.0
+   },
+   {
+    "cost": 2800000,
+    "hours": 48.0
+   },
+   {
+    "cost": 3700000,
+    "hours": 66.0
+   },
+   {
+    "cost": 4800000,
+    "hours": 72.0
+   },
+   {
+    "cost": 6200000,
+    "hours": 96.0
+   },
+   {
+    "cost": 9500000,
+    "hours": 144.0
+   },
+   {
+    "cost": 11000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 13500000,
+    "hours": 174.0
+   },
+   {
+    "cost": 16500000,
+    "hours": 240.0
+   },
+   {
+    "cost": 29000000,
+    "hours": 366.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Baby Dragon/Home Village"
+ },
+ "miner": {
+  "name": "Miner",
+  "kind": "troop",
+  "resource": "elixir",
+  "housing": 6,
+  "max": {
+   "10": 3,
+   "11": 5,
+   "12": 6,
+   "13": 7,
+   "14": 8,
+   "15": 9,
+   "16": 10,
+   "17": 11,
+   "18": 12
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 1500000,
+    "hours": 24.0
+   },
+   {
+    "cost": 2600000,
+    "hours": 48.0
+   },
+   {
+    "cost": 3000000,
+    "hours": 54.0
+   },
+   {
+    "cost": 4000000,
+    "hours": 60.0
+   },
+   {
+    "cost": 4800000,
+    "hours": 72.0
+   },
+   {
+    "cost": 6000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 8600000,
+    "hours": 144.0
+   },
+   {
+    "cost": 10500000,
+    "hours": 156.0
+   },
+   {
+    "cost": 12500000,
+    "hours": 168.0
+   },
+   {
+    "cost": 16500000,
+    "hours": 228.0
+   },
+   {
+    "cost": 28000000,
+    "hours": 348.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Miner"
+ },
+ "electro_dragon": {
+  "name": "Electro Dragon",
+  "kind": "troop",
+  "resource": "elixir",
+  "housing": 30,
+  "max": {
+   "11": 2,
+   "12": 3,
+   "13": 4,
+   "14": 5,
+   "15": 6,
+   "16": 7,
+   "17": 8,
+   "18": 9
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 6000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 7000000,
+    "hours": 108.0
+   },
+   {
+    "cost": 9000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 11000000,
+    "hours": 192.0
+   },
+   {
+    "cost": 14000000,
+    "hours": 204.0
+   },
+   {
+    "cost": 16000000,
+    "hours": 216.0
+   },
+   {
+    "cost": 20000000,
+    "hours": 240.0
+   },
+   {
+    "cost": 30000000,
+    "hours": 384.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Electro Dragon"
+ },
+ "yeti": {
+  "name": "Yeti",
+  "kind": "troop",
+  "resource": "elixir",
+  "housing": 18,
+  "max": {
+   "12": 2,
+   "13": 3,
+   "14": 4,
+   "15": 5,
+   "16": 6,
+   "17": 7,
+   "18": 8
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 5000000,
+    "hours": 72.0
+   },
+   {
+    "cost": 6500000,
+    "hours": 108.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 12000000,
+    "hours": 180.0
+   },
+   {
+    "cost": 14500000,
+    "hours": 198.0
+   },
+   {
+    "cost": 17000000,
+    "hours": 240.0
+   },
+   {
+    "cost": 27500000,
+    "hours": 372.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Yeti"
+ },
+ "dragon_rider": {
+  "name": "Dragon Rider",
+  "kind": "troop",
+  "resource": "elixir",
+  "housing": 25,
+  "max": {
+   "13": 2,
+   "14": 3,
+   "16": 4,
+   "17": 5,
+   "18": 6
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 7500000,
+    "hours": 144.0
+   },
+   {
+    "cost": 12000000,
+    "hours": 192.0
+   },
+   {
+    "cost": 14500000,
+    "hours": 216.0
+   },
+   {
+    "cost": 19000000,
+    "hours": 246.0
+   },
+   {
+    "cost": 29500000,
+    "hours": 372.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Dragon Rider"
+ },
+ "electro_titan": {
+  "name": "Electro Titan",
+  "kind": "troop",
+  "resource": "elixir",
+  "housing": 32,
+  "max": {
+   "14": 2,
+   "15": 3,
+   "16": 4,
+   "18": 5
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 14000000,
+    "hours": 192.0
+   },
+   {
+    "cost": 16000000,
+    "hours": 216.0
+   },
+   {
+    "cost": 18500000,
+    "hours": 264.0
+   },
+   {
+    "cost": 30000000,
+    "hours": 384.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Electro Titan"
+ },
+ "root_rider": {
+  "name": "Root Rider",
+  "kind": "troop",
+  "resource": "elixir",
+  "housing": 20,
+  "max": {
+   "15": 2,
+   "16": 3,
+   "18": 4
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 15000000,
+    "hours": 192.0
+   },
+   {
+    "cost": 17600000,
+    "hours": 240.0
+   },
+   {
+    "cost": 30000000,
+    "hours": 384.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Root Rider"
+ },
+ "thrower": {
+  "name": "Thrower",
+  "kind": "troop",
+  "resource": "elixir",
+  "housing": 16,
+  "max": {
+   "16": 2,
+   "17": 3,
+   "18": 4
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 16000000,
+    "hours": 228.0
+   },
+   {
+    "cost": 18000000,
+    "hours": 252.0
+   },
+   {
+    "cost": 27000000,
+    "hours": 360.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Thrower"
+ },
+ "minion": {
+  "name": "Minion",
+  "kind": "troop",
+  "resource": "dark",
+  "housing": 2,
+  "max": {
+   "7": 2,
+   "8": 4,
+   "9": 5,
+   "10": 6,
+   "11": 7,
+   "12": 8,
+   "13": 9,
+   "14": 10,
+   "15": 11,
+   "16": 12,
+   "17": 13,
+   "18": 14
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 1000,
+    "hours": 6.0
+   },
+   {
+    "cost": 2500,
+    "hours": 8.0
+   },
+   {
+    "cost": 5000,
+    "hours": 12.0
+   },
+   {
+    "cost": 10000,
+    "hours": 24.0
+   },
+   {
+    "cost": 15000,
+    "hours": 36.0
+   },
+   {
+    "cost": 31500,
+    "hours": 42.0
+   },
+   {
+    "cost": 47500,
+    "hours": 48.0
+   },
+   {
+    "cost": 75000,
+    "hours": 72.0
+   },
+   {
+    "cost": 100000,
+    "hours": 96.0
+   },
+   {
+    "cost": 115000,
+    "hours": 108.0
+   },
+   {
+    "cost": 160000,
+    "hours": 120.0
+   },
+   {
+    "cost": 220000,
+    "hours": 216.0
+   },
+   {
+    "cost": 335000,
+    "hours": 336.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Minion"
+ },
+ "hog_rider": {
+  "name": "Hog Rider",
+  "kind": "troop",
+  "resource": "dark",
+  "housing": 5,
+  "max": {
+   "7": 2,
+   "8": 4,
+   "9": 5,
+   "10": 6,
+   "11": 7,
+   "12": 9,
+   "13": 10,
+   "14": 11,
+   "15": 12,
+   "16": 13,
+   "17": 14,
+   "18": 15
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 2000,
+    "hours": 10.0
+   },
+   {
+    "cost": 3500,
+    "hours": 18.0
+   },
+   {
+    "cost": 5000,
+    "hours": 24.0
+   },
+   {
+    "cost": 10000,
+    "hours": 48.0
+   },
+   {
+    "cost": 18500,
+    "hours": 54.0
+   },
+   {
+    "cost": 35000,
+    "hours": 60.0
+   },
+   {
+    "cost": 47500,
+    "hours": 72.0
+   },
+   {
+    "cost": 50000,
+    "hours": 84.0
+   },
+   {
+    "cost": 85000,
+    "hours": 96.0
+   },
+   {
+    "cost": 107500,
+    "hours": 120.0
+   },
+   {
+    "cost": 125000,
+    "hours": 132.0
+   },
+   {
+    "cost": 175000,
+    "hours": 156.0
+   },
+   {
+    "cost": 240000,
+    "hours": 240.0
+   },
+   {
+    "cost": 340000,
+    "hours": 348.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Hog Rider"
+ },
+ "valkyrie": {
+  "name": "Valkyrie",
+  "kind": "troop",
+  "resource": "dark",
+  "housing": 8,
+  "max": {
+   "8": 2,
+   "9": 4,
+   "10": 5,
+   "11": 6,
+   "12": 7,
+   "13": 8,
+   "14": 9,
+   "15": 10,
+   "16": 11,
+   "17": 12
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 3000,
+    "hours": 8.0
+   },
+   {
+    "cost": 5000,
+    "hours": 24.0
+   },
+   {
+    "cost": 10000,
+    "hours": 36.0
+   },
+   {
+    "cost": 16000,
+    "hours": 42.0
+   },
+   {
+    "cost": 31500,
+    "hours": 48.0
+   },
+   {
+    "cost": 55000,
+    "hours": 54.0
+   },
+   {
+    "cost": 77500,
+    "hours": 72.0
+   },
+   {
+    "cost": 105000,
+    "hours": 108.0
+   },
+   {
+    "cost": 120000,
+    "hours": 120.0
+   },
+   {
+    "cost": 170000,
+    "hours": 144.0
+   },
+   {
+    "cost": 340000,
+    "hours": 336.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Valkyrie"
+ },
+ "golem": {
+  "name": "Golem",
+  "kind": "troop",
+  "resource": "dark",
+  "housing": 30,
+  "max": {
+   "8": 2,
+   "9": 4,
+   "10": 5,
+   "11": 7,
+   "12": 9,
+   "13": 10,
+   "14": 11,
+   "15": 12,
+   "16": 13,
+   "17": 14,
+   "18": 15
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 4000,
+    "hours": 16.0
+   },
+   {
+    "cost": 6000,
+    "hours": 36.0
+   },
+   {
+    "cost": 10000,
+    "hours": 48.0
+   },
+   {
+    "cost": 18500,
+    "hours": 54.0
+   },
+   {
+    "cost": 26500,
+    "hours": 60.0
+   },
+   {
+    "cost": 38500,
+    "hours": 66.0
+   },
+   {
+    "cost": 50000,
+    "hours": 72.0
+   },
+   {
+    "cost": 62500,
+    "hours": 84.0
+   },
+   {
+    "cost": 80000,
+    "hours": 96.0
+   },
+   {
+    "cost": 105000,
+    "hours": 120.0
+   },
+   {
+    "cost": 122500,
+    "hours": 132.0
+   },
+   {
+    "cost": 175000,
+    "hours": 144.0
+   },
+   {
+    "cost": 230000,
+    "hours": 240.0
+   },
+   {
+    "cost": 350000,
+    "hours": 348.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Golem"
+ },
+ "witch": {
+  "name": "Witch",
+  "kind": "troop",
+  "resource": "dark",
+  "housing": 12,
+  "max": {
+   "9": 2,
+   "10": 3,
+   "11": 4,
+   "12": 5,
+   "15": 6,
+   "16": 7,
+   "18": 8
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 20000,
+    "hours": 48.0
+   },
+   {
+    "cost": 29000,
+    "hours": 72.0
+   },
+   {
+    "cost": 45000,
+    "hours": 84.0
+   },
+   {
+    "cost": 62500,
+    "hours": 96.0
+   },
+   {
+    "cost": 150000,
+    "hours": 132.0
+   },
+   {
+    "cost": 180000,
+    "hours": 174.0
+   },
+   {
+    "cost": 355000,
+    "hours": 372.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Witch"
+ },
+ "lava_hound": {
+  "name": "Lava Hound",
+  "kind": "troop",
+  "resource": "dark",
+  "housing": 30,
+  "max": {
+   "9": 2,
+   "10": 3,
+   "11": 4,
+   "12": 5,
+   "13": 6,
+   "16": 7,
+   "18": 8
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 14000,
+    "hours": 48.0
+   },
+   {
+    "cost": 21500,
+    "hours": 60.0
+   },
+   {
+    "cost": 42500,
+    "hours": 72.0
+   },
+   {
+    "cost": 60000,
+    "hours": 96.0
+   },
+   {
+    "cost": 80000,
+    "hours": 168.0
+   },
+   {
+    "cost": 200000,
+    "hours": 192.0
+   },
+   {
+    "cost": 345000,
+    "hours": 366.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Lava Hound"
+ },
+ "bowler": {
+  "name": "Bowler",
+  "kind": "troop",
+  "resource": "dark",
+  "housing": 6,
+  "max": {
+   "10": 2,
+   "11": 3,
+   "12": 4,
+   "13": 5,
+   "14": 6,
+   "15": 7,
+   "16": 8,
+   "17": 9,
+   "18": 10
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 32500,
+    "hours": 48.0
+   },
+   {
+    "cost": 44000,
+    "hours": 60.0
+   },
+   {
+    "cost": 62500,
+    "hours": 72.0
+   },
+   {
+    "cost": 85000,
+    "hours": 96.0
+   },
+   {
+    "cost": 110000,
+    "hours": 144.0
+   },
+   {
+    "cost": 145000,
+    "hours": 168.0
+   },
+   {
+    "cost": 175000,
+    "hours": 180.0
+   },
+   {
+    "cost": 260000,
+    "hours": 240.0
+   },
+   {
+    "cost": 360000,
+    "hours": 360.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Bowler"
+ },
+ "ice_golem": {
+  "name": "Ice Golem",
+  "kind": "troop",
+  "resource": "dark",
+  "housing": 15,
+  "max": {
+   "11": 3,
+   "12": 5,
+   "14": 6,
+   "15": 7,
+   "16": 8,
+   "17": 9
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 27500,
+    "hours": 48.0
+   },
+   {
+    "cost": 42500,
+    "hours": 60.0
+   },
+   {
+    "cost": 50000,
+    "hours": 78.0
+   },
+   {
+    "cost": 62500,
+    "hours": 96.0
+   },
+   {
+    "cost": 110000,
+    "hours": 156.0
+   },
+   {
+    "cost": 140000,
+    "hours": 180.0
+   },
+   {
+    "cost": 180000,
+    "hours": 192.0
+   },
+   {
+    "cost": 280000,
+    "hours": 254.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Ice Golem"
+ },
+ "headhunter": {
+  "name": "Headhunter",
+  "kind": "troop",
+  "resource": "dark",
+  "housing": 6,
+  "max": {
+   "12": 2,
+   "13": 3,
+   "18": 4
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 57500,
+    "hours": 120.0
+   },
+   {
+    "cost": 90000,
+    "hours": 168.0
+   },
+   {
+    "cost": 370000,
+    "hours": 372.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Headhunter"
+ },
+ "apprentice_warden": {
+  "name": "Apprentice Warden",
+  "kind": "troop",
+  "resource": "dark",
+  "housing": 20,
+  "max": {
+   "13": 2,
+   "14": 3,
+   "15": 4
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 90000,
+    "hours": 144.0
+   },
+   {
+    "cost": 135000,
+    "hours": 180.0
+   },
+   {
+    "cost": 160000,
+    "hours": 192.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Apprentice Warden"
+ },
+ "druid": {
+  "name": "Druid",
+  "kind": "troop",
+  "resource": "dark",
+  "housing": 20,
+  "max": {
+   "14": 2,
+   "15": 3,
+   "16": 4,
+   "17": 5,
+   "18": 6
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 125000,
+    "hours": 192.0
+   },
+   {
+    "cost": 175000,
+    "hours": 216.0
+   },
+   {
+    "cost": 187500,
+    "hours": 264.0
+   },
+   {
+    "cost": 300000,
+    "hours": 288.0
+   },
+   {
+    "cost": 380000,
+    "hours": 372.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Druid"
+ },
+ "lightning": {
+  "name": "Lightning Spell",
+  "kind": "spell",
+  "resource": "elixir",
+  "housing": 2,
+  "max": {
+   "5": 4,
+   "8": 5,
+   "9": 6,
+   "10": 7,
+   "11": 8,
+   "12": 9,
+   "15": 10,
+   "16": 11,
+   "17": 12,
+   "18": 13
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 50000,
+    "hours": 2.0
+   },
+   {
+    "cost": 100000,
+    "hours": 4.0
+   },
+   {
+    "cost": 200000,
+    "hours": 6.0
+   },
+   {
+    "cost": 600000,
+    "hours": 24.0
+   },
+   {
+    "cost": 1500000,
+    "hours": 36.0
+   },
+   {
+    "cost": 2500000,
+    "hours": 72.0
+   },
+   {
+    "cost": 4200000,
+    "hours": 84.0
+   },
+   {
+    "cost": 6300000,
+    "hours": 120.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 144.0
+   },
+   {
+    "cost": 13500000,
+    "hours": 168.0
+   },
+   {
+    "cost": 18500000,
+    "hours": 240.0
+   },
+   {
+    "cost": 27000000,
+    "hours": 336.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Lightning Spell/Home Village"
+ },
+ "healing": {
+  "name": "Healing Spell",
+  "kind": "spell",
+  "resource": "elixir",
+  "housing": 2,
+  "max": {
+   "6": 3,
+   "7": 4,
+   "8": 5,
+   "9": 6,
+   "10": 7,
+   "13": 8,
+   "15": 9,
+   "16": 10,
+   "17": 11,
+   "18": 12
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 75000,
+    "hours": 3.0
+   },
+   {
+    "cost": 150000,
+    "hours": 6.0
+   },
+   {
+    "cost": 300000,
+    "hours": 12.0
+   },
+   {
+    "cost": 900000,
+    "hours": 24.0
+   },
+   {
+    "cost": 1800000,
+    "hours": 36.0
+   },
+   {
+    "cost": 3000000,
+    "hours": 72.0
+   },
+   {
+    "cost": 6000000,
+    "hours": 120.0
+   },
+   {
+    "cost": 11000000,
+    "hours": 156.0
+   },
+   {
+    "cost": 14000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 19000000,
+    "hours": 252.0
+   },
+   {
+    "cost": 29000000,
+    "hours": 360.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Healing Spell/Home Village"
+ },
+ "rage": {
+  "name": "Rage Spell",
+  "kind": "spell",
+  "resource": "elixir",
+  "housing": 2,
+  "max": {
+   "7": 4,
+   "8": 5,
+   "12": 6,
+   "18": 7
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 400000,
+    "hours": 6.0
+   },
+   {
+    "cost": 800000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1000000,
+    "hours": 24.0
+   },
+   {
+    "cost": 2000000,
+    "hours": 48.0
+   },
+   {
+    "cost": 5000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 26000000,
+    "hours": 336.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Rage Spell/Home Village"
+ },
+ "jump": {
+  "name": "Jump Spell",
+  "kind": "spell",
+  "resource": "elixir",
+  "housing": 2,
+  "max": {
+   "9": 2,
+   "10": 3,
+   "13": 4,
+   "15": 5
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 1000000,
+    "hours": 24.0
+   },
+   {
+    "cost": 2000000,
+    "hours": 48.0
+   },
+   {
+    "cost": 5000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 8000000,
+    "hours": 120.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Jump Spell/Home Village"
+ },
+ "freeze": {
+  "name": "Freeze Spell",
+  "kind": "spell",
+  "resource": "elixir",
+  "housing": 1,
+  "max": {
+   "9": 2,
+   "10": 5,
+   "11": 6,
+   "12": 7,
+   "18": 8
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 1200000,
+    "hours": 24.0
+   },
+   {
+    "cost": 1700000,
+    "hours": 36.0
+   },
+   {
+    "cost": 3000000,
+    "hours": 48.0
+   },
+   {
+    "cost": 4200000,
+    "hours": 60.0
+   },
+   {
+    "cost": 6000000,
+    "hours": 84.0
+   },
+   {
+    "cost": 7000000,
+    "hours": 120.0
+   },
+   {
+    "cost": 28000000,
+    "hours": 372.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Freeze Spell"
+ },
+ "clone": {
+  "name": "Clone Spell",
+  "kind": "spell",
+  "resource": "elixir",
+  "housing": 3,
+  "max": {
+   "10": 3,
+   "11": 5,
+   "13": 6,
+   "14": 7,
+   "15": 8,
+   "18": 9
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 1500000,
+    "hours": 24.0
+   },
+   {
+    "cost": 2500000,
+    "hours": 48.0
+   },
+   {
+    "cost": 3000000,
+    "hours": 54.0
+   },
+   {
+    "cost": 4000000,
+    "hours": 60.0
+   },
+   {
+    "cost": 5000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 8000000,
+    "hours": 120.0
+   },
+   {
+    "cost": 9000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 26000000,
+    "hours": 324.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Clone Spell"
+ },
+ "invisibility": {
+  "name": "Invisibility Spell",
+  "kind": "spell",
+  "resource": "elixir",
+  "housing": 1,
+  "max": {
+   "11": 2,
+   "12": 3,
+   "13": 4
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 5000000,
+    "hours": 72.0
+   },
+   {
+    "cost": 6000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 7000000,
+    "hours": 120.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Invisibility Spell"
+ },
+ "recall": {
+  "name": "Recall Spell",
+  "kind": "spell",
+  "resource": "elixir",
+  "housing": 2,
+  "max": {
+   "13": 2,
+   "14": 3,
+   "15": 4,
+   "16": 5,
+   "17": 6,
+   "18": 7
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 7500000,
+    "hours": 168.0
+   },
+   {
+    "cost": 8000000,
+    "hours": 180.0
+   },
+   {
+    "cost": 9000000,
+    "hours": 192.0
+   },
+   {
+    "cost": 13000000,
+    "hours": 216.0
+   },
+   {
+    "cost": 19000000,
+    "hours": 264.0
+   },
+   {
+    "cost": 29000000,
+    "hours": 384.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Recall Spell"
+ },
+ "revive": {
+  "name": "Revive Spell",
+  "kind": "spell",
+  "resource": "elixir",
+  "housing": 1,
+  "max": {
+   "15": 2,
+   "16": 3,
+   "17": 4,
+   "18": 5
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 18000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 19000000,
+    "hours": 192.0
+   },
+   {
+    "cost": 20000000,
+    "hours": 276.0
+   },
+   {
+    "cost": 29500000,
+    "hours": 384.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Revive Spell"
+ },
+ "poison": {
+  "name": "Poison Spell",
+  "kind": "spell",
+  "resource": "dark",
+  "housing": 1,
+  "max": {
+   "8": 2,
+   "9": 3,
+   "10": 4,
+   "11": 5,
+   "12": 6,
+   "13": 7,
+   "14": 8,
+   "15": 9,
+   "16": 10,
+   "17": 11,
+   "18": 12
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 5000,
+    "hours": 6.0
+   },
+   {
+    "cost": 10000,
+    "hours": 18.0
+   },
+   {
+    "cost": 21500,
+    "hours": 48.0
+   },
+   {
+    "cost": 35000,
+    "hours": 72.0
+   },
+   {
+    "cost": 55000,
+    "hours": 96.0
+   },
+   {
+    "cost": 77500,
+    "hours": 120.0
+   },
+   {
+    "cost": 100000,
+    "hours": 156.0
+   },
+   {
+    "cost": 135000,
+    "hours": 168.0
+   },
+   {
+    "cost": 175000,
+    "hours": 192.0
+   },
+   {
+    "cost": 230000,
+    "hours": 232.0
+   },
+   {
+    "cost": 350000,
+    "hours": 348.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Poison Spell"
+ },
+ "earthquake": {
+  "name": "Earthquake Spell",
+  "kind": "spell",
+  "resource": "dark",
+  "housing": 1,
+  "max": {
+   "8": 2,
+   "9": 3,
+   "10": 4,
+   "11": 5,
+   "14": 6,
+   "16": 7,
+   "18": 8
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 6000,
+    "hours": 12.0
+   },
+   {
+    "cost": 12000,
+    "hours": 24.0
+   },
+   {
+    "cost": 25500,
+    "hours": 72.0
+   },
+   {
+    "cost": 42000,
+    "hours": 84.0
+   },
+   {
+    "cost": 120000,
+    "hours": 192.0
+   },
+   {
+    "cost": 200000,
+    "hours": 216.0
+   },
+   {
+    "cost": 330000,
+    "hours": 324.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Earthquake Spell"
+ },
+ "haste": {
+  "name": "Haste Spell",
+  "kind": "spell",
+  "resource": "dark",
+  "housing": 1,
+  "max": {
+   "9": 2,
+   "10": 4,
+   "11": 5,
+   "17": 6,
+   "18": 7
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 8000,
+    "hours": 24.0
+   },
+   {
+    "cost": 17000,
+    "hours": 48.0
+   },
+   {
+    "cost": 30000,
+    "hours": 72.0
+   },
+   {
+    "cost": 38500,
+    "hours": 96.0
+   },
+   {
+    "cost": 200000,
+    "hours": 216.0
+   },
+   {
+    "cost": 320000,
+    "hours": 300.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Haste Spell"
+ },
+ "skeleton": {
+  "name": "Skeleton Spell",
+  "kind": "spell",
+  "resource": "dark",
+  "housing": 1,
+  "max": {
+   "9": 1,
+   "10": 3,
+   "11": 4,
+   "12": 6,
+   "13": 7,
+   "15": 8
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 11000,
+    "hours": 12.0
+   },
+   {
+    "cost": 17000,
+    "hours": 24.0
+   },
+   {
+    "cost": 25000,
+    "hours": 48.0
+   },
+   {
+    "cost": 40000,
+    "hours": 60.0
+   },
+   {
+    "cost": 50000,
+    "hours": 72.0
+   },
+   {
+    "cost": 75000,
+    "hours": 96.0
+   },
+   {
+    "cost": 135000,
+    "hours": 144.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Skeleton Spell"
+ },
+ "bat": {
+  "name": "Bat Spell",
+  "kind": "spell",
+  "resource": "dark",
+  "housing": 1,
+  "max": {
+   "10": 3,
+   "11": 4,
+   "12": 5,
+   "15": 6,
+   "17": 7,
+   "18": 8
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 13000,
+    "hours": 18.0
+   },
+   {
+    "cost": 25500,
+    "hours": 36.0
+   },
+   {
+    "cost": 35000,
+    "hours": 54.0
+   },
+   {
+    "cost": 47500,
+    "hours": 96.0
+   },
+   {
+    "cost": 140000,
+    "hours": 168.0
+   },
+   {
+    "cost": 220000,
+    "hours": 204.0
+   },
+   {
+    "cost": 300000,
+    "hours": 312.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Bat Spell"
+ },
+ "wall_wrecker": {
+  "name": "Wall Wrecker",
+  "kind": "siege",
+  "resource": "elixir",
+  "housing": 1,
+  "max": {
+   "12": 3,
+   "13": 4,
+   "15": 5,
+   "18": 6
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 2500000,
+    "hours": 48.0
+   },
+   {
+    "cost": 3500000,
+    "hours": 72.0
+   },
+   {
+    "cost": 6500000,
+    "hours": 168.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 216.0
+   },
+   {
+    "cost": 26000000,
+    "hours": 324.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Wall Wrecker"
+ },
+ "battle_blimp": {
+  "name": "Battle Blimp",
+  "kind": "siege",
+  "resource": "elixir",
+  "housing": 1,
+  "max": {
+   "12": 3,
+   "13": 4,
+   "15": 5,
+   "18": 6
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 2500000,
+    "hours": 48.0
+   },
+   {
+    "cost": 3500000,
+    "hours": 72.0
+   },
+   {
+    "cost": 6500000,
+    "hours": 168.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 216.0
+   },
+   {
+    "cost": 26000000,
+    "hours": 324.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Battle Blimp"
+ },
+ "stone_slammer": {
+  "name": "Stone Slammer",
+  "kind": "siege",
+  "resource": "elixir",
+  "housing": 1,
+  "max": {
+   "12": 3,
+   "13": 4,
+   "15": 5,
+   "18": 6
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 2500000,
+    "hours": 48.0
+   },
+   {
+    "cost": 3500000,
+    "hours": 72.0
+   },
+   {
+    "cost": 6500000,
+    "hours": 168.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 216.0
+   },
+   {
+    "cost": 26000000,
+    "hours": 324.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Stone Slammer"
+ },
+ "siege_barracks": {
+  "name": "Siege Barracks",
+  "kind": "siege",
+  "resource": "elixir",
+  "housing": 1,
+  "max": {
+   "13": 4,
+   "16": 5,
+   "18": 6
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 3500000,
+    "hours": 72.0
+   },
+   {
+    "cost": 5000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 8000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 18000000,
+    "hours": 288.0
+   },
+   {
+    "cost": 27000000,
+    "hours": 360.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Siege Barracks"
+ },
+ "log_launcher": {
+  "name": "Log Launcher",
+  "kind": "siege",
+  "resource": "elixir",
+  "housing": 1,
+  "max": {
+   "13": 4,
+   "16": 5,
+   "18": 6
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 3200000,
+    "hours": 72.0
+   },
+   {
+    "cost": 4500000,
+    "hours": 96.0
+   },
+   {
+    "cost": 7500000,
+    "hours": 168.0
+   },
+   {
+    "cost": 18000000,
+    "hours": 288.0
+   },
+   {
+    "cost": 27000000,
+    "hours": 360.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Log Launcher"
+ },
+ "flame_flinger": {
+  "name": "Flame Flinger",
+  "kind": "siege",
+  "resource": "elixir",
+  "housing": 1,
+  "max": {
+   "14": 4,
+   "16": 5
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 5500000,
+    "hours": 72.0
+   },
+   {
+    "cost": 8000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 18000000,
+    "hours": 288.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Flame Flinger"
+ },
+ "battle_drill": {
+  "name": "Battle Drill",
+  "kind": "siege",
+  "resource": "elixir",
+  "housing": 1,
+  "max": {
+   "15": 4,
+   "17": 5,
+   "18": 6
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 6000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 8500000,
+    "hours": 120.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 192.0
+   },
+   {
+    "cost": 17000000,
+    "hours": 216.0
+   },
+   {
+    "cost": 28000000,
+    "hours": 372.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Battle Drill"
+ },
+ "troop_launcher": {
+  "name": "Troop Launcher",
+  "kind": "siege",
+  "resource": "elixir",
+  "housing": 1,
+  "max": {
+   "16": 3,
+   "17": 4
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 8500000,
+    "hours": 144.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 192.0
+   },
+   {
+    "cost": 17000000,
+    "hours": 216.0
+   }
+  ],
+  "gate": "Laboratory",
+  "page": "Troop Launcher"
+ },
+ "barbarian_king": {
+  "name": "Barbarian King",
+  "kind": "hero",
+  "resource": "dark",
+  "housing": 0,
+  "max": {
+   "4": 1,
+   "7": 10,
+   "8": 20,
+   "9": 30,
+   "10": 40,
+   "11": 50,
+   "12": 65,
+   "13": 75,
+   "14": 85,
+   "15": 90,
+   "16": 95,
+   "17": 100,
+   "18": 110
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 5000,
+    "hours": 2.0
+   },
+   {
+    "cost": 5500,
+    "hours": 4.0
+   },
+   {
+    "cost": 6000,
+    "hours": 8.0
+   },
+   {
+    "cost": 6500,
+    "hours": 10.0
+   },
+   {
+    "cost": 7000,
+    "hours": 12.0
+   },
+   {
+    "cost": 7500,
+    "hours": 14.0
+   },
+   {
+    "cost": 8000,
+    "hours": 16.0
+   },
+   {
+    "cost": 8500,
+    "hours": 18.0
+   },
+   {
+    "cost": 10000,
+    "hours": 20.0
+   },
+   {
+    "cost": 10500,
+    "hours": 22.0
+   },
+   {
+    "cost": 11000,
+    "hours": 24.0
+   },
+   {
+    "cost": 11500,
+    "hours": 24.0
+   },
+   {
+    "cost": 12000,
+    "hours": 24.0
+   },
+   {
+    "cost": 12500,
+    "hours": 24.0
+   },
+   {
+    "cost": 13000,
+    "hours": 24.0
+   },
+   {
+    "cost": 13500,
+    "hours": 24.0
+   },
+   {
+    "cost": 14000,
+    "hours": 24.0
+   },
+   {
+    "cost": 14500,
+    "hours": 24.0
+   },
+   {
+    "cost": 15000,
+    "hours": 24.0
+   },
+   {
+    "cost": 17000,
+    "hours": 24.0
+   },
+   {
+    "cost": 19000,
+    "hours": 24.0
+   },
+   {
+    "cost": 21000,
+    "hours": 24.0
+   },
+   {
+    "cost": 23000,
+    "hours": 24.0
+   },
+   {
+    "cost": 25000,
+    "hours": 24.0
+   },
+   {
+    "cost": 27000,
+    "hours": 48.0
+   },
+   {
+    "cost": 29000,
+    "hours": 48.0
+   },
+   {
+    "cost": 31000,
+    "hours": 48.0
+   },
+   {
+    "cost": 33000,
+    "hours": 48.0
+   },
+   {
+    "cost": 35000,
+    "hours": 48.0
+   },
+   {
+    "cost": 37000,
+    "hours": 54.0
+   },
+   {
+    "cost": 39000,
+    "hours": 54.0
+   },
+   {
+    "cost": 41000,
+    "hours": 54.0
+   },
+   {
+    "cost": 43000,
+    "hours": 54.0
+   },
+   {
+    "cost": 45000,
+    "hours": 54.0
+   },
+   {
+    "cost": 47000,
+    "hours": 60.0
+   },
+   {
+    "cost": 49000,
+    "hours": 60.0
+   },
+   {
+    "cost": 51000,
+    "hours": 60.0
+   },
+   {
+    "cost": 53000,
+    "hours": 60.0
+   },
+   {
+    "cost": 55000,
+    "hours": 60.0
+   },
+   {
+    "cost": 58000,
+    "hours": 72.0
+   },
+   {
+    "cost": 61000,
+    "hours": 72.0
+   },
+   {
+    "cost": 64000,
+    "hours": 72.0
+   },
+   {
+    "cost": 67000,
+    "hours": 72.0
+   },
+   {
+    "cost": 70000,
+    "hours": 72.0
+   },
+   {
+    "cost": 73000,
+    "hours": 72.0
+   },
+   {
+    "cost": 76000,
+    "hours": 72.0
+   },
+   {
+    "cost": 79000,
+    "hours": 72.0
+   },
+   {
+    "cost": 82000,
+    "hours": 72.0
+   },
+   {
+    "cost": 85000,
+    "hours": 72.0
+   },
+   {
+    "cost": 86000,
+    "hours": 72.0
+   },
+   {
+    "cost": 87000,
+    "hours": 72.0
+   },
+   {
+    "cost": 88000,
+    "hours": 72.0
+   },
+   {
+    "cost": 89000,
+    "hours": 72.0
+   },
+   {
+    "cost": 90000,
+    "hours": 72.0
+   },
+   {
+    "cost": 93000,
+    "hours": 72.0
+   },
+   {
+    "cost": 96000,
+    "hours": 72.0
+   },
+   {
+    "cost": 99000,
+    "hours": 72.0
+   },
+   {
+    "cost": 102000,
+    "hours": 72.0
+   },
+   {
+    "cost": 105000,
+    "hours": 72.0
+   },
+   {
+    "cost": 107000,
+    "hours": 96.0
+   },
+   {
+    "cost": 109000,
+    "hours": 96.0
+   },
+   {
+    "cost": 111000,
+    "hours": 96.0
+   },
+   {
+    "cost": 113000,
+    "hours": 96.0
+   },
+   {
+    "cost": 115000,
+    "hours": 96.0
+   },
+   {
+    "cost": 117000,
+    "hours": 96.0
+   },
+   {
+    "cost": 119000,
+    "hours": 96.0
+   },
+   {
+    "cost": 121000,
+    "hours": 96.0
+   },
+   {
+    "cost": 123000,
+    "hours": 96.0
+   },
+   {
+    "cost": 125000,
+    "hours": 96.0
+   },
+   {
+    "cost": 130000,
+    "hours": 96.0
+   },
+   {
+    "cost": 135000,
+    "hours": 96.0
+   },
+   {
+    "cost": 140000,
+    "hours": 96.0
+   },
+   {
+    "cost": 145000,
+    "hours": 96.0
+   },
+   {
+    "cost": 150000,
+    "hours": 96.0
+   },
+   {
+    "cost": 155000,
+    "hours": 96.0
+   },
+   {
+    "cost": 160000,
+    "hours": 96.0
+   },
+   {
+    "cost": 165000,
+    "hours": 96.0
+   },
+   {
+    "cost": 170000,
+    "hours": 96.0
+   },
+   {
+    "cost": 175000,
+    "hours": 96.0
+   },
+   {
+    "cost": 180000,
+    "hours": 120.0
+   },
+   {
+    "cost": 185000,
+    "hours": 120.0
+   },
+   {
+    "cost": 195000,
+    "hours": 120.0
+   },
+   {
+    "cost": 205000,
+    "hours": 120.0
+   },
+   {
+    "cost": 215000,
+    "hours": 120.0
+   },
+   {
+    "cost": 220000,
+    "hours": 144.0
+   },
+   {
+    "cost": 230000,
+    "hours": 144.0
+   },
+   {
+    "cost": 240000,
+    "hours": 144.0
+   },
+   {
+    "cost": 250000,
+    "hours": 144.0
+   },
+   {
+    "cost": 255000,
+    "hours": 144.0
+   },
+   {
+    "cost": 280000,
+    "hours": 168.0
+   },
+   {
+    "cost": 290000,
+    "hours": 168.0
+   },
+   {
+    "cost": 300000,
+    "hours": 168.0
+   },
+   {
+    "cost": 310000,
+    "hours": 168.0
+   },
+   {
+    "cost": 320000,
+    "hours": 168.0
+   },
+   {
+    "cost": 340000,
+    "hours": 192.0
+   },
+   {
+    "cost": 350000,
+    "hours": 192.0
+   },
+   {
+    "cost": 360000,
+    "hours": 192.0
+   },
+   {
+    "cost": 370000,
+    "hours": 192.0
+   },
+   {
+    "cost": 380000,
+    "hours": 192.0
+   },
+   {
+    "cost": 400000,
+    "hours": 192.0
+   },
+   {
+    "cost": 410000,
+    "hours": 192.0
+   },
+   {
+    "cost": 420000,
+    "hours": 192.0
+   },
+   {
+    "cost": 430000,
+    "hours": 192.0
+   },
+   {
+    "cost": 450000,
+    "hours": 192.0
+   },
+   {
+    "cost": 460000,
+    "hours": 192.0
+   },
+   {
+    "cost": 470000,
+    "hours": 192.0
+   },
+   {
+    "cost": 475000,
+    "hours": 192.0
+   },
+   {
+    "cost": 485000,
+    "hours": 192.0
+   },
+   {
+    "cost": 490000,
+    "hours": 192.0
+   }
+  ],
+  "gate": "Hero Hall",
+  "page": "Barbarian King"
+ },
+ "archer_queen": {
+  "name": "Archer Queen",
+  "kind": "hero",
+  "resource": "dark",
+  "housing": 0,
+  "max": {
+   "8": 10,
+   "9": 30,
+   "10": 40,
+   "11": 50,
+   "12": 65,
+   "13": 75,
+   "14": 85,
+   "15": 90,
+   "16": 95,
+   "17": 100,
+   "18": 110
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 5000,
+    "hours": 2.0
+   },
+   {
+    "cost": 5500,
+    "hours": 4.0
+   },
+   {
+    "cost": 6000,
+    "hours": 8.0
+   },
+   {
+    "cost": 6500,
+    "hours": 10.0
+   },
+   {
+    "cost": 7000,
+    "hours": 12.0
+   },
+   {
+    "cost": 7500,
+    "hours": 14.0
+   },
+   {
+    "cost": 8000,
+    "hours": 16.0
+   },
+   {
+    "cost": 8500,
+    "hours": 18.0
+   },
+   {
+    "cost": 10000,
+    "hours": 20.0
+   },
+   {
+    "cost": 10500,
+    "hours": 22.0
+   },
+   {
+    "cost": 11000,
+    "hours": 24.0
+   },
+   {
+    "cost": 11500,
+    "hours": 24.0
+   },
+   {
+    "cost": 12000,
+    "hours": 24.0
+   },
+   {
+    "cost": 12500,
+    "hours": 24.0
+   },
+   {
+    "cost": 13000,
+    "hours": 24.0
+   },
+   {
+    "cost": 13500,
+    "hours": 24.0
+   },
+   {
+    "cost": 14000,
+    "hours": 24.0
+   },
+   {
+    "cost": 14500,
+    "hours": 24.0
+   },
+   {
+    "cost": 15000,
+    "hours": 24.0
+   },
+   {
+    "cost": 17000,
+    "hours": 24.0
+   },
+   {
+    "cost": 19000,
+    "hours": 24.0
+   },
+   {
+    "cost": 21000,
+    "hours": 24.0
+   },
+   {
+    "cost": 23000,
+    "hours": 24.0
+   },
+   {
+    "cost": 25000,
+    "hours": 24.0
+   },
+   {
+    "cost": 27000,
+    "hours": 48.0
+   },
+   {
+    "cost": 29000,
+    "hours": 48.0
+   },
+   {
+    "cost": 31000,
+    "hours": 48.0
+   },
+   {
+    "cost": 33000,
+    "hours": 48.0
+   },
+   {
+    "cost": 35000,
+    "hours": 48.0
+   },
+   {
+    "cost": 37000,
+    "hours": 54.0
+   },
+   {
+    "cost": 39000,
+    "hours": 54.0
+   },
+   {
+    "cost": 41000,
+    "hours": 54.0
+   },
+   {
+    "cost": 43000,
+    "hours": 54.0
+   },
+   {
+    "cost": 45000,
+    "hours": 54.0
+   },
+   {
+    "cost": 47000,
+    "hours": 60.0
+   },
+   {
+    "cost": 49000,
+    "hours": 60.0
+   },
+   {
+    "cost": 51000,
+    "hours": 60.0
+   },
+   {
+    "cost": 53000,
+    "hours": 60.0
+   },
+   {
+    "cost": 55000,
+    "hours": 60.0
+   },
+   {
+    "cost": 58000,
+    "hours": 72.0
+   },
+   {
+    "cost": 61000,
+    "hours": 72.0
+   },
+   {
+    "cost": 64000,
+    "hours": 72.0
+   },
+   {
+    "cost": 67000,
+    "hours": 72.0
+   },
+   {
+    "cost": 70000,
+    "hours": 72.0
+   },
+   {
+    "cost": 73000,
+    "hours": 72.0
+   },
+   {
+    "cost": 76000,
+    "hours": 72.0
+   },
+   {
+    "cost": 79000,
+    "hours": 72.0
+   },
+   {
+    "cost": 82000,
+    "hours": 72.0
+   },
+   {
+    "cost": 85000,
+    "hours": 72.0
+   },
+   {
+    "cost": 86000,
+    "hours": 72.0
+   },
+   {
+    "cost": 87000,
+    "hours": 72.0
+   },
+   {
+    "cost": 88000,
+    "hours": 72.0
+   },
+   {
+    "cost": 89000,
+    "hours": 72.0
+   },
+   {
+    "cost": 90000,
+    "hours": 72.0
+   },
+   {
+    "cost": 93000,
+    "hours": 72.0
+   },
+   {
+    "cost": 96000,
+    "hours": 72.0
+   },
+   {
+    "cost": 99000,
+    "hours": 72.0
+   },
+   {
+    "cost": 102000,
+    "hours": 72.0
+   },
+   {
+    "cost": 105000,
+    "hours": 72.0
+   },
+   {
+    "cost": 107000,
+    "hours": 96.0
+   },
+   {
+    "cost": 109000,
+    "hours": 96.0
+   },
+   {
+    "cost": 111000,
+    "hours": 96.0
+   },
+   {
+    "cost": 113000,
+    "hours": 96.0
+   },
+   {
+    "cost": 115000,
+    "hours": 96.0
+   },
+   {
+    "cost": 117000,
+    "hours": 96.0
+   },
+   {
+    "cost": 119000,
+    "hours": 96.0
+   },
+   {
+    "cost": 121000,
+    "hours": 96.0
+   },
+   {
+    "cost": 123000,
+    "hours": 96.0
+   },
+   {
+    "cost": 125000,
+    "hours": 96.0
+   },
+   {
+    "cost": 130000,
+    "hours": 96.0
+   },
+   {
+    "cost": 135000,
+    "hours": 96.0
+   },
+   {
+    "cost": 140000,
+    "hours": 96.0
+   },
+   {
+    "cost": 145000,
+    "hours": 96.0
+   },
+   {
+    "cost": 150000,
+    "hours": 96.0
+   },
+   {
+    "cost": 155000,
+    "hours": 96.0
+   },
+   {
+    "cost": 160000,
+    "hours": 96.0
+   },
+   {
+    "cost": 165000,
+    "hours": 96.0
+   },
+   {
+    "cost": 170000,
+    "hours": 96.0
+   },
+   {
+    "cost": 175000,
+    "hours": 96.0
+   },
+   {
+    "cost": 180000,
+    "hours": 120.0
+   },
+   {
+    "cost": 185000,
+    "hours": 120.0
+   },
+   {
+    "cost": 190000,
+    "hours": 120.0
+   },
+   {
+    "cost": 195000,
+    "hours": 120.0
+   },
+   {
+    "cost": 200000,
+    "hours": 120.0
+   },
+   {
+    "cost": 215000,
+    "hours": 144.0
+   },
+   {
+    "cost": 225000,
+    "hours": 144.0
+   },
+   {
+    "cost": 235000,
+    "hours": 144.0
+   },
+   {
+    "cost": 245000,
+    "hours": 144.0
+   },
+   {
+    "cost": 255000,
+    "hours": 144.0
+   },
+   {
+    "cost": 280000,
+    "hours": 168.0
+   },
+   {
+    "cost": 290000,
+    "hours": 168.0
+   },
+   {
+    "cost": 300000,
+    "hours": 168.0
+   },
+   {
+    "cost": 310000,
+    "hours": 168.0
+   },
+   {
+    "cost": 320000,
+    "hours": 168.0
+   },
+   {
+    "cost": 340000,
+    "hours": 192.0
+   },
+   {
+    "cost": 350000,
+    "hours": 192.0
+   },
+   {
+    "cost": 360000,
+    "hours": 192.0
+   },
+   {
+    "cost": 370000,
+    "hours": 192.0
+   },
+   {
+    "cost": 380000,
+    "hours": 192.0
+   },
+   {
+    "cost": 400000,
+    "hours": 192.0
+   },
+   {
+    "cost": 410000,
+    "hours": 192.0
+   },
+   {
+    "cost": 420000,
+    "hours": 192.0
+   },
+   {
+    "cost": 430000,
+    "hours": 192.0
+   },
+   {
+    "cost": 450000,
+    "hours": 192.0
+   },
+   {
+    "cost": 460000,
+    "hours": 192.0
+   },
+   {
+    "cost": 470000,
+    "hours": 192.0
+   },
+   {
+    "cost": 475000,
+    "hours": 192.0
+   },
+   {
+    "cost": 485000,
+    "hours": 192.0
+   },
+   {
+    "cost": 490000,
+    "hours": 192.0
+   }
+  ],
+  "gate": "Hero Hall",
+  "page": "Archer Queen"
+ },
+ "minion_prince": {
+  "name": "Minion Prince",
+  "kind": "hero",
+  "resource": "dark",
+  "housing": 0,
+  "max": {
+   "9": 10,
+   "10": 20,
+   "11": 30,
+   "12": 40,
+   "13": 50,
+   "14": 60,
+   "15": 70,
+   "16": 80,
+   "17": 90,
+   "18": 95
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 5000,
+    "hours": 2.0
+   },
+   {
+    "cost": 5500,
+    "hours": 4.0
+   },
+   {
+    "cost": 6000,
+    "hours": 8.0
+   },
+   {
+    "cost": 6500,
+    "hours": 10.0
+   },
+   {
+    "cost": 7000,
+    "hours": 12.0
+   },
+   {
+    "cost": 7500,
+    "hours": 14.0
+   },
+   {
+    "cost": 8000,
+    "hours": 16.0
+   },
+   {
+    "cost": 8500,
+    "hours": 18.0
+   },
+   {
+    "cost": 10000,
+    "hours": 20.0
+   },
+   {
+    "cost": 10500,
+    "hours": 22.0
+   },
+   {
+    "cost": 11000,
+    "hours": 24.0
+   },
+   {
+    "cost": 11500,
+    "hours": 24.0
+   },
+   {
+    "cost": 12000,
+    "hours": 24.0
+   },
+   {
+    "cost": 12500,
+    "hours": 24.0
+   },
+   {
+    "cost": 13000,
+    "hours": 24.0
+   },
+   {
+    "cost": 13500,
+    "hours": 24.0
+   },
+   {
+    "cost": 14000,
+    "hours": 24.0
+   },
+   {
+    "cost": 14500,
+    "hours": 24.0
+   },
+   {
+    "cost": 15000,
+    "hours": 24.0
+   },
+   {
+    "cost": 17000,
+    "hours": 24.0
+   },
+   {
+    "cost": 19000,
+    "hours": 24.0
+   },
+   {
+    "cost": 21000,
+    "hours": 24.0
+   },
+   {
+    "cost": 23000,
+    "hours": 24.0
+   },
+   {
+    "cost": 25000,
+    "hours": 24.0
+   },
+   {
+    "cost": 27000,
+    "hours": 36.0
+   },
+   {
+    "cost": 29000,
+    "hours": 36.0
+   },
+   {
+    "cost": 31000,
+    "hours": 36.0
+   },
+   {
+    "cost": 33000,
+    "hours": 36.0
+   },
+   {
+    "cost": 35000,
+    "hours": 36.0
+   },
+   {
+    "cost": 36000,
+    "hours": 48.0
+   },
+   {
+    "cost": 37000,
+    "hours": 48.0
+   },
+   {
+    "cost": 38000,
+    "hours": 48.0
+   },
+   {
+    "cost": 39000,
+    "hours": 48.0
+   },
+   {
+    "cost": 40000,
+    "hours": 48.0
+   },
+   {
+    "cost": 41000,
+    "hours": 48.0
+   },
+   {
+    "cost": 42000,
+    "hours": 48.0
+   },
+   {
+    "cost": 43000,
+    "hours": 48.0
+   },
+   {
+    "cost": 44000,
+    "hours": 48.0
+   },
+   {
+    "cost": 45000,
+    "hours": 48.0
+   },
+   {
+    "cost": 50000,
+    "hours": 54.0
+   },
+   {
+    "cost": 55000,
+    "hours": 54.0
+   },
+   {
+    "cost": 60000,
+    "hours": 54.0
+   },
+   {
+    "cost": 65000,
+    "hours": 54.0
+   },
+   {
+    "cost": 70000,
+    "hours": 54.0
+   },
+   {
+    "cost": 75000,
+    "hours": 72.0
+   },
+   {
+    "cost": 80000,
+    "hours": 72.0
+   },
+   {
+    "cost": 85000,
+    "hours": 72.0
+   },
+   {
+    "cost": 90000,
+    "hours": 72.0
+   },
+   {
+    "cost": 95000,
+    "hours": 72.0
+   },
+   {
+    "cost": 100000,
+    "hours": 96.0
+   },
+   {
+    "cost": 105000,
+    "hours": 96.0
+   },
+   {
+    "cost": 110000,
+    "hours": 96.0
+   },
+   {
+    "cost": 115000,
+    "hours": 96.0
+   },
+   {
+    "cost": 120000,
+    "hours": 96.0
+   },
+   {
+    "cost": 125000,
+    "hours": 96.0
+   },
+   {
+    "cost": 130000,
+    "hours": 96.0
+   },
+   {
+    "cost": 135000,
+    "hours": 96.0
+   },
+   {
+    "cost": 140000,
+    "hours": 96.0
+   },
+   {
+    "cost": 145000,
+    "hours": 96.0
+   },
+   {
+    "cost": 150000,
+    "hours": 120.0
+   },
+   {
+    "cost": 155000,
+    "hours": 120.0
+   },
+   {
+    "cost": 160000,
+    "hours": 120.0
+   },
+   {
+    "cost": 165000,
+    "hours": 120.0
+   },
+   {
+    "cost": 170000,
+    "hours": 120.0
+   },
+   {
+    "cost": 175000,
+    "hours": 144.0
+   },
+   {
+    "cost": 180000,
+    "hours": 144.0
+   },
+   {
+    "cost": 185000,
+    "hours": 144.0
+   },
+   {
+    "cost": 190000,
+    "hours": 144.0
+   },
+   {
+    "cost": 195000,
+    "hours": 144.0
+   },
+   {
+    "cost": 200000,
+    "hours": 168.0
+   },
+   {
+    "cost": 205000,
+    "hours": 168.0
+   },
+   {
+    "cost": 210000,
+    "hours": 168.0
+   },
+   {
+    "cost": 220000,
+    "hours": 168.0
+   },
+   {
+    "cost": 230000,
+    "hours": 168.0
+   },
+   {
+    "cost": 240000,
+    "hours": 180.0
+   },
+   {
+    "cost": 250000,
+    "hours": 180.0
+   },
+   {
+    "cost": 260000,
+    "hours": 180.0
+   },
+   {
+    "cost": 270000,
+    "hours": 180.0
+   },
+   {
+    "cost": 280000,
+    "hours": 180.0
+   },
+   {
+    "cost": 290000,
+    "hours": 192.0
+   },
+   {
+    "cost": 300000,
+    "hours": 192.0
+   },
+   {
+    "cost": 310000,
+    "hours": 192.0
+   },
+   {
+    "cost": 320000,
+    "hours": 192.0
+   },
+   {
+    "cost": 330000,
+    "hours": 192.0
+   },
+   {
+    "cost": 340000,
+    "hours": 192.0
+   },
+   {
+    "cost": 350000,
+    "hours": 192.0
+   },
+   {
+    "cost": 360000,
+    "hours": 192.0
+   },
+   {
+    "cost": 370000,
+    "hours": 192.0
+   },
+   {
+    "cost": 380000,
+    "hours": 192.0
+   },
+   {
+    "cost": 400000,
+    "hours": 192.0
+   },
+   {
+    "cost": 410000,
+    "hours": 192.0
+   },
+   {
+    "cost": 420000,
+    "hours": 192.0
+   },
+   {
+    "cost": 430000,
+    "hours": 192.0
+   },
+   {
+    "cost": 450000,
+    "hours": 192.0
+   }
+  ],
+  "gate": "Hero Hall",
+  "page": "Minion Prince"
+ },
+ "grand_warden": {
+  "name": "Grand Warden",
+  "kind": "hero",
+  "resource": "elixir",
+  "housing": 0,
+  "max": {
+   "11": 20,
+   "12": 40,
+   "13": 50,
+   "14": 60,
+   "15": 65,
+   "16": 70,
+   "17": 75,
+   "18": 85
+  },
+  "levels": [
+   {
+    "cost": 1000000,
+    "hours": 0.0
+   },
+   {
+    "cost": 1000000,
+    "hours": 2.0
+   },
+   {
+    "cost": 1100000,
+    "hours": 4.0
+   },
+   {
+    "cost": 1200000,
+    "hours": 8.0
+   },
+   {
+    "cost": 1400000,
+    "hours": 10.0
+   },
+   {
+    "cost": 1500000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1700000,
+    "hours": 14.0
+   },
+   {
+    "cost": 1800000,
+    "hours": 16.0
+   },
+   {
+    "cost": 2000000,
+    "hours": 18.0
+   },
+   {
+    "cost": 2300000,
+    "hours": 20.0
+   },
+   {
+    "cost": 2700000,
+    "hours": 24.0
+   },
+   {
+    "cost": 3000000,
+    "hours": 24.0
+   },
+   {
+    "cost": 3400000,
+    "hours": 24.0
+   },
+   {
+    "cost": 3700000,
+    "hours": 24.0
+   },
+   {
+    "cost": 4100000,
+    "hours": 24.0
+   },
+   {
+    "cost": 4400000,
+    "hours": 24.0
+   },
+   {
+    "cost": 4800000,
+    "hours": 24.0
+   },
+   {
+    "cost": 5100000,
+    "hours": 24.0
+   },
+   {
+    "cost": 5500000,
+    "hours": 24.0
+   },
+   {
+    "cost": 6000000,
+    "hours": 24.0
+   },
+   {
+    "cost": 6100000,
+    "hours": 24.0
+   },
+   {
+    "cost": 6200000,
+    "hours": 24.0
+   },
+   {
+    "cost": 6300000,
+    "hours": 24.0
+   },
+   {
+    "cost": 6400000,
+    "hours": 24.0
+   },
+   {
+    "cost": 6500000,
+    "hours": 24.0
+   },
+   {
+    "cost": 6600000,
+    "hours": 36.0
+   },
+   {
+    "cost": 6700000,
+    "hours": 36.0
+   },
+   {
+    "cost": 6800000,
+    "hours": 36.0
+   },
+   {
+    "cost": 6900000,
+    "hours": 36.0
+   },
+   {
+    "cost": 7000000,
+    "hours": 36.0
+   },
+   {
+    "cost": 7100000,
+    "hours": 48.0
+   },
+   {
+    "cost": 7200000,
+    "hours": 48.0
+   },
+   {
+    "cost": 7300000,
+    "hours": 48.0
+   },
+   {
+    "cost": 7400000,
+    "hours": 48.0
+   },
+   {
+    "cost": 7500000,
+    "hours": 48.0
+   },
+   {
+    "cost": 7600000,
+    "hours": 48.0
+   },
+   {
+    "cost": 7700000,
+    "hours": 48.0
+   },
+   {
+    "cost": 7800000,
+    "hours": 48.0
+   },
+   {
+    "cost": 7900000,
+    "hours": 48.0
+   },
+   {
+    "cost": 8000000,
+    "hours": 48.0
+   },
+   {
+    "cost": 8300000,
+    "hours": 72.0
+   },
+   {
+    "cost": 8600000,
+    "hours": 72.0
+   },
+   {
+    "cost": 8900000,
+    "hours": 72.0
+   },
+   {
+    "cost": 9200000,
+    "hours": 72.0
+   },
+   {
+    "cost": 9500000,
+    "hours": 72.0
+   },
+   {
+    "cost": 9800000,
+    "hours": 72.0
+   },
+   {
+    "cost": 10100000,
+    "hours": 72.0
+   },
+   {
+    "cost": 10400000,
+    "hours": 72.0
+   },
+   {
+    "cost": 10700000,
+    "hours": 72.0
+   },
+   {
+    "cost": 11000000,
+    "hours": 72.0
+   },
+   {
+    "cost": 11400000,
+    "hours": 96.0
+   },
+   {
+    "cost": 11800000,
+    "hours": 96.0
+   },
+   {
+    "cost": 12200000,
+    "hours": 96.0
+   },
+   {
+    "cost": 12600000,
+    "hours": 96.0
+   },
+   {
+    "cost": 13000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 13400000,
+    "hours": 96.0
+   },
+   {
+    "cost": 13800000,
+    "hours": 96.0
+   },
+   {
+    "cost": 14200000,
+    "hours": 96.0
+   },
+   {
+    "cost": 14600000,
+    "hours": 96.0
+   },
+   {
+    "cost": 15000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 15500000,
+    "hours": 144.0
+   },
+   {
+    "cost": 16000000,
+    "hours": 144.0
+   },
+   {
+    "cost": 16500000,
+    "hours": 144.0
+   },
+   {
+    "cost": 17000000,
+    "hours": 144.0
+   },
+   {
+    "cost": 17500000,
+    "hours": 144.0
+   },
+   {
+    "cost": 18000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 18500000,
+    "hours": 168.0
+   },
+   {
+    "cost": 19000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 19500000,
+    "hours": 168.0
+   },
+   {
+    "cost": 20000000,
+    "hours": 180.0
+   },
+   {
+    "cost": 20500000,
+    "hours": 192.0
+   },
+   {
+    "cost": 21000000,
+    "hours": 192.0
+   },
+   {
+    "cost": 21500000,
+    "hours": 192.0
+   },
+   {
+    "cost": 22000000,
+    "hours": 192.0
+   },
+   {
+    "cost": 22500000,
+    "hours": 192.0
+   },
+   {
+    "cost": 23500000,
+    "hours": 192.0
+   },
+   {
+    "cost": 24500000,
+    "hours": 192.0
+   },
+   {
+    "cost": 25500000,
+    "hours": 192.0
+   },
+   {
+    "cost": 26500000,
+    "hours": 192.0
+   },
+   {
+    "cost": 27500000,
+    "hours": 192.0
+   },
+   {
+    "cost": 28500000,
+    "hours": 192.0
+   },
+   {
+    "cost": 29000000,
+    "hours": 192.0
+   },
+   {
+    "cost": 29500000,
+    "hours": 192.0
+   },
+   {
+    "cost": 30000000,
+    "hours": 192.0
+   },
+   {
+    "cost": 30500000,
+    "hours": 192.0
+   }
+  ],
+  "gate": "Hero Hall",
+  "page": "Grand Warden"
+ },
+ "royal_champion": {
+  "name": "Royal Champion",
+  "kind": "hero",
+  "resource": "dark",
+  "housing": 0,
+  "max": {
+   "13": 25,
+   "14": 30,
+   "15": 40,
+   "16": 45,
+   "17": 50,
+   "18": 55
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 10000,
+    "hours": 4.0
+   },
+   {
+    "cost": 15000,
+    "hours": 10.0
+   },
+   {
+    "cost": 20000,
+    "hours": 12.0
+   },
+   {
+    "cost": 25000,
+    "hours": 20.0
+   },
+   {
+    "cost": 30000,
+    "hours": 24.0
+   },
+   {
+    "cost": 35000,
+    "hours": 24.0
+   },
+   {
+    "cost": 40000,
+    "hours": 24.0
+   },
+   {
+    "cost": 45000,
+    "hours": 24.0
+   },
+   {
+    "cost": 50000,
+    "hours": 24.0
+   },
+   {
+    "cost": 53000,
+    "hours": 24.0
+   },
+   {
+    "cost": 56000,
+    "hours": 24.0
+   },
+   {
+    "cost": 59000,
+    "hours": 24.0
+   },
+   {
+    "cost": 62000,
+    "hours": 24.0
+   },
+   {
+    "cost": 65000,
+    "hours": 24.0
+   },
+   {
+    "cost": 70000,
+    "hours": 36.0
+   },
+   {
+    "cost": 75000,
+    "hours": 36.0
+   },
+   {
+    "cost": 80000,
+    "hours": 36.0
+   },
+   {
+    "cost": 85000,
+    "hours": 36.0
+   },
+   {
+    "cost": 90000,
+    "hours": 36.0
+   },
+   {
+    "cost": 95000,
+    "hours": 48.0
+   },
+   {
+    "cost": 100000,
+    "hours": 48.0
+   },
+   {
+    "cost": 105000,
+    "hours": 48.0
+   },
+   {
+    "cost": 110000,
+    "hours": 48.0
+   },
+   {
+    "cost": 115000,
+    "hours": 48.0
+   },
+   {
+    "cost": 120000,
+    "hours": 72.0
+   },
+   {
+    "cost": 125000,
+    "hours": 72.0
+   },
+   {
+    "cost": 130000,
+    "hours": 72.0
+   },
+   {
+    "cost": 135000,
+    "hours": 72.0
+   },
+   {
+    "cost": 140000,
+    "hours": 72.0
+   },
+   {
+    "cost": 145000,
+    "hours": 96.0
+   },
+   {
+    "cost": 150000,
+    "hours": 96.0
+   },
+   {
+    "cost": 155000,
+    "hours": 96.0
+   },
+   {
+    "cost": 160000,
+    "hours": 96.0
+   },
+   {
+    "cost": 165000,
+    "hours": 96.0
+   },
+   {
+    "cost": 170000,
+    "hours": 120.0
+   },
+   {
+    "cost": 175000,
+    "hours": 120.0
+   },
+   {
+    "cost": 180000,
+    "hours": 120.0
+   },
+   {
+    "cost": 200000,
+    "hours": 120.0
+   },
+   {
+    "cost": 220000,
+    "hours": 120.0
+   },
+   {
+    "cost": 240000,
+    "hours": 120.0
+   },
+   {
+    "cost": 260000,
+    "hours": 144.0
+   },
+   {
+    "cost": 280000,
+    "hours": 156.0
+   },
+   {
+    "cost": 300000,
+    "hours": 168.0
+   },
+   {
+    "cost": 320000,
+    "hours": 180.0
+   },
+   {
+    "cost": 340000,
+    "hours": 192.0
+   },
+   {
+    "cost": 350000,
+    "hours": 192.0
+   },
+   {
+    "cost": 360000,
+    "hours": 192.0
+   },
+   {
+    "cost": 370000,
+    "hours": 192.0
+   },
+   {
+    "cost": 380000,
+    "hours": 192.0
+   },
+   {
+    "cost": 400000,
+    "hours": 192.0
+   },
+   {
+    "cost": 410000,
+    "hours": 192.0
+   },
+   {
+    "cost": 420000,
+    "hours": 192.0
+   },
+   {
+    "cost": 430000,
+    "hours": 192.0
+   },
+   {
+    "cost": 450000,
+    "hours": 192.0
+   }
+  ],
+  "gate": "Hero Hall",
+  "page": "Royal Champion"
+ },
+ "dragon_duke": {
+  "name": "Dragon Duke",
+  "kind": "hero",
+  "resource": "dark",
+  "housing": 0,
+  "max": {
+   "15": 10,
+   "16": 15,
+   "17": 20,
+   "18": 25
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 50000,
+    "hours": 6.0
+   },
+   {
+    "cost": 60000,
+    "hours": 12.0
+   },
+   {
+    "cost": 70000,
+    "hours": 24.0
+   },
+   {
+    "cost": 80000,
+    "hours": 24.0
+   },
+   {
+    "cost": 90000,
+    "hours": 48.0
+   },
+   {
+    "cost": 100000,
+    "hours": 48.0
+   },
+   {
+    "cost": 110000,
+    "hours": 48.0
+   },
+   {
+    "cost": 120000,
+    "hours": 72.0
+   },
+   {
+    "cost": 130000,
+    "hours": 72.0
+   },
+   {
+    "cost": 150000,
+    "hours": 96.0
+   },
+   {
+    "cost": 175000,
+    "hours": 120.0
+   },
+   {
+    "cost": 200000,
+    "hours": 120.0
+   },
+   {
+    "cost": 225000,
+    "hours": 144.0
+   },
+   {
+    "cost": 250000,
+    "hours": 144.0
+   },
+   {
+    "cost": 275000,
+    "hours": 168.0
+   },
+   {
+    "cost": 300000,
+    "hours": 168.0
+   },
+   {
+    "cost": 325000,
+    "hours": 192.0
+   },
+   {
+    "cost": 350000,
+    "hours": 192.0
+   },
+   {
+    "cost": 375000,
+    "hours": 192.0
+   },
+   {
+    "cost": 400000,
+    "hours": 192.0
+   },
+   {
+    "cost": 420000,
+    "hours": 192.0
+   },
+   {
+    "cost": 440000,
+    "hours": 192.0
+   },
+   {
+    "cost": 460000,
+    "hours": 192.0
+   },
+   {
+    "cost": 480000,
+    "hours": 192.0
+   }
+  ],
+  "gate": "Hero Hall",
+  "page": "Dragon Duke"
+ },
+ "lassi": {
+  "name": "L.A.S.S.I",
+  "kind": "pet",
+  "resource": "dark",
+  "housing": 0,
+  "max": {
+   "14": 10,
+   "15": 15
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 20000,
+    "hours": 24.0
+   },
+   {
+    "cost": 30000,
+    "hours": 36.0
+   },
+   {
+    "cost": 40000,
+    "hours": 48.0
+   },
+   {
+    "cost": 50000,
+    "hours": 60.0
+   },
+   {
+    "cost": 60000,
+    "hours": 72.0
+   },
+   {
+    "cost": 70000,
+    "hours": 84.0
+   },
+   {
+    "cost": 80000,
+    "hours": 96.0
+   },
+   {
+    "cost": 90000,
+    "hours": 108.0
+   },
+   {
+    "cost": 100000,
+    "hours": 120.0
+   },
+   {
+    "cost": 110000,
+    "hours": 132.0
+   },
+   {
+    "cost": 120000,
+    "hours": 144.0
+   },
+   {
+    "cost": 130000,
+    "hours": 156.0
+   },
+   {
+    "cost": 140000,
+    "hours": 168.0
+   },
+   {
+    "cost": 150000,
+    "hours": 180.0
+   }
+  ],
+  "gate": "Pet House",
+  "page": "L.A.S.S.I"
+ },
+ "electro_owl": {
+  "name": "Electro Owl",
+  "kind": "pet",
+  "resource": "dark",
+  "housing": 0,
+  "max": {
+   "14": 10,
+   "16": 15
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 30000,
+    "hours": 36.0
+   },
+   {
+    "cost": 45000,
+    "hours": 48.0
+   },
+   {
+    "cost": 60000,
+    "hours": 72.0
+   },
+   {
+    "cost": 75000,
+    "hours": 96.0
+   },
+   {
+    "cost": 90000,
+    "hours": 108.0
+   },
+   {
+    "cost": 105000,
+    "hours": 120.0
+   },
+   {
+    "cost": 120000,
+    "hours": 132.0
+   },
+   {
+    "cost": 135000,
+    "hours": 144.0
+   },
+   {
+    "cost": 150000,
+    "hours": 156.0
+   },
+   {
+    "cost": 165000,
+    "hours": 168.0
+   },
+   {
+    "cost": 180000,
+    "hours": 192.0
+   },
+   {
+    "cost": 195000,
+    "hours": 192.0
+   },
+   {
+    "cost": 210000,
+    "hours": 192.0
+   },
+   {
+    "cost": 225000,
+    "hours": 192.0
+   }
+  ],
+  "gate": "Pet House",
+  "page": "Electro Owl"
+ },
+ "mighty_yak": {
+  "name": "Mighty Yak",
+  "kind": "pet",
+  "resource": "dark",
+  "housing": 0,
+  "max": {
+   "14": 10,
+   "15": 15
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 40000,
+    "hours": 24.0
+   },
+   {
+    "cost": 50000,
+    "hours": 36.0
+   },
+   {
+    "cost": 60000,
+    "hours": 48.0
+   },
+   {
+    "cost": 70000,
+    "hours": 60.0
+   },
+   {
+    "cost": 80000,
+    "hours": 72.0
+   },
+   {
+    "cost": 90000,
+    "hours": 84.0
+   },
+   {
+    "cost": 100000,
+    "hours": 96.0
+   },
+   {
+    "cost": 110000,
+    "hours": 108.0
+   },
+   {
+    "cost": 120000,
+    "hours": 120.0
+   },
+   {
+    "cost": 130000,
+    "hours": 132.0
+   },
+   {
+    "cost": 140000,
+    "hours": 144.0
+   },
+   {
+    "cost": 150000,
+    "hours": 156.0
+   },
+   {
+    "cost": 160000,
+    "hours": 168.0
+   },
+   {
+    "cost": 170000,
+    "hours": 180.0
+   }
+  ],
+  "gate": "Pet House",
+  "page": "Mighty Yak"
+ },
+ "unicorn": {
+  "name": "Unicorn",
+  "kind": "pet",
+  "resource": "dark",
+  "housing": 0,
+  "max": {
+   "14": 10,
+   "17": 15
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 50000,
+    "hours": 36.0
+   },
+   {
+    "cost": 65000,
+    "hours": 48.0
+   },
+   {
+    "cost": 80000,
+    "hours": 72.0
+   },
+   {
+    "cost": 95000,
+    "hours": 96.0
+   },
+   {
+    "cost": 110000,
+    "hours": 108.0
+   },
+   {
+    "cost": 125000,
+    "hours": 120.0
+   },
+   {
+    "cost": 140000,
+    "hours": 132.0
+   },
+   {
+    "cost": 155000,
+    "hours": 144.0
+   },
+   {
+    "cost": 170000,
+    "hours": 156.0
+   },
+   {
+    "cost": 200000,
+    "hours": 168.0
+   },
+   {
+    "cost": 230000,
+    "hours": 192.0
+   },
+   {
+    "cost": 260000,
+    "hours": 192.0
+   },
+   {
+    "cost": 290000,
+    "hours": 192.0
+   },
+   {
+    "cost": 320000,
+    "hours": 192.0
+   }
+  ],
+  "gate": "Pet House",
+  "page": "Unicorn"
+ },
+ "frosty": {
+  "name": "Frosty",
+  "kind": "pet",
+  "resource": "dark",
+  "housing": 0,
+  "max": {
+   "15": 10,
+   "17": 15
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 70000,
+    "hours": 36.0
+   },
+   {
+    "cost": 85000,
+    "hours": 48.0
+   },
+   {
+    "cost": 100000,
+    "hours": 72.0
+   },
+   {
+    "cost": 115000,
+    "hours": 96.0
+   },
+   {
+    "cost": 130000,
+    "hours": 108.0
+   },
+   {
+    "cost": 145000,
+    "hours": 120.0
+   },
+   {
+    "cost": 160000,
+    "hours": 132.0
+   },
+   {
+    "cost": 170000,
+    "hours": 144.0
+   },
+   {
+    "cost": 180000,
+    "hours": 156.0
+   },
+   {
+    "cost": 200000,
+    "hours": 168.0
+   },
+   {
+    "cost": 230000,
+    "hours": 192.0
+   },
+   {
+    "cost": 260000,
+    "hours": 192.0
+   },
+   {
+    "cost": 290000,
+    "hours": 192.0
+   },
+   {
+    "cost": 320000,
+    "hours": 192.0
+   }
+  ],
+  "gate": "Pet House",
+  "page": "Frosty"
+ },
+ "diggy": {
+  "name": "Diggy",
+  "kind": "pet",
+  "resource": "dark",
+  "housing": 0,
+  "max": {
+   "15": 10,
+   "18": 15
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 90000,
+    "hours": 36.0
+   },
+   {
+    "cost": 105000,
+    "hours": 48.0
+   },
+   {
+    "cost": 120000,
+    "hours": 72.0
+   },
+   {
+    "cost": 130000,
+    "hours": 96.0
+   },
+   {
+    "cost": 140000,
+    "hours": 108.0
+   },
+   {
+    "cost": 150000,
+    "hours": 120.0
+   },
+   {
+    "cost": 160000,
+    "hours": 132.0
+   },
+   {
+    "cost": 170000,
+    "hours": 144.0
+   },
+   {
+    "cost": 180000,
+    "hours": 156.0
+   },
+   {
+    "cost": 220000,
+    "hours": 168.0
+   },
+   {
+    "cost": 250000,
+    "hours": 180.0
+   },
+   {
+    "cost": 280000,
+    "hours": 192.0
+   },
+   {
+    "cost": 310000,
+    "hours": 192.0
+   },
+   {
+    "cost": 350000,
+    "hours": 192.0
+   }
+  ],
+  "gate": "Pet House",
+  "page": "Diggy"
+ },
+ "poison_lizard": {
+  "name": "Poison Lizard",
+  "kind": "pet",
+  "resource": "dark",
+  "housing": 0,
+  "max": {
+   "15": 10,
+   "17": 15
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 60000,
+    "hours": 24.0
+   },
+   {
+    "cost": 75000,
+    "hours": 36.0
+   },
+   {
+    "cost": 90000,
+    "hours": 48.0
+   },
+   {
+    "cost": 100000,
+    "hours": 60.0
+   },
+   {
+    "cost": 110000,
+    "hours": 72.0
+   },
+   {
+    "cost": 120000,
+    "hours": 84.0
+   },
+   {
+    "cost": 130000,
+    "hours": 96.0
+   },
+   {
+    "cost": 140000,
+    "hours": 108.0
+   },
+   {
+    "cost": 150000,
+    "hours": 120.0
+   },
+   {
+    "cost": 180000,
+    "hours": 144.0
+   },
+   {
+    "cost": 200000,
+    "hours": 168.0
+   },
+   {
+    "cost": 220000,
+    "hours": 192.0
+   },
+   {
+    "cost": 240000,
+    "hours": 192.0
+   },
+   {
+    "cost": 260000,
+    "hours": 192.0
+   }
+  ],
+  "gate": "Pet House",
+  "page": "Poison Lizard"
+ },
+ "phoenix": {
+  "name": "Phoenix",
+  "kind": "pet",
+  "resource": "dark",
+  "housing": 0,
+  "max": {
+   "15": 10
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 80000,
+    "hours": 36.0
+   },
+   {
+    "cost": 95000,
+    "hours": 48.0
+   },
+   {
+    "cost": 110000,
+    "hours": 72.0
+   },
+   {
+    "cost": 125000,
+    "hours": 96.0
+   },
+   {
+    "cost": 140000,
+    "hours": 108.0
+   },
+   {
+    "cost": 155000,
+    "hours": 120.0
+   },
+   {
+    "cost": 170000,
+    "hours": 132.0
+   },
+   {
+    "cost": 180000,
+    "hours": 144.0
+   },
+   {
+    "cost": 190000,
+    "hours": 156.0
+   }
+  ],
+  "gate": "Pet House",
+  "page": "Phoenix"
+ },
+ "spirit_fox": {
+  "name": "Spirit Fox",
+  "kind": "pet",
+  "resource": "dark",
+  "housing": 0,
+  "max": {
+   "16": 10
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 150000,
+    "hours": 72.0
+   },
+   {
+    "cost": 160000,
+    "hours": 96.0
+   },
+   {
+    "cost": 170000,
+    "hours": 120.0
+   },
+   {
+    "cost": 180000,
+    "hours": 132.0
+   },
+   {
+    "cost": 190000,
+    "hours": 144.0
+   },
+   {
+    "cost": 200000,
+    "hours": 156.0
+   },
+   {
+    "cost": 210000,
+    "hours": 168.0
+   },
+   {
+    "cost": 220000,
+    "hours": 180.0
+   },
+   {
+    "cost": 230000,
+    "hours": 192.0
+   }
+  ],
+  "gate": "Pet House",
+  "page": "Spirit Fox"
+ },
+ "angry_jelly": {
+  "name": "Angry Jelly",
+  "kind": "pet",
+  "resource": "dark",
+  "housing": 0,
+  "max": {
+   "16": 10
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 150000,
+    "hours": 72.0
+   },
+   {
+    "cost": 160000,
+    "hours": 96.0
+   },
+   {
+    "cost": 170000,
+    "hours": 120.0
+   },
+   {
+    "cost": 180000,
+    "hours": 144.0
+   },
+   {
+    "cost": 190000,
+    "hours": 168.0
+   },
+   {
+    "cost": 200000,
+    "hours": 192.0
+   },
+   {
+    "cost": 210000,
+    "hours": 192.0
+   },
+   {
+    "cost": 220000,
+    "hours": 192.0
+   },
+   {
+    "cost": 230000,
+    "hours": 192.0
+   }
+  ],
+  "gate": "Pet House",
+  "page": "Angry Jelly"
+ }
+}

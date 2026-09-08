@@ -16,9 +16,9 @@ const CELL = 'px-3 py-2';
  * they are never added to a Home Village total, because they are not the same
  * currency. See src/lib/game/builder-base.ts.
  *
- * No building figure on this page is an estimate: the Builder Base's costs are
- * published per level, so there is no "≈" to explain away. The Home Village's
- * buildings are read the same way now; only its troop research is interpolated.
+ * No figure on this page is an estimate: the Builder Base's costs are published
+ * per level, so there is no "≈" to explain away. The Home Village is read the
+ * same way now, structures and units alike.
  */
 export function BuilderVillage({ bh, summary }: {
   bh: number;

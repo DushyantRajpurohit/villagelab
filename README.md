@@ -98,34 +98,44 @@ key, point the worker at a fixed-IP host, and nothing else changes.
 The API exposes unit levels but **no building levels and no upgrade costs**, so
 `src/lib/game/` carries a curated dataset: 18 Town Halls, 46 buildings, 67 units.
 
-Buildings, Town Halls and the whole Builder Base are **transcribed**, level by
-level, from the game's published tables. Troops, spells and heroes are still
-stored as **anchors** — levels whose real values are known — with the gaps
-filled by geometric interpolation. That leaves about 55% of all levels
-interpolated, and every one of them is in `army.ts` — no building level is.
+**All 1,579 levels are transcribed**, level by level, from the game's published
+tables — every structure and every unit in both villages. Nothing is
+interpolated, so the `≈` that marks an estimate does not appear anywhere in the
+app, and a test asserts it cannot.
 
-Every interpolated value renders with a `≈` and is flagged `est: true`. Nothing
-carrying one should be read as a wiki-accurate figure. Adding a real value is a
-one-line edit:
-
-```ts
-costs: { 1: 270, 5: 12000, 8: 400000, /* add: */ 9: 620000 },
-```
+The machinery for estimates is still wired up (`est: true`, `curve.ts`), unused,
+because new game content arrives half-documented and that is the honest way to
+show it: store the known **anchors**, interpolate the gaps, and mark every
+generated value.
 
 ### What a curve got wrong
 
-The Home Village buildings used to be anchored-and-interpolated too, and the
-anchors had drifted. A level 21 Cannon was priced at **22,500,000 gold against a
-real 3,000,000**, because a curve that keeps doubling does not know that the
-game flattens out at the top — so the error grew with the Town Hall, exactly
-where people rely on the number. The Town Hall table had the same shape of bug:
-Town Hall 17 at 528 hours and 20M gold against a real 240 hours and 16M.
+All of this used to be anchors plus geometric interpolation, and it was wrong in
+both directions.
 
-Both are now read from source, along with three currencies that were simply
-wrong (the Monolith takes dark elixir, not gold; the Clan Castle and Dark Elixir
-Storage take elixir).
+A level 21 Cannon was priced at **22,500,000 gold against a real 3,000,000**,
+because a curve that keeps doubling does not know that the game flattens out at
+the top — so the error grew with the Town Hall, exactly where people rely on the
+number. The Town Hall table had the same bug: TH17 at 528 hours and 20M gold
+against a real 240 hours and 16M.
 
-### How the buildings are read
+The units were worse. **46 of 67 had the wrong maximum level** — the Witch
+listed at 10 against a real 8, the Healer at 9 against a real 11 — and
+cost-to-max ran from 65% under to 158% over:
+
+| | listed | real | |
+|---|---|---|---|
+| Goblin | 15.0M elixir | 42.8M | −65% |
+| Barbarian King | 22.0M dark | 15.2M | +45% |
+| Lava Hound | 2.0M dark | 763K | +158% |
+
+Elixir troops came out consistently understated and dark ones overstated, which
+is what one shared curve does to two different price scales.
+
+Three currencies were simply wrong too: the Monolith takes dark elixir, not
+gold; the Clan Castle and Dark Elixir Storage take elixir.
+
+### How it is read
 
 Not from the Town Hall page. Its building tables merge cells across several hall
 levels, and two successive parsers shifted columns silently — one reported zero
@@ -145,7 +155,21 @@ and **refuses to read a table it cannot resolve** rather than guessing — which
 is what caught a "Boost Cost" column standing in for a build cost on the
 collectors.
 
-Two rules fall out of that data:
+A unit's table never names a Town Hall — it names the building that gates the
+upgrade, the Laboratory for troops and spells, the Pet House for pets, the Hero
+Hall for heroes — so a ceiling is derived by asking when that building first
+reaches the required level. Those building ceilings are themselves transcribed,
+which makes it a lookup rather than a guess. The Hero Hall is the one to watch:
+its levels do not track the Town Hall one for one, arriving at TH4 and then not
+again until TH8.
+
+Level 1 needs a different source, and getting it wrong is instructive. The level
+table's first row is free and names no Laboratory requirement, so reading the
+unlock from it put the **Dragon at Town Hall 1**. The unlock comes from the
+*producing* building instead — Barracks, Spell Factory, Workshop, Pet House —
+named on each page's info table.
+
+Two rules fall out of the building data:
 
 - `count` is the **un-merged** figure. From Town Hall 16 the game merges pairs
   of defences (Cannons into a Ricochet Cannon, and so on) and the wiki gives
@@ -172,8 +196,8 @@ The Builder Base was the first dataset built this way, and the proof the route
 worked: the game publishes every Builder Base level individually, so
 `src/lib/game/builder-base.json` carries the real cost and build time for each
 of them — 35 structures and 14 units, with footprints, per-hall counts and
-per-hall ceilings. The "≈" never appears on a Builder Base figure, and a test
-asserts it cannot.
+per-hall ceilings. It was the first dataset done this way and the reason the
+Home Village followed.
 
 Two independent tables agree, which is what makes it trustworthy rather than
 transcribed: counts and ceilings come from the Builder Hall page, costs and

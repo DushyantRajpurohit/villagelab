@@ -57,8 +57,10 @@ const RES_COLOR: Record<Resource, string> = {
 
 /**
  * A cost, badged with the game's own icon for the resource and coloured to
- * match. `est` renders the "≈" that marks every value interpolated rather than
- * anchored — see src/lib/game/curve.ts.
+ * match. `est` renders the "≈" that marks a value as interpolated rather than
+ * read from a published table. No dataset sets it today; it stays wired up so
+ * that half-documented new content can be shown honestly — see
+ * src/lib/game/curve.ts.
  *
  * Always a cost, never a balance: an amount you already hold is marked with the
  * storage that banks it. Same colour, different noun.

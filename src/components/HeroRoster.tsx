@@ -32,7 +32,7 @@ export interface HeroCardData {
   remainingCost: number;
   remainingHours: number;
   resource: Resource;
-  /** Home village costs can be interpolated; Builder Base ones never are. */
+  /** Kept for the "≈"; no hero cost is an estimate in either village today. */
   est?: boolean;
   /** The previous hall's ceiling — what "rushed" is measured against. */
   prevMax?: number;
