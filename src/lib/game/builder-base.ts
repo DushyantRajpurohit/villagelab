@@ -8,10 +8,11 @@ import type { LevelStep } from './curve';
  * Builder Hall allows and how far each can be upgraded there. Nothing is
  * interpolated.
  *
- * That is the opposite of the Home Village table in `buildings.ts`, which is
- * ~76% interpolated from anchors because the Home Village's own numbers are not
- * published level by level. The Builder Base's are, so `est` is `false` on
- * every step in this file and the "≈" never appears on a Builder Base figure.
+ * `buildings.ts` now works the same way, from the same kind of source: this
+ * file was the proof that a per-structure scrape beats a curve, and the Home
+ * Village's buildings were rebuilt on it afterwards. `est` is `false` on every
+ * step in both, and the "≈" survives only on `army.ts` — troops, spells and
+ * heroes are still anchored-and-interpolated.
  *
  * Ceilings are derived rather than transcribed: a troop's ceiling at a Builder
  * Hall is the highest level whose published Star Laboratory requirement that

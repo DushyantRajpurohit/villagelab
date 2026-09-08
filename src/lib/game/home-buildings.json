@@ -1,0 +1,3534 @@
+{
+ "cannon": {
+  "name": "Cannon",
+  "category": "defense",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "gold",
+  "count": {
+   "1": 2,
+   "5": 3,
+   "7": 5,
+   "10": 6,
+   "11": 7
+  },
+  "max": {
+   "1": 2,
+   "2": 3,
+   "3": 4,
+   "4": 5,
+   "5": 6,
+   "6": 7,
+   "7": 8,
+   "8": 10,
+   "9": 11,
+   "10": 13,
+   "11": 15,
+   "12": 17,
+   "13": 19,
+   "14": 20,
+   "15": 21
+  },
+  "levels": [
+   {
+    "cost": 250,
+    "hours": 0.0014
+   },
+   {
+    "cost": 1000,
+    "hours": 0.0083
+   },
+   {
+    "cost": 4000,
+    "hours": 0.0333
+   },
+   {
+    "cost": 16000,
+    "hours": 0.3333
+   },
+   {
+    "cost": 50000,
+    "hours": 0.5
+   },
+   {
+    "cost": 60000,
+    "hours": 1.0
+   },
+   {
+    "cost": 100000,
+    "hours": 2.0
+   },
+   {
+    "cost": 160000,
+    "hours": 3.0
+   },
+   {
+    "cost": 250000,
+    "hours": 3.5
+   },
+   {
+    "cost": 330000,
+    "hours": 4.0
+   },
+   {
+    "cost": 500000,
+    "hours": 4.5
+   },
+   {
+    "cost": 600000,
+    "hours": 5.0
+   },
+   {
+    "cost": 660000,
+    "hours": 6.0
+   },
+   {
+    "cost": 1000000,
+    "hours": 8.0
+   },
+   {
+    "cost": 1200000,
+    "hours": 10.0
+   },
+   {
+    "cost": 1300000,
+    "hours": 11.0
+   },
+   {
+    "cost": 1500000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1800000,
+    "hours": 16.0
+   },
+   {
+    "cost": 2000000,
+    "hours": 20.0
+   },
+   {
+    "cost": 2600000,
+    "hours": 24.0
+   },
+   {
+    "cost": 3000000,
+    "hours": 36.0
+   }
+  ],
+  "page": "Cannon/Home Village"
+ },
+ "archer_tower": {
+  "name": "Archer Tower",
+  "category": "defense",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "gold",
+  "count": {
+   "2": 1,
+   "4": 2,
+   "5": 3,
+   "7": 4,
+   "8": 5,
+   "9": 6,
+   "10": 7,
+   "11": 8,
+   "17": 9
+  },
+  "max": {
+   "2": 2,
+   "3": 3,
+   "4": 4,
+   "5": 6,
+   "6": 7,
+   "7": 8,
+   "8": 10,
+   "9": 11,
+   "10": 13,
+   "11": 15,
+   "12": 17,
+   "13": 19,
+   "14": 20,
+   "15": 21
+  },
+  "levels": [
+   {
+    "cost": 1000,
+    "hours": 0.0042
+   },
+   {
+    "cost": 2000,
+    "hours": 0.0333
+   },
+   {
+    "cost": 5000,
+    "hours": 0.3333
+   },
+   {
+    "cost": 20000,
+    "hours": 1.0
+   },
+   {
+    "cost": 70000,
+    "hours": 1.5
+   },
+   {
+    "cost": 80000,
+    "hours": 2.0
+   },
+   {
+    "cost": 150000,
+    "hours": 3.0
+   },
+   {
+    "cost": 200000,
+    "hours": 4.0
+   },
+   {
+    "cost": 400000,
+    "hours": 5.0
+   },
+   {
+    "cost": 460000,
+    "hours": 6.0
+   },
+   {
+    "cost": 600000,
+    "hours": 7.0
+   },
+   {
+    "cost": 700000,
+    "hours": 8.0
+   },
+   {
+    "cost": 1000000,
+    "hours": 10.0
+   },
+   {
+    "cost": 1100000,
+    "hours": 11.0
+   },
+   {
+    "cost": 1300000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1600000,
+    "hours": 16.0
+   },
+   {
+    "cost": 1800000,
+    "hours": 20.0
+   },
+   {
+    "cost": 2000000,
+    "hours": 24.0
+   },
+   {
+    "cost": 2200000,
+    "hours": 30.0
+   },
+   {
+    "cost": 3000000,
+    "hours": 36.0
+   },
+   {
+    "cost": 4000000,
+    "hours": 48.0
+   }
+  ],
+  "page": "Archer Tower/Home Village"
+ },
+ "mortar": {
+  "name": "Mortar",
+  "category": "defense",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "gold",
+  "count": {
+   "3": 1,
+   "6": 2,
+   "7": 3,
+   "8": 4
+  },
+  "max": {
+   "3": 1,
+   "4": 2,
+   "5": 3,
+   "6": 4,
+   "7": 5,
+   "8": 6,
+   "9": 7,
+   "10": 8,
+   "11": 10,
+   "12": 12,
+   "13": 13,
+   "14": 14,
+   "15": 15,
+   "16": 16,
+   "17": 17,
+   "18": 18
+  },
+  "levels": [
+   {
+    "cost": 5000,
+    "hours": 0.5
+   },
+   {
+    "cost": 25000,
+    "hours": 1.0
+   },
+   {
+    "cost": 90000,
+    "hours": 2.0
+   },
+   {
+    "cost": 180000,
+    "hours": 3.0
+   },
+   {
+    "cost": 300000,
+    "hours": 6.0
+   },
+   {
+    "cost": 500000,
+    "hours": 8.0
+   },
+   {
+    "cost": 900000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1200000,
+    "hours": 18.0
+   },
+   {
+    "cost": 1600000,
+    "hours": 20.0
+   },
+   {
+    "cost": 1800000,
+    "hours": 24.0
+   },
+   {
+    "cost": 2300000,
+    "hours": 30.0
+   },
+   {
+    "cost": 2400000,
+    "hours": 36.0
+   },
+   {
+    "cost": 2800000,
+    "hours": 48.0
+   },
+   {
+    "cost": 4300000,
+    "hours": 60.0
+   },
+   {
+    "cost": 5000000,
+    "hours": 72.0
+   },
+   {
+    "cost": 7000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 13000000,
+    "hours": 120.0
+   },
+   {
+    "cost": 21000000,
+    "hours": 300.0
+   }
+  ],
+  "page": "Mortar",
+  "supercharge": [
+   {
+    "cost": 9000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 7000000,
+    "hours": 144.0
+   }
+  ]
+ },
+ "air_defense": {
+  "name": "Air Defense",
+  "category": "defense",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "gold",
+  "count": {
+   "4": 1,
+   "6": 2,
+   "7": 3,
+   "9": 4
+  },
+  "max": {
+   "4": 2,
+   "5": 3,
+   "6": 4,
+   "7": 5,
+   "8": 6,
+   "9": 7,
+   "10": 8,
+   "11": 9,
+   "12": 10,
+   "13": 11,
+   "14": 12,
+   "15": 13,
+   "16": 14,
+   "17": 15,
+   "18": 16
+  },
+  "levels": [
+   {
+    "cost": 22000,
+    "hours": 1.0
+   },
+   {
+    "cost": 90000,
+    "hours": 2.0
+   },
+   {
+    "cost": 210000,
+    "hours": 6.0
+   },
+   {
+    "cost": 500000,
+    "hours": 12.0
+   },
+   {
+    "cost": 800000,
+    "hours": 18.0
+   },
+   {
+    "cost": 1000000,
+    "hours": 24.0
+   },
+   {
+    "cost": 1750000,
+    "hours": 48.0
+   },
+   {
+    "cost": 2300000,
+    "hours": 60.0
+   },
+   {
+    "cost": 3400000,
+    "hours": 72.0
+   },
+   {
+    "cost": 5000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 5600000,
+    "hours": 108.0
+   },
+   {
+    "cost": 6500000,
+    "hours": 120.0
+   },
+   {
+    "cost": 8000000,
+    "hours": 144.0
+   },
+   {
+    "cost": 9000000,
+    "hours": 156.0
+   },
+   {
+    "cost": 15000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 26000000,
+    "hours": 318.0
+   }
+  ],
+  "page": "Air Defense/Home Village",
+  "supercharge": [
+   {
+    "cost": 6000000,
+    "hours": 66.0
+   },
+   {
+    "cost": 3000000,
+    "hours": 102.0
+   }
+  ]
+ },
+ "wizard_tower": {
+  "name": "Wizard Tower",
+  "category": "defense",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "gold",
+  "count": {
+   "5": 1,
+   "6": 2,
+   "8": 3,
+   "9": 4,
+   "11": 5,
+   "18": 6
+  },
+  "max": {
+   "5": 2,
+   "6": 3,
+   "7": 4,
+   "8": 6,
+   "9": 7,
+   "10": 9,
+   "11": 10,
+   "12": 11,
+   "13": 13,
+   "14": 14,
+   "15": 15,
+   "16": 16,
+   "17": 17
+  },
+  "levels": [
+   {
+    "cost": 100000,
+    "hours": 1.0
+   },
+   {
+    "cost": 150000,
+    "hours": 1.5
+   },
+   {
+    "cost": 250000,
+    "hours": 4.0
+   },
+   {
+    "cost": 400000,
+    "hours": 8.0
+   },
+   {
+    "cost": 550000,
+    "hours": 10.0
+   },
+   {
+    "cost": 660000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1000000,
+    "hours": 18.0
+   },
+   {
+    "cost": 1100000,
+    "hours": 20.0
+   },
+   {
+    "cost": 1300000,
+    "hours": 24.0
+   },
+   {
+    "cost": 2000000,
+    "hours": 30.0
+   },
+   {
+    "cost": 2500000,
+    "hours": 36.0
+   },
+   {
+    "cost": 2600000,
+    "hours": 42.0
+   },
+   {
+    "cost": 3000000,
+    "hours": 48.0
+   },
+   {
+    "cost": 4500000,
+    "hours": 72.0
+   },
+   {
+    "cost": 5500000,
+    "hours": 96.0
+   },
+   {
+    "cost": 8000000,
+    "hours": 108.0
+   },
+   {
+    "cost": 14000000,
+    "hours": 132.0
+   }
+  ],
+  "page": "Wizard Tower"
+ },
+ "air_sweeper": {
+  "name": "Air Sweeper",
+  "category": "defense",
+  "size": [
+   2,
+   2
+  ],
+  "resource": "gold",
+  "count": {
+   "6": 1,
+   "9": 2
+  },
+  "max": {
+   "6": 2,
+   "7": 3,
+   "8": 4,
+   "9": 5,
+   "10": 6,
+   "11": 7
+  },
+  "levels": [
+   {
+    "cost": 200000,
+    "hours": 4.0
+   },
+   {
+    "cost": 300000,
+    "hours": 6.0
+   },
+   {
+    "cost": 450000,
+    "hours": 8.0
+   },
+   {
+    "cost": 800000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1200000,
+    "hours": 24.0
+   },
+   {
+    "cost": 1900000,
+    "hours": 48.0
+   },
+   {
+    "cost": 3400000,
+    "hours": 72.0
+   }
+  ],
+  "page": "Air Sweeper"
+ },
+ "hidden_tesla": {
+  "name": "Hidden Tesla",
+  "category": "defense",
+  "size": [
+   2,
+   2
+  ],
+  "resource": "gold",
+  "count": {
+   "7": 2,
+   "8": 3,
+   "9": 4,
+   "12": 5
+  },
+  "max": {
+   "7": 3,
+   "8": 6,
+   "9": 7,
+   "10": 8,
+   "11": 9,
+   "12": 10,
+   "13": 12,
+   "14": 13,
+   "15": 14,
+   "16": 15,
+   "17": 16,
+   "18": 17
+  },
+  "levels": [
+   {
+    "cost": 250000,
+    "hours": 2.0
+   },
+   {
+    "cost": 350000,
+    "hours": 3.0
+   },
+   {
+    "cost": 500000,
+    "hours": 4.0
+   },
+   {
+    "cost": 600000,
+    "hours": 6.0
+   },
+   {
+    "cost": 800000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1200000,
+    "hours": 24.0
+   },
+   {
+    "cost": 1400000,
+    "hours": 30.0
+   },
+   {
+    "cost": 1600000,
+    "hours": 36.0
+   },
+   {
+    "cost": 2100000,
+    "hours": 42.0
+   },
+   {
+    "cost": 3000000,
+    "hours": 48.0
+   },
+   {
+    "cost": 3100000,
+    "hours": 60.0
+   },
+   {
+    "cost": 3700000,
+    "hours": 72.0
+   },
+   {
+    "cost": 5100000,
+    "hours": 84.0
+   },
+   {
+    "cost": 6500000,
+    "hours": 96.0
+   },
+   {
+    "cost": 8200000,
+    "hours": 120.0
+   },
+   {
+    "cost": 15000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 25000000,
+    "hours": 312.0
+   }
+  ],
+  "page": "Hidden Tesla/Home Village",
+  "supercharge": [
+   {
+    "cost": 12000000,
+    "hours": 108.0
+   },
+   {
+    "cost": 8000000,
+    "hours": 156.0
+   }
+  ]
+ },
+ "bomb_tower": {
+  "name": "Bomb Tower",
+  "category": "defense",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "gold",
+  "count": {
+   "8": 1,
+   "10": 2
+  },
+  "max": {
+   "8": 2,
+   "9": 3,
+   "10": 4,
+   "11": 6,
+   "12": 7,
+   "13": 8,
+   "14": 9,
+   "15": 10,
+   "16": 11,
+   "17": 12,
+   "18": 13
+  },
+  "levels": [
+   {
+    "cost": 700000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1000000,
+    "hours": 18.0
+   },
+   {
+    "cost": 1300000,
+    "hours": 24.0
+   },
+   {
+    "cost": 1800000,
+    "hours": 36.0
+   },
+   {
+    "cost": 1900000,
+    "hours": 42.0
+   },
+   {
+    "cost": 2000000,
+    "hours": 48.0
+   },
+   {
+    "cost": 4000000,
+    "hours": 72.0
+   },
+   {
+    "cost": 5000000,
+    "hours": 84.0
+   },
+   {
+    "cost": 6000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 7000000,
+    "hours": 108.0
+   },
+   {
+    "cost": 8500000,
+    "hours": 120.0
+   },
+   {
+    "cost": 14500000,
+    "hours": 168.0
+   },
+   {
+    "cost": 25000000,
+    "hours": 312.0
+   }
+  ],
+  "page": "Bomb Tower/Home Village",
+  "supercharge": [
+   {
+    "cost": 6000000,
+    "hours": 60.0
+   },
+   {
+    "cost": 3000000,
+    "hours": 96.0
+   }
+  ]
+ },
+ "xbow": {
+  "name": "X-Bow",
+  "category": "defense",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "gold",
+  "count": {
+   "9": 2,
+   "10": 3,
+   "11": 4
+  },
+  "max": {
+   "9": 3,
+   "10": 4,
+   "11": 5,
+   "12": 6,
+   "13": 8,
+   "14": 9,
+   "15": 10,
+   "16": 11,
+   "17": 12,
+   "18": 13
+  },
+  "levels": [
+   {
+    "cost": 1000000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1200000,
+    "hours": 24.0
+   },
+   {
+    "cost": 2400000,
+    "hours": 48.0
+   },
+   {
+    "cost": 2500000,
+    "hours": 60.0
+   },
+   {
+    "cost": 3900000,
+    "hours": 72.0
+   },
+   {
+    "cost": 5000000,
+    "hours": 84.0
+   },
+   {
+    "cost": 6000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 7000000,
+    "hours": 108.0
+   },
+   {
+    "cost": 9000000,
+    "hours": 120.0
+   },
+   {
+    "cost": 9500000,
+    "hours": 132.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 144.0
+   },
+   {
+    "cost": 16000000,
+    "hours": 192.0
+   },
+   {
+    "cost": 26000000,
+    "hours": 324.0
+   }
+  ],
+  "page": "X-Bow/Home Village",
+  "supercharge": [
+   {
+    "cost": 9000000,
+    "hours": 132.0
+   },
+   {
+    "cost": 7000000,
+    "hours": 180.0
+   }
+  ]
+ },
+ "inferno_tower": {
+  "name": "Inferno Tower",
+  "category": "defense",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "gold",
+  "count": {
+   "10": 2,
+   "12": 3
+  },
+  "max": {
+   "10": 3,
+   "11": 5,
+   "12": 6,
+   "13": 7,
+   "14": 8,
+   "15": 9,
+   "16": 10,
+   "17": 11,
+   "18": 12
+  },
+  "levels": [
+   {
+    "cost": 1000000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1200000,
+    "hours": 24.0
+   },
+   {
+    "cost": 2400000,
+    "hours": 48.0
+   },
+   {
+    "cost": 3400000,
+    "hours": 60.0
+   },
+   {
+    "cost": 4200000,
+    "hours": 72.0
+   },
+   {
+    "cost": 6000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 8000000,
+    "hours": 120.0
+   },
+   {
+    "cost": 9500000,
+    "hours": 144.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 156.0
+   },
+   {
+    "cost": 11000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 16000000,
+    "hours": 192.0
+   },
+   {
+    "cost": 26500000,
+    "hours": 324.0
+   }
+  ],
+  "page": "Inferno Tower/Home Village",
+  "supercharge": [
+   {
+    "cost": 13000000,
+    "hours": 120.0
+   },
+   {
+    "cost": 8500000,
+    "hours": 168.0
+   }
+  ]
+ },
+ "eagle_artillery": {
+  "name": "Eagle Artillery",
+  "category": "defense",
+  "size": [
+   4,
+   4
+  ],
+  "resource": "gold",
+  "count": {
+   "11": 1,
+   "17": 0
+  },
+  "max": {
+   "11": 2,
+   "12": 3,
+   "13": 4,
+   "14": 5,
+   "15": 6,
+   "16": 7
+  },
+  "levels": [
+   {
+    "cost": 5000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 6000000,
+    "hours": 120.0
+   },
+   {
+    "cost": 9000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 180.0
+   },
+   {
+    "cost": 12000000,
+    "hours": 192.0
+   },
+   {
+    "cost": 13000000,
+    "hours": 216.0
+   },
+   {
+    "cost": 14000000,
+    "hours": 228.0
+   }
+  ],
+  "page": "Eagle Artillery"
+ },
+ "scattershot": {
+  "name": "Scattershot",
+  "category": "defense",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "gold",
+  "count": {
+   "13": 2
+  },
+  "max": {
+   "13": 2,
+   "14": 3,
+   "15": 4,
+   "16": 5,
+   "17": 6,
+   "18": 7
+  },
+  "levels": [
+   {
+    "cost": 8000000,
+    "hours": 120.0
+   },
+   {
+    "cost": 9000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 11000000,
+    "hours": 180.0
+   },
+   {
+    "cost": 11500000,
+    "hours": 192.0
+   },
+   {
+    "cost": 12000000,
+    "hours": 204.0
+   },
+   {
+    "cost": 16500000,
+    "hours": 216.0
+   },
+   {
+    "cost": 26500000,
+    "hours": 360.0
+   }
+  ],
+  "page": "Scattershot",
+  "supercharge": [
+   {
+    "cost": 14500000,
+    "hours": 120.0
+   },
+   {
+    "cost": 9500000,
+    "hours": 168.0
+   }
+  ]
+ },
+ "monolith": {
+  "name": "Monolith",
+  "category": "defense",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "dark",
+  "count": {
+   "15": 1
+  },
+  "max": {
+   "15": 2,
+   "16": 3,
+   "17": 4,
+   "18": 5
+  },
+  "levels": [
+   {
+    "cost": 200000,
+    "hours": 168.0
+   },
+   {
+    "cost": 250000,
+    "hours": 192.0
+   },
+   {
+    "cost": 260000,
+    "hours": 216.0
+   },
+   {
+    "cost": 300000,
+    "hours": 264.0
+   },
+   {
+    "cost": 470000,
+    "hours": 360.0
+   }
+  ],
+  "page": "Monolith",
+  "supercharge": [
+   {
+    "cost": 220000,
+    "hours": 120.0
+   },
+   {
+    "cost": 200000,
+    "hours": 168.0
+   }
+  ]
+ },
+ "spell_tower": {
+  "name": "Spell Tower",
+  "category": "defense",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "gold",
+  "count": {
+   "15": 2
+  },
+  "max": {
+   "15": 3,
+   "17": 4
+  },
+  "levels": [
+   {
+    "cost": 9000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 11000000,
+    "hours": 192.0
+   },
+   {
+    "cost": 12000000,
+    "hours": 204.0
+   },
+   {
+    "cost": 27000000,
+    "hours": 240.0
+   }
+  ],
+  "page": "Spell Tower"
+ },
+ "multi_archer_tower": {
+  "name": "Multi-Archer Tower",
+  "category": "defense",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "gold",
+  "count": {
+   "16": 2,
+   "17": 3
+  },
+  "max": {
+   "16": 2,
+   "17": 3,
+   "18": 4
+  },
+  "levels": [
+   {
+    "cost": 12000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 13000000,
+    "hours": 192.0
+   },
+   {
+    "cost": 17500000,
+    "hours": 216.0
+   },
+   {
+    "cost": 27000000,
+    "hours": 336.0
+   }
+  ],
+  "page": "Multi-Archer Tower",
+  "supercharge": [
+   {
+    "cost": 12000000,
+    "hours": 144.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 168.0
+   }
+  ]
+ },
+ "ricochet_cannon": {
+  "name": "Ricochet Cannon",
+  "category": "defense",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "gold",
+  "count": {
+   "16": 2,
+   "17": 3
+  },
+  "max": {
+   "16": 2,
+   "17": 3,
+   "18": 4
+  },
+  "levels": [
+   {
+    "cost": 12000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 13000000,
+    "hours": 192.0
+   },
+   {
+    "cost": 17500000,
+    "hours": 216.0
+   },
+   {
+    "cost": 26500000,
+    "hours": 324.0
+   }
+  ],
+  "page": "Ricochet Cannon",
+  "supercharge": [
+   {
+    "cost": 12000000,
+    "hours": 144.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 168.0
+   }
+  ]
+ },
+ "multi_gear_tower": {
+  "name": "Multi-Gear Tower",
+  "category": "defense",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "gold",
+  "count": {
+   "17": 1
+  },
+  "max": {
+   "17": 2,
+   "18": 3
+  },
+  "levels": [
+   {
+    "cost": 17000000,
+    "hours": 192.0
+   },
+   {
+    "cost": 18000000,
+    "hours": 216.0
+   },
+   {
+    "cost": 28000000,
+    "hours": 336.0
+   }
+  ],
+  "page": "Multi-Gear Tower",
+  "supercharge": [
+   {
+    "cost": 12000000,
+    "hours": 144.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 168.0
+   }
+  ]
+ },
+ "firespitter": {
+  "name": "Firespitter",
+  "category": "defense",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "gold",
+  "count": {
+   "17": 2
+  },
+  "max": {
+   "17": 2,
+   "18": 3
+  },
+  "levels": [
+   {
+    "cost": 17000000,
+    "hours": 204.0
+   },
+   {
+    "cost": 18000000,
+    "hours": 240.0
+   },
+   {
+    "cost": 29000000,
+    "hours": 360.0
+   }
+  ],
+  "page": "Firespitter",
+  "supercharge": [
+   {
+    "cost": 14000000,
+    "hours": 156.0
+   },
+   {
+    "cost": 12000000,
+    "hours": 180.0
+   }
+  ]
+ },
+ "revenge_tower": {
+  "name": "Revenge Tower",
+  "category": "defense",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "dark",
+  "count": {
+   "18": 1
+  },
+  "max": {
+   "18": 2
+  },
+  "levels": [
+   {
+    "cost": 430000,
+    "hours": 312.0014
+   },
+   {
+    "cost": 460000,
+    "hours": 336.0
+   }
+  ],
+  "page": "Revenge Tower",
+  "supercharge": [
+   {
+    "cost": 220000,
+    "hours": 168.0
+   },
+   {
+    "cost": 200000,
+    "hours": 192.0
+   }
+  ]
+ },
+ "super_wizard_tower": {
+  "name": "Super Wizard Tower",
+  "category": "defense",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "gold",
+  "count": {
+   "18": 2
+  },
+  "max": {
+   "18": 2
+  },
+  "levels": [
+   {
+    "cost": 29000000,
+    "hours": 312.0
+   },
+   {
+    "cost": 30000000,
+    "hours": 336.0
+   }
+  ],
+  "page": "Super Wizard Tower/Home Village",
+  "supercharge": [
+   {
+    "cost": 12000000,
+    "hours": 144.0
+   },
+   {
+    "cost": 14000000,
+    "hours": 168.0
+   }
+  ]
+ },
+ "crafting_station": {
+  "name": "Crafting Station",
+  "category": "defense",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "elixir",
+  "count": {
+   "11": 1
+  },
+  "max": {
+   "11": 1
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   }
+  ],
+  "page": "Crafting Station"
+ },
+ "wall": {
+  "name": "Wall",
+  "category": "wall",
+  "size": [
+   1,
+   1
+  ],
+  "resource": "gold",
+  "count": {
+   "2": 25,
+   "3": 50,
+   "4": 75,
+   "5": 100,
+   "6": 125,
+   "7": 175,
+   "8": 225,
+   "9": 250,
+   "10": 275,
+   "11": 300,
+   "14": 325
+  },
+  "max": {
+   "2": 2,
+   "3": 3,
+   "4": 4,
+   "5": 5,
+   "6": 6,
+   "7": 7,
+   "8": 8,
+   "9": 10,
+   "10": 11,
+   "11": 12,
+   "12": 13,
+   "13": 14,
+   "14": 15,
+   "15": 16,
+   "16": 17,
+   "17": 18,
+   "18": 19
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 1000,
+    "hours": 0.0
+   },
+   {
+    "cost": 5000,
+    "hours": 0.0
+   },
+   {
+    "cost": 10000,
+    "hours": 0.0
+   },
+   {
+    "cost": 20000,
+    "hours": 0.0
+   },
+   {
+    "cost": 30000,
+    "hours": 0.0
+   },
+   {
+    "cost": 50000,
+    "hours": 0.0
+   },
+   {
+    "cost": 75000,
+    "hours": 0.0
+   },
+   {
+    "cost": 100000,
+    "hours": 0.0
+   },
+   {
+    "cost": 200000,
+    "hours": 0.0
+   },
+   {
+    "cost": 500000,
+    "hours": 0.0
+   },
+   {
+    "cost": 1000000,
+    "hours": 0.0
+   },
+   {
+    "cost": 1500000,
+    "hours": 0.0
+   },
+   {
+    "cost": 2000000,
+    "hours": 0.0
+   },
+   {
+    "cost": 3000000,
+    "hours": 0.0
+   },
+   {
+    "cost": 4000000,
+    "hours": 0.0
+   },
+   {
+    "cost": 5000000,
+    "hours": 0.0
+   },
+   {
+    "cost": 7000000,
+    "hours": 0.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 0.0
+   }
+  ],
+  "page": "Wall/Home Village"
+ },
+ "gold_mine": {
+  "name": "Gold Mine",
+  "category": "resource",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "elixir",
+  "count": {
+   "1": 1,
+   "2": 2,
+   "3": 3,
+   "4": 4,
+   "5": 5,
+   "6": 6,
+   "9": 7
+  },
+  "max": {
+   "1": 2,
+   "2": 4,
+   "3": 6,
+   "4": 8,
+   "5": 10,
+   "7": 11,
+   "8": 12,
+   "10": 13,
+   "11": 14,
+   "12": 15,
+   "14": 16,
+   "16": 17
+  },
+  "levels": [
+   {
+    "cost": 150,
+    "hours": 0.0014
+   },
+   {
+    "cost": 300,
+    "hours": 0.0042
+   },
+   {
+    "cost": 700,
+    "hours": 0.0167
+   },
+   {
+    "cost": 1400,
+    "hours": 0.0333
+   },
+   {
+    "cost": 3000,
+    "hours": 0.0833
+   },
+   {
+    "cost": 7000,
+    "hours": 0.25
+   },
+   {
+    "cost": 14000,
+    "hours": 0.5
+   },
+   {
+    "cost": 28000,
+    "hours": 1.0
+   },
+   {
+    "cost": 56000,
+    "hours": 1.5
+   },
+   {
+    "cost": 75000,
+    "hours": 2.0
+   },
+   {
+    "cost": 85000,
+    "hours": 3.0
+   },
+   {
+    "cost": 170000,
+    "hours": 4.0
+   },
+   {
+    "cost": 400000,
+    "hours": 5.0
+   },
+   {
+    "cost": 800000,
+    "hours": 6.0
+   },
+   {
+    "cost": 1200000,
+    "hours": 10.0
+   },
+   {
+    "cost": 2000000,
+    "hours": 24.0
+   },
+   {
+    "cost": 8000000,
+    "hours": 48.0
+   }
+  ],
+  "page": "Gold Mine/Home Village",
+  "supercharge": [
+   {
+    "cost": 1700000,
+    "hours": 48.0
+   },
+   {
+    "cost": 1500000,
+    "hours": 72.0
+   },
+   {
+    "cost": 1300000,
+    "hours": 96.0
+   }
+  ]
+ },
+ "elixir_collector": {
+  "name": "Elixir Collector",
+  "category": "resource",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "gold",
+  "count": {
+   "1": 1,
+   "2": 2,
+   "3": 3,
+   "4": 4,
+   "5": 5,
+   "6": 6,
+   "9": 7
+  },
+  "max": {
+   "1": 2,
+   "2": 4,
+   "3": 6,
+   "4": 8,
+   "5": 10,
+   "7": 11,
+   "8": 12,
+   "10": 13,
+   "11": 14,
+   "12": 15,
+   "14": 16,
+   "16": 17
+  },
+  "levels": [
+   {
+    "cost": 150,
+    "hours": 0.0014
+   },
+   {
+    "cost": 300,
+    "hours": 0.0042
+   },
+   {
+    "cost": 700,
+    "hours": 0.0167
+   },
+   {
+    "cost": 1400,
+    "hours": 0.0333
+   },
+   {
+    "cost": 3000,
+    "hours": 0.0833
+   },
+   {
+    "cost": 7000,
+    "hours": 0.25
+   },
+   {
+    "cost": 14000,
+    "hours": 0.5
+   },
+   {
+    "cost": 28000,
+    "hours": 1.0
+   },
+   {
+    "cost": 56000,
+    "hours": 1.5
+   },
+   {
+    "cost": 75000,
+    "hours": 2.0
+   },
+   {
+    "cost": 85000,
+    "hours": 3.0
+   },
+   {
+    "cost": 170000,
+    "hours": 4.0
+   },
+   {
+    "cost": 400000,
+    "hours": 5.0
+   },
+   {
+    "cost": 800000,
+    "hours": 6.0
+   },
+   {
+    "cost": 1200000,
+    "hours": 10.0
+   },
+   {
+    "cost": 2000000,
+    "hours": 24.0
+   },
+   {
+    "cost": 8000000,
+    "hours": 48.0
+   }
+  ],
+  "page": "Elixir Collector/Home Village",
+  "supercharge": [
+   {
+    "cost": 1700000,
+    "hours": 48.0
+   },
+   {
+    "cost": 1500000,
+    "hours": 72.0
+   },
+   {
+    "cost": 1300000,
+    "hours": 96.0
+   }
+  ]
+ },
+ "dark_drill": {
+  "name": "Dark Elixir Drill",
+  "category": "resource",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "elixir",
+  "count": {
+   "7": 1,
+   "8": 2,
+   "9": 3
+  },
+  "max": {
+   "7": 3,
+   "9": 6,
+   "10": 7,
+   "11": 8,
+   "12": 9,
+   "14": 10,
+   "16": 11
+  },
+  "levels": [
+   {
+    "cost": 180000,
+    "hours": 4.0
+   },
+   {
+    "cost": 270000,
+    "hours": 6.0
+   },
+   {
+    "cost": 540000,
+    "hours": 12.0
+   },
+   {
+    "cost": 900000,
+    "hours": 18.0
+   },
+   {
+    "cost": 1200000,
+    "hours": 24.0
+   },
+   {
+    "cost": 1800000,
+    "hours": 36.0
+   },
+   {
+    "cost": 2100000,
+    "hours": 42.0
+   },
+   {
+    "cost": 2400000,
+    "hours": 48.0
+   },
+   {
+    "cost": 3700000,
+    "hours": 60.0
+   },
+   {
+    "cost": 5300000,
+    "hours": 72.0
+   },
+   {
+    "cost": 12000000,
+    "hours": 144.0
+   }
+  ],
+  "page": "Dark Elixir Drill",
+  "supercharge": [
+   {
+    "cost": 5100000,
+    "hours": 72.0
+   },
+   {
+    "cost": 4500000,
+    "hours": 96.0
+   },
+   {
+    "cost": 3900000,
+    "hours": 120.0
+   }
+  ]
+ },
+ "gold_storage": {
+  "name": "Gold Storage",
+  "category": "resource",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "elixir",
+  "count": {
+   "1": 1,
+   "3": 2,
+   "8": 3,
+   "9": 4
+  },
+  "max": {
+   "1": 1,
+   "2": 3,
+   "3": 6,
+   "4": 8,
+   "5": 9,
+   "6": 10,
+   "7": 11,
+   "11": 12,
+   "12": 13,
+   "13": 14,
+   "14": 15,
+   "15": 16,
+   "16": 17,
+   "17": 18,
+   "18": 19
+  },
+  "levels": [
+   {
+    "cost": 300,
+    "hours": 0.0028
+   },
+   {
+    "cost": 750,
+    "hours": 0.0333
+   },
+   {
+    "cost": 1500,
+    "hours": 0.0833
+   },
+   {
+    "cost": 3000,
+    "hours": 0.25
+   },
+   {
+    "cost": 6000,
+    "hours": 0.5
+   },
+   {
+    "cost": 12000,
+    "hours": 1.0
+   },
+   {
+    "cost": 25000,
+    "hours": 2.0
+   },
+   {
+    "cost": 50000,
+    "hours": 3.0
+   },
+   {
+    "cost": 100000,
+    "hours": 4.0
+   },
+   {
+    "cost": 250000,
+    "hours": 5.0
+   },
+   {
+    "cost": 500000,
+    "hours": 6.0
+   },
+   {
+    "cost": 1000000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1800000,
+    "hours": 18.0
+   },
+   {
+    "cost": 2800000,
+    "hours": 24.0
+   },
+   {
+    "cost": 3000000,
+    "hours": 48.0
+   },
+   {
+    "cost": 4000000,
+    "hours": 72.0
+   },
+   {
+    "cost": 5500000,
+    "hours": 96.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 120.0
+   },
+   {
+    "cost": 18000000,
+    "hours": 300.0
+   }
+  ],
+  "page": "Gold Storage/Home Village"
+ },
+ "elixir_storage": {
+  "name": "Elixir Storage",
+  "category": "resource",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "gold",
+  "count": {
+   "1": 1,
+   "3": 2,
+   "8": 3,
+   "9": 4
+  },
+  "max": {
+   "1": 1,
+   "2": 3,
+   "3": 6,
+   "4": 8,
+   "5": 9,
+   "6": 10,
+   "7": 11,
+   "11": 12,
+   "12": 13,
+   "13": 14,
+   "14": 15,
+   "15": 16,
+   "16": 17,
+   "17": 18,
+   "18": 19
+  },
+  "levels": [
+   {
+    "cost": 300,
+    "hours": 0.0028
+   },
+   {
+    "cost": 750,
+    "hours": 0.0333
+   },
+   {
+    "cost": 1500,
+    "hours": 0.0833
+   },
+   {
+    "cost": 3000,
+    "hours": 0.25
+   },
+   {
+    "cost": 6000,
+    "hours": 0.5
+   },
+   {
+    "cost": 12000,
+    "hours": 1.0
+   },
+   {
+    "cost": 25000,
+    "hours": 2.0
+   },
+   {
+    "cost": 50000,
+    "hours": 3.0
+   },
+   {
+    "cost": 100000,
+    "hours": 4.0
+   },
+   {
+    "cost": 250000,
+    "hours": 5.0
+   },
+   {
+    "cost": 500000,
+    "hours": 6.0
+   },
+   {
+    "cost": 1000000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1800000,
+    "hours": 18.0
+   },
+   {
+    "cost": 2800000,
+    "hours": 24.0
+   },
+   {
+    "cost": 3000000,
+    "hours": 48.0
+   },
+   {
+    "cost": 4000000,
+    "hours": 72.0
+   },
+   {
+    "cost": 5500000,
+    "hours": 96.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 120.0
+   },
+   {
+    "cost": 18000000,
+    "hours": 300.0
+   }
+  ],
+  "page": "Elixir Storage/Home Village"
+ },
+ "dark_storage": {
+  "name": "Dark Elixir Storage",
+  "category": "resource",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "elixir",
+  "count": {
+   "7": 1
+  },
+  "max": {
+   "7": 2,
+   "8": 4,
+   "9": 6,
+   "12": 7,
+   "13": 8,
+   "14": 9,
+   "15": 10,
+   "16": 11,
+   "17": 12,
+   "18": 13
+  },
+  "levels": [
+   {
+    "cost": 250000,
+    "hours": 8.0
+   },
+   {
+    "cost": 500000,
+    "hours": 16.0
+   },
+   {
+    "cost": 1000000,
+    "hours": 24.0
+   },
+   {
+    "cost": 1500000,
+    "hours": 36.0
+   },
+   {
+    "cost": 2000000,
+    "hours": 40.0
+   },
+   {
+    "cost": 2400000,
+    "hours": 48.0
+   },
+   {
+    "cost": 3800000,
+    "hours": 72.0
+   },
+   {
+    "cost": 5400000,
+    "hours": 84.0
+   },
+   {
+    "cost": 6600000,
+    "hours": 96.0
+   },
+   {
+    "cost": 8000000,
+    "hours": 108.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 120.0
+   },
+   {
+    "cost": 16000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 25000000,
+    "hours": 312.0
+   }
+  ],
+  "page": "Dark Elixir Storage"
+ },
+ "army_camp": {
+  "name": "Army Camp",
+  "category": "army",
+  "size": [
+   4,
+   4
+  ],
+  "resource": "elixir",
+  "count": {
+   "1": 1,
+   "3": 2,
+   "5": 3,
+   "7": 4
+  },
+  "max": {
+   "1": 1,
+   "2": 2,
+   "3": 3,
+   "4": 4,
+   "5": 5,
+   "6": 6,
+   "9": 7,
+   "10": 8,
+   "11": 9,
+   "12": 10,
+   "13": 11,
+   "15": 12,
+   "17": 13,
+   "18": 14
+  },
+  "levels": [
+   {
+    "cost": 200,
+    "hours": 0.0167
+   },
+   {
+    "cost": 2000,
+    "hours": 0.0833
+   },
+   {
+    "cost": 10000,
+    "hours": 0.5
+   },
+   {
+    "cost": 100000,
+    "hours": 2.0
+   },
+   {
+    "cost": 250000,
+    "hours": 6.0
+   },
+   {
+    "cost": 500000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1500000,
+    "hours": 48.0
+   },
+   {
+    "cost": 2500000,
+    "hours": 72.0
+   },
+   {
+    "cost": 4200000,
+    "hours": 84.0
+   },
+   {
+    "cost": 4500000,
+    "hours": 96.0
+   },
+   {
+    "cost": 7500000,
+    "hours": 120.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 144.0
+   },
+   {
+    "cost": 17000000,
+    "hours": 180.0
+   },
+   {
+    "cost": 26000000,
+    "hours": 360.0
+   }
+  ],
+  "page": "Army Camp/Home Village"
+ },
+ "barracks": {
+  "name": "Barracks",
+  "category": "army",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "elixir",
+  "count": {
+   "1": 1
+  },
+  "max": {
+   "1": 3,
+   "2": 4,
+   "3": 5,
+   "4": 6,
+   "5": 7,
+   "6": 8,
+   "7": 9,
+   "8": 10,
+   "9": 11,
+   "10": 12,
+   "11": 13,
+   "12": 14,
+   "13": 15,
+   "14": 16,
+   "15": 17,
+   "16": 18,
+   "17": 19
+  },
+  "levels": [
+   {
+    "cost": 100,
+    "hours": 0.0028
+   },
+   {
+    "cost": 500,
+    "hours": 0.0042
+   },
+   {
+    "cost": 2500,
+    "hours": 0.0333
+   },
+   {
+    "cost": 5000,
+    "hours": 0.5
+   },
+   {
+    "cost": 20000,
+    "hours": 2.0
+   },
+   {
+    "cost": 120000,
+    "hours": 4.0
+   },
+   {
+    "cost": 270000,
+    "hours": 6.0
+   },
+   {
+    "cost": 600000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1000000,
+    "hours": 24.0
+   },
+   {
+    "cost": 1400000,
+    "hours": 36.0
+   },
+   {
+    "cost": 2600000,
+    "hours": 48.0
+   },
+   {
+    "cost": 3700000,
+    "hours": 96.0
+   },
+   {
+    "cost": 6000000,
+    "hours": 120.0
+   },
+   {
+    "cost": 7000000,
+    "hours": 144.0
+   },
+   {
+    "cost": 9000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 11000000,
+    "hours": 180.0
+   },
+   {
+    "cost": 12600000,
+    "hours": 192.0
+   },
+   {
+    "cost": 15000000,
+    "hours": 216.0
+   },
+   {
+    "cost": 26000000,
+    "hours": 252.0
+   }
+  ],
+  "page": "Barracks"
+ },
+ "dark_barracks": {
+  "name": "Dark Barracks",
+  "category": "army",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "elixir",
+  "count": {
+   "7": 1
+  },
+  "max": {
+   "7": 2,
+   "8": 4,
+   "9": 6,
+   "10": 7,
+   "11": 8,
+   "12": 9,
+   "13": 10,
+   "14": 11,
+   "15": 12,
+   "16": 13
+  },
+  "levels": [
+   {
+    "cost": 200000,
+    "hours": 8.0
+   },
+   {
+    "cost": 600000,
+    "hours": 24.0
+   },
+   {
+    "cost": 1000000,
+    "hours": 36.0
+   },
+   {
+    "cost": 1600000,
+    "hours": 48.0
+   },
+   {
+    "cost": 2200000,
+    "hours": 60.0
+   },
+   {
+    "cost": 2900000,
+    "hours": 72.0
+   },
+   {
+    "cost": 4000000,
+    "hours": 120.0
+   },
+   {
+    "cost": 7000000,
+    "hours": 144.0
+   },
+   {
+    "cost": 7200000,
+    "hours": 168.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 180.0
+   },
+   {
+    "cost": 12000000,
+    "hours": 192.0
+   },
+   {
+    "cost": 20000000,
+    "hours": 216.0
+   },
+   {
+    "cost": 23000000,
+    "hours": 240.0
+   }
+  ],
+  "page": "Dark Barracks"
+ },
+ "laboratory": {
+  "name": "Laboratory",
+  "category": "army",
+  "size": [
+   4,
+   4
+  ],
+  "resource": "elixir",
+  "count": {
+   "3": 1
+  },
+  "max": {
+   "3": 1,
+   "4": 2,
+   "5": 3,
+   "6": 4,
+   "7": 5,
+   "8": 6,
+   "9": 7,
+   "10": 8,
+   "11": 9,
+   "12": 10,
+   "13": 11,
+   "14": 12,
+   "15": 13,
+   "16": 14,
+   "17": 15,
+   "18": 16
+  },
+  "levels": [
+   {
+    "cost": 5000,
+    "hours": 0.0167
+   },
+   {
+    "cost": 25000,
+    "hours": 0.5
+   },
+   {
+    "cost": 50000,
+    "hours": 2.0
+   },
+   {
+    "cost": 100000,
+    "hours": 4.0
+   },
+   {
+    "cost": 200000,
+    "hours": 8.0
+   },
+   {
+    "cost": 400000,
+    "hours": 16.0
+   },
+   {
+    "cost": 800000,
+    "hours": 24.0
+   },
+   {
+    "cost": 1300000,
+    "hours": 42.0
+   },
+   {
+    "cost": 2100000,
+    "hours": 66.0
+   },
+   {
+    "cost": 3800000,
+    "hours": 96.0
+   },
+   {
+    "cost": 5500000,
+    "hours": 144.0
+   },
+   {
+    "cost": 8100000,
+    "hours": 168.0
+   },
+   {
+    "cost": 10800000,
+    "hours": 192.0
+   },
+   {
+    "cost": 13000000,
+    "hours": 216.0
+   },
+   {
+    "cost": 18000000,
+    "hours": 240.0
+   },
+   {
+    "cost": 27000000,
+    "hours": 384.0
+   }
+  ],
+  "page": "Laboratory"
+ },
+ "spell_factory": {
+  "name": "Spell Factory",
+  "category": "army",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "elixir",
+  "count": {
+   "5": 1
+  },
+  "max": {
+   "5": 1,
+   "6": 2,
+   "7": 3,
+   "9": 4,
+   "10": 5,
+   "11": 6,
+   "13": 7,
+   "15": 8,
+   "16": 9
+  },
+  "levels": [
+   {
+    "cost": 150000,
+    "hours": 6.0
+   },
+   {
+    "cost": 300000,
+    "hours": 12.0
+   },
+   {
+    "cost": 600000,
+    "hours": 24.0
+   },
+   {
+    "cost": 1200000,
+    "hours": 48.0
+   },
+   {
+    "cost": 2000000,
+    "hours": 72.0
+   },
+   {
+    "cost": 3500000,
+    "hours": 120.0
+   },
+   {
+    "cost": 9000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 14000000,
+    "hours": 192.0
+   },
+   {
+    "cost": 24000000,
+    "hours": 216.0
+   }
+  ],
+  "page": "Spell Factory"
+ },
+ "dark_spell_factory": {
+  "name": "Dark Spell Factory",
+  "category": "army",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "elixir",
+  "count": {
+   "8": 1
+  },
+  "max": {
+   "8": 2,
+   "9": 4,
+   "10": 5,
+   "12": 6,
+   "14": 7,
+   "15": 8
+  },
+  "levels": [
+   {
+    "cost": 130000,
+    "hours": 6.0
+   },
+   {
+    "cost": 260000,
+    "hours": 12.0
+   },
+   {
+    "cost": 600000,
+    "hours": 48.0
+   },
+   {
+    "cost": 1200000,
+    "hours": 72.0
+   },
+   {
+    "cost": 2500000,
+    "hours": 120.0
+   },
+   {
+    "cost": 4000000,
+    "hours": 144.0
+   },
+   {
+    "cost": 11000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 18000000,
+    "hours": 240.0
+   }
+  ],
+  "page": "Dark Spell Factory"
+ },
+ "workshop": {
+  "name": "Workshop",
+  "category": "army",
+  "size": [
+   4,
+   4
+  ],
+  "resource": "elixir",
+  "count": {
+   "12": 1
+  },
+  "max": {
+   "12": 3,
+   "13": 5,
+   "14": 6,
+   "15": 7,
+   "16": 8,
+   "17": 9
+  },
+  "levels": [
+   {
+    "cost": 2400000,
+    "hours": 48.0
+   },
+   {
+    "cost": 3700000,
+    "hours": 72.0
+   },
+   {
+    "cost": 5000000,
+    "hours": 84.0
+   },
+   {
+    "cost": 8700000,
+    "hours": 96.0
+   },
+   {
+    "cost": 9000000,
+    "hours": 120.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 132.0
+   },
+   {
+    "cost": 11000000,
+    "hours": 144.0
+   },
+   {
+    "cost": 13000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 26000000,
+    "hours": 324.0
+   }
+  ],
+  "page": "Workshop"
+ },
+ "pet_house": {
+  "name": "Pet House",
+  "category": "army",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "elixir",
+  "count": {
+   "14": 1
+  },
+  "max": {
+   "14": 4,
+   "15": 8,
+   "16": 10,
+   "17": 11,
+   "18": 12
+  },
+  "levels": [
+   {
+    "cost": 3000000,
+    "hours": 24.0
+   },
+   {
+    "cost": 4000000,
+    "hours": 48.0
+   },
+   {
+    "cost": 5000000,
+    "hours": 72.0
+   },
+   {
+    "cost": 6000000,
+    "hours": 84.0
+   },
+   {
+    "cost": 7000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 8000000,
+    "hours": 108.0
+   },
+   {
+    "cost": 9000000,
+    "hours": 120.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 132.0
+   },
+   {
+    "cost": 11000000,
+    "hours": 144.0
+   },
+   {
+    "cost": 12000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 16500000,
+    "hours": 192.0
+   },
+   {
+    "cost": 25500000,
+    "hours": 324.0
+   }
+  ],
+  "page": "Pet House"
+ },
+ "blacksmith": {
+  "name": "Blacksmith",
+  "category": "army",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "elixir",
+  "count": {
+   "8": 1
+  },
+  "max": {
+   "8": 1,
+   "9": 2,
+   "10": 3,
+   "11": 4,
+   "12": 5,
+   "13": 6,
+   "14": 7,
+   "15": 8,
+   "16": 9,
+   "17": 10
+  },
+  "levels": [
+   {
+    "cost": 600000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1200000,
+    "hours": 24.0
+   },
+   {
+    "cost": 2300000,
+    "hours": 48.0
+   },
+   {
+    "cost": 3000000,
+    "hours": 72.0
+   },
+   {
+    "cost": 5000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 6200000,
+    "hours": 108.0
+   },
+   {
+    "cost": 9200000,
+    "hours": 120.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 144.0
+   },
+   {
+    "cost": 11000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 18000000,
+    "hours": 240.0
+   }
+  ],
+  "page": "Blacksmith"
+ },
+ "clan_castle": {
+  "name": "Clan Castle",
+  "category": "army",
+  "size": [
+   3,
+   3
+  ],
+  "resource": "elixir",
+  "count": {
+   "1": 1
+  },
+  "max": {
+   "2": 1,
+   "4": 2,
+   "6": 3,
+   "8": 4,
+   "9": 5,
+   "10": 6,
+   "11": 7,
+   "12": 8,
+   "13": 9,
+   "14": 10,
+   "15": 11,
+   "16": 12,
+   "17": 13,
+   "18": 14
+  },
+  "levels": [
+   {
+    "cost": 10000,
+    "hours": 0.0
+   },
+   {
+    "cost": 50000,
+    "hours": 2.0
+   },
+   {
+    "cost": 600000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1200000,
+    "hours": 24.0
+   },
+   {
+    "cost": 2000000,
+    "hours": 36.0
+   },
+   {
+    "cost": 3000000,
+    "hours": 48.0
+   },
+   {
+    "cost": 5000000,
+    "hours": 72.0
+   },
+   {
+    "cost": 5000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 8000000,
+    "hours": 144.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 168.0
+   },
+   {
+    "cost": 12000000,
+    "hours": 192.0
+   },
+   {
+    "cost": 14500000,
+    "hours": 216.0
+   },
+   {
+    "cost": 19000000,
+    "hours": 240.0
+   },
+   {
+    "cost": 28000000,
+    "hours": 336.0
+   }
+  ],
+  "page": "Clan Castle"
+ },
+ "builders_hut": {
+  "name": "Builder's Hut",
+  "category": "other",
+  "size": [
+   2,
+   2
+  ],
+  "resource": "gold",
+  "count": {
+   "1": 5
+  },
+  "max": {
+   "1": 1,
+   "14": 4,
+   "15": 5,
+   "16": 6,
+   "17": 7,
+   "18": 8
+  },
+  "levels": [
+   {
+    "cost": 0,
+    "hours": 0.0
+   },
+   {
+    "cost": 3000000,
+    "hours": 48.0
+   },
+   {
+    "cost": 4000000,
+    "hours": 72.0
+   },
+   {
+    "cost": 6000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 7000000,
+    "hours": 120.0
+   },
+   {
+    "cost": 8000000,
+    "hours": 132.0
+   },
+   {
+    "cost": 15500000,
+    "hours": 168.0
+   },
+   {
+    "cost": 24000000,
+    "hours": 312.0
+   }
+  ],
+  "page": "Builder's Hut",
+  "supercharge": [
+   {
+    "cost": 10000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 8000000,
+    "hours": 144.0
+   }
+  ]
+ },
+ "bomb": {
+  "name": "Bomb",
+  "category": "trap",
+  "size": [
+   1,
+   1
+  ],
+  "resource": "gold",
+  "count": {
+   "3": 2,
+   "5": 4,
+   "7": 6,
+   "13": 7,
+   "14": 8
+  },
+  "max": {
+   "3": 2,
+   "5": 3,
+   "7": 4,
+   "8": 5,
+   "9": 6,
+   "10": 7,
+   "11": 8,
+   "13": 9,
+   "14": 10,
+   "15": 11,
+   "16": 12,
+   "17": 13,
+   "18": 14
+  },
+  "levels": [
+   {
+    "cost": 400,
+    "hours": 0.0
+   },
+   {
+    "cost": 1000,
+    "hours": 0.0167
+   },
+   {
+    "cost": 10000,
+    "hours": 0.0833
+   },
+   {
+    "cost": 40000,
+    "hours": 0.6667
+   },
+   {
+    "cost": 100000,
+    "hours": 1.0
+   },
+   {
+    "cost": 230000,
+    "hours": 2.0
+   },
+   {
+    "cost": 330000,
+    "hours": 3.0
+   },
+   {
+    "cost": 500000,
+    "hours": 4.0
+   },
+   {
+    "cost": 750000,
+    "hours": 6.0
+   },
+   {
+    "cost": 1300000,
+    "hours": 12.0
+   },
+   {
+    "cost": 2500000,
+    "hours": 18.0
+   },
+   {
+    "cost": 4000000,
+    "hours": 24.0
+   },
+   {
+    "cost": 8500000,
+    "hours": 48.0
+   },
+   {
+    "cost": 14000000,
+    "hours": 192.0
+   }
+  ],
+  "page": "Bomb"
+ },
+ "spring_trap": {
+  "name": "Spring Trap",
+  "category": "trap",
+  "size": [
+   1,
+   1
+  ],
+  "resource": "gold",
+  "count": {
+   "4": 2,
+   "6": 4,
+   "8": 6,
+   "12": 8,
+   "13": 9
+  },
+  "max": {
+   "4": 1,
+   "7": 2,
+   "8": 3,
+   "9": 4,
+   "10": 5,
+   "11": 6,
+   "12": 7,
+   "13": 8,
+   "14": 9,
+   "15": 10,
+   "16": 11,
+   "17": 12,
+   "18": 13
+  },
+  "levels": [
+   {
+    "cost": 2000,
+    "hours": 0.0
+   },
+   {
+    "cost": 130000,
+    "hours": 1.0
+   },
+   {
+    "cost": 240000,
+    "hours": 2.0
+   },
+   {
+    "cost": 350000,
+    "hours": 3.0
+   },
+   {
+    "cost": 800000,
+    "hours": 4.0
+   },
+   {
+    "cost": 1000000,
+    "hours": 6.0
+   },
+   {
+    "cost": 1700000,
+    "hours": 8.0
+   },
+   {
+    "cost": 2000000,
+    "hours": 12.0
+   },
+   {
+    "cost": 3000000,
+    "hours": 18.0
+   },
+   {
+    "cost": 4000000,
+    "hours": 24.0
+   },
+   {
+    "cost": 6000000,
+    "hours": 48.0
+   },
+   {
+    "cost": 13000000,
+    "hours": 72.0
+   },
+   {
+    "cost": 16000000,
+    "hours": 264.0
+   }
+  ],
+  "page": "Spring Trap/Home Village"
+ },
+ "air_bomb": {
+  "name": "Air Bomb",
+  "category": "trap",
+  "size": [
+   1,
+   1
+  ],
+  "resource": "gold",
+  "count": {
+   "5": 2,
+   "8": 4,
+   "10": 5,
+   "12": 6,
+   "14": 7,
+   "18": 8
+  },
+  "max": {
+   "5": 2,
+   "7": 3,
+   "9": 4,
+   "11": 5,
+   "12": 6,
+   "13": 8,
+   "14": 9,
+   "15": 10,
+   "16": 11,
+   "17": 12,
+   "18": 13
+  },
+  "levels": [
+   {
+    "cost": 4000,
+    "hours": 0.0
+   },
+   {
+    "cost": 20000,
+    "hours": 0.5
+   },
+   {
+    "cost": 75000,
+    "hours": 1.0
+   },
+   {
+    "cost": 300000,
+    "hours": 4.0
+   },
+   {
+    "cost": 550000,
+    "hours": 8.0
+   },
+   {
+    "cost": 800000,
+    "hours": 12.0
+   },
+   {
+    "cost": 1000000,
+    "hours": 14.0
+   },
+   {
+    "cost": 1200000,
+    "hours": 16.0
+   },
+   {
+    "cost": 2000000,
+    "hours": 24.0
+   },
+   {
+    "cost": 3000000,
+    "hours": 36.0
+   },
+   {
+    "cost": 5000000,
+    "hours": 48.0
+   },
+   {
+    "cost": 9500000,
+    "hours": 72.0
+   },
+   {
+    "cost": 15000000,
+    "hours": 216.0
+   }
+  ],
+  "page": "Air Bomb"
+ },
+ "giant_bomb": {
+  "name": "Giant Bomb",
+  "category": "trap",
+  "size": [
+   2,
+   2
+  ],
+  "resource": "gold",
+  "count": {
+   "6": 1,
+   "7": 2,
+   "8": 3,
+   "9": 4,
+   "10": 5,
+   "12": 6,
+   "14": 7,
+   "17": 8
+  },
+  "max": {
+   "6": 2,
+   "8": 3,
+   "10": 4,
+   "11": 5,
+   "13": 7,
+   "14": 8,
+   "15": 9,
+   "16": 10,
+   "17": 11,
+   "18": 12
+  },
+  "levels": [
+   {
+    "cost": 12500,
+    "hours": 0.0
+   },
+   {
+    "cost": 75000,
+    "hours": 1.0
+   },
+   {
+    "cost": 220000,
+    "hours": 3.0
+   },
+   {
+    "cost": 750000,
+    "hours": 4.0
+   },
+   {
+    "cost": 900000,
+    "hours": 10.0
+   },
+   {
+    "cost": 1300000,
+    "hours": 11.0
+   },
+   {
+    "cost": 1500000,
+    "hours": 12.0
+   },
+   {
+    "cost": 2000000,
+    "hours": 24.0
+   },
+   {
+    "cost": 3200000,
+    "hours": 48.0
+   },
+   {
+    "cost": 5500000,
+    "hours": 60.0
+   },
+   {
+    "cost": 10000000,
+    "hours": 96.0
+   },
+   {
+    "cost": 17000000,
+    "hours": 252.0
+   }
+  ],
+  "page": "Giant Bomb"
+ },
+ "seeking_air_mine": {
+  "name": "Seeking Air Mine",
+  "category": "trap",
+  "size": [
+   1,
+   1
+  ],
+  "resource": "gold",
+  "count": {
+   "7": 1,
+   "8": 2,
+   "9": 4,
+   "10": 5,
+   "12": 6,
+   "13": 7,
+   "14": 8,
+   "17": 9
+  },
+  "max": {
+   "7": 1,
+   "9": 2,
+   "10": 3,
+   "13": 4,
+   "15": 5,
+   "16": 6,
+   "17": 7,
+   "18": 8
+  },
+  "levels": [
+   {
+    "cost": 12000,
+    "hours": 0.0
+   },
+   {
+    "cost": 600000,
+    "hours": 6.0
+   },
+   {
+    "cost": 1200000,
+    "hours": 24.0
+   },
+   {
+    "cost": 2500000,
+    "hours": 36.0
+   },
+   {
+    "cost": 5000000,
+    "hours": 48.0
+   },
+   {
+    "cost": 6500000,
+    "hours": 72.0
+   },
+   {
+    "cost": 12000000,
+    "hours": 120.0
+   },
+   {
+    "cost": 19000000,
+    "hours": 276.0
+   }
+  ],
+  "page": "Seeking Air Mine"
+ },
+ "skeleton_trap": {
+  "name": "Skeleton Trap",
+  "category": "trap",
+  "size": [
+   1,
+   1
+  ],
+  "resource": "gold",
+  "count": {
+   "8": 2,
+   "10": 3,
+   "14": 4
+  },
+  "max": {
+   "8": 2,
+   "9": 3,
+   "10": 4,
+   "18": 5
+  },
+  "levels": [
+   {
+    "cost": 6000,
+    "hours": 0.0
+   },
+   {
+    "cost": 250000,
+    "hours": 5.0
+   },
+   {
+    "cost": 400000,
+    "hours": 8.0
+   },
+   {
+    "cost": 1000000,
+    "hours": 12.0
+   },
+   {
+    "cost": 18000000,
+    "hours": 168.0
+   }
+  ],
+  "page": "Skeleton Trap"
+ },
+ "tornado_trap": {
+  "name": "Tornado Trap",
+  "category": "trap",
+  "size": [
+   2,
+   2
+  ],
+  "resource": "gold",
+  "count": {
+   "11": 1
+  },
+  "max": {
+   "11": 2,
+   "12": 3
+  },
+  "levels": [
+   {
+    "cost": 1800000,
+    "hours": 0.0
+   },
+   {
+    "cost": 2000000,
+    "hours": 24.0
+   },
+   {
+    "cost": 2500000,
+    "hours": 48.0
+   }
+  ],
+  "page": "Tornado Trap"
+ }
+}

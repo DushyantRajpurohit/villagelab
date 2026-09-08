@@ -96,49 +96,84 @@ key, point the worker at a fixed-IP host, and nothing else changes.
 ## Data accuracy
 
 The API exposes unit levels but **no building levels and no upgrade costs**, so
-`src/lib/game/` carries a curated dataset: 18 Town Halls, 43 buildings, 67 units.
+`src/lib/game/` carries a curated dataset: 18 Town Halls, 46 buildings, 67 units.
 
-Costs and times are stored as **anchors** — levels whose real values are known —
-with the gaps filled by geometric interpolation. Roughly **24% of levels are
-anchored and 76% interpolated.**
-
-The Town Hall table itself is now the exception: all 18 levels are transcribed
-from the game's own table rather than interpolated, so none of them is an
-estimate. That correction mattered — the old curated guesses had Town Hall 17 at
-528 hours and 20M gold against a real 240 hours and 16M, because a geometric
-guess kept doubling where the game had flattened out.
-
-### Known gap: Town Hall 18 buildings
-
-Town Hall 18 exists here — the hall's own cost, time, hitpoints and art, and a
-ceiling for all six heroes — but **the 43 buildings still carry their Town Hall
-17 counts and ceilings**. Nothing is invented: a structure simply keeps its
-TH17 limits at TH18 until the real ones are transcribed, so figures are
-incomplete rather than wrong.
-
-They are not filled in yet because the Town Hall page's building tables use
-merged cells spanning several hall levels, and a naive read silently shifts
-columns — handing the Cannon the Eagle Artillery's numbers. Wrong ceilings
-presented confidently are worse than absent ones, so the safe route is the one
-the Builder Base dataset already uses: each structure's own page, which
-publishes a clean per-level table. That is the next piece of work.
+Buildings, Town Halls and the whole Builder Base are **transcribed**, level by
+level, from the game's published tables. Troops, spells and heroes are still
+stored as **anchors** — levels whose real values are known — with the gaps
+filled by geometric interpolation. That leaves about 55% of all levels
+interpolated, and every one of them is in `army.ts` — no building level is.
 
 Every interpolated value renders with a `≈` and is flagged `est: true`. Nothing
-here should be read as a wiki-accurate figure until its anchor is verified.
-Adding a real value is a one-line edit:
+carrying one should be read as a wiki-accurate figure. Adding a real value is a
+one-line edit:
 
 ```ts
 costs: { 1: 270, 5: 12000, 8: 400000, /* add: */ 9: 620000 },
 ```
 
-### The Builder Base dataset is exact
+### What a curve got wrong
 
-The Home Village table above is ~76% interpolated. The Builder Base's is not
-interpolated at all: the game publishes every Builder Base level individually,
-so `src/lib/game/builder-base.json` carries the real cost and build time for
-each of them — 35 structures and 14 units, with footprints, per-hall counts and
-per-hall ceilings. The "≈" that marks an estimate never appears on a Builder
-Base figure, and a test asserts it cannot.
+The Home Village buildings used to be anchored-and-interpolated too, and the
+anchors had drifted. A level 21 Cannon was priced at **22,500,000 gold against a
+real 3,000,000**, because a curve that keeps doubling does not know that the
+game flattens out at the top — so the error grew with the Town Hall, exactly
+where people rely on the number. The Town Hall table had the same shape of bug:
+Town Hall 17 at 528 hours and 20M gold against a real 240 hours and 16M.
+
+Both are now read from source, along with three currencies that were simply
+wrong (the Monolith takes dark elixir, not gold; the Clan Castle and Dark Elixir
+Storage take elixir).
+
+### How the buildings are read
+
+Not from the Town Hall page. Its building tables merge cells across several hall
+levels, and two successive parsers shifted columns silently — one reported zero
+Cannons at Town Hall 17 and handed structures each other's numbers.
+
+Each structure's own page publishes what is needed without a merged cell in
+sight, and both anchors are machine-readable:
+
+```
+{{NumberAvailable|TH1=2|TH5=3|TH7=5|TH10=6|TH11=7|TH16=7/3*|TH17=7/0*}}
+```
+
+for how many a hall allows, and a per-level table whose *Town Hall Level
+Required* column gives the ceiling at every hall. The parser locates columns by
+header text, cross-checks the cost column against the wiki's own `bCost` class,
+and **refuses to read a table it cannot resolve** rather than guessing — which
+is what caught a "Boost Cost" column standing in for a build cost on the
+collectors.
+
+Two rules fall out of that data:
+
+- `count` is the **un-merged** figure. From Town Hall 16 the game merges pairs
+  of defences (Cannons into a Ricochet Cannon, and so on) and the wiki gives
+  both, e.g. `7/3`. Seven is the number to plan against: merging consumes
+  buildings at their maximum level, so a Cannon that ends up inside a Ricochet
+  Cannon still has to be paid all the way up first. The merged figure describes
+  the finished layout, not the bill. The Eagle Artillery is the one structure
+  whose count genuinely falls — it merges into the Giga Inferno at Town Hall 17
+  and is gone for good.
+- **Supercharges** — Town Hall 18's extra levels on an already-maxed structure,
+  18 of them — are kept out of `levels` and out of every cost-to-max total. The
+  game removes them again when a real level is added, so a supercharged Mortar
+  is not a level 20 Mortar.
+
+Town Hall 18 also brings three structures that did not exist here before: the
+**Revenge Tower**, the **Super Wizard Tower**, and the **Crafting Station**. The
+Crafting Station is free and level-less; the Crafted Defenses it hosts are
+upgraded with Sparky Stones, a currency this app does not model yet — the same
+gap as Ores and hero equipment.
+
+### The Builder Base dataset
+
+The Builder Base was the first dataset built this way, and the proof the route
+worked: the game publishes every Builder Base level individually, so
+`src/lib/game/builder-base.json` carries the real cost and build time for each
+of them — 35 structures and 14 units, with footprints, per-hall counts and
+per-hall ceilings. The "≈" never appears on a Builder Base figure, and a test
+asserts it cannot.
 
 Two independent tables agree, which is what makes it trustworthy rather than
 transcribed: counts and ceilings come from the Builder Hall page, costs and
@@ -161,7 +196,7 @@ anchor at zero — so every Wall level had `hours: NaN`. The previous validator
 checked ordering with `cost < prev`, and **every comparison against NaN is
 false**, so it reported success while the data was broken.
 
-`finite.test.ts` now asserts finiteness across all 109 entities, because
+`finite.test.ts` now asserts finiteness across all 113 entities, because
 ordering checks structurally cannot catch NaN.
 
 The war analysis is tested the same way. Stars are credited to the attacker who

@@ -675,6 +675,29 @@
    ],
    "maxLevel": 11,
    "files": 2
+  },
+  "revenge_tower": {
+   "levels": [
+    1,
+    2
+   ],
+   "maxLevel": 2,
+   "files": 2
+  },
+  "super_wizard_tower": {
+   "levels": [
+    1,
+    2
+   ],
+   "maxLevel": 2,
+   "files": 2
+  },
+  "crafting_station": {
+   "levels": [
+    1
+   ],
+   "maxLevel": 1,
+   "files": 1
   }
  },
  "units": {

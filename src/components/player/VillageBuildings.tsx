@@ -1,8 +1,10 @@
+import type { ReactNode } from 'react';
 import { Chip, Panel, Res } from '@/components/primitives';
 import { GameIcon } from '@/components/GameIcon';
 import { fmtDuration } from '@/lib/format';
 import { builderBuildingsAtBH } from '@/lib/game/builder-base';
-import { buildingsAtTH } from '@/lib/game/buildings';
+import { BUILDINGS_BY_ID, SUPERCHARGES, buildingsAtTH } from '@/lib/game/buildings';
+import { MAX_TH } from '@/lib/game/town-halls';
 import type { Resource } from '@/lib/game/types';
 import type { Village } from '@/lib/sprites';
 
@@ -16,10 +18,10 @@ import type { Village } from '@/lib/sprites';
  * many of each, and how far each upgrades. The panels say so rather than
  * implying the numbers are theirs.
  *
- * The two villages differ in one way that matters here. The Builder Base's
- * figures are published values, so its total is exact; the Home Village's are
- * ~76% interpolated, so its total carries the "≈" every estimated figure in
- * this app carries. Same panel, honest about which is which.
+ * Both villages' figures are published values now, read from each structure's
+ * own per-level table, so neither total is an estimate and the "≈" appears on
+ * neither. It is still wired up: `est` rides on every level, and the panel says
+ * which it is rather than assuming.
  */
 
 const CATEGORY_LABEL: Record<string, string> = {
@@ -70,6 +72,12 @@ export function HomeVillageBuildings({ th }: { th: number }) {
     countHere: b.countHere, maxHere: b.maxHere, startLevel: 0, levels: b.levels,
   }));
 
+  // Supercharges are a Town Hall 18 mechanic and only apply to a structure
+  // already at its ceiling, so they are named at that hall and nowhere else.
+  // They are deliberately absent from the total above.
+  const charged = th < MAX_TH ? []
+    : Object.keys(SUPERCHARGES).filter((id) => BUILDINGS_BY_ID[id].count[th] > 0);
+
   return (
     <VillageBuildings
       title={`What Town Hall ${th} can build`}
@@ -77,16 +85,24 @@ export function HomeVillageBuildings({ th }: { th: number }) {
       village="home"
       resources={['gold', 'elixir', 'dark']}
       label={(k) => `${k === 'dark' ? 'Dark elixir' : k} to max them all`}
+      footnote={charged.length > 0 && (
+        <>
+          {' '}Past that, {charged.length} of them can be <em>supercharged</em> — extra levels a
+          maxed structure can take here, which the game removes again when a real level is added.
+          They are not counted above.
+        </>
+      )}
     />
   );
 }
 
-function VillageBuildings({ title, entries, village, resources, label }: {
+function VillageBuildings({ title, entries, village, resources, label, footnote }: {
   title: string;
   entries: Entry[];
   village: Village;
   resources: Resource[];
   label: (k: Resource) => string;
+  footnote?: ReactNode;
 }) {
   if (!entries.length) return null;
 
@@ -127,6 +143,7 @@ function VillageBuildings({ title, entries, village, resources, label }: {
           building levels for either village. Record yours in the planner to see what is actually
           left. {fmtDuration(hours)} of building at one builder
           {est ? ', and the figures marked ≈ are interpolated rather than verified.' : ', from published values.'}
+          {footnote}
         </p>
       </Panel>
 

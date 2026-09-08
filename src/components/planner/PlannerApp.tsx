@@ -64,8 +64,9 @@ const BUILDER: PlannerConfig = {
     army: 'Army buildings', wall: 'Walls', troop: 'Troops', hero: 'Heroes',
   },
   heroKinds: ['hero'],
-  note: 'Every Builder Base cost and time here is a published value, not an interpolated one — '
-    + 'this village never shows the "≈" the Home Village does.',
+  note: 'Every Builder Base cost and time here is a published value, not an interpolated one. '
+    + 'So are the Home Village’s buildings; the "≈" is left only on troop, spell and hero '
+    + 'research.',
 };
 
 const CONFIG: Record<VillageId, PlannerConfig> = { home: HOME, builder: BUILDER };
