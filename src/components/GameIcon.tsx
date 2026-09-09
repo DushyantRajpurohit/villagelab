@@ -1,7 +1,8 @@
 import Image from 'next/image';
-import type { Resource } from '@/lib/game/types';
+import type { Currency, Resource } from '@/lib/game/types';
 import {
-  buildingSpriteUrl, resourceSpriteUrl, unitSpriteUrl, STORAGE_ID, type Village,
+  buildingSpriteUrl, equipmentSpriteUrl, resourceSpriteUrl, unitSpriteUrl,
+  STORAGE_ID, type Village,
 } from '@/lib/sprites';
 
 /**
@@ -53,9 +54,43 @@ export function GameIcon({ kind, id, level, village = 'home', size = 26, alt = '
   );
 }
 
-export const RESOURCE_NAME: Record<Resource, string> = {
+export const RESOURCE_NAME: Record<Currency, string> = {
   gold: 'Gold', elixir: 'Elixir', dark: 'Dark elixir',
+  shiny: 'Shiny Ore', glowy: 'Glowy Ore', starry: 'Starry Ore',
 };
+
+/**
+ * A piece of hero equipment's icon.
+ *
+ * One icon per item at every level — the game draws the Giant Gauntlet the same
+ * whether it is level 1 or 27 — so unlike a structure this takes no level. It
+ * keeps the same fixed box as `GameIcon` for the same reason: an item whose art
+ * has not been fetched must not shift the row beside it.
+ */
+export function EquipmentIcon({ id, size = 26, alt = '' }: {
+  id: string; size?: number; alt?: string;
+}) {
+  const url = equipmentSpriteUrl(id);
+  if (!url) {
+    return (
+      <span
+        aria-hidden
+        className="shrink-0 rounded-[4px] border border-line bg-panel-2"
+        style={{ width: size, height: size }}
+      />
+    );
+  }
+  return (
+    <Image
+      src={url}
+      alt={alt}
+      width={size}
+      height={size}
+      className="shrink-0 object-contain"
+      style={{ width: size, height: size }}
+    />
+  );
+}
 
 /**
  * The game's own badge for a resource — the coin, the elixir drop, the dark
@@ -67,7 +102,7 @@ export const RESOURCE_NAME: Record<Resource, string> = {
  * separating gold from elixir, and colour alone is not a label.
  */
 export function ResourceIcon({ kind, em = 1.05, village = 'home' }: {
-  kind: Resource; em?: number; village?: Village;
+  kind: Currency; em?: number; village?: Village;
 }) {
   const url = resourceSpriteUrl(kind, village);
   if (!url) return null;

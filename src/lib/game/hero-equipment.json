@@ -1,0 +1,4726 @@
+{
+ "barbarian_puppet": {
+  "name": "Barbarian Puppet",
+  "hero": "barbarian_king",
+  "rarity": "common",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "4": 1,
+   "8": 9,
+   "10": 12,
+   "12": 15,
+   "14": 18
+  },
+  "levels": [
+   {
+    "gate": 0
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 3
+   },
+   {
+    "shiny": 2000,
+    "gate": 3
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "gate": 3
+   },
+   {
+    "shiny": 2200,
+    "gate": 5
+   },
+   {
+    "shiny": 2300,
+    "gate": 5
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "gate": 5
+   },
+   {
+    "shiny": 2500,
+    "gate": 7
+   },
+   {
+    "shiny": 2600,
+    "gate": 7
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "gate": 7
+   }
+  ],
+  "page": "Barbarian Puppet"
+ },
+ "earthquake_boots": {
+  "name": "Earthquake Boots",
+  "hero": "barbarian_king",
+  "rarity": "common",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "8": 9,
+   "10": 12,
+   "12": 15,
+   "14": 18
+  },
+  "levels": [
+   {
+    "gate": 1
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 3
+   },
+   {
+    "shiny": 2000,
+    "gate": 3
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "gate": 3
+   },
+   {
+    "shiny": 2200,
+    "gate": 5
+   },
+   {
+    "shiny": 2300,
+    "gate": 5
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "gate": 5
+   },
+   {
+    "shiny": 2500,
+    "gate": 7
+   },
+   {
+    "shiny": 2600,
+    "gate": 7
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "gate": 7
+   }
+  ],
+  "page": "Earthquake Boots"
+ },
+ "rage_vial": {
+  "name": "Rage Vial",
+  "hero": "barbarian_king",
+  "rarity": "common",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "4": 1,
+   "8": 9,
+   "10": 12,
+   "12": 15,
+   "14": 18
+  },
+  "levels": [
+   {
+    "gate": 0
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 3
+   },
+   {
+    "shiny": 2000,
+    "gate": 3
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "gate": 3
+   },
+   {
+    "shiny": 2200,
+    "gate": 5
+   },
+   {
+    "shiny": 2300,
+    "gate": 5
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "gate": 5
+   },
+   {
+    "shiny": 2500,
+    "gate": 7
+   },
+   {
+    "shiny": 2600,
+    "gate": 7
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "gate": 7
+   }
+  ],
+  "page": "Rage Vial"
+ },
+ "vampstache": {
+  "name": "Vampstache",
+  "hero": "barbarian_king",
+  "rarity": "common",
+  "ability": "passive",
+  "gate": "Blacksmith",
+  "max": {
+   "10": 12,
+   "12": 15,
+   "14": 18
+  },
+  "levels": [
+   {
+    "gate": 3
+   },
+   {
+    "shiny": 120,
+    "gate": 3
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 3
+   },
+   {
+    "shiny": 400,
+    "gate": 3
+   },
+   {
+    "shiny": 600,
+    "gate": 3
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 3
+   },
+   {
+    "shiny": 1120,
+    "gate": 3
+   },
+   {
+    "shiny": 1440,
+    "gate": 3
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "gate": 3
+   },
+   {
+    "shiny": 1900,
+    "gate": 3
+   },
+   {
+    "shiny": 2000,
+    "gate": 3
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "gate": 3
+   },
+   {
+    "shiny": 2200,
+    "gate": 5
+   },
+   {
+    "shiny": 2300,
+    "gate": 5
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "gate": 5
+   },
+   {
+    "shiny": 2500,
+    "gate": 7
+   },
+   {
+    "shiny": 2600,
+    "gate": 7
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "gate": 7
+   }
+  ],
+  "page": "Vampstache"
+ },
+ "giant_gauntlet": {
+  "name": "Giant Gauntlet",
+  "hero": "barbarian_king",
+  "rarity": "epic",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "8": 12,
+   "10": 15,
+   "12": 18,
+   "14": 21,
+   "15": 24,
+   "16": 27
+  },
+  "levels": [
+   {
+    "gate": 1
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "starry": 10,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 1
+   },
+   {
+    "shiny": 2000,
+    "gate": 1
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "starry": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 2200,
+    "gate": 3
+   },
+   {
+    "shiny": 2300,
+    "gate": 3
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "starry": 30,
+    "gate": 3
+   },
+   {
+    "shiny": 2500,
+    "gate": 5
+   },
+   {
+    "shiny": 2600,
+    "gate": 5
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "starry": 50,
+    "gate": 5
+   },
+   {
+    "shiny": 2800,
+    "gate": 7
+   },
+   {
+    "shiny": 2900,
+    "gate": 7
+   },
+   {
+    "shiny": 3000,
+    "glowy": 600,
+    "starry": 100,
+    "gate": 7
+   },
+   {
+    "shiny": 3100,
+    "gate": 8
+   },
+   {
+    "shiny": 3200,
+    "gate": 8
+   },
+   {
+    "shiny": 3300,
+    "glowy": 600,
+    "starry": 120,
+    "gate": 8
+   },
+   {
+    "shiny": 3400,
+    "gate": 9
+   },
+   {
+    "shiny": 3500,
+    "gate": 9
+   },
+   {
+    "shiny": 3600,
+    "glowy": 600,
+    "starry": 150,
+    "gate": 9
+   }
+  ],
+  "page": "Giant Gauntlet"
+ },
+ "snake_bracelet": {
+  "name": "Snake Bracelet",
+  "hero": "barbarian_king",
+  "rarity": "epic",
+  "ability": "passive",
+  "gate": "Blacksmith",
+  "max": {
+   "8": 12,
+   "10": 15,
+   "12": 18,
+   "14": 21,
+   "15": 24,
+   "16": 27
+  },
+  "levels": [
+   {
+    "gate": 1
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "starry": 10,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 1
+   },
+   {
+    "shiny": 2000,
+    "gate": 1
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "starry": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 2200,
+    "gate": 3
+   },
+   {
+    "shiny": 2300,
+    "gate": 3
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "starry": 30,
+    "gate": 3
+   },
+   {
+    "shiny": 2500,
+    "gate": 5
+   },
+   {
+    "shiny": 2600,
+    "gate": 5
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "starry": 50,
+    "gate": 5
+   },
+   {
+    "shiny": 2800,
+    "gate": 7
+   },
+   {
+    "shiny": 2900,
+    "gate": 7
+   },
+   {
+    "shiny": 3000,
+    "glowy": 600,
+    "starry": 100,
+    "gate": 7
+   },
+   {
+    "shiny": 3100,
+    "gate": 8
+   },
+   {
+    "shiny": 3200,
+    "gate": 8
+   },
+   {
+    "shiny": 3300,
+    "glowy": 600,
+    "starry": 120,
+    "gate": 8
+   },
+   {
+    "shiny": 3400,
+    "gate": 9
+   },
+   {
+    "shiny": 3500,
+    "gate": 9
+   },
+   {
+    "shiny": 3600,
+    "glowy": 600,
+    "starry": 150,
+    "gate": 9
+   }
+  ],
+  "page": "Snake Bracelet"
+ },
+ "spiky_ball": {
+  "name": "Spiky Ball",
+  "hero": "barbarian_king",
+  "rarity": "epic",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "8": 12,
+   "10": 15,
+   "12": 18,
+   "14": 21,
+   "15": 24,
+   "16": 27
+  },
+  "levels": [
+   {
+    "gate": 1
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "starry": 10,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 1
+   },
+   {
+    "shiny": 2000,
+    "gate": 1
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "starry": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 2200,
+    "gate": 3
+   },
+   {
+    "shiny": 2300,
+    "gate": 3
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "starry": 30,
+    "gate": 3
+   },
+   {
+    "shiny": 2500,
+    "gate": 5
+   },
+   {
+    "shiny": 2600,
+    "gate": 5
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "starry": 50,
+    "gate": 5
+   },
+   {
+    "shiny": 2800,
+    "gate": 7
+   },
+   {
+    "shiny": 2900,
+    "gate": 7
+   },
+   {
+    "shiny": 3000,
+    "glowy": 600,
+    "starry": 100,
+    "gate": 7
+   },
+   {
+    "shiny": 3100,
+    "gate": 8
+   },
+   {
+    "shiny": 3200,
+    "gate": 8
+   },
+   {
+    "shiny": 3300,
+    "glowy": 600,
+    "starry": 120,
+    "gate": 8
+   },
+   {
+    "shiny": 3400,
+    "gate": 9
+   },
+   {
+    "shiny": 3500,
+    "gate": 9
+   },
+   {
+    "shiny": 3600,
+    "glowy": 600,
+    "starry": 150,
+    "gate": 9
+   }
+  ],
+  "page": "Spiky Ball"
+ },
+ "stick_horse": {
+  "name": "Stick Horse",
+  "hero": "barbarian_king",
+  "rarity": "epic",
+  "ability": "passive",
+  "gate": "Blacksmith",
+  "max": {
+   "8": 12,
+   "10": 15,
+   "12": 18,
+   "14": 21,
+   "15": 24,
+   "16": 27
+  },
+  "levels": [
+   {
+    "gate": 1
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "starry": 10,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 1
+   },
+   {
+    "shiny": 2000,
+    "gate": 1
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "starry": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 2200,
+    "gate": 3
+   },
+   {
+    "shiny": 2300,
+    "gate": 3
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "starry": 30,
+    "gate": 3
+   },
+   {
+    "shiny": 2500,
+    "gate": 5
+   },
+   {
+    "shiny": 2600,
+    "gate": 5
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "starry": 50,
+    "gate": 5
+   },
+   {
+    "shiny": 2800,
+    "gate": 7
+   },
+   {
+    "shiny": 2900,
+    "gate": 7
+   },
+   {
+    "shiny": 3000,
+    "glowy": 600,
+    "starry": 100,
+    "gate": 7
+   },
+   {
+    "shiny": 3100,
+    "gate": 8
+   },
+   {
+    "shiny": 3200,
+    "gate": 8
+   },
+   {
+    "shiny": 3300,
+    "glowy": 600,
+    "starry": 120,
+    "gate": 8
+   },
+   {
+    "shiny": 3400,
+    "gate": 9
+   },
+   {
+    "shiny": 3500,
+    "gate": 9
+   },
+   {
+    "shiny": 3600,
+    "glowy": 600,
+    "starry": 150,
+    "gate": 9
+   }
+  ],
+  "page": "Stick Horse"
+ },
+ "archer_puppet": {
+  "name": "Archer Puppet",
+  "hero": "archer_queen",
+  "rarity": "common",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "8": 9,
+   "10": 12,
+   "12": 15,
+   "14": 18
+  },
+  "levels": [
+   {
+    "gate": 0
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 3
+   },
+   {
+    "shiny": 2000,
+    "gate": 3
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "gate": 3
+   },
+   {
+    "shiny": 2200,
+    "gate": 5
+   },
+   {
+    "shiny": 2300,
+    "gate": 5
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "gate": 5
+   },
+   {
+    "shiny": 2500,
+    "gate": 7
+   },
+   {
+    "shiny": 2600,
+    "gate": 7
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "gate": 7
+   }
+  ],
+  "page": "Archer Puppet"
+ },
+ "giant_arrow": {
+  "name": "Giant Arrow",
+  "hero": "archer_queen",
+  "rarity": "common",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "9": 9,
+   "10": 12,
+   "12": 15,
+   "14": 18
+  },
+  "levels": [
+   {
+    "gate": 2
+   },
+   {
+    "shiny": 120,
+    "gate": 2
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 2
+   },
+   {
+    "shiny": 400,
+    "gate": 2
+   },
+   {
+    "shiny": 600,
+    "gate": 2
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 2
+   },
+   {
+    "shiny": 1120,
+    "gate": 2
+   },
+   {
+    "shiny": 1440,
+    "gate": 2
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "gate": 2
+   },
+   {
+    "shiny": 1900,
+    "gate": 3
+   },
+   {
+    "shiny": 2000,
+    "gate": 3
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "gate": 3
+   },
+   {
+    "shiny": 2200,
+    "gate": 5
+   },
+   {
+    "shiny": 2300,
+    "gate": 5
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "gate": 5
+   },
+   {
+    "shiny": 2500,
+    "gate": 7
+   },
+   {
+    "shiny": 2600,
+    "gate": 7
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "gate": 7
+   }
+  ],
+  "page": "Giant Arrow"
+ },
+ "healer_puppet": {
+  "name": "Healer Puppet",
+  "hero": "archer_queen",
+  "rarity": "common",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "12": 15,
+   "14": 18
+  },
+  "levels": [
+   {
+    "gate": 5
+   },
+   {
+    "shiny": 120,
+    "gate": 5
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 5
+   },
+   {
+    "shiny": 400,
+    "gate": 5
+   },
+   {
+    "shiny": 600,
+    "gate": 5
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 5
+   },
+   {
+    "shiny": 1120,
+    "gate": 5
+   },
+   {
+    "shiny": 1440,
+    "gate": 5
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "gate": 5
+   },
+   {
+    "shiny": 1900,
+    "gate": 5
+   },
+   {
+    "shiny": 2000,
+    "gate": 5
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "gate": 5
+   },
+   {
+    "shiny": 2200,
+    "gate": 5
+   },
+   {
+    "shiny": 2300,
+    "gate": 5
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "gate": 5
+   },
+   {
+    "shiny": 2500,
+    "gate": 7
+   },
+   {
+    "shiny": 2600,
+    "gate": 7
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "gate": 7
+   }
+  ],
+  "page": "Healer Puppet"
+ },
+ "invisibility_vial": {
+  "name": "Invisibility Vial",
+  "hero": "archer_queen",
+  "rarity": "common",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "8": 9,
+   "10": 12,
+   "12": 15,
+   "14": 18
+  },
+  "levels": [
+   {
+    "gate": 0
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 3
+   },
+   {
+    "shiny": 2000,
+    "gate": 3
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "gate": 3
+   },
+   {
+    "shiny": 2200,
+    "gate": 5
+   },
+   {
+    "shiny": 2300,
+    "gate": 5
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "gate": 5
+   },
+   {
+    "shiny": 2500,
+    "gate": 7
+   },
+   {
+    "shiny": 2600,
+    "gate": 7
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "gate": 7
+   }
+  ],
+  "page": "Invisibility Vial"
+ },
+ "action_figure": {
+  "name": "Action Figure",
+  "hero": "archer_queen",
+  "rarity": "epic",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "8": 12,
+   "10": 15,
+   "12": 18,
+   "14": 21,
+   "15": 24,
+   "16": 27
+  },
+  "levels": [
+   {
+    "gate": 1
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "starry": 10,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 1
+   },
+   {
+    "shiny": 2000,
+    "gate": 1
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "starry": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 2200,
+    "gate": 3
+   },
+   {
+    "shiny": 2300,
+    "gate": 3
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "starry": 30,
+    "gate": 3
+   },
+   {
+    "shiny": 2500,
+    "gate": 5
+   },
+   {
+    "shiny": 2600,
+    "gate": 5
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "starry": 50,
+    "gate": 5
+   },
+   {
+    "shiny": 2800,
+    "gate": 7
+   },
+   {
+    "shiny": 2900,
+    "gate": 7
+   },
+   {
+    "shiny": 3000,
+    "glowy": 600,
+    "starry": 100,
+    "gate": 7
+   },
+   {
+    "shiny": 3100,
+    "gate": 8
+   },
+   {
+    "shiny": 3200,
+    "gate": 8
+   },
+   {
+    "shiny": 3300,
+    "glowy": 600,
+    "starry": 120,
+    "gate": 8
+   },
+   {
+    "shiny": 3400,
+    "gate": 9
+   },
+   {
+    "shiny": 3500,
+    "gate": 9
+   },
+   {
+    "shiny": 3600,
+    "glowy": 600,
+    "starry": 150,
+    "gate": 9
+   }
+  ],
+  "page": "Action Figure"
+ },
+ "frozen_arrow": {
+  "name": "Frozen Arrow",
+  "hero": "archer_queen",
+  "rarity": "epic",
+  "ability": "passive",
+  "gate": "Blacksmith",
+  "max": {
+   "8": 12,
+   "10": 15,
+   "12": 18,
+   "14": 21,
+   "15": 24,
+   "16": 27
+  },
+  "levels": [
+   {
+    "gate": 1
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "starry": 10,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 1
+   },
+   {
+    "shiny": 2000,
+    "gate": 1
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "starry": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 2200,
+    "gate": 3
+   },
+   {
+    "shiny": 2300,
+    "gate": 3
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "starry": 30,
+    "gate": 3
+   },
+   {
+    "shiny": 2500,
+    "gate": 5
+   },
+   {
+    "shiny": 2600,
+    "gate": 5
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "starry": 50,
+    "gate": 5
+   },
+   {
+    "shiny": 2800,
+    "gate": 7
+   },
+   {
+    "shiny": 2900,
+    "gate": 7
+   },
+   {
+    "shiny": 3000,
+    "glowy": 600,
+    "starry": 100,
+    "gate": 7
+   },
+   {
+    "shiny": 3100,
+    "gate": 8
+   },
+   {
+    "shiny": 3200,
+    "gate": 8
+   },
+   {
+    "shiny": 3300,
+    "glowy": 600,
+    "starry": 120,
+    "gate": 8
+   },
+   {
+    "shiny": 3400,
+    "gate": 9
+   },
+   {
+    "shiny": 3500,
+    "gate": 9
+   },
+   {
+    "shiny": 3600,
+    "glowy": 600,
+    "starry": 150,
+    "gate": 9
+   }
+  ],
+  "page": "Frozen Arrow"
+ },
+ "magic_mirror": {
+  "name": "Magic Mirror",
+  "hero": "archer_queen",
+  "rarity": "epic",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "8": 12,
+   "10": 15,
+   "12": 18,
+   "14": 21,
+   "15": 24,
+   "16": 27
+  },
+  "levels": [
+   {
+    "gate": 1
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "starry": 10,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 1
+   },
+   {
+    "shiny": 2000,
+    "gate": 1
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "starry": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 2200,
+    "gate": 3
+   },
+   {
+    "shiny": 2300,
+    "gate": 3
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "starry": 30,
+    "gate": 3
+   },
+   {
+    "shiny": 2500,
+    "gate": 5
+   },
+   {
+    "shiny": 2600,
+    "gate": 5
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "starry": 50,
+    "gate": 5
+   },
+   {
+    "shiny": 2800,
+    "gate": 7
+   },
+   {
+    "shiny": 2900,
+    "gate": 7
+   },
+   {
+    "shiny": 3000,
+    "glowy": 600,
+    "starry": 100,
+    "gate": 7
+   },
+   {
+    "shiny": 3100,
+    "gate": 8
+   },
+   {
+    "shiny": 3200,
+    "gate": 8
+   },
+   {
+    "shiny": 3300,
+    "glowy": 600,
+    "starry": 120,
+    "gate": 8
+   },
+   {
+    "shiny": 3400,
+    "gate": 9
+   },
+   {
+    "shiny": 3500,
+    "gate": 9
+   },
+   {
+    "shiny": 3600,
+    "glowy": 600,
+    "starry": 150,
+    "gate": 9
+   }
+  ],
+  "page": "Magic Mirror"
+ },
+ "monolith_arrow": {
+  "name": "Monolith Arrow",
+  "hero": "archer_queen",
+  "rarity": "epic",
+  "ability": "passive",
+  "gate": "Blacksmith",
+  "max": {
+   "8": 12,
+   "10": 15,
+   "12": 18,
+   "14": 21,
+   "15": 24,
+   "16": 27
+  },
+  "levels": [
+   {
+    "gate": 1
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "starry": 10,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 1
+   },
+   {
+    "shiny": 2000,
+    "gate": 1
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "starry": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 2200,
+    "gate": 3
+   },
+   {
+    "shiny": 2300,
+    "gate": 3
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "starry": 30,
+    "gate": 3
+   },
+   {
+    "shiny": 2500,
+    "gate": 5
+   },
+   {
+    "shiny": 2600,
+    "gate": 5
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "starry": 50,
+    "gate": 5
+   },
+   {
+    "shiny": 2800,
+    "gate": 7
+   },
+   {
+    "shiny": 2900,
+    "gate": 7
+   },
+   {
+    "shiny": 3000,
+    "glowy": 600,
+    "starry": 100,
+    "gate": 7
+   },
+   {
+    "shiny": 3100,
+    "gate": 8
+   },
+   {
+    "shiny": 3200,
+    "gate": 8
+   },
+   {
+    "shiny": 3300,
+    "glowy": 600,
+    "starry": 120,
+    "gate": 8
+   },
+   {
+    "shiny": 3400,
+    "gate": 9
+   },
+   {
+    "shiny": 3500,
+    "gate": 9
+   },
+   {
+    "shiny": 3600,
+    "glowy": 600,
+    "starry": 150,
+    "gate": 9
+   }
+  ],
+  "page": "Monolith Arrow"
+ },
+ "dark_orb": {
+  "name": "Dark Orb",
+  "hero": "minion_prince",
+  "rarity": "common",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "9": 9,
+   "10": 12,
+   "12": 15,
+   "14": 18
+  },
+  "levels": [
+   {
+    "gate": 1
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 3
+   },
+   {
+    "shiny": 2000,
+    "gate": 3
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "gate": 3
+   },
+   {
+    "shiny": 2200,
+    "gate": 5
+   },
+   {
+    "shiny": 2300,
+    "gate": 5
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "gate": 5
+   },
+   {
+    "shiny": 2500,
+    "gate": 7
+   },
+   {
+    "shiny": 2600,
+    "gate": 7
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "gate": 7
+   }
+  ],
+  "page": "Dark Orb"
+ },
+ "henchmen_puppet": {
+  "name": "Henchmen Puppet",
+  "hero": "minion_prince",
+  "rarity": "common",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "9": 9,
+   "10": 12,
+   "12": 15,
+   "14": 18
+  },
+  "levels": [
+   {
+    "gate": 1
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 3
+   },
+   {
+    "shiny": 2000,
+    "gate": 3
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "gate": 3
+   },
+   {
+    "shiny": 2200,
+    "gate": 5
+   },
+   {
+    "shiny": 2300,
+    "gate": 5
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "gate": 5
+   },
+   {
+    "shiny": 2500,
+    "gate": 7
+   },
+   {
+    "shiny": 2600,
+    "gate": 7
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "gate": 7
+   }
+  ],
+  "page": "Henchmen Puppet"
+ },
+ "metal_pants": {
+  "name": "Metal Pants",
+  "hero": "minion_prince",
+  "rarity": "common",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "10": 12,
+   "12": 15,
+   "14": 18
+  },
+  "levels": [
+   {
+    "gate": 3
+   },
+   {
+    "shiny": 120,
+    "gate": 3
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 3
+   },
+   {
+    "shiny": 400,
+    "gate": 3
+   },
+   {
+    "shiny": 600,
+    "gate": 3
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 3
+   },
+   {
+    "shiny": 1120,
+    "gate": 3
+   },
+   {
+    "shiny": 1440,
+    "gate": 3
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "gate": 3
+   },
+   {
+    "shiny": 1900,
+    "gate": 3
+   },
+   {
+    "shiny": 2000,
+    "gate": 3
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "gate": 3
+   },
+   {
+    "shiny": 2200,
+    "gate": 5
+   },
+   {
+    "shiny": 2300,
+    "gate": 5
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "gate": 5
+   },
+   {
+    "shiny": 2500,
+    "gate": 7
+   },
+   {
+    "shiny": 2600,
+    "gate": 7
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "gate": 7
+   }
+  ],
+  "page": "Metal Pants"
+ },
+ "noble_iron": {
+  "name": "Noble Iron",
+  "hero": "minion_prince",
+  "rarity": "common",
+  "ability": "passive",
+  "gate": "Blacksmith",
+  "max": {
+   "12": 15,
+   "14": 18
+  },
+  "levels": [
+   {
+    "gate": 5
+   },
+   {
+    "shiny": 120,
+    "gate": 5
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 5
+   },
+   {
+    "shiny": 400,
+    "gate": 5
+   },
+   {
+    "shiny": 600,
+    "gate": 5
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 5
+   },
+   {
+    "shiny": 1120,
+    "gate": 5
+   },
+   {
+    "shiny": 1440,
+    "gate": 5
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "gate": 5
+   },
+   {
+    "shiny": 1900,
+    "gate": 5
+   },
+   {
+    "shiny": 2000,
+    "gate": 5
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "gate": 5
+   },
+   {
+    "shiny": 2200,
+    "gate": 5
+   },
+   {
+    "shiny": 2300,
+    "gate": 5
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "gate": 5
+   },
+   {
+    "shiny": 2500,
+    "gate": 7
+   },
+   {
+    "shiny": 2600,
+    "gate": 7
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "gate": 7
+   }
+  ],
+  "page": "Noble Iron"
+ },
+ "dark_crown": {
+  "name": "Dark Crown",
+  "hero": "minion_prince",
+  "rarity": "epic",
+  "ability": "passive",
+  "gate": "Blacksmith",
+  "max": {
+   "9": 12,
+   "10": 15,
+   "12": 18,
+   "14": 21,
+   "15": 24,
+   "16": 27
+  },
+  "levels": [
+   {
+    "gate": 1
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "starry": 10,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 1
+   },
+   {
+    "shiny": 2000,
+    "gate": 1
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "starry": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 2200,
+    "gate": 3
+   },
+   {
+    "shiny": 2300,
+    "gate": 3
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "starry": 30,
+    "gate": 3
+   },
+   {
+    "shiny": 2500,
+    "gate": 5
+   },
+   {
+    "shiny": 2600,
+    "gate": 5
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "starry": 50,
+    "gate": 5
+   },
+   {
+    "shiny": 2800,
+    "gate": 7
+   },
+   {
+    "shiny": 2900,
+    "gate": 7
+   },
+   {
+    "shiny": 3000,
+    "glowy": 600,
+    "starry": 100,
+    "gate": 7
+   },
+   {
+    "shiny": 3100,
+    "gate": 8
+   },
+   {
+    "shiny": 3200,
+    "gate": 8
+   },
+   {
+    "shiny": 3300,
+    "glowy": 600,
+    "starry": 120,
+    "gate": 8
+   },
+   {
+    "shiny": 3400,
+    "gate": 9
+   },
+   {
+    "shiny": 3500,
+    "gate": 9
+   },
+   {
+    "shiny": 3600,
+    "glowy": 600,
+    "starry": 150,
+    "gate": 9
+   }
+  ],
+  "page": "Dark Crown"
+ },
+ "meteor_staff": {
+  "name": "Meteor Staff",
+  "hero": "minion_prince",
+  "rarity": "epic",
+  "ability": "passive",
+  "gate": "Blacksmith",
+  "max": {
+   "9": 12,
+   "10": 15,
+   "12": 18,
+   "14": 21,
+   "15": 24,
+   "16": 27
+  },
+  "levels": [
+   {
+    "gate": 1
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "starry": 10,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 1
+   },
+   {
+    "shiny": 2000,
+    "gate": 1
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "starry": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 2200,
+    "gate": 3
+   },
+   {
+    "shiny": 2300,
+    "gate": 3
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "starry": 30,
+    "gate": 3
+   },
+   {
+    "shiny": 2500,
+    "gate": 5
+   },
+   {
+    "shiny": 2600,
+    "gate": 5
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "starry": 50,
+    "gate": 5
+   },
+   {
+    "shiny": 2800,
+    "gate": 7
+   },
+   {
+    "shiny": 2900,
+    "gate": 7
+   },
+   {
+    "shiny": 3000,
+    "glowy": 600,
+    "starry": 100,
+    "gate": 7
+   },
+   {
+    "shiny": 3100,
+    "gate": 8
+   },
+   {
+    "shiny": 3200,
+    "gate": 8
+   },
+   {
+    "shiny": 3300,
+    "glowy": 600,
+    "starry": 120,
+    "gate": 8
+   },
+   {
+    "shiny": 3400,
+    "gate": 9
+   },
+   {
+    "shiny": 3500,
+    "gate": 9
+   },
+   {
+    "shiny": 3600,
+    "glowy": 600,
+    "starry": 150,
+    "gate": 9
+   }
+  ],
+  "page": "Meteor Staff"
+ },
+ "eternal_tome": {
+  "name": "Eternal Tome",
+  "hero": "grand_warden",
+  "rarity": "common",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "11": 12,
+   "12": 15,
+   "14": 18
+  },
+  "levels": [
+   {
+    "gate": 0
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 3
+   },
+   {
+    "shiny": 2000,
+    "gate": 3
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "gate": 3
+   },
+   {
+    "shiny": 2200,
+    "gate": 5
+   },
+   {
+    "shiny": 2300,
+    "gate": 5
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "gate": 5
+   },
+   {
+    "shiny": 2500,
+    "gate": 7
+   },
+   {
+    "shiny": 2600,
+    "gate": 7
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "gate": 7
+   }
+  ],
+  "page": "Eternal Tome"
+ },
+ "healing_tome": {
+  "name": "Healing Tome",
+  "hero": "grand_warden",
+  "rarity": "common",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "13": 15,
+   "14": 18
+  },
+  "levels": [
+   {
+    "gate": 6
+   },
+   {
+    "shiny": 120,
+    "gate": 6
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 6
+   },
+   {
+    "shiny": 400,
+    "gate": 6
+   },
+   {
+    "shiny": 600,
+    "gate": 6
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 6
+   },
+   {
+    "shiny": 1120,
+    "gate": 6
+   },
+   {
+    "shiny": 1440,
+    "gate": 6
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "gate": 6
+   },
+   {
+    "shiny": 1900,
+    "gate": 6
+   },
+   {
+    "shiny": 2000,
+    "gate": 6
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "gate": 6
+   },
+   {
+    "shiny": 2200,
+    "gate": 6
+   },
+   {
+    "shiny": 2300,
+    "gate": 6
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "gate": 6
+   },
+   {
+    "shiny": 2500,
+    "gate": 7
+   },
+   {
+    "shiny": 2600,
+    "gate": 7
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "gate": 7
+   }
+  ],
+  "page": "Healing Tome"
+ },
+ "life_gem": {
+  "name": "Life Gem",
+  "hero": "grand_warden",
+  "rarity": "common",
+  "ability": "passive",
+  "gate": "Blacksmith",
+  "max": {
+   "11": 12,
+   "12": 15,
+   "14": 18
+  },
+  "levels": [
+   {
+    "gate": 0
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 3
+   },
+   {
+    "shiny": 2000,
+    "gate": 3
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "gate": 3
+   },
+   {
+    "shiny": 2200,
+    "gate": 5
+   },
+   {
+    "shiny": 2300,
+    "gate": 5
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "gate": 5
+   },
+   {
+    "shiny": 2500,
+    "gate": 7
+   },
+   {
+    "shiny": 2600,
+    "gate": 7
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "gate": 7
+   }
+  ],
+  "page": "Life Gem"
+ },
+ "rage_gem": {
+  "name": "Rage Gem",
+  "hero": "grand_warden",
+  "rarity": "common",
+  "ability": "passive",
+  "gate": "Blacksmith",
+  "max": {
+   "11": 12,
+   "12": 15,
+   "14": 18
+  },
+  "levels": [
+   {
+    "gate": 4
+   },
+   {
+    "shiny": 120,
+    "gate": 4
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 4
+   },
+   {
+    "shiny": 400,
+    "gate": 4
+   },
+   {
+    "shiny": 600,
+    "gate": 4
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 4
+   },
+   {
+    "shiny": 1120,
+    "gate": 4
+   },
+   {
+    "shiny": 1440,
+    "gate": 4
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "gate": 4
+   },
+   {
+    "shiny": 1900,
+    "gate": 4
+   },
+   {
+    "shiny": 2000,
+    "gate": 4
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "gate": 4
+   },
+   {
+    "shiny": 2200,
+    "gate": 5
+   },
+   {
+    "shiny": 2300,
+    "gate": 5
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "gate": 5
+   },
+   {
+    "shiny": 2500,
+    "gate": 7
+   },
+   {
+    "shiny": 2600,
+    "gate": 7
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "gate": 7
+   }
+  ],
+  "page": "Rage Gem"
+ },
+ "fireball": {
+  "name": "Fireball",
+  "hero": "grand_warden",
+  "rarity": "epic",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "11": 15,
+   "12": 18,
+   "14": 21,
+   "15": 24,
+   "16": 27
+  },
+  "levels": [
+   {
+    "gate": 1
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "starry": 10,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 1
+   },
+   {
+    "shiny": 2000,
+    "gate": 1
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "starry": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 2200,
+    "gate": 3
+   },
+   {
+    "shiny": 2300,
+    "gate": 3
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "starry": 30,
+    "gate": 3
+   },
+   {
+    "shiny": 2500,
+    "gate": 5
+   },
+   {
+    "shiny": 2600,
+    "gate": 5
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "starry": 50,
+    "gate": 5
+   },
+   {
+    "shiny": 2800,
+    "gate": 7
+   },
+   {
+    "shiny": 2900,
+    "gate": 7
+   },
+   {
+    "shiny": 3000,
+    "glowy": 600,
+    "starry": 100,
+    "gate": 7
+   },
+   {
+    "shiny": 3100,
+    "gate": 8
+   },
+   {
+    "shiny": 3200,
+    "gate": 8
+   },
+   {
+    "shiny": 3300,
+    "glowy": 600,
+    "starry": 120,
+    "gate": 8
+   },
+   {
+    "shiny": 3400,
+    "gate": 9
+   },
+   {
+    "shiny": 3500,
+    "gate": 9
+   },
+   {
+    "shiny": 3600,
+    "glowy": 600,
+    "starry": 150,
+    "gate": 9
+   }
+  ],
+  "page": "Fireball"
+ },
+ "heroic_torch": {
+  "name": "Heroic Torch",
+  "hero": "grand_warden",
+  "rarity": "epic",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "11": 15,
+   "12": 18,
+   "14": 21,
+   "15": 24,
+   "16": 27
+  },
+  "levels": [
+   {
+    "gate": 1
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "starry": 10,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 1
+   },
+   {
+    "shiny": 2000,
+    "gate": 1
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "starry": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 2200,
+    "gate": 3
+   },
+   {
+    "shiny": 2300,
+    "gate": 3
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "starry": 30,
+    "gate": 3
+   },
+   {
+    "shiny": 2500,
+    "gate": 5
+   },
+   {
+    "shiny": 2600,
+    "gate": 5
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "starry": 50,
+    "gate": 5
+   },
+   {
+    "shiny": 2800,
+    "gate": 7
+   },
+   {
+    "shiny": 2900,
+    "gate": 7
+   },
+   {
+    "shiny": 3000,
+    "glowy": 600,
+    "starry": 100,
+    "gate": 7
+   },
+   {
+    "shiny": 3100,
+    "gate": 8
+   },
+   {
+    "shiny": 3200,
+    "gate": 8
+   },
+   {
+    "shiny": 3300,
+    "glowy": 600,
+    "starry": 120,
+    "gate": 8
+   },
+   {
+    "shiny": 3400,
+    "gate": 9
+   },
+   {
+    "shiny": 3500,
+    "gate": 9
+   },
+   {
+    "shiny": 3600,
+    "glowy": 600,
+    "starry": 150,
+    "gate": 9
+   }
+  ],
+  "page": "Heroic Torch"
+ },
+ "lavaloon_puppet": {
+  "name": "Lavaloon Puppet",
+  "hero": "grand_warden",
+  "rarity": "epic",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "11": 15,
+   "12": 18,
+   "14": 21,
+   "15": 24,
+   "16": 27
+  },
+  "levels": [
+   {
+    "gate": 1
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "starry": 10,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 1
+   },
+   {
+    "shiny": 2000,
+    "gate": 1
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "starry": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 2200,
+    "gate": 3
+   },
+   {
+    "shiny": 2300,
+    "gate": 3
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "starry": 30,
+    "gate": 3
+   },
+   {
+    "shiny": 2500,
+    "gate": 5
+   },
+   {
+    "shiny": 2600,
+    "gate": 5
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "starry": 50,
+    "gate": 5
+   },
+   {
+    "shiny": 2800,
+    "gate": 7
+   },
+   {
+    "shiny": 2900,
+    "gate": 7
+   },
+   {
+    "shiny": 3000,
+    "glowy": 600,
+    "starry": 100,
+    "gate": 7
+   },
+   {
+    "shiny": 3100,
+    "gate": 8
+   },
+   {
+    "shiny": 3200,
+    "gate": 8
+   },
+   {
+    "shiny": 3300,
+    "glowy": 600,
+    "starry": 120,
+    "gate": 8
+   },
+   {
+    "shiny": 3400,
+    "gate": 9
+   },
+   {
+    "shiny": 3500,
+    "gate": 9
+   },
+   {
+    "shiny": 3600,
+    "glowy": 600,
+    "starry": 150,
+    "gate": 9
+   }
+  ],
+  "page": "Lavaloon Puppet"
+ },
+ "haste_vial": {
+  "name": "Haste Vial",
+  "hero": "royal_champion",
+  "rarity": "common",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "15": 18
+  },
+  "levels": [
+   {
+    "gate": 8
+   },
+   {
+    "shiny": 120,
+    "gate": 8
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 8
+   },
+   {
+    "shiny": 400,
+    "gate": 8
+   },
+   {
+    "shiny": 600,
+    "gate": 8
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 8
+   },
+   {
+    "shiny": 1120,
+    "gate": 8
+   },
+   {
+    "shiny": 1440,
+    "gate": 8
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "gate": 8
+   },
+   {
+    "shiny": 1900,
+    "gate": 8
+   },
+   {
+    "shiny": 2000,
+    "gate": 8
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "gate": 8
+   },
+   {
+    "shiny": 2200,
+    "gate": 8
+   },
+   {
+    "shiny": 2300,
+    "gate": 8
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "gate": 8
+   },
+   {
+    "shiny": 2500,
+    "gate": 8
+   },
+   {
+    "shiny": 2600,
+    "gate": 8
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "gate": 8
+   }
+  ],
+  "page": "Haste Vial"
+ },
+ "hog_rider_puppet": {
+  "name": "Hog Rider Puppet",
+  "hero": "royal_champion",
+  "rarity": "common",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "14": 18
+  },
+  "levels": [
+   {
+    "gate": 7
+   },
+   {
+    "shiny": 120,
+    "gate": 7
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 7
+   },
+   {
+    "shiny": 400,
+    "gate": 7
+   },
+   {
+    "shiny": 600,
+    "gate": 7
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 7
+   },
+   {
+    "shiny": 1120,
+    "gate": 7
+   },
+   {
+    "shiny": 1440,
+    "gate": 7
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "gate": 7
+   },
+   {
+    "shiny": 1900,
+    "gate": 7
+   },
+   {
+    "shiny": 2000,
+    "gate": 7
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "gate": 7
+   },
+   {
+    "shiny": 2200,
+    "gate": 7
+   },
+   {
+    "shiny": 2300,
+    "gate": 7
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "gate": 7
+   },
+   {
+    "shiny": 2500,
+    "gate": 7
+   },
+   {
+    "shiny": 2600,
+    "gate": 7
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "gate": 7
+   }
+  ],
+  "page": "Hog Rider Puppet"
+ },
+ "royal_gem": {
+  "name": "Royal Gem",
+  "hero": "royal_champion",
+  "rarity": "common",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "13": 15,
+   "14": 18
+  },
+  "levels": [
+   {
+    "gate": 0
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 3
+   },
+   {
+    "shiny": 2000,
+    "gate": 3
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "gate": 3
+   },
+   {
+    "shiny": 2200,
+    "gate": 5
+   },
+   {
+    "shiny": 2300,
+    "gate": 5
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "gate": 5
+   },
+   {
+    "shiny": 2500,
+    "gate": 7
+   },
+   {
+    "shiny": 2600,
+    "gate": 7
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "gate": 7
+   }
+  ],
+  "page": "Royal Gem"
+ },
+ "seeking_shield": {
+  "name": "Seeking Shield",
+  "hero": "royal_champion",
+  "rarity": "common",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "13": 15,
+   "14": 18
+  },
+  "levels": [
+   {
+    "gate": 0
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 3
+   },
+   {
+    "shiny": 2000,
+    "gate": 3
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "gate": 3
+   },
+   {
+    "shiny": 2200,
+    "gate": 5
+   },
+   {
+    "shiny": 2300,
+    "gate": 5
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "gate": 5
+   },
+   {
+    "shiny": 2500,
+    "gate": 7
+   },
+   {
+    "shiny": 2600,
+    "gate": 7
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "gate": 7
+   }
+  ],
+  "page": "Seeking Shield"
+ },
+ "electro_boots": {
+  "name": "Electro Boots",
+  "hero": "royal_champion",
+  "rarity": "epic",
+  "ability": "passive",
+  "gate": "Blacksmith",
+  "max": {
+   "13": 18,
+   "14": 21,
+   "15": 24,
+   "16": 27
+  },
+  "levels": [
+   {
+    "gate": 1
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "starry": 10,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 1
+   },
+   {
+    "shiny": 2000,
+    "gate": 1
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "starry": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 2200,
+    "gate": 3
+   },
+   {
+    "shiny": 2300,
+    "gate": 3
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "starry": 30,
+    "gate": 3
+   },
+   {
+    "shiny": 2500,
+    "gate": 5
+   },
+   {
+    "shiny": 2600,
+    "gate": 5
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "starry": 50,
+    "gate": 5
+   },
+   {
+    "shiny": 2800,
+    "gate": 7
+   },
+   {
+    "shiny": 2900,
+    "gate": 7
+   },
+   {
+    "shiny": 3000,
+    "glowy": 600,
+    "starry": 100,
+    "gate": 7
+   },
+   {
+    "shiny": 3100,
+    "gate": 8
+   },
+   {
+    "shiny": 3200,
+    "gate": 8
+   },
+   {
+    "shiny": 3300,
+    "glowy": 600,
+    "starry": 120,
+    "gate": 8
+   },
+   {
+    "shiny": 3400,
+    "gate": 9
+   },
+   {
+    "shiny": 3500,
+    "gate": 9
+   },
+   {
+    "shiny": 3600,
+    "glowy": 600,
+    "starry": 150,
+    "gate": 9
+   }
+  ],
+  "page": "Electro Boots"
+ },
+ "frost_flake": {
+  "name": "Frost Flake",
+  "hero": "royal_champion",
+  "rarity": "epic",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "13": 18,
+   "14": 21,
+   "15": 24,
+   "16": 27
+  },
+  "levels": [
+   {
+    "gate": 1
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "starry": 10,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 1
+   },
+   {
+    "shiny": 2000,
+    "gate": 1
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "starry": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 2200,
+    "gate": 3
+   },
+   {
+    "shiny": 2300,
+    "gate": 3
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "starry": 30,
+    "gate": 3
+   },
+   {
+    "shiny": 2500,
+    "gate": 5
+   },
+   {
+    "shiny": 2600,
+    "gate": 5
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "starry": 50,
+    "gate": 5
+   },
+   {
+    "shiny": 2800,
+    "gate": 7
+   },
+   {
+    "shiny": 2900,
+    "gate": 7
+   },
+   {
+    "shiny": 3000,
+    "glowy": 600,
+    "starry": 100,
+    "gate": 7
+   },
+   {
+    "shiny": 3100,
+    "gate": 8
+   },
+   {
+    "shiny": 3200,
+    "gate": 8
+   },
+   {
+    "shiny": 3300,
+    "glowy": 600,
+    "starry": 120,
+    "gate": 8
+   },
+   {
+    "shiny": 3400,
+    "gate": 9
+   },
+   {
+    "shiny": 3500,
+    "gate": 9
+   },
+   {
+    "shiny": 3600,
+    "glowy": 600,
+    "starry": 150,
+    "gate": 9
+   }
+  ],
+  "page": "Frost Flake"
+ },
+ "rocket_spear": {
+  "name": "Rocket Spear",
+  "hero": "royal_champion",
+  "rarity": "epic",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "13": 18,
+   "14": 21,
+   "15": 24,
+   "16": 27
+  },
+  "levels": [
+   {
+    "gate": 1
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "starry": 10,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 1
+   },
+   {
+    "shiny": 2000,
+    "gate": 1
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "starry": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 2200,
+    "gate": 3
+   },
+   {
+    "shiny": 2300,
+    "gate": 3
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "starry": 30,
+    "gate": 3
+   },
+   {
+    "shiny": 2500,
+    "gate": 5
+   },
+   {
+    "shiny": 2600,
+    "gate": 5
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "starry": 50,
+    "gate": 5
+   },
+   {
+    "shiny": 2800,
+    "gate": 7
+   },
+   {
+    "shiny": 2900,
+    "gate": 7
+   },
+   {
+    "shiny": 3000,
+    "glowy": 600,
+    "starry": 100,
+    "gate": 7
+   },
+   {
+    "shiny": 3100,
+    "gate": 8
+   },
+   {
+    "shiny": 3200,
+    "gate": 8
+   },
+   {
+    "shiny": 3300,
+    "glowy": 600,
+    "starry": 120,
+    "gate": 8
+   },
+   {
+    "shiny": 3400,
+    "gate": 9
+   },
+   {
+    "shiny": 3500,
+    "gate": 9
+   },
+   {
+    "shiny": 3600,
+    "glowy": 600,
+    "starry": 150,
+    "gate": 9
+   }
+  ],
+  "page": "Rocket Spear"
+ },
+ "electro_fangs": {
+  "name": "Electro Fangs",
+  "hero": "dragon_duke",
+  "rarity": "common",
+  "ability": "passive",
+  "gate": "Blacksmith",
+  "max": {
+   "15": 1,
+   "17": 18
+  },
+  "levels": [
+   {
+    "gate": 0
+   },
+   {
+    "shiny": 120,
+    "gate": 10
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 10
+   },
+   {
+    "shiny": 400,
+    "gate": 10
+   },
+   {
+    "shiny": 600,
+    "gate": 10
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 10
+   },
+   {
+    "shiny": 1120,
+    "gate": 10
+   },
+   {
+    "shiny": 1440,
+    "gate": 10
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "gate": 10
+   },
+   {
+    "shiny": 1900,
+    "gate": 10
+   },
+   {
+    "shiny": 2000,
+    "gate": 10
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "gate": 10
+   },
+   {
+    "shiny": 2200,
+    "gate": 10
+   },
+   {
+    "shiny": 2300,
+    "gate": 10
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "gate": 10
+   },
+   {
+    "shiny": 2500,
+    "gate": 10
+   },
+   {
+    "shiny": 2600,
+    "gate": 10
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "gate": 10
+   }
+  ],
+  "page": "Electro Fangs"
+ },
+ "fire_heart": {
+  "name": "Fire Heart",
+  "hero": "dragon_duke",
+  "rarity": "common",
+  "ability": "passive",
+  "gate": "Blacksmith",
+  "max": {
+   "15": 18
+  },
+  "levels": [
+   {
+    "gate": 0
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 3
+   },
+   {
+    "shiny": 2000,
+    "gate": 3
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "gate": 3
+   },
+   {
+    "shiny": 2200,
+    "gate": 5
+   },
+   {
+    "shiny": 2300,
+    "gate": 5
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "gate": 5
+   },
+   {
+    "shiny": 2500,
+    "gate": 7
+   },
+   {
+    "shiny": 2600,
+    "gate": 7
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "gate": 7
+   }
+  ],
+  "page": "Fire Heart"
+ },
+ "flame_blower": {
+  "name": "Flame Blower",
+  "hero": "dragon_duke",
+  "rarity": "common",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "15": 18
+  },
+  "levels": [
+   {
+    "gate": 0
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 3
+   },
+   {
+    "shiny": 2000,
+    "gate": 3
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "gate": 3
+   },
+   {
+    "shiny": 2200,
+    "gate": 5
+   },
+   {
+    "shiny": 2300,
+    "gate": 5
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "gate": 5
+   },
+   {
+    "shiny": 2500,
+    "gate": 7
+   },
+   {
+    "shiny": 2600,
+    "gate": 7
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "gate": 7
+   }
+  ],
+  "page": "Flame Blower"
+ },
+ "stun_blaster": {
+  "name": "Stun Blaster",
+  "hero": "dragon_duke",
+  "rarity": "common",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "15": 1,
+   "16": 18
+  },
+  "levels": [
+   {
+    "gate": 0
+   },
+   {
+    "shiny": 120,
+    "gate": 9
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 9
+   },
+   {
+    "shiny": 400,
+    "gate": 9
+   },
+   {
+    "shiny": 600,
+    "gate": 9
+   },
+   {
+    "shiny": 940,
+    "glowy": 100,
+    "gate": 9
+   },
+   {
+    "shiny": 1120,
+    "gate": 9
+   },
+   {
+    "shiny": 1440,
+    "gate": 9
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "gate": 9
+   },
+   {
+    "shiny": 1900,
+    "gate": 9
+   },
+   {
+    "shiny": 2000,
+    "gate": 9
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "gate": 9
+   },
+   {
+    "shiny": 2200,
+    "gate": 9
+   },
+   {
+    "shiny": 2300,
+    "gate": 9
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "gate": 9
+   },
+   {
+    "shiny": 2500,
+    "gate": 9
+   },
+   {
+    "shiny": 2600,
+    "gate": 9
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "gate": 9
+   }
+  ],
+  "page": "Stun Blaster"
+ },
+ "revenge_deck": {
+  "name": "Revenge Deck",
+  "hero": "dragon_duke",
+  "rarity": "epic",
+  "ability": "passive",
+  "gate": "Blacksmith",
+  "max": {
+   "15": 24,
+   "16": 27
+  },
+  "levels": [
+   {
+    "gate": 1
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "starry": 10,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 1
+   },
+   {
+    "shiny": 2000,
+    "gate": 1
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "starry": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 2200,
+    "gate": 3
+   },
+   {
+    "shiny": 2300,
+    "gate": 3
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "starry": 30,
+    "gate": 3
+   },
+   {
+    "shiny": 2500,
+    "gate": 5
+   },
+   {
+    "shiny": 2600,
+    "gate": 5
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "starry": 50,
+    "gate": 5
+   },
+   {
+    "shiny": 2800,
+    "gate": 7
+   },
+   {
+    "shiny": 2900,
+    "gate": 7
+   },
+   {
+    "shiny": 3000,
+    "glowy": 600,
+    "starry": 100,
+    "gate": 7
+   },
+   {
+    "shiny": 3100,
+    "gate": 8
+   },
+   {
+    "shiny": 3200,
+    "gate": 8
+   },
+   {
+    "shiny": 3300,
+    "glowy": 600,
+    "starry": 120,
+    "gate": 8
+   },
+   {
+    "shiny": 3400,
+    "gate": 9
+   },
+   {
+    "shiny": 3500,
+    "gate": 9
+   },
+   {
+    "shiny": 3600,
+    "glowy": 600,
+    "starry": 150,
+    "gate": 9
+   }
+  ],
+  "page": "Revenge Deck"
+ },
+ "rocket_backpack": {
+  "name": "Rocket Backpack",
+  "hero": "dragon_duke",
+  "rarity": "epic",
+  "ability": "active",
+  "gate": "Blacksmith",
+  "max": {
+   "15": 24,
+   "16": 27
+  },
+  "levels": [
+   {
+    "gate": 1
+   },
+   {
+    "shiny": 120,
+    "gate": 1
+   },
+   {
+    "shiny": 240,
+    "glowy": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 400,
+    "gate": 1
+   },
+   {
+    "shiny": 600,
+    "gate": 1
+   },
+   {
+    "shiny": 840,
+    "glowy": 100,
+    "gate": 1
+   },
+   {
+    "shiny": 1120,
+    "gate": 1
+   },
+   {
+    "shiny": 1440,
+    "gate": 1
+   },
+   {
+    "shiny": 1800,
+    "glowy": 200,
+    "starry": 10,
+    "gate": 1
+   },
+   {
+    "shiny": 1900,
+    "gate": 1
+   },
+   {
+    "shiny": 2000,
+    "gate": 1
+   },
+   {
+    "shiny": 2100,
+    "glowy": 400,
+    "starry": 20,
+    "gate": 1
+   },
+   {
+    "shiny": 2200,
+    "gate": 3
+   },
+   {
+    "shiny": 2300,
+    "gate": 3
+   },
+   {
+    "shiny": 2400,
+    "glowy": 600,
+    "starry": 30,
+    "gate": 3
+   },
+   {
+    "shiny": 2500,
+    "gate": 5
+   },
+   {
+    "shiny": 2600,
+    "gate": 5
+   },
+   {
+    "shiny": 2700,
+    "glowy": 600,
+    "starry": 50,
+    "gate": 5
+   },
+   {
+    "shiny": 2800,
+    "gate": 7
+   },
+   {
+    "shiny": 2900,
+    "gate": 7
+   },
+   {
+    "shiny": 3000,
+    "glowy": 600,
+    "starry": 100,
+    "gate": 7
+   },
+   {
+    "shiny": 3100,
+    "gate": 8
+   },
+   {
+    "shiny": 3200,
+    "gate": 8
+   },
+   {
+    "shiny": 3300,
+    "glowy": 600,
+    "starry": 120,
+    "gate": 8
+   },
+   {
+    "shiny": 3400,
+    "gate": 9
+   },
+   {
+    "shiny": 3500,
+    "gate": 9
+   },
+   {
+    "shiny": 3600,
+    "glowy": 600,
+    "starry": 150,
+    "gate": 9
+   }
+  ],
+  "page": "Rocket Backpack"
+ }
+}

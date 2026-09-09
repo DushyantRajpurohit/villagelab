@@ -2,6 +2,7 @@ import Image from 'next/image';
 import type { Resource } from '@/lib/game/types';
 import { unitSpriteUrl, type Village } from '@/lib/sprites';
 import { fmtDuration } from '@/lib/format';
+import { EquipmentIcon } from './GameIcon';
 import { Bar, Res, pctTone } from './primitives';
 
 /**
@@ -17,6 +18,10 @@ import { Bar, Res, pctTone } from './primitives';
  * Everything the table showed is still here — level against the ceiling,
  * progress, cost and time to max, rushed and locked — because this is how the
  * same facts are presented, not fewer of them.
+ *
+ * Under each home-village hero is its gear tray: every piece of equipment the
+ * Town Hall allows that hero, at the level the account has it. The Builder Base
+ * has no equipment, so its two heroes simply get no tray.
  */
 
 export interface HeroCardData {
@@ -38,27 +43,44 @@ export interface HeroCardData {
   prevMax?: number;
 }
 
-export function HeroRoster({ heroes, hall, village = 'home', hallShort = 'TH' }: {
+/** One slot in a hero's gear tray. */
+export interface HeroGear {
+  id: string;
+  name: string;
+  rarity: 'common' | 'epic';
+  level: number;
+  maxHere: number;
+  /** False when the account has never obtained this item. */
+  found: boolean;
+}
+
+export function HeroRoster({ heroes, hall, village = 'home', hallShort = 'TH', gear }: {
   heroes: HeroCardData[];
   /** The hall level these heroes are measured against. */
   hall: number;
   village?: Village;
   /** "TH" or "BH", for the rushed hero's explanation. */
   hallShort?: string;
+  /** Equipment for each hero, keyed by hero id. Absent in the Builder Base. */
+  gear?: Record<string, HeroGear[]>;
 }) {
   if (!heroes.length) return null;
 
   return (
     <div className="grid grid-cols-2 gap-3 p-4 sm:grid-cols-3 xl:grid-cols-5">
       {heroes.map((h, i) => (
-        <HeroCard key={h.id} hero={h} village={village} hall={hall} hallShort={hallShort} index={i} />
+        <HeroCard
+          key={h.id} hero={h} village={village} hall={hall}
+          hallShort={hallShort} index={i} gear={gear?.[h.id]}
+        />
       ))}
     </div>
   );
 }
 
-function HeroCard({ hero: h, village, hall, hallShort, index }: {
-  hero: HeroCardData; village: Village; hall: number; hallShort: string; index: number;
+function HeroCard({ hero: h, village, hall, hallShort, index, gear }: {
+  hero: HeroCardData; village: Village; hall: number; hallShort: string;
+  index: number; gear?: HeroGear[];
 }) {
   const url = unitSpriteUrl(h.id, village);
   const maxed = h.found && h.level >= h.maxHere;
@@ -141,6 +163,40 @@ function HeroCard({ hero: h, village, hall, hallShort, index }: {
           {h.remainingHours > 0 ? fmtDuration(h.remainingHours) : ''}
         </span>
       </div>
+
+      {gear && gear.length > 0 && <GearTray gear={gear} />}
+    </div>
+  );
+}
+
+/**
+ * The hero's equipment, in the order the dataset keeps it: commons first, then
+ * epics. Not sorted by level — the tray is a fixed set of slots in the game and
+ * reordering it every time a level changes would make it unreadable at a
+ * glance across five heroes.
+ */
+function GearTray({ gear }: { gear: HeroGear[] }) {
+  return (
+    <div className="flex flex-wrap justify-center gap-x-[7px] gap-y-2 pt-0.5">
+      {gear.map((g) => {
+        const maxed = g.found && g.level >= g.maxHere;
+        return (
+          <span
+            key={g.id}
+            className="gear-slot h-[30px] w-[30px]"
+            data-owned={g.found}
+            data-rarity={g.rarity}
+            title={g.found
+              ? `${g.name} — level ${g.level} of ${g.maxHere}`
+              : `${g.name} — not obtained (${g.rarity})`}
+          >
+            <EquipmentIcon id={g.id} size={24} />
+            {g.found && (
+              <span className="gear-level" data-tone={maxed ? 'max' : undefined}>{g.level}</span>
+            )}
+          </span>
+        );
+      })}
     </div>
   );
 }

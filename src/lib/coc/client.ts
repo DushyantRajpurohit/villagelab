@@ -67,6 +67,12 @@ export interface RawPlayer {
   troops?: Array<{ name: string; level: number; village?: string }>;
   spells?: Array<{ name: string; level: number; village?: string }>;
   heroes?: Array<{ name: string; level: number; village?: string }>;
+  /**
+   * Hero equipment the account owns. Absent items were never obtained, which is
+   * the only source we have for ownership — nothing else in the API or the
+   * game's published tables says which epics a player has bought.
+   */
+  heroEquipment?: Array<{ name: string; level: number; village?: string }>;
 }
 
 export const getPlayer = (tag: string) => call<RawPlayer>(`/players/${encodeTag(tag)}`);

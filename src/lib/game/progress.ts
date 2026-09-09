@@ -1,5 +1,6 @@
-import type { Building, Resource, Unit } from './types';
+import type { Building, Equipment, OreCost, Resource, Unit } from './types';
 import { ALL_UNITS } from './army';
+import { EQUIPMENT, addOre, oreToMax, totalOre } from './equipment';
 import { BUILDER_UNITS, type BuilderResource, type BuilderUnit } from './builder-base';
 
 /**
@@ -37,6 +38,7 @@ export interface PlayerUnitLevels {
   heroes?: Array<{ name: string; level: number; village?: string }>;
   troops?: Array<{ name: string; level: number; village?: string }>;
   spells?: Array<{ name: string; level: number; village?: string }>;
+  heroEquipment?: Array<{ name: string; level: number; village?: string }>;
 }
 
 export function analyseUnits(player: PlayerUnitLevels): UnitProgress[] {
@@ -110,6 +112,90 @@ export function summarise(rows: UnitProgress[]): ProgressSummary {
     est,
   };
 }
+
+/* ------------------------------------------------------------- equipment */
+
+/**
+ * Hero equipment progress.
+ *
+ * Ownership matters here in a way it never does for troops. Every troop the
+ * hall allows is yours; equipment is not — commons arrive with their hero, but
+ * epics are bought from events, the Trader or the League Shop, and an account
+ * may simply never have obtained one. The API's `heroEquipment` list is the
+ * only source for that, so an item missing from it is reported as unowned
+ * rather than as level 0, and its ore is quoted as what it *would* cost from
+ * level 1 rather than added to what the account owes.
+ *
+ * There is no time to report: equipment upgrades are instant.
+ */
+export interface EquipmentProgress {
+  equipment: Equipment;
+  id: string;
+  name: string;
+  /** The hero that carries it — a `Unit` id. */
+  hero: string;
+  rarity: Equipment['rarity'];
+  ability: Equipment['ability'];
+  level: number;
+  maxHere: number;
+  pct: number;
+  /** False when the account has never obtained this item. */
+  found: boolean;
+  /** Ore from the current level (or from level 1 if unowned) to the ceiling. */
+  remainingOre: OreCost;
+}
+
+export function analyseEquipment(player: PlayerUnitLevels): EquipmentProgress[] {
+  const th = player.townHallLevel;
+  const levels = new Map<string, number>();
+  for (const e of player.heroEquipment ?? []) {
+    if (e.village && e.village !== 'home') continue;
+    levels.set(nameKey(e.name), e.level);
+  }
+
+  return EQUIPMENT.filter((e) => e.max[th] > 0).map((e) => {
+    const found = levels.has(nameKey(e.name));
+    const level = levels.get(nameKey(e.name)) ?? 0;
+    const maxHere = e.max[th];
+    return {
+      equipment: e, id: e.id, name: e.name, hero: e.hero,
+      rarity: e.rarity, ability: e.ability,
+      level, maxHere,
+      pct: maxHere ? (Math.min(level, maxHere) / maxHere) * 100 : 0,
+      found,
+      remainingOre: oreToMax(e, found ? level : 1, th),
+    };
+  });
+}
+
+export interface EquipmentSummary {
+  rows: EquipmentProgress[];
+  /** Ore owed on equipment the account actually has. */
+  ore: OreCost;
+  /** Ore the unowned items would cost on top, once obtained. */
+  oreIfObtained: OreCost;
+  ownedCount: number;
+  maxedCount: number;
+  /** Mean completion across owned items only — an epic never bought is not 0%. */
+  overallPct: number;
+}
+
+export function summariseEquipment(rows: EquipmentProgress[]): EquipmentSummary {
+  const owned = rows.filter((r) => r.found);
+  return {
+    rows,
+    ore: addOre(...owned.map((r) => r.remainingOre)),
+    oreIfObtained: addOre(...rows.filter((r) => !r.found).map((r) => r.remainingOre)),
+    ownedCount: owned.length,
+    maxedCount: owned.filter((r) => r.level >= r.maxHere).length,
+    overallPct: owned.length
+      ? (owned.reduce((a, r) => a + Math.min(1, r.level / Math.max(1, r.maxHere)), 0) / owned.length) * 100
+      : 0,
+  };
+}
+
+/** Sort key for a hero's items: what is still owed, heaviest first. */
+export const oreOwed = (r: EquipmentProgress): number => totalOre(r.remainingOre);
 
 /** Building-side equivalent, for a village recorded in the planner. */
 export function buildingProgressPct(b: Building, buckets: Record<number, number>, th: number): number {

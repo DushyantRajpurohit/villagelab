@@ -2,6 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { MAX_TH, TOWN_HALLS } from '../town-halls';
 import { BUILDINGS, BUILDINGS_BY_ID, SUPERCHARGES } from '../buildings';
 import { ALL_UNITS, CAMP_CAPACITY, SPELL_CAPACITY, UNITS_BY_ID } from '../army';
+import {
+  EQUIPMENT, EQUIPMENT_BY_ID, ORES, addOre, equipmentForHero, oreToMax, totalOre,
+} from '../equipment';
 
 /**
  * These do not verify values against the wiki — they catch the mistakes that
@@ -217,5 +220,133 @@ describe('town hall 18 and the sixth hero', () => {
     expect(dd.unlockTH).toBe(15);
     expect(dd.max[14]).toBe(0);
     expect(dd.max[18]).toBe(25);
+  });
+});
+
+describe.each(EQUIPMENT.map((e) => [e.name, e] as const))('equipment: %s', (_name, e) => {
+  it('max level never decreases with Town Hall', () => nonDecreasing(e.max, `${e.name} max`));
+
+  it('has a dense level table and a Blacksmith gate that never falls', () => {
+    expect(e.maxLevel).toBe(Math.max(...e.max));
+    expect(e.levels).toHaveLength(e.maxLevel + 1);
+    for (let l = 1; l <= e.maxLevel; l++) expect(e.levels[l]).not.toBeNull();
+    for (let l = 2; l <= e.maxLevel; l++) {
+      expect(e.levels[l]!.gate).toBeGreaterThanOrEqual(e.levels[l - 1]!.gate);
+    }
+  });
+
+  it('is free at level 1 and costs ore at every level after', () => {
+    // Equipment arrives at level 1; you never buy that level.
+    expect(totalOre(e.levels[1]!.ore)).toBe(0);
+    for (let l = 2; l <= e.maxLevel; l++) {
+      expect(totalOre(e.levels[l]!.ore), `${e.id} lvl${l}`).toBeGreaterThan(0);
+    }
+  });
+
+  it('does not exist before the Blacksmith or before its hero', () => {
+    expect(e.unlockTH).toBeGreaterThanOrEqual(UNITS_BY_ID[e.hero].unlockTH);
+    // Level 1 of an item that names a Blacksmith level needs one to be built.
+    if (e.levels[1]!.gate > 0) {
+      expect(e.unlockTH).toBeGreaterThanOrEqual(BUILDINGS_BY_ID.blacksmith.unlockTH);
+    }
+  });
+});
+
+describe('hero equipment', () => {
+  it('covers all 42 items across the six heroes', () => {
+    expect(EQUIPMENT).toHaveLength(42);
+    const heroes = new Set(EQUIPMENT.map((e) => e.hero));
+    expect(heroes.size).toBe(6);
+    for (const h of heroes) expect(UNITS_BY_ID[h]?.kind, h).toBe('hero');
+  });
+
+  it('prices every item of a rarity identically, bar one published outlier', () => {
+    // The game charges by rarity, not by item, so 41 of the 42 agreeing to the
+    // ore is the strongest check we have that the per-page transcription did
+    // not drift.
+    //
+    // The exception is the Stun Blaster, whose page prices level 6 at 940 Shiny
+    // where the other 23 commons all say 840 — every other row in its column
+    // matches. It reads like a typo at the source, but this dataset transcribes
+    // what is published rather than what it expects, so the figure stands and
+    // is pinned here instead of being quietly rounded to the pattern.
+    const toMax = (e: (typeof EQUIPMENT)[number]) =>
+      JSON.stringify(addOre(...e.levels.slice(1).map((l) => l!.ore)));
+
+    const common = EQUIPMENT.filter((e) => e.rarity === 'common');
+    const epic = EQUIPMENT.filter((e) => e.rarity === 'epic');
+    expect(common).toHaveLength(24);
+    expect(epic).toHaveLength(18);
+
+    const odd = common.filter((e) => toMax(e) !== toMax(EQUIPMENT_BY_ID.barbarian_puppet));
+    expect(odd.map((e) => e.id)).toEqual(['stun_blaster']);
+    expect(JSON.parse(toMax(EQUIPMENT_BY_ID.stun_blaster)))
+      .toEqual({ shiny: 27_360, glowy: 1_920 });
+    expect(EQUIPMENT_BY_ID.stun_blaster.levels[6]!.ore.shiny).toBe(940);
+    expect(EQUIPMENT_BY_ID.barbarian_puppet.levels[6]!.ore.shiny).toBe(840);
+
+    expect(new Set(epic.map(toMax)).size).toBe(1);
+    expect(JSON.parse(toMax(common[0]))).toEqual({ shiny: 27_260, glowy: 1_920 });
+    expect(JSON.parse(toMax(epic[0]))).toEqual({ shiny: 56_060, glowy: 3_720, starry: 480 });
+  });
+
+  it('gives commons 18 levels and epics 27', () => {
+    for (const e of EQUIPMENT) {
+      expect(e.maxLevel, e.id).toBe(e.rarity === 'common' ? 18 : 27);
+    }
+  });
+
+  it('never uses Starry Ore on a common item', () => {
+    // Starry Ore only ever appears on epic upgrades.
+    for (const e of EQUIPMENT.filter((x) => x.rarity === 'common')) {
+      for (const l of e.levels) expect(l?.ore.starry, e.id).toBeUndefined();
+    }
+    expect(ORES).toEqual(['shiny', 'glowy', 'starry']);
+  });
+
+  it('spends nothing to max an item already at its ceiling', () => {
+    const g = EQUIPMENT_BY_ID.giant_gauntlet;
+    expect(totalOre(oreToMax(g, g.max[MAX_TH], MAX_TH))).toBe(0);
+    expect(oreToMax(g, 1, MAX_TH)).toEqual({ shiny: 56_060, glowy: 3_720, starry: 480 });
+  });
+
+  it('hands the Barbarian King his puppet at Town Hall 4, with the Hero Hall', () => {
+    // The Barbarian Puppet is not bought — it comes with the hero, so it can
+    // exist before the Blacksmith does.
+    const bp = EQUIPMENT_BY_ID.barbarian_puppet;
+    expect(bp.unlockTH).toBe(4);
+    expect(bp.levels[1]!.gate).toBe(0);
+    expect(BUILDINGS_BY_ID.hero_hall.unlockTH).toBe(4);
+  });
+
+  it('groups a hero\'s items commons first', () => {
+    const bk = equipmentForHero('barbarian_king');
+    expect(bk.length).toBeGreaterThan(4);
+    const firstEpic = bk.findIndex((e) => e.rarity === 'epic');
+    expect(bk.slice(0, firstEpic).every((e) => e.rarity === 'common')).toBe(true);
+    expect(bk.slice(firstEpic).every((e) => e.rarity === 'epic')).toBe(true);
+  });
+});
+
+describe('the Hero Hall', () => {
+  it('is a structure like any other, not just a mapping', () => {
+    // It was used to derive every hero's ceiling long before it was added to
+    // the building table, which left the village drawing a hall it did not own.
+    const hh = BUILDINGS_BY_ID.hero_hall;
+    expect(hh).toBeTruthy();
+    expect(hh.maxLevel).toBe(12);
+    expect(hh.count[MAX_TH]).toBe(1);
+    expect(hh.resource).toBe('elixir');
+    expect(hh.levels[12]!.cost).toBe(26_000_000);
+  });
+
+  it('agrees with the hero ceilings it was used to derive', () => {
+    // Hero Hall level N is reachable at exactly the Town Hall where each hero's
+    // ceiling steps up; a mismatch means one of the two was re-scraped alone.
+    const hh = BUILDINGS_BY_ID.hero_hall;
+    expect(hh.max[4]).toBe(1);
+    expect(hh.max[8]).toBe(2);
+    expect(hh.max[MAX_TH]).toBe(12);
+    expect(UNITS_BY_ID.archer_queen.unlockTH).toBe(8);
   });
 });

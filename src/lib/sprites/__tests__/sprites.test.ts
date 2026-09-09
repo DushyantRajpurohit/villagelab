@@ -1,9 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import {
-  buildingSpriteFile, buildingSpriteUrl, resourceSpriteUrl, unitSpriteUrl, STORAGE_ID,
+  buildingSpriteFile, buildingSpriteUrl, equipmentSpriteUrl, resourceSpriteUrl,
+  unitSpriteUrl, STORAGE_ID,
 } from '@/lib/sprites';
 import { ALL_UNITS } from '@/lib/game/army';
 import { buildingsAtTH } from '@/lib/game/buildings';
+import { EQUIPMENT, ORES } from '@/lib/game/equipment';
 import type { Resource } from '@/lib/game/types';
 import { BUILDER_UNITS } from '@/lib/game/builder-base';
 import { BUILDER_HALL_ID, paletteFor, TOWN_HALL_ID, type PaletteEntry } from '@/lib/base/layout';
@@ -148,6 +150,46 @@ describe('resource badges', () => {
     const at = (th: number) => buildingsAtTH(th).some((b) => b.id === STORAGE_ID.dark);
     expect(at(6)).toBe(false);
     expect(at(7)).toBe(true);
+  });
+});
+
+describe('hero equipment art', () => {
+  it('has an icon for every one of the 42 items', () => {
+    const gaps = EQUIPMENT.filter((e) => !equipmentSpriteUrl(e.id)).map((e) => e.id);
+    expect(gaps).toEqual([]);
+  });
+
+  it('gives every item its own icon, under /sprites/equipment', () => {
+    const urls = EQUIPMENT.map((e) => equipmentSpriteUrl(e.id)!);
+    for (const u of urls) expect(u).toMatch(/^\/sprites\/equipment\/[0-9a-f]+\.webp$/);
+    expect(new Set(urls).size).toBe(EQUIPMENT.length);
+  });
+
+  it('returns null for something that is not equipment', () => {
+    expect(equipmentSpriteUrl('cannon')).toBeNull();
+    expect(equipmentSpriteUrl('barbarian_king')).toBeNull();
+  });
+});
+
+describe('ore badges', () => {
+  it('has a badge for each ore, distinct from every village currency', () => {
+    const ores = ORES.map((o) => resourceSpriteUrl(o));
+    for (const u of ores) expect(u).toMatch(/^\/sprites\/resources\/[0-9a-f]+\.webp$/);
+    const currencies = [
+      resourceSpriteUrl('gold'), resourceSpriteUrl('elixir'), resourceSpriteUrl('dark'),
+      resourceSpriteUrl('gold', 'builder'), resourceSpriteUrl('elixir', 'builder'),
+    ];
+    expect(new Set([...ores, ...currencies]).size).toBe(ores.length + currencies.length);
+  });
+
+  it('has no ore in the Builder Base, which has no Blacksmith', () => {
+    for (const o of ORES) expect(resourceSpriteUrl(o, 'builder'), o).toBeNull();
+  });
+
+  it('banks no ore, so an ore on hand keeps its own badge', () => {
+    // Ores are not in STORAGE_ID at all: no structure holds them, so there is
+    // no storage art to swap in for an amount already earned.
+    for (const o of ORES) expect(o in STORAGE_ID).toBe(false);
   });
 });
 

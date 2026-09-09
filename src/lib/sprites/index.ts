@@ -1,6 +1,6 @@
 /**
- * Official Clash of Clans art: structures per level, units as portraits, and
- * the three resource badges.
+ * Official Clash of Clans art: structures per level, units and hero equipment
+ * as portraits, and the currency badges.
  *
  * Sprites come from the Clash of Clans community wiki and are used under
  * Supercell's Fan Content Policy — see README. A structure's appearance changes
@@ -21,9 +21,10 @@
  * art arrives, rather than blocking the first frame on hundreds of requests.
  */
 
-import type { Resource, VillageId } from '@/lib/game/types';
+import type { Currency, Resource, VillageId } from '@/lib/game/types';
 import buildings from './buildings.json';
 import builderBuildings from './builder-buildings.json';
+import equipment from './equipment.json';
 import resources from './resources.json';
 import units from './units.json';
 
@@ -51,6 +52,7 @@ const BUILDINGS: Record<Village, SpriteIndex> = {
 };
 const UNITS: Record<string, string> = units as Record<string, string>;
 const RESOURCES: Record<string, string> = resources as Record<string, string>;
+const EQUIPMENT: Record<string, string> = equipment as Record<string, string>;
 
 /**
  * The file for a structure at a level, or null if it has no art at all.
@@ -143,10 +145,27 @@ export function unitSpriteUrl(id: string, village: Village = 'home'): string | n
  *
  * The Builder Base has no dark elixir, so that key has no builder entry and
  * resolves to null rather than falling back to the home village's.
+ *
+ * The three ores are here too, under the home village. They are not village
+ * currency — see `Ore` in game/types.ts — but they are drawn the same way: one
+ * badge, no levels, marking a cost. Nothing banks them, so they have no
+ * `STORAGE_ID` entry and an ore on hand keeps its own badge.
  */
-export function resourceSpriteUrl(kind: Resource, village: Village = 'home'): string | null {
+export function resourceSpriteUrl(kind: Currency, village: Village = 'home'): string | null {
   const file = RESOURCES[`${village}:${kind}`];
   return file ? `/sprites/resources/${file}` : null;
+}
+
+/**
+ * A piece of hero equipment's icon.
+ *
+ * One per item, never per level: the Blacksmith draws the same icon whether the
+ * Giant Gauntlet is level 1 or level 27. Equipment exists only in the home
+ * village, so unlike structures and units this is not keyed by village.
+ */
+export function equipmentSpriteUrl(id: string): string | null {
+  const file = EQUIPMENT[id];
+  return file ? `/sprites/equipment/${file}` : null;
 }
 
 /** The structure that banks a resource — the icon for an amount on hand. */

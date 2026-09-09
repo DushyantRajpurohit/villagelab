@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { analyseUnits, nameKey, summarise } from '../progress';
+import { analyseEquipment, analyseUnits, nameKey, summarise, summariseEquipment } from '../progress';
 import { UNITS_BY_ID } from '../army';
+import { EQUIPMENT_BY_ID, totalOre } from '../equipment';
 
 const bk = UNITS_BY_ID.barbarian_king;
 const hog = UNITS_BY_ID.hog_rider;
@@ -91,5 +92,71 @@ describe('summarise', () => {
     const s = summarise([]);
     expect(s.overallPct).toBe(0);
     expect(s.maxedCount).toBe(0);
+  });
+});
+
+describe('analyseEquipment', () => {
+  it('treats an item missing from the API as unowned, not as level 0', () => {
+    // Epics are bought, not granted. An account that never bought the Giant
+    // Gauntlet has not "left it at level 0" — it does not have one.
+    const rows = analyseEquipment({ townHallLevel: 16, heroEquipment: [] });
+    const g = rows.find((r) => r.id === 'giant_gauntlet')!;
+    expect(g.found).toBe(false);
+    expect(g.level).toBe(0);
+    // Quoted from level 1, because that is the level it would arrive at.
+    expect(g.remainingOre).toEqual({ shiny: 56_060, glowy: 3_720, starry: 480 });
+  });
+
+  it('owes nothing on an item already at this hall\'s ceiling', () => {
+    const th = 16;
+    const cap = EQUIPMENT_BY_ID.giant_gauntlet.max[th];
+    const rows = analyseEquipment({
+      townHallLevel: th,
+      heroEquipment: [{ name: 'Giant Gauntlet', level: cap, village: 'home' }],
+    });
+    const g = rows.find((r) => r.id === 'giant_gauntlet')!;
+    expect(g.found).toBe(true);
+    expect(g.pct).toBe(100);
+    expect(totalOre(g.remainingOre)).toBe(0);
+  });
+
+  it('lists only what the Town Hall can reach', () => {
+    const low = analyseEquipment({ townHallLevel: 5 });
+    expect(low.some((r) => r.id === 'barbarian_puppet')).toBe(true);
+    expect(low.some((r) => r.id === 'eternal_tome')).toBe(false);
+    expect(low.every((r) => r.hero === 'barbarian_king')).toBe(true);
+  });
+});
+
+describe('summariseEquipment', () => {
+  it('keeps ore for what you have apart from ore for what you do not', () => {
+    const th = 16;
+    const rows = analyseEquipment({
+      townHallLevel: th,
+      heroEquipment: [{ name: 'Barbarian Puppet', level: 1, village: 'home' }],
+    });
+    const s = summariseEquipment(rows);
+    expect(s.ownedCount).toBe(1);
+    expect(s.ore).toEqual({ shiny: 27_260, glowy: 1_920 });
+    // Everything else is quoted separately, so the two are never added.
+    expect(totalOre(s.oreIfObtained)).toBeGreaterThan(totalOre(s.ore));
+  });
+
+  it('does not score an unbought epic as 0% progress', () => {
+    const th = 16;
+    const rows = analyseEquipment({
+      townHallLevel: th,
+      heroEquipment: [{ name: 'Barbarian Puppet', level: 18, village: 'home' }],
+    });
+    const s = summariseEquipment(rows);
+    expect(s.overallPct).toBeCloseTo(100);
+    expect(s.maxedCount).toBe(1);
+  });
+
+  it('handles an account with no equipment at all', () => {
+    const s = summariseEquipment(analyseEquipment({ townHallLevel: 3 }));
+    expect(s.rows).toEqual([]);
+    expect(s.overallPct).toBe(0);
+    expect(s.ore).toEqual({});
   });
 });

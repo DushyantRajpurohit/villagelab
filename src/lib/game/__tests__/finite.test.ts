@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { BUILDINGS } from '../buildings';
 import { ALL_UNITS } from '../army';
+import { EQUIPMENT, ORES } from '../equipment';
 
 /**
  * Geometric interpolation is undefined when an anchor is zero — it silently
@@ -14,6 +15,24 @@ describe('every level has usable numbers', () => {
       .map((l, i) => ({ l, i }))
       .filter(({ l }) => l && (!Number.isFinite(l.cost) || !Number.isFinite(l.hours)));
     expect(bad.map(({ i, l }) => `lvl${i}: cost=${l!.cost} hours=${l!.hours}`)).toEqual([]);
+  });
+});
+
+describe('every equipment level has usable ore', () => {
+  // Same rule, different shape: an equipment step carries two or three ore
+  // figures instead of one cost, and an absent ore must be absent rather than
+  // NaN — `totalOre` sums whatever is there.
+  it.each(EQUIPMENT.map((e) => [e.name, e] as const))('%s', (_name, e) => {
+    const bad: string[] = [];
+    e.levels.forEach((l, i) => {
+      if (!l) return;
+      for (const o of ORES) {
+        const v = l.ore[o];
+        if (v !== undefined && !(Number.isFinite(v) && v > 0)) bad.push(`lvl${i} ${o}=${v}`);
+      }
+      if (!Number.isFinite(l.gate)) bad.push(`lvl${i} gate=${l.gate}`);
+    });
+    expect(bad).toEqual([]);
   });
 });
 

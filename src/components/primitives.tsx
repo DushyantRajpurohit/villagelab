@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
-import type { Resource } from '@/lib/game/types';
+import type { Currency, OreCost } from '@/lib/game/types';
 import { fmtResource } from '@/lib/format';
 import { ResourceIcon } from '@/components/GameIcon';
+import { ORES } from '@/lib/game/equipment';
 import type { Village } from '@/lib/sprites';
 
 export function Panel({ title, action, children, tight }: {
@@ -51,8 +52,9 @@ export function Bar({ pct, tone = 'gold' }: { pct: number; tone?: keyof typeof B
 export const pctTone = (pct: number): keyof typeof BAR_TONE =>
   pct >= 99 ? 'ok' : pct >= 60 ? 'gold' : pct >= 30 ? 'warn' : 'bad';
 
-const RES_COLOR: Record<Resource, string> = {
+const RES_COLOR: Record<Currency, string> = {
   gold: 'text-gold', elixir: 'text-elixir', dark: 'text-dark',
+  shiny: 'text-shiny', glowy: 'text-glowy', starry: 'text-starry',
 };
 
 /**
@@ -70,7 +72,7 @@ const RES_COLOR: Record<Resource, string> = {
  * elsewhere, and the game draws them differently.
  */
 export function Res({ amount, kind, est, village = 'home' }: {
-  amount: number; kind: Resource; est?: boolean; village?: Village;
+  amount: number; kind: Currency; est?: boolean; village?: Village;
 }) {
   return (
     <span className={`num inline-flex items-center gap-1 whitespace-nowrap ${RES_COLOR[kind]}`}>
@@ -81,6 +83,26 @@ export function Res({ amount, kind, est, village = 'home' }: {
         )}
         {fmtResource(amount)}
       </span>
+    </span>
+  );
+}
+
+/**
+ * An equipment upgrade's price: two or three ores at once, each with its own
+ * badge.
+ *
+ * Rendered as a row of `Res` rather than a single figure because the ores are
+ * not interchangeable — 600 Glowy is not 600 Shiny, and no exchange rate exists
+ * between them — so adding them into one number would invent a currency the
+ * game does not have. Ores an item never uses are absent from the cost and are
+ * simply not drawn.
+ */
+export function OreRow({ cost, gap = 'gap-2' }: { cost: OreCost; gap?: string }) {
+  const parts = ORES.filter((o) => cost[o]);
+  if (!parts.length) return null;
+  return (
+    <span className={`inline-flex flex-wrap items-baseline ${gap}`}>
+      {parts.map((o) => <Res key={o} amount={cost[o]!} kind={o} />)}
     </span>
   );
 }

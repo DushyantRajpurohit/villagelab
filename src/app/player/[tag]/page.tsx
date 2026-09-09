@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getPlayer } from '@/lib/data/players';
-import { analyseUnits, summarise } from '@/lib/game/progress';
+import { analyseEquipment, analyseUnits, summarise, summariseEquipment } from '@/lib/game/progress';
 import { normalizeTag } from '@/lib/coc/tags';
 import { fmtDuration, fmtInt } from '@/lib/format';
-import { Bar, Chip, Panel, Res, Stat, pctTone } from '@/components/primitives';
+import { Bar, Chip, OreRow, Panel, Res, Stat, pctTone } from '@/components/primitives';
 import { RESOURCE_NAME } from '@/components/GameIcon';
+import { totalOre } from '@/lib/game/equipment';
 import { UnitTable } from '@/components/UnitTable';
-import { HeroRoster } from '@/components/HeroRoster';
+import { HeroRoster, type HeroGear } from '@/components/HeroRoster';
 import { HomeVillageBuildings } from '@/components/player/VillageBuildings';
 import {
   MockBanner, PlayerFrame, PlayerIdentity, PlayerNotFound, PlayerQueued,
@@ -66,6 +67,16 @@ export default async function PlayerPage({ params }: Params) {
   const s = summarise(rows);
   const th = p.townHallLevel;
   const rushed = rows.filter((r) => r.rushed);
+
+  const gearRows = analyseEquipment(p);
+  const gearSummary = summariseEquipment(gearRows);
+  const gear: Record<string, HeroGear[]> = {};
+  for (const g of gearRows) {
+    (gear[g.hero] ??= []).push({
+      id: g.id, name: g.name, rarity: g.rarity,
+      level: g.level, maxHere: g.maxHere, found: g.found,
+    });
+  }
 
   return (
     <PlayerFrame tag={p.tag}>
@@ -128,11 +139,49 @@ export default async function PlayerPage({ params }: Params) {
             {/* Heroes get the hall treatment; everything else is a table,
                 because forty troops are a list and five heroes are a cast. */}
             {kind === 'hero'
-              ? <HeroRoster heroes={group} hall={th} />
+              ? <HeroRoster heroes={group} hall={th} gear={gear} />
               : <UnitTable rows={sortBy(group, (r) => r.pct)} th={th} />}
           </Panel>
         );
       })}
+
+      {gearRows.length > 0 && (
+        <Panel
+          title={`Hero equipment at TH${th}`}
+          action={
+            <Chip tone={gearSummary.ownedCount === gearRows.length ? 'ok' : 'plain'}>
+              {gearSummary.ownedCount}/{gearRows.length} obtained
+            </Chip>
+          }
+        >
+          <div className="grid gap-4 sm:grid-cols-3">
+            <Stat
+              label="Equipment progress"
+              value={`${gearSummary.overallPct.toFixed(0)}%`}
+              sub={`${gearSummary.maxedCount} of ${gearSummary.ownedCount} maxed for TH${th}`}
+            />
+            <div className="sm:col-span-2">
+              <div className="text-[11px] uppercase tracking-[.06em] text-muted">Ore to max what you have</div>
+              <div className="mt-1 text-[22px] font-semibold">
+                {totalOre(gearSummary.ore) > 0
+                  ? <OreRow cost={gearSummary.ore} />
+                  : <span className="text-ok">nothing owed</span>}
+              </div>
+              {totalOre(gearSummary.oreIfObtained) > 0 && (
+                <div className="mt-2 text-[13px]">
+                  <span className="text-muted">Plus, once obtained: </span>
+                  <OreRow cost={gearSummary.oreIfObtained} gap="gap-2.5" />
+                </div>
+              )}
+            </div>
+          </div>
+          <p className="mt-3 text-xs text-muted">
+            Ore is not village currency — nothing else spends it and no storage banks it — and
+            equipment upgrades are instant, so none of this sits on the laboratory clock above.
+            The ceiling comes from the Blacksmith, which the Town Hall in turn limits.
+          </p>
+        </Panel>
+      )}
 
       {/* What the hall permits, not what the account has — the API carries no
           building levels for either village. */}

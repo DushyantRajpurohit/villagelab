@@ -7,6 +7,7 @@
  * player data is reproduced.
  */
 import { ALL_UNITS } from '../game/army';
+import { EQUIPMENT } from '../game/equipment';
 import { BUILDER_TROOPS, BUILDER_HEROES, MAX_BH } from '../game/builder-base';
 import { MAX_TH } from '../game/town-halls';
 import { normalizeTag } from './tags';
@@ -94,6 +95,17 @@ export function mockPlayer(tag: string, opts: MockOptions = {}): RawPlayer & { _
 
   const builderTrophies = between(rng, 500 + bh * 320, 900 + bh * 380);
 
+  // Equipment ownership is not derivable — the API is the only source for which
+  // epics an account bought — so the mock buys some and skips others. Commons
+  // always arrive with their hero.
+  const equipment = EQUIPMENT.filter((e) => e.max[th] > 0)
+    .filter((e) => e.rarity === 'common' || rng() < 0.55)
+    .map((e) => {
+      const cap = e.max[th];
+      const level = Math.max(1, Math.min(cap, Math.round(cap * progress * (0.6 + rng() * 0.55))));
+      return { name: e.name, level, village: 'home' as const };
+    });
+
   return {
     tag: norm,
     name: opts.name ?? `${pick(rng, FIRST)}${pick(rng, SECOND)}`,
@@ -114,6 +126,7 @@ export function mockPlayer(tag: string, opts: MockOptions = {}): RawPlayer & { _
     troops: [...roster('troop'), ...roster('pet'), ...roster('siege'), ...builderRoster(BUILDER_TROOPS)],
     spells: roster('spell'),
     heroes: [...roster('hero'), ...builderRoster(BUILDER_HEROES)],
+    heroEquipment: equipment,
     _mock: true,
   };
 }

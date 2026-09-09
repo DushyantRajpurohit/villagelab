@@ -96,12 +96,13 @@ key, point the worker at a fixed-IP host, and nothing else changes.
 ## Data accuracy
 
 The API exposes unit levels but **no building levels and no upgrade costs**, so
-`src/lib/game/` carries a curated dataset: 18 Town Halls, 46 buildings, 67 units.
+`src/lib/game/` carries a curated dataset: 18 Town Halls, 47 buildings, 67 units
+and 42 pieces of hero equipment.
 
-**All 1,579 levels are transcribed**, level by level, from the game's published
-tables — every structure and every unit in both villages. Nothing is
-interpolated, so the `≈` that marks an estimate does not appear anywhere in the
-app, and a test asserts it cannot.
+**Every level is transcribed** — 1,591 building and unit levels in the Home
+Village, 918 equipment levels, and the Builder Base's own set — level by level,
+from the game's published tables. Nothing is interpolated, so the `≈` that marks
+an estimate does not appear anywhere in the app, and a test asserts it cannot.
 
 The machinery for estimates is still wired up (`est: true`, `curve.ts`), unused,
 because new game content arrives half-documented and that is the honest way to
@@ -187,8 +188,52 @@ Two rules fall out of the building data:
 Town Hall 18 also brings three structures that did not exist here before: the
 **Revenge Tower**, the **Super Wizard Tower**, and the **Crafting Station**. The
 Crafting Station is free and level-less; the Crafted Defenses it hosts are
-upgraded with Sparky Stones, a currency this app does not model yet — the same
-gap as Ores and hero equipment.
+upgraded with Sparky Stones, a currency this app does not model yet.
+
+### Hero equipment
+
+The 42 items the Blacksmith upgrades are a third kind of entity — not a
+structure, not a unit — and each of the three ways they differ is modelled
+rather than flattened:
+
+- **They cost ore, often two or three at once.** A building or unit step spends
+  exactly one currency, which is why `LevelStep` has a single `cost`; an
+  equipment step carries an `OreCost` instead. Ores are deliberately *not* part
+  of `Resource`: nothing else in either village spends them, no storage banks
+  them, and they cannot be raided or donated. Folding them in would put three
+  keys into every `Record<Resource, number>` total that could never receive a
+  value. `OreRow` renders the two or three figures side by side rather than
+  adding them, because there is no exchange rate between ores.
+- **Upgrades are instant.** No build time, no lane, so equipment never enters
+  the planner's queue and never lands on the laboratory clock.
+- **The ceiling comes from the Blacksmith, not the Town Hall** — the same shape
+  as the Laboratory gating troops. Each level publishes the Blacksmith level it
+  needs; the Town Hall enters only through how far the Blacksmith reaches there,
+  and the result is bounded below by the hero's own unlock, since a Grand Warden
+  item cannot exist at Town Hall 8.
+
+Ownership is the one thing the tables cannot tell you. Commons arrive with their
+hero, but epics are bought from events, the Trader or the League Shop, so the
+API's `heroEquipment` list is the only source for which ones an account has. An
+item missing from it is reported as **unowned** rather than as level 0: its ore
+is quoted as what it *would* cost once obtained and kept out of what the account
+owes, and an epic never bought does not drag the equipment percentage down.
+
+The ore price is uniform per rarity, which is the strongest check on the
+transcription available: every common costs 27,260 Shiny and 1,920 Glowy from 1
+to 18, and every epic 56,060 Shiny, 3,720 Glowy and 480 Starry from 1 to 27.
+Forty-one of the forty-two agree to the ore. The exception is the **Stun
+Blaster**, whose page prices level 6 at 940 Shiny where the other 23 commons all
+say 840 — every other row in its column matches, so it reads like a typo at the
+source. It is transcribed as published and pinned in a test rather than quietly
+rounded to the pattern, because this dataset records what the tables say, not
+what it expects them to say.
+
+The **Hero Hall** joined the building table at the same time. Its page had been
+read for a while to derive every hero's ceiling, but the hall itself was never a
+structure the village could own. A test now asserts the two agree — Hero Hall
+level N reachable at exactly the Town Hall where each hero's ceiling steps up —
+so neither can be re-scraped alone.
 
 ### The Builder Base dataset
 
@@ -220,8 +265,9 @@ anchor at zero — so every Wall level had `hours: NaN`. The previous validator
 checked ordering with `cost < prev`, and **every comparison against NaN is
 false**, so it reported success while the data was broken.
 
-`finite.test.ts` now asserts finiteness across all 113 entities, because
-ordering checks structurally cannot catch NaN.
+`finite.test.ts` now asserts finiteness across all 156 Home Village entities —
+114 structures and units plus 42 pieces of equipment — because ordering checks
+structurally cannot catch NaN.
 
 The war analysis is tested the same way. Stars are credited to the attacker who
 *added* them, not the one who scored them — a cleanup hit on a base the clan

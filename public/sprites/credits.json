@@ -415,6 +415,24 @@
    "maxLevel": 19,
    "files": 17
   },
+  "hero_hall": {
+   "levels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+   ],
+   "maxLevel": 12,
+   "files": 12
+  },
   "hidden_tesla": {
    "levels": [
     3,
@@ -1046,6 +1064,18 @@
   "builder:elixir": {
    "name": "Builder Elixir",
    "source": "File:ElixirB.png"
+  },
+  "home:shiny": {
+   "name": "Shiny Ore",
+   "source": "File:Shiny_Ore.png"
+  },
+  "home:glowy": {
+   "name": "Glowy Ore",
+   "source": "File:Glowy_Ore.png"
+  },
+  "home:starry": {
+   "name": "Starry Ore",
+   "source": "File:Starry_Ore.png"
   }
  },
  "builderStructures": {
@@ -1551,6 +1581,177 @@
    ],
    "files": 5,
    "page": "X-Bow/Builder Base"
+  }
+ },
+ "_equipment": "public/sprites/equipment/*.webp, indexed by src/lib/sprites/equipment.json. ONE icon per item, no levels - the Blacksmith draws the same icon at every level.",
+ "equipment": {
+  "action_figure": {
+   "name": "Action Figure",
+   "source": "File:Action_Figure.png"
+  },
+  "archer_puppet": {
+   "name": "Archer Puppet",
+   "source": "File:Archer_Puppet.png"
+  },
+  "barbarian_puppet": {
+   "name": "Barbarian Puppet",
+   "source": "File:Barbarian_Puppet.png"
+  },
+  "dark_crown": {
+   "name": "Dark Crown",
+   "source": "File:Dark_Crown.png"
+  },
+  "dark_orb": {
+   "name": "Dark Orb",
+   "source": "File:Dark_Orb.png"
+  },
+  "earthquake_boots": {
+   "name": "Earthquake Boots",
+   "source": "File:Earthquake_Boots.png"
+  },
+  "electro_boots": {
+   "name": "Electro Boots",
+   "source": "File:Electro_Boots.png"
+  },
+  "electro_fangs": {
+   "name": "Electro Fangs",
+   "source": "File:Electro_Fangs.png"
+  },
+  "eternal_tome": {
+   "name": "Eternal Tome",
+   "source": "File:Eternal_Tome.png"
+  },
+  "fire_heart": {
+   "name": "Fire Heart",
+   "source": "File:Fire_Heart.png"
+  },
+  "fireball": {
+   "name": "Fireball",
+   "source": "File:Fireball.png"
+  },
+  "flame_blower": {
+   "name": "Flame Blower",
+   "source": "File:Flame_Blower.png"
+  },
+  "frost_flake": {
+   "name": "Frost Flake",
+   "source": "File:Frost_Flake.png"
+  },
+  "frozen_arrow": {
+   "name": "Frozen Arrow",
+   "source": "File:Frozen_Arrow.png"
+  },
+  "giant_arrow": {
+   "name": "Giant Arrow",
+   "source": "File:Giant_Arrow.png"
+  },
+  "giant_gauntlet": {
+   "name": "Giant Gauntlet",
+   "source": "File:Giant_Gauntlet.png"
+  },
+  "haste_vial": {
+   "name": "Haste Vial",
+   "source": "File:Haste_Vial.png"
+  },
+  "healer_puppet": {
+   "name": "Healer Puppet",
+   "source": "File:Healer_Puppet.png"
+  },
+  "healing_tome": {
+   "name": "Healing Tome",
+   "source": "File:Healing_Tome.png"
+  },
+  "henchmen_puppet": {
+   "name": "Henchmen Puppet",
+   "source": "File:Henchmen_Puppet.png"
+  },
+  "heroic_torch": {
+   "name": "Heroic Torch",
+   "source": "File:Heroic_Torch.png"
+  },
+  "hog_rider_puppet": {
+   "name": "Hog Rider Puppet",
+   "source": "File:Hog_Rider_Puppet.png"
+  },
+  "invisibility_vial": {
+   "name": "Invisibility Vial",
+   "source": "File:Invisibility_Vial.png"
+  },
+  "lavaloon_puppet": {
+   "name": "Lavaloon Puppet",
+   "source": "File:Lavaloon_Puppet.png"
+  },
+  "life_gem": {
+   "name": "Life Gem",
+   "source": "File:Life_Gem.png"
+  },
+  "magic_mirror": {
+   "name": "Magic Mirror",
+   "source": "File:Magic_Mirror.png"
+  },
+  "metal_pants": {
+   "name": "Metal Pants",
+   "source": "File:Metal_Pants.png"
+  },
+  "meteor_staff": {
+   "name": "Meteor Staff",
+   "source": "File:Meteor_Staff.png"
+  },
+  "monolith_arrow": {
+   "name": "Monolith Arrow",
+   "source": "File:Monolith_Arrow.png"
+  },
+  "noble_iron": {
+   "name": "Noble Iron",
+   "source": "File:Noble_Iron.png"
+  },
+  "rage_gem": {
+   "name": "Rage Gem",
+   "source": "File:Rage_Gem.png"
+  },
+  "rage_vial": {
+   "name": "Rage Vial",
+   "source": "File:Rage_Vial.png"
+  },
+  "revenge_deck": {
+   "name": "Revenge Deck",
+   "source": "File:Revenge_Deck.png"
+  },
+  "rocket_backpack": {
+   "name": "Rocket Backpack",
+   "source": "File:Rocket_Backpack.png"
+  },
+  "rocket_spear": {
+   "name": "Rocket Spear",
+   "source": "File:Rocket_Spear.png"
+  },
+  "royal_gem": {
+   "name": "Royal Gem",
+   "source": "File:Royal_Gem.png"
+  },
+  "seeking_shield": {
+   "name": "Seeking Shield",
+   "source": "File:Seeking_Shield.png"
+  },
+  "snake_bracelet": {
+   "name": "Snake Bracelet",
+   "source": "File:Snake_Bracelet.png"
+  },
+  "spiky_ball": {
+   "name": "Spiky Ball",
+   "source": "File:Spiky_Ball.png"
+  },
+  "stick_horse": {
+   "name": "Stick Horse",
+   "source": "File:Stick_Horse.png"
+  },
+  "stun_blaster": {
+   "name": "Stun Blaster",
+   "source": "File:Stun_Blaster.png"
+  },
+  "vampstache": {
+   "name": "Vampstache",
+   "source": "File:Vampstache.png"
   }
  }
 }
