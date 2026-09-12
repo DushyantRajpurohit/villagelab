@@ -1076,6 +1076,10 @@
   "home:starry": {
    "name": "Starry Ore",
    "source": "File:Starry_Ore.png"
+  },
+  "home:sparky": {
+   "name": "Sparky Stone",
+   "source": "File:Res SparkyStone.png"
   }
  },
  "builderStructures": {
@@ -1752,6 +1756,27 @@
   "vampstache": {
    "name": "Vampstache",
    "source": "File:Vampstache.png"
+  }
+ },
+ "_crafted": "public/sprites/crafted/*.webp, indexed by src/lib/sprites/crafted.json. Indexed per LEVEL like a structure, because the game redraws a Crafted Defense as it upgrades - but BANDED: the four pictures cover levels 3-11, 12-20, 21-29 and 30, so the index holds one entry per band and a level with no entry uses the highest below it. A separate index from the structures, because a Crafted Defense is not a building: it is what the Crafting Station turns into, and its set is replaced every four months, so a retired one can be dropped without touching structure art.",
+ "crafted": {
+  "hot_candle": {
+   "3": "File:Hot Candle1-1.png",
+   "12": "File:Hot Candle2-1.png",
+   "21": "File:Hot Candle3-1.png",
+   "30": "File:Hot Candle4-1.png"
+  },
+  "hero_hunter": {
+   "3": "File:Hero Hunter1.png",
+   "12": "File:Hero Hunter2.png",
+   "21": "File:Hero Hunter3.png",
+   "30": "File:Hero Hunter4.png"
+  },
+  "cake_a_pult": {
+   "3": "File:Cake-A-Pult1.png",
+   "12": "File:Cake-A-Pult2.png",
+   "21": "File:Cake-A-Pult3.png",
+   "30": "File:Cake-A-Pult4.png"
   }
  }
 }

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { BUILDINGS } from '../buildings';
 import { ALL_UNITS } from '../army';
 import { EQUIPMENT, ORES } from '../equipment';
+import { CRAFTED_DEFENSES } from '../crafted';
 
 /**
  * Geometric interpolation is undefined when an anchor is zero — it silently
@@ -31,6 +32,27 @@ describe('every equipment level has usable ore', () => {
         if (v !== undefined && !(Number.isFinite(v) && v > 0)) bad.push(`lvl${i} ${o}=${v}`);
       }
       if (!Number.isFinite(l.gate)) bad.push(`lvl${i} gate=${l.gate}`);
+    });
+    expect(bad).toEqual([]);
+  });
+});
+
+describe('every crafted defense module has usable numbers', () => {
+  // A module's level 1 is legitimately null — it is where the module starts,
+  // not something anyone buys — so this asserts the null is where it should be
+  // and every other level is real, rather than skipping nulls and finding
+  // nothing to check.
+  const modules = CRAFTED_DEFENSES.flatMap((d) =>
+    d.modules.map((m) => [`${d.name} / ${m.name}`, m] as const));
+
+  it.each(modules)('%s', (_name, m) => {
+    expect(m.levels[1]).toBeNull();
+    const bad: string[] = [];
+    m.levels.forEach((l, i) => {
+      if (i === 0 || i === 1) return;
+      if (!l) { bad.push(`lvl${i} missing`); return; }
+      if (!Number.isFinite(l.cost) || l.cost <= 0) bad.push(`lvl${i} cost=${l.cost}`);
+      if (!Number.isFinite(l.hours) || l.hours <= 0) bad.push(`lvl${i} hours=${l.hours}`);
     });
     expect(bad).toEqual([]);
   });

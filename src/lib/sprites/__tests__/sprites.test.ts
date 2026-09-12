@@ -1,11 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import {
-  buildingSpriteFile, buildingSpriteUrl, equipmentSpriteUrl, resourceSpriteUrl,
-  unitSpriteUrl, STORAGE_ID,
+  buildingSpriteFile, buildingSpriteUrl, craftedSpriteUrl, equipmentSpriteUrl,
+  resourceSpriteUrl, unitSpriteUrl, STORAGE_ID,
 } from '@/lib/sprites';
 import { ALL_UNITS } from '@/lib/game/army';
 import { buildingsAtTH } from '@/lib/game/buildings';
 import { EQUIPMENT, ORES } from '@/lib/game/equipment';
+import { CRAFTED_DEFENSES } from '@/lib/game/crafted';
 import type { Resource } from '@/lib/game/types';
 import { BUILDER_UNITS } from '@/lib/game/builder-base';
 import { BUILDER_HALL_ID, paletteFor, TOWN_HALL_ID, type PaletteEntry } from '@/lib/base/layout';
@@ -190,6 +191,75 @@ describe('ore badges', () => {
     // Ores are not in STORAGE_ID at all: no structure holds them, so there is
     // no storage art to swap in for an amount already earned.
     for (const o of ORES) expect(o in STORAGE_ID).toBe(false);
+  });
+});
+
+describe('crafted defense art', () => {
+  it('has art for every defense at every level it can reach', () => {
+    // A Crafted Defense runs 3 to 30 and the game redraws it three times on the
+    // way, so unlike equipment this is indexed per level — banded, with the
+    // fallback filling in between.
+    const gaps: string[] = [];
+    for (const d of CRAFTED_DEFENSES) {
+      for (let l = 3; l <= d.maxLevel; l++) {
+        if (!craftedSpriteUrl(d.id, l)) gaps.push(`${d.id}@${l}`);
+      }
+    }
+    expect(gaps).toEqual([]);
+  });
+
+  it('redraws each defense across its four published bands', () => {
+    // Levels 3-11, 12-20, 21-29 and 30 each get their own picture, so a maxed
+    // defense must not look like a fresh one.
+    for (const d of CRAFTED_DEFENSES) {
+      const bands = [3, 12, 21, 30].map((l) => craftedSpriteUrl(d.id, l));
+      expect(new Set(bands).size, d.id).toBe(4);
+      expect(craftedSpriteUrl(d.id, 11)).toBe(craftedSpriteUrl(d.id, 3));
+      expect(craftedSpriteUrl(d.id, 20)).toBe(craftedSpriteUrl(d.id, 12));
+      expect(craftedSpriteUrl(d.id, 29)).toBe(craftedSpriteUrl(d.id, 21));
+    }
+  });
+
+  it('serves crafted art from its own directory, and gives each defense its own', () => {
+    const urls = CRAFTED_DEFENSES.map((d) => craftedSpriteUrl(d.id, 30)!);
+    for (const u of urls) expect(u).toMatch(/^\/sprites\/crafted\/[0-9a-f]+\.webp$/);
+    expect(new Set(urls).size).toBe(CRAFTED_DEFENSES.length);
+  });
+
+  it('never resolves a crafted defense to a structure, or the other way', () => {
+    // They are separate indexes precisely so a retired defense can be dropped
+    // without touching structure art, and so neither can borrow the other's.
+    expect(craftedSpriteUrl('cannon', 5)).toBeNull();
+    expect(craftedSpriteUrl('crafting_station', 1)).toBeNull();
+    for (const d of CRAFTED_DEFENSES) expect(buildingSpriteFile(d.id, 30)).toBeNull();
+  });
+
+  it('draws the Crafting Station itself as a structure, because it is one', () => {
+    expect(buildingSpriteFile('crafting_station', 1)).toBeTruthy();
+  });
+});
+
+describe('the sparky stone badge', () => {
+  it('has a badge of its own, distinct from every currency and ore', () => {
+    const sparky = resourceSpriteUrl('sparky');
+    expect(sparky).toMatch(/^\/sprites\/resources\/[0-9a-f]+\.webp$/);
+    const others = [
+      resourceSpriteUrl('gold'), resourceSpriteUrl('elixir'), resourceSpriteUrl('dark'),
+      ...ORES.map((o) => resourceSpriteUrl(o)),
+    ];
+    expect(others).not.toContain(sparky);
+  });
+
+  it('exists only in the home village, which is where both its sources are', () => {
+    // Crafted Defenses and Supercharges are Home Village mechanics; the Builder
+    // Base earns no Sparky Stones at all.
+    expect(resourceSpriteUrl('sparky', 'builder')).toBeNull();
+  });
+
+  it('banks nowhere, so an amount earned keeps its own badge', () => {
+    // Like the ores and for the same reason: no structure holds them, so there
+    // is no storage art to swap in. They are capped, not stored.
+    expect('sparky' in STORAGE_ID).toBe(false);
   });
 });
 

@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import type { Currency, Resource } from '@/lib/game/types';
 import {
-  buildingSpriteUrl, equipmentSpriteUrl, resourceSpriteUrl, unitSpriteUrl,
-  STORAGE_ID, type Village,
+  buildingSpriteUrl, craftedSpriteUrl, equipmentSpriteUrl, resourceSpriteUrl,
+  unitSpriteUrl, STORAGE_ID, type Village,
 } from '@/lib/sprites';
 
 /**
@@ -57,6 +57,7 @@ export function GameIcon({ kind, id, level, village = 'home', size = 26, alt = '
 export const RESOURCE_NAME: Record<Currency, string> = {
   gold: 'Gold', elixir: 'Elixir', dark: 'Dark elixir',
   shiny: 'Shiny Ore', glowy: 'Glowy Ore', starry: 'Starry Ore',
+  sparky: 'Sparky Stone',
 };
 
 /**
@@ -71,6 +72,38 @@ export function EquipmentIcon({ id, size = 26, alt = '' }: {
   id: string; size?: number; alt?: string;
 }) {
   const url = equipmentSpriteUrl(id);
+  if (!url) {
+    return (
+      <span
+        aria-hidden
+        className="shrink-0 rounded-[4px] border border-line bg-panel-2"
+        style={{ width: size, height: size }}
+      />
+    );
+  }
+  return (
+    <Image
+      src={url}
+      alt={alt}
+      width={size}
+      height={size}
+      className="shrink-0 object-contain"
+      style={{ width: size, height: size }}
+    />
+  );
+}
+
+/**
+ * A Crafted Defense, drawn at one of its own levels.
+ *
+ * Takes a level like a structure rather than none like equipment, because the
+ * game redraws it three times on the way from 3 to 30 — so a maxed Hot Candle
+ * does not look like a fresh one. The art is banded; see src/lib/sprites.
+ */
+export function CraftedIcon({ id, level, size = 26, alt = '' }: {
+  id: string; level: number; size?: number; alt?: string;
+}) {
+  const url = craftedSpriteUrl(id, level);
   if (!url) {
     return (
       <span

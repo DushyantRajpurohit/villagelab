@@ -24,8 +24,30 @@ export type Resource = 'gold' | 'elixir' | 'dark';
  */
 export type Ore = 'shiny' | 'glowy' | 'starry';
 
-/** Anything a cost can be denominated in — for the badge, not for a total. */
-export type Currency = Resource | Ore;
+/**
+ * Sparky Stones — what temporary upgrades pay out.
+ *
+ * The odd one out, and kept out of `Resource` for the opposite reason to
+ * `Ore`. Ores are a cost the app never totals with gold; Sparky Stones are not
+ * a cost in the village at all. Nothing in either village is built or upgraded
+ * with them. They are *earned* — 8 for every Crafted Defense module level and
+ * 10 for every Supercharge charge level — and spent only in the Fancy Shop, on
+ * cosmetics. So they are a yield, and the app models them as one: something an
+ * upgrade pays you, never something an upgrade costs.
+ *
+ * They are held against a cap of 5,000 rather than in a storage, which is the
+ * other reason they are not a `Resource`: no structure banks them, so there is
+ * no storage art to mark a balance with.
+ */
+export type Sparky = 'sparky';
+
+/**
+ * Anything a cost can be denominated in — for the badge, not for a total.
+ *
+ * Sparky Stones are here because the Fancy Shop prices cosmetics in them, so
+ * there is a figure to badge. Nothing in the village is priced in them.
+ */
+export type Currency = Resource | Ore | Sparky;
 
 /** What an equipment upgrade costs. Ores an item never uses are absent. */
 export type OreCost = Partial<Record<Ore, number>>;
@@ -106,6 +128,79 @@ export interface EquipmentStep {
   ore: OreCost;
   /** Blacksmith level this upgrade needs. */
   gate: number;
+}
+
+/**
+ * One of a Crafted Defense's three modules.
+ *
+ * A module is the unit of upgrading, not the defense: the defense itself has no
+ * cost table of its own. Each module runs 1..10, spends exactly one currency,
+ * and the three modules of a defense spend three different ones — so a single
+ * Crafted Defense is billed in gold *and* elixir *and* dark elixir. That is why
+ * a module carries the `resource`, where a `Building` carries it once.
+ *
+ * Structurally a module is an `Upgradable` (see planner.ts): a ceiling per hall
+ * and a dense level table is exactly what it is, which is why the planner's
+ * engine can price one without knowing what a Crafted Defense is.
+ */
+export interface CraftedModule {
+  /** 1, 2 or 3 — the order the game lists them in. */
+  index: number;
+  name: string;
+  /** The one currency this module spends. */
+  resource: Resource;
+  /** Highest reachable level at each Town Hall; index === TH level. */
+  max: number[];
+  maxLevel: number;
+  /**
+   * Dense per-level costs; index === level, 0 unused. Level 1 is null: it is
+   * the level the module arrives at, not an upgrade anyone buys.
+   */
+  levels: (LevelStep | null)[];
+}
+
+/**
+ * A Crafted Defense — what the Crafting Station can be turned into.
+ *
+ * Not a `Building`, and the differences are the point:
+ *
+ *  - **It has no level ladder of its own.** Its level is the sum of its three
+ *    modules' levels, so it arrives at 3 and tops out at 30, and there is no
+ *    such thing as the cost of "level 7".
+ *  - **It is billed in three currencies**, one per module.
+ *  - **It is temporary.** A Crafting Phase lasts four months and takes its set
+ *    with it when it ends. `CRAFTING_PHASE` says which set this is.
+ *  - **It is free to choose and free to swap.** The station can be toggled
+ *    between the phase's defenses at no cost, so a player can hold all three
+ *    and pay only for the modules they upgrade.
+ */
+export interface CraftedDefense {
+  id: string;
+  name: string;
+  /** Footprint in grid tiles, [width, height]. */
+  size: readonly [number, number];
+  /** First Town Hall at which the Crafting Station can be placed. */
+  unlockTH: number;
+  modules: CraftedModule[];
+  /** The defense's own level at each Town Hall: its modules' ceilings summed. */
+  max: number[];
+  /** 30 — all three modules at 10. */
+  maxLevel: number;
+}
+
+/**
+ * Which Crafting Phase the dataset describes, and when it ends.
+ *
+ * Recorded rather than assumed because the set rotates: after `until` these
+ * three defenses are gone from the game and the next three are not in here
+ * yet. The app says which phase it is holding rather than presenting a
+ * finished phase as current.
+ */
+export interface CraftingPhase {
+  number: number;
+  /** ISO dates, as published. */
+  from: string;
+  until: string;
 }
 
 export interface TownHall {

@@ -4,6 +4,7 @@ import { GameIcon } from '@/components/GameIcon';
 import { fmtDuration } from '@/lib/format';
 import { builderBuildingsAtBH } from '@/lib/game/builder-base';
 import { BUILDINGS_BY_ID, SUPERCHARGES, buildingsAtTH } from '@/lib/game/buildings';
+import { craftedAtTH } from '@/lib/game/crafted';
 import { MAX_TH } from '@/lib/game/town-halls';
 import type { Resource } from '@/lib/game/types';
 import type { Village } from '@/lib/sprites';
@@ -78,6 +79,13 @@ export function HomeVillageBuildings({ th }: { th: number }) {
   const charged = th < MAX_TH ? []
     : Object.keys(SUPERCHARGES).filter((id) => BUILDINGS_BY_ID[id].count[th] > 0);
 
+  // Same rule as supercharges, for the same reason: the Crafting Station is a
+  // structure this hall can build and belongs in the total, but the Crafted
+  // Defense it turns into is not a structure and its modules expire with the
+  // phase. Naming that here is what stops the total reading as if it covered
+  // everything on the map.
+  const crafted = craftedAtTH(th);
+
   return (
     <VillageBuildings
       title={`What Town Hall ${th} can build`}
@@ -85,13 +93,24 @@ export function HomeVillageBuildings({ th }: { th: number }) {
       village="home"
       resources={['gold', 'elixir', 'dark']}
       label={(k) => `${k === 'dark' ? 'Dark elixir' : k} to max them all`}
-      footnote={charged.length > 0 && (
+      footnote={
         <>
-          {' '}Past that, {charged.length} of them can be <em>supercharged</em> — extra levels a
-          maxed structure can take here, which the game removes again when a real level is added.
-          They are not counted above.
+          {charged.length > 0 && (
+            <>
+              {' '}Past that, {charged.length} of them can be <em>supercharged</em> — extra levels a
+              maxed structure can take here, which the game removes again when a real level is
+              added. They are not counted above.
+            </>
+          )}
+          {crafted.length > 0 && (
+            <>
+              {' '}The Crafting Station is counted as the free, level-less structure it is; the
+              Crafted Defense it becomes is not, and neither are the module upgrades that defense
+              takes. Those expire with the Crafting Phase and have a panel of their own below.
+            </>
+          )}
         </>
-      )}
+      }
     />
   );
 }

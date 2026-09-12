@@ -14,6 +14,11 @@
    game's own badge — Shiny is a cyan crystal, Glowy a violet one, Starry an
    amber star — so the colour agrees with the icon beside it.
 
+   The Sparky Stone gets a hue on the same terms, and it is the one that is
+   never a cost: temporary upgrades pay it out and the Fancy Shop takes it. Its
+   electric blue comes from the game's badge and is kept clear of Shiny's teal,
+   because the two sit closest.
+
    Nothing here reproduces Supercell artwork, iconography or typography.
    ========================================================================= */
 
@@ -41,6 +46,8 @@
   --color-shiny:     #0e7d9c;
   --color-glowy:     #8a34c9;
   --color-starry:    #c25a10;
+
+  --color-sparky:    #0b6fd8;
 
   --color-ok:        #1f8f4e;
   --color-warn:      #c07408;
@@ -87,6 +94,8 @@
     --color-glowy:   #c48cff;
     --color-starry:  #ffa552;
 
+    --color-sparky:  #4fb0ff;
+
     --color-ok:      #46dd8b;
     --color-warn:    #ffb746;
     --color-bad:     #ff6f64;
@@ -123,6 +132,8 @@
   --color-shiny:   #57cbe8;
   --color-glowy:   #c48cff;
   --color-starry:  #ffa552;
+
+  --color-sparky:  #4fb0ff;
 
   --color-ok:      #46dd8b;
   --color-warn:    #ffb746;

@@ -10,6 +10,7 @@ import { totalOre } from '@/lib/game/equipment';
 import { UnitTable } from '@/components/UnitTable';
 import { HeroRoster, type HeroGear } from '@/components/HeroRoster';
 import { HomeVillageBuildings } from '@/components/player/VillageBuildings';
+import { CraftedDefenses } from '@/components/player/CraftedDefenses';
 import {
   MockBanner, PlayerFrame, PlayerIdentity, PlayerNotFound, PlayerQueued,
 } from '@/components/player/PlayerFrame';
@@ -186,6 +187,11 @@ export default async function PlayerPage({ params }: Params) {
       {/* What the hall permits, not what the account has — the API carries no
           building levels for either village. */}
       <HomeVillageBuildings th={th} />
+
+      {/* Temporary, so deliberately after the hall's roster and outside its
+          total: the Crafting Station is a structure, the defenses it becomes
+          are not, and the phase takes them away again. */}
+      <CraftedDefenses th={th} />
     </PlayerFrame>
   );
 }

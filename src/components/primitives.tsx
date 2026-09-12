@@ -55,6 +55,7 @@ export const pctTone = (pct: number): keyof typeof BAR_TONE =>
 const RES_COLOR: Record<Currency, string> = {
   gold: 'text-gold', elixir: 'text-elixir', dark: 'text-dark',
   shiny: 'text-shiny', glowy: 'text-glowy', starry: 'text-starry',
+  sparky: 'text-sparky',
 };
 
 /**

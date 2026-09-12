@@ -1,0 +1,538 @@
+{
+ "_readme": "Crafted Defenses: what the Crafting Station can be turned into, and what its three modules cost to upgrade. Every cost, build time and Town Hall requirement is transcribed from the defense's own published per-level table - nothing is interpolated. A Crafted Defense is not a building with one level ladder: it has three modules of ten levels each, arrives at level 3 (each module at 1) and reaches 30 with all three maxed. Each module spends ONE currency and the three modules of a defense spend three different ones.",
+ "_source": "https://clashofclans.fandom.com - each entry records the page it came from.",
+ "_derivation": "Counts and footprint come from the Crafting Station page's own {{NumberAvailable}} and {{BuildingSize}}; costs, build times and the 'Town Hall Level Required' column from each defense's own module tables. Columns are located by header text and the cost and time columns are cross-checked against the wiki's own bCost and bTime classes, because these tables mix rowspan and colspan headers and cannot be read positionally. A module's ceiling at a hall is the highest level whose published Town Hall requirement that hall meets. Level 1 is the level a module arrives at, not an upgrade anyone buys, so it carries no cost and no build time - the same rule builder-base.json uses for a troop that unlocks part-levelled.",
+ "_temporary": "Crafted Defenses are temporary. A Crafting Phase lasts four months and its set is removed and replaced at the end of it, so this dataset carries the CURRENT phase only - a defense nobody can still craft is not something to plan against. `phase` records which phase these are and when it ends, so a stale dataset is visible rather than silently wrong.",
+ "phase": {
+  "number": 4,
+  "from": "2026-08-01",
+  "until": "2026-12-31",
+  "page": "Crafting Station"
+ },
+ "sparky": {
+  "_readme": "Sparky Stones are EARNED, not spent: temporary upgrades pay them, and they buy cosmetics in the Fancy Shop. 8 per Crafted Defense module level and 10 per Supercharge charge level, capped at 5,000 held.",
+  "perModuleLevel": 8,
+  "perChargeLevel": 10,
+  "cap": 5000,
+  "page": "Fancy Shop"
+ },
+ "station": "crafting_station",
+ "defenses": {
+  "hot_candle": {
+   "name": "Hot Candle",
+   "page": "Hot Candle",
+   "size": [
+    3,
+    3
+   ],
+   "modules": [
+    {
+     "name": "Hitpoints",
+     "resource": "elixir",
+     "levels": [
+      {
+       "th": 11
+      },
+      {
+       "cost": 3500000,
+       "hours": 6,
+       "th": 12
+      },
+      {
+       "cost": 4500000,
+       "hours": 8,
+       "th": 13
+      },
+      {
+       "cost": 5500000,
+       "hours": 10,
+       "th": 14
+      },
+      {
+       "cost": 6500000,
+       "hours": 12,
+       "th": 15
+      },
+      {
+       "cost": 7500000,
+       "hours": 18,
+       "th": 16
+      },
+      {
+       "cost": 8500000,
+       "hours": 43,
+       "th": 17
+      },
+      {
+       "cost": 10000000,
+       "hours": 80,
+       "th": 18
+      },
+      {
+       "cost": 11500000,
+       "hours": 138,
+       "th": 18
+      },
+      {
+       "cost": 13000000,
+       "hours": 228,
+       "th": 18
+      }
+     ]
+    },
+    {
+     "name": "Damage",
+     "resource": "gold",
+     "levels": [
+      {
+       "th": 11
+      },
+      {
+       "cost": 4000000,
+       "hours": 8,
+       "th": 12
+      },
+      {
+       "cost": 5000000,
+       "hours": 10,
+       "th": 13
+      },
+      {
+       "cost": 6000000,
+       "hours": 11,
+       "th": 14
+      },
+      {
+       "cost": 7500000,
+       "hours": 13,
+       "th": 15
+      },
+      {
+       "cost": 9000000,
+       "hours": 19,
+       "th": 16
+      },
+      {
+       "cost": 10500000,
+       "hours": 46,
+       "th": 17
+      },
+      {
+       "cost": 12000000,
+       "hours": 83,
+       "th": 18
+      },
+      {
+       "cost": 13500000,
+       "hours": 148,
+       "th": 18
+      },
+      {
+       "cost": 15000000,
+       "hours": 240,
+       "th": 18
+      }
+     ]
+    },
+    {
+     "name": "Seconds Active",
+     "resource": "dark",
+     "levels": [
+      {
+       "th": 11
+      },
+      {
+       "cost": 30000,
+       "hours": 4,
+       "th": 12
+      },
+      {
+       "cost": 40000,
+       "hours": 6,
+       "th": 13
+      },
+      {
+       "cost": 50000,
+       "hours": 8,
+       "th": 14
+      },
+      {
+       "cost": 60000,
+       "hours": 10,
+       "th": 15
+      },
+      {
+       "cost": 70000,
+       "hours": 16,
+       "th": 16
+      },
+      {
+       "cost": 80000,
+       "hours": 40,
+       "th": 17
+      },
+      {
+       "cost": 90000,
+       "hours": 74,
+       "th": 18
+      },
+      {
+       "cost": 100000,
+       "hours": 126,
+       "th": 18
+      },
+      {
+       "cost": 110000,
+       "hours": 216,
+       "th": 18
+      }
+     ]
+    }
+   ]
+  },
+  "hero_hunter": {
+   "name": "Hero Hunter",
+   "page": "Hero Hunter",
+   "size": [
+    3,
+    3
+   ],
+   "modules": [
+    {
+     "name": "Hitpoints",
+     "resource": "dark",
+     "levels": [
+      {
+       "th": 11
+      },
+      {
+       "cost": 40000,
+       "hours": 8,
+       "th": 12
+      },
+      {
+       "cost": 50000,
+       "hours": 10,
+       "th": 13
+      },
+      {
+       "cost": 60000,
+       "hours": 11,
+       "th": 14
+      },
+      {
+       "cost": 70000,
+       "hours": 13,
+       "th": 15
+      },
+      {
+       "cost": 80000,
+       "hours": 19,
+       "th": 16
+      },
+      {
+       "cost": 90000,
+       "hours": 46,
+       "th": 17
+      },
+      {
+       "cost": 100000,
+       "hours": 83,
+       "th": 18
+      },
+      {
+       "cost": 110000,
+       "hours": 148,
+       "th": 18
+      },
+      {
+       "cost": 120000,
+       "hours": 240,
+       "th": 18
+      }
+     ]
+    },
+    {
+     "name": "Damage",
+     "resource": "elixir",
+     "levels": [
+      {
+       "th": 11
+      },
+      {
+       "cost": 3000000,
+       "hours": 4,
+       "th": 12
+      },
+      {
+       "cost": 4000000,
+       "hours": 6,
+       "th": 13
+      },
+      {
+       "cost": 5000000,
+       "hours": 8,
+       "th": 14
+      },
+      {
+       "cost": 6000000,
+       "hours": 10,
+       "th": 15
+      },
+      {
+       "cost": 7000000,
+       "hours": 16,
+       "th": 16
+      },
+      {
+       "cost": 8000000,
+       "hours": 40,
+       "th": 17
+      },
+      {
+       "cost": 9000000,
+       "hours": 74,
+       "th": 18
+      },
+      {
+       "cost": 10000000,
+       "hours": 126,
+       "th": 18
+      },
+      {
+       "cost": 11000000,
+       "hours": 216,
+       "th": 18
+      }
+     ]
+    },
+    {
+     "name": "Poison Level",
+     "resource": "gold",
+     "levels": [
+      {
+       "th": 11
+      },
+      {
+       "cost": 3500000,
+       "hours": 6,
+       "th": 12
+      },
+      {
+       "cost": 4500000,
+       "hours": 8,
+       "th": 13
+      },
+      {
+       "cost": 5500000,
+       "hours": 10,
+       "th": 14
+      },
+      {
+       "cost": 6500000,
+       "hours": 12,
+       "th": 15
+      },
+      {
+       "cost": 7500000,
+       "hours": 18,
+       "th": 16
+      },
+      {
+       "cost": 8500000,
+       "hours": 43,
+       "th": 17
+      },
+      {
+       "cost": 10000000,
+       "hours": 80,
+       "th": 18
+      },
+      {
+       "cost": 11500000,
+       "hours": 138,
+       "th": 18
+      },
+      {
+       "cost": 13000000,
+       "hours": 228,
+       "th": 18
+      }
+     ]
+    }
+   ]
+  },
+  "cake_a_pult": {
+   "name": "Cake-A-Pult",
+   "page": "Cake-A-Pult",
+   "size": [
+    3,
+    3
+   ],
+   "modules": [
+    {
+     "name": "Hitpoints",
+     "resource": "gold",
+     "levels": [
+      {
+       "th": 11
+      },
+      {
+       "cost": 3000000,
+       "hours": 4,
+       "th": 12
+      },
+      {
+       "cost": 4000000,
+       "hours": 6,
+       "th": 13
+      },
+      {
+       "cost": 5000000,
+       "hours": 8,
+       "th": 14
+      },
+      {
+       "cost": 6000000,
+       "hours": 10,
+       "th": 15
+      },
+      {
+       "cost": 7000000,
+       "hours": 16,
+       "th": 16
+      },
+      {
+       "cost": 8000000,
+       "hours": 40,
+       "th": 17
+      },
+      {
+       "cost": 9000000,
+       "hours": 74,
+       "th": 18
+      },
+      {
+       "cost": 10000000,
+       "hours": 126,
+       "th": 18
+      },
+      {
+       "cost": 11000000,
+       "hours": 216,
+       "th": 18
+      }
+     ]
+    },
+    {
+     "name": "Damage",
+     "resource": "dark",
+     "levels": [
+      {
+       "th": 11
+      },
+      {
+       "cost": 35000,
+       "hours": 6,
+       "th": 12
+      },
+      {
+       "cost": 45000,
+       "hours": 8,
+       "th": 13
+      },
+      {
+       "cost": 55000,
+       "hours": 10,
+       "th": 14
+      },
+      {
+       "cost": 65000,
+       "hours": 12,
+       "th": 15
+      },
+      {
+       "cost": 75000,
+       "hours": 18,
+       "th": 16
+      },
+      {
+       "cost": 85000,
+       "hours": 43,
+       "th": 17
+      },
+      {
+       "cost": 95000,
+       "hours": 80,
+       "th": 18
+      },
+      {
+       "cost": 105000,
+       "hours": 138,
+       "th": 18
+      },
+      {
+       "cost": 115000,
+       "hours": 228,
+       "th": 18
+      }
+     ]
+    },
+    {
+     "name": "Explosion Damage",
+     "resource": "elixir",
+     "levels": [
+      {
+       "th": 11
+      },
+      {
+       "cost": 4000000,
+       "hours": 8,
+       "th": 12
+      },
+      {
+       "cost": 5000000,
+       "hours": 10,
+       "th": 13
+      },
+      {
+       "cost": 6000000,
+       "hours": 11,
+       "th": 14
+      },
+      {
+       "cost": 7500000,
+       "hours": 13,
+       "th": 15
+      },
+      {
+       "cost": 9000000,
+       "hours": 19,
+       "th": 16
+      },
+      {
+       "cost": 10500000,
+       "hours": 46,
+       "th": 17
+      },
+      {
+       "cost": 12000000,
+       "hours": 83,
+       "th": 18
+      },
+      {
+       "cost": 13500000,
+       "hours": 148,
+       "th": 18
+      },
+      {
+       "cost": 15000000,
+       "hours": 240,
+       "th": 18
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

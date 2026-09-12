@@ -24,6 +24,7 @@
 import type { Currency, Resource, VillageId } from '@/lib/game/types';
 import buildings from './buildings.json';
 import builderBuildings from './builder-buildings.json';
+import crafted from './crafted.json';
 import equipment from './equipment.json';
 import resources from './resources.json';
 import units from './units.json';
@@ -53,6 +54,7 @@ const BUILDINGS: Record<Village, SpriteIndex> = {
 const UNITS: Record<string, string> = units as Record<string, string>;
 const RESOURCES: Record<string, string> = resources as Record<string, string>;
 const EQUIPMENT: Record<string, string> = equipment as Record<string, string>;
+const CRAFTED: SpriteIndex = crafted as SpriteIndex;
 
 /**
  * The file for a structure at a level, or null if it has no art at all.
@@ -62,7 +64,18 @@ const EQUIPMENT: Record<string, string> = equipment as Record<string, string>;
  * cannon legitimately resolves to the level 11 file.
  */
 export function buildingSpriteFile(id: string, level: number, village: Village = 'home'): string | null {
-  const byLevel = BUILDINGS[village][id];
+  return atLevel(BUILDINGS[village][id], level);
+}
+
+/**
+ * The entry for a level, falling back to the highest one below it.
+ *
+ * Shared by structures and Crafted Defenses because both index art sparsely:
+ * an index only stores a level where the art actually changed, so a level 12
+ * cannon legitimately resolves to the level 11 file, and a Hot Candle at level
+ * 17 resolves to the one drawn for 12.
+ */
+function atLevel(byLevel: Record<string, string> | undefined, level: number): string | null {
   if (!byLevel) return null;
 
   const exact = byLevel[String(level)];
@@ -150,6 +163,11 @@ export function unitSpriteUrl(id: string, village: Village = 'home'): string | n
  * currency — see `Ore` in game/types.ts — but they are drawn the same way: one
  * badge, no levels, marking a cost. Nothing banks them, so they have no
  * `STORAGE_ID` entry and an ore on hand keeps its own badge.
+ *
+ * The Sparky Stone is the one badge here that never marks a cost in either
+ * village: it is a yield, paid out by temporary upgrades and spent only in the
+ * Fancy Shop. It is drawn the same way because it is still a figure that needs
+ * naming, and like the ores nothing banks it.
  */
 export function resourceSpriteUrl(kind: Currency, village: Village = 'home'): string | null {
   const file = RESOURCES[`${village}:${kind}`];
@@ -166,6 +184,29 @@ export function resourceSpriteUrl(kind: Currency, village: Village = 'home'): st
 export function equipmentSpriteUrl(id: string): string | null {
   const file = EQUIPMENT[id];
   return file ? `/sprites/equipment/${file}` : null;
+}
+
+/**
+ * A Crafted Defense's art at one of its levels.
+ *
+ * Indexed per level like a structure, not per entity like equipment, because
+ * the game redraws it as it upgrades — but banded rather than dense: the four
+ * pictures cover levels 3-11, 12-20, 21-29 and 30, so the index holds one entry
+ * per band and the level fallback resolves everything between.
+ *
+ * A separate index from `buildings.json` rather than extra ids inside it. A
+ * Crafted Defense is not a `Building` — it is what the Crafting Station turns
+ * into, it has no level ladder of its own, and its set is replaced every four
+ * months. Keeping it apart means a defense retired at the end of a phase can be
+ * dropped without touching structure art, and a missing entry can never
+ * silently resolve to a structure that happens to share its id.
+ *
+ * The Hot Candle is drawn in its base form. It melts during a battle, and the
+ * wiki publishes all three decay stages, but the village shows the base one.
+ */
+export function craftedSpriteUrl(id: string, level: number): string | null {
+  const file = atLevel(CRAFTED[id], level);
+  return file ? `/sprites/crafted/${file}` : null;
 }
 
 /** The structure that banks a resource — the icon for an amount on hand. */
