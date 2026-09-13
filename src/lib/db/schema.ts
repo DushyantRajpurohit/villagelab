@@ -155,6 +155,52 @@ export const warAttacks = pgTable('war_attacks', {
 ]);
 
 /**
+ * A clan's Clan War League group for one season.
+ *
+ * Keyed per clan rather than per group: the API only ever answers "the group
+ * this clan is in", and nothing identifies a group on its own. Eight tracked
+ * clans in one group are eight small rows, which is cheaper than inventing an
+ * identity the game does not publish.
+ */
+export const leagueGroups = pgTable('league_groups', {
+  id: text('id').primaryKey(), // clanTag:season
+  clanTag: text('clan_tag').notNull(),
+  season: text('season').notNull(),
+  /** preparation | inWar | ended */
+  state: text('state').notNull(),
+  /** Every clan in the group with its roster, as JSON. */
+  clans: text('clans').notNull().default('[]'),
+  /** Seven rounds of war tags, `#0` where a war is not scheduled yet. */
+  rounds: text('rounds').notNull().default('[]'),
+  fetchedAt: timestamp('fetched_at', { withTimezone: true }).notNull().defaultNow(),
+}, (t) => [
+  index('league_groups_clan_season_idx').on(t.clanTag, t.season),
+]);
+
+/**
+ * One league war, shared by every clan in the group that fights it.
+ *
+ * Stored whole-group rather than only for the clan that asked, because the
+ * standings are a sum over all of them: a clan's rank depends on wars it was
+ * not in. A finished war never changes, so it is fetched once and then left.
+ */
+export const leagueWars = pgTable('league_wars', {
+  warTag: text('war_tag').primaryKey(),
+  season: text('season').notNull(),
+  round: integer('round').notNull(),
+  /** preparation | inWar | warEnded */
+  state: text('state').notNull(),
+  teamSize: integer('team_size').notNull(),
+  /** Both sides, each with its folded member rows, as JSON. */
+  sides: text('sides').notNull(),
+  startTime: timestamp('start_time', { withTimezone: true }),
+  endTime: timestamp('end_time', { withTimezone: true }),
+  fetchedAt: timestamp('fetched_at', { withTimezone: true }).notNull().defaultNow(),
+}, (t) => [
+  index('league_wars_season_idx').on(t.season),
+]);
+
+/**
  * The ingestion queue.
  *
  * Nothing is fetched from Supercell on a user request. A page miss enqueues the
@@ -164,7 +210,7 @@ export const warAttacks = pgTable('war_attacks', {
  */
 export const fetchQueue = pgTable('fetch_queue', {
   tag: text('tag').notNull(),
-  kind: text('kind').notNull(), // player | clan | war
+  kind: text('kind').notNull(), // player | clan | war | league
   /** Higher runs first. Actively-viewed entities get bumped. */
   priority: integer('priority').notNull().default(0),
   nextFetchAt: timestamp('next_fetch_at', { withTimezone: true }).notNull().defaultNow(),

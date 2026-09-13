@@ -1,5 +1,4 @@
-import { SUPERCHARGES, BUILDINGS_BY_ID } from './buildings';
-import { MAX_TH } from './town-halls';
+import { superchargeBill } from './buildings';
 import { CRAFTED_DEFENSES, craftedAtTH, craftedCostToMax } from './crafted';
 import type { CraftedDefense } from './types';
 import data from './crafted-defenses.json';
@@ -75,14 +74,8 @@ export const sparkyFromPhase = (th: number): number =>
  * charge levels: a charge is bought for each Cannon, so seven Cannons are seven
  * bills and seven payouts.
  */
-export function sparkyFromSupercharges(th: number): number {
-  if (th < MAX_TH) return 0;
-  let levels = 0;
-  for (const [id, charges] of Object.entries(SUPERCHARGES)) {
-    levels += charges.length * (BUILDINGS_BY_ID[id]?.count[th] ?? 0);
-  }
-  return levels * PER_CHARGE_LEVEL;
-}
+export const sparkyFromSupercharges = (th: number): number =>
+  superchargeBill(th).charges * PER_CHARGE_LEVEL;
 
 export interface SparkyYield {
   crafted: number;

@@ -1,11 +1,12 @@
-import { and, asc, desc, eq, isNull, lte, sql } from 'drizzle-orm';
+import { and, asc, desc, eq, inArray, isNull, lte, sql } from 'drizzle-orm';
 import { db, hasDatabase, schema } from '../db';
 import * as coc from '../coc/client';
 import { CocApiError } from '../coc/client';
 import { normalizeTag } from '../coc/tags';
 import { parseCocDate } from '../format';
 import { analyseWar, standingOf } from '../war/analyse';
-import type { RawWar, RawWarLogEntry } from '../war/types';
+import { recordLeagueWar, roundOfWar, scheduledTags } from '../war/league';
+import type { RawLeagueGroup, RawWar, RawWarLogEntry } from '../war/types';
 import type { OpponentSlot } from '../data/wars';
 
 /**
@@ -22,7 +23,7 @@ import type { OpponentSlot } from '../data/wars';
 
 /** How long before we look at a tag again, by queue priority. */
 function nextInterval(kind: string, priority: number): number {
-  const base = kind === 'war' ? 30 : kind === 'clan' ? 120 : 360; // minutes
+  const base = kind === 'war' ? 30 : kind === 'league' ? 60 : kind === 'clan' ? 120 : 360; // minutes
   // Actively-viewed entities accumulate priority and refresh sooner.
   const factor = Math.max(0.25, 1 - Math.min(priority, 20) / 25);
   return Math.round(base * factor);
@@ -60,13 +61,17 @@ export async function runIngestion({ limit = 20 }: { limit?: number } = {}): Pro
   for (const job of due) {
     result.processed++;
     try {
+      // A job may name its own next interval when it knows better than the
+      // queue does — a league that is not running need not be asked hourly.
+      let minutes: number | undefined;
       if (job.kind === 'player') await ingestPlayer(job.tag);
       else if (job.kind === 'clan') await ingestClan(job.tag);
       else if (job.kind === 'war') await ingestWar(job.tag);
+      else if (job.kind === 'league') minutes = await ingestLeague(job.tag);
       else continue;
 
       result.ok++;
-      await reschedule(job.tag, job.kind, nextInterval(job.kind, job.priority));
+      await reschedule(job.tag, job.kind, minutes ?? nextInterval(job.kind, job.priority));
     } catch (err) {
       if (err instanceof CocApiError && err.isNotFound) {
         result.notFound++;
@@ -197,6 +202,12 @@ async function ingestClan(rawTag: string) {
       .values({ tag: c.tag, kind: 'war', priority: 0 })
       .onConflictDoNothing();
   }
+
+  // The league is queued either way. Outside a league, or where the group
+  // cannot be read, it costs one call on a long interval rather than a retry.
+  await db().insert(schema.fetchQueue)
+    .values({ tag: c.tag, kind: 'league', priority: 0 })
+    .onConflictDoNothing();
 }
 
 /**
@@ -358,4 +369,89 @@ async function saveWarLog(clanTag: string, items: RawWarLogEntry[]) {
     await db().insert(schema.wars).values({ id, ...set })
       .onConflictDoUpdate({ target: schema.wars.id, set });
   }
+}
+
+/* --------------------------------------------------------- war leagues */
+
+/**
+ * How long to leave a clan that is not in a league. The group endpoint 404s for
+ * most of every month, and asking hourly would spend the budget on that.
+ */
+const LEAGUE_IDLE_MINUTES = 12 * 60;
+
+const isNotFound = (err: unknown) => err instanceof CocApiError && err.isNotFound;
+
+/**
+ * The group, then every war it has drawn — all of them, not just this clan's,
+ * because the standings are a sum over the whole group.
+ *
+ * A finished war never changes, so one already stored as ended is skipped. That
+ * bounds the cost: the first pass of a season fetches what has been drawn so
+ * far, and each later pass fetches only the round in preparation and the round
+ * being fought.
+ */
+async function ingestLeague(rawTag: string): Promise<number | undefined> {
+  const tag = normalizeTag(rawTag);
+
+  let group: RawLeagueGroup;
+  try {
+    group = (await coc.getLeagueGroup(tag)) as unknown as RawLeagueGroup;
+  } catch (err) {
+    // A 404 here means "not in a league this season", not "no such clan".
+    // Letting it reach the run loop would mark the tag not-found for good.
+    if (isNotFound(err) || isPrivateLog(err)) return LEAGUE_IDLE_MINUTES;
+    throw err;
+  }
+  if (!group?.season || group.state === 'notInWar') return LEAGUE_IDLE_MINUTES;
+
+  const row = {
+    id: `${tag}:${group.season}`,
+    clanTag: tag,
+    season: group.season,
+    state: group.state,
+    clans: JSON.stringify(group.clans ?? []),
+    rounds: JSON.stringify(group.rounds ?? []),
+    fetchedAt: new Date(),
+  };
+  await db().insert(schema.leagueGroups).values(row)
+    .onConflictDoUpdate({ target: schema.leagueGroups.id, set: row });
+
+  const tags = scheduledTags(group);
+  if (tags.length) {
+    const finished = new Set((await db()
+      .select({ warTag: schema.leagueWars.warTag })
+      .from(schema.leagueWars)
+      .where(and(inArray(schema.leagueWars.warTag, tags), eq(schema.leagueWars.state, 'warEnded'))))
+      .map((r) => r.warTag));
+
+    for (const warTag of tags) {
+      if (finished.has(warTag)) continue;
+      let war: RawWar;
+      try {
+        war = (await coc.getLeagueWar(warTag)) as unknown as RawWar;
+      } catch (err) {
+        // One unreadable war must not cost the group; the next pass retries it.
+        if (isNotFound(err)) continue;
+        throw err;
+      }
+      if (!war?.state || war.state === 'notInWar') continue;
+
+      const rec = recordLeagueWar(war, warTag, roundOfWar(group, warTag));
+      const set = {
+        season: group.season,
+        round: rec.round,
+        state: rec.state,
+        teamSize: rec.teamSize,
+        sides: JSON.stringify(rec.sides),
+        startTime: warEndTime(war.startTime),
+        endTime: warEndTime(war.endTime),
+        fetchedAt: new Date(),
+      };
+      await db().insert(schema.leagueWars).values({ warTag, ...set })
+        .onConflictDoUpdate({ target: schema.leagueWars.warTag, set });
+    }
+  }
+
+  // A finished league will not change again; look for the next one slowly.
+  return group.state === 'ended' ? LEAGUE_IDLE_MINUTES : undefined;
 }

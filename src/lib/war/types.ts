@@ -57,6 +57,46 @@ export interface RawWarLogEntry {
   opponent: RawWarSide;
 }
 
+/* ------------------------------------------------------ Clan War Leagues */
+
+/**
+ * A league group's own lifecycle. Note `ended`, where a war says `warEnded` —
+ * the two endpoints do not share a vocabulary either.
+ */
+export type LeagueState = 'notInWar' | 'preparation' | 'inWar' | 'ended';
+
+export interface RawLeagueMember {
+  tag: string;
+  name: string;
+  /**
+   * The group roster spells it `townHallLevel`, like `/players`; the wars it
+   * schedules spell it `townhallLevel`. Both are accepted so neither endpoint's
+   * spelling can zero a roster.
+   */
+  townHallLevel?: number;
+  townhallLevel?: number;
+}
+
+export interface RawLeagueClan {
+  tag: string;
+  name: string;
+  clanLevel?: number;
+  members?: RawLeagueMember[];
+}
+
+/** `#0` is a war not scheduled yet — the placeholder, not a tag. */
+export interface RawLeagueRound {
+  warTags: string[];
+}
+
+export interface RawLeagueGroup {
+  state: LeagueState;
+  /** `2026-09`. Sorts correctly as a string. */
+  season: string;
+  clans: RawLeagueClan[];
+  rounds: RawLeagueRound[];
+}
+
 /* ------------------------------------------------------------ view models */
 
 /** One member of our side, with their whole war folded into a single row. */
@@ -128,4 +168,109 @@ export interface WarLogSummary {
   avgDestruction: number;
   /** Longest run of wins anywhere in the window, newest-first input. */
   bestStreak: number;
+}
+
+/* ------------------------------------------------- league view models */
+
+/** One side of a league war, kept whole so any clan in the group can read it. */
+export interface LeagueSide {
+  tag: string;
+  name: string;
+  stars: number;
+  /** Average destruction across the side's bases, as the war itself reports it. */
+  destruction: number;
+  rows: WarMemberRow[];
+}
+
+/**
+ * A league war as stored. The API lists the two clans in no particular order,
+ * so neither side is "us" until a clan is asked about — see `orient`.
+ */
+export interface LeagueWarRecord {
+  warTag: string;
+  /** 1-based, in the order the group schedules them. */
+  round: number;
+  state: WarState;
+  teamSize: number;
+  startTime: string | null;
+  endTime: string | null;
+  sides: [LeagueSide, LeagueSide];
+}
+
+export interface LeagueStanding {
+  rank: number;
+  tag: string;
+  name: string;
+  /** Including win bonuses — the figure the group is ranked on. */
+  stars: number;
+  bonus: number;
+  /** Summed per base, not averaged: the tiebreak the game ranks on. */
+  destruction: number;
+  wins: number;
+  losses: number;
+  ties: number;
+}
+
+/**
+ * `unscheduled` has no war tag yet; `pending` has one we have not fetched; `bye`
+ * is a round whose wars we hold and none of which is this clan's — a group of
+ * fewer than eight leaves someone out each round.
+ */
+export type RoundStatus = 'unscheduled' | 'pending' | 'preparation' | 'inWar' | 'warEnded' | 'bye';
+
+export interface LeagueRound {
+  round: number;
+  status: RoundStatus;
+  opponent: { tag: string; name: string } | null;
+  stars: number;
+  opponentStars: number;
+  destruction: number;
+  opponentDestruction: number;
+  /** Only a finished war has one. */
+  result: 'win' | 'lose' | 'tie' | null;
+  /** Where a war still being fought stands. Null before battle day. */
+  standing: Standing | null;
+  startTime: string | null;
+  endTime: string | null;
+}
+
+/** One member's league so far, folded across every war they were lined up for. */
+export interface LeagueMemberSeason {
+  tag: string;
+  name: string;
+  townHallLevel: number;
+  /** Wars they were in the lineup for, once battle day had started. */
+  wars: number;
+  attacksUsed: number;
+  /** Attacks not used in a war that has finished. Gone for good. */
+  missed: number;
+  /** Attacks not used yet in a war still being fought. */
+  owed: number;
+  /** New stars only — the count league medals are paid on. */
+  stars: number;
+  totalDestruction: number;
+  avgDestruction: number;
+  /** Wars in which their base was attacked at all. */
+  defended: number;
+  /** Best stars taken off their base, summed across those wars. */
+  starsConceded: number;
+}
+
+export interface LeagueAnalysis {
+  season: string;
+  state: LeagueState;
+  clanTag: string;
+  clanName: string;
+  groupSize: number;
+  roundsTotal: number;
+  roundsPlayed: number;
+  standings: LeagueStanding[];
+  us: LeagueStanding | null;
+  rounds: LeagueRound[];
+  members: LeagueMemberSeason[];
+  /** The round being fought right now, and who in it has not attacked. */
+  live: { round: number; opponent: string; endTime: string | null; owing: WarMemberRow[] } | null;
+  attacksUsed: number;
+  attacksMissed: number;
+  attacksOwed: number;
 }

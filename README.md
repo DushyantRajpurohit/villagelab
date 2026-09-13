@@ -11,6 +11,7 @@ Next.js 16 · TypeScript · Postgres · deployed free.
 | `/planner` | Upgrade queue scheduled across builder, lab and hero lanes |
 | `/clan/[tag]` | Roster health, donation ratios, Town Hall spread |
 | `/clan/[tag]/war` | Live war: scoreline, matchup, attacks still owed |
+| `/clan/[tag]/league` | Clan War League: group standings, each round, every member's attacks |
 | `/clan/[tag]/log` | War history: record, win rate, average stars |
 | `/base` | Isometric 44×44 editor with the game's own art, placement limits per hall |
 
@@ -48,7 +49,7 @@ fresh clone is fully usable and CI needs no secrets.
 | Script | |
 | --- | --- |
 | `npm run dev` | Dev server |
-| `npm test` | Vitest — 941 tests |
+| `npm test` | Vitest — 966 tests |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run lint` | ESLint |
 | `npm run db:generate` | Generate a Drizzle migration |
@@ -184,7 +185,9 @@ Two rules fall out of the building data:
 - **Supercharges** — Town Hall 18's extra levels on an already-maxed structure,
   18 of them — are kept out of `levels` and out of every cost-to-max total. The
   game removes them again when a real level is added, so a supercharged Mortar
-  is not a level 20 Mortar.
+  is not a level 20 Mortar. Their bill is stated beside the total instead of
+  inside it, per copy and in each structure's own currency: a Gold Mine's
+  charges cost elixir and a Monolith's dark elixir, exactly as their levels do.
 
 Town Hall 18 also brings two structures that did not exist here before, the
 **Revenge Tower** and the **Super Wizard Tower**, and a third that is not a
@@ -331,6 +334,40 @@ already three-starred is worth nothing — so `sum(members) === clan total` is a
 invariant the tests assert against generated wars, rather than a comment nobody
 checks.
 
+### Clan War Leagues are not seven wars in a row
+
+A league war is served by different endpoints from a regular one — the current
+war reads `notInWar` all through a league — so the war room never showed one.
+`/clan/[tag]/league` does, and the three ways a league differs are each
+modelled rather than approximated:
+
+- **The group is ranked, not the war.** A clan's place depends on wars it was
+  not in, so the worker stores every war in the group, not just the clan's own
+  seven. A finished war never changes and is fetched once; later passes fetch
+  only the round in preparation and the round being fought.
+- **A win is worth ten more stars.** The table is ranked on stars with those
+  bonuses included, then on destruction *summed* across bases rather than
+  averaged — the figure the game accrues over a league. Every war in a group is
+  the same size, so summing cannot reorder the table; it keeps the number
+  players recognise. A war still being fought counts as it stands, and its
+  bonus waits for the end.
+- **One attack each.** A member's stars are the stars they added, which is also
+  what league medals are paid on. An unused attack is *missed* in a finished war
+  and *still to use* in one being fought — adding them would make someone who
+  has not attacked yet today look like someone who skipped a war.
+
+Two API details are handled at the boundary. The group endpoint 404s whenever no
+league is running, which is most of every month; left to the run loop, that
+would mark the clan not-found and stop asking for good, so it is read as "not in
+a league" and rescheduled twelve hours out. And the group's roster spells
+`townHallLevel` the way `/players` does while the wars it schedules spell it
+`townhallLevel`, so both are accepted.
+
+The tests hold the table to its arithmetic against generated leagues: the
+standings' stars are exactly the stars fought for plus ten per decisive war, the
+members' stars are exactly their clan's, and every member's attacks used,
+missed and still owed add up to the wars they played.
+
 ## Deployment
 
 | | | Cost |
@@ -402,6 +439,7 @@ src/lib/game/      curated dataset, interpolation, planner + progress logic
 src/lib/game/crafted.ts  Crafted Defenses — three modules, three currencies, one phase
 src/lib/game/sparky.ts   Sparky Stones — the one figure that is earned, not spent
 src/lib/war/       war analysis — star credit, standings, war log summaries
+src/lib/war/league.ts    Clan War Leagues — group table, rounds, members' season
 src/lib/theme.ts   three-state theme store (system / light / dark)
 src/lib/base/      base layout rules — collision, count limits, drag painting
 src/lib/base/iso.ts      isometric projection, its inverse, and the zoom/pan camera

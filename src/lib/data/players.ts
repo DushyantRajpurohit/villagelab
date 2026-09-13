@@ -70,7 +70,7 @@ export async function getPlayer(rawTag: string): Promise<PlayerResult> {
  * Add a tag to the ingestion queue, or bump its priority if already waiting.
  * Priority is what lets an actively-viewed tag jump ahead of a bulk backfill.
  */
-export async function enqueue(rawTag: string, kind: 'player' | 'clan' | 'war', bump = 1) {
+export async function enqueue(rawTag: string, kind: 'player' | 'clan' | 'war' | 'league', bump = 1) {
   if (!hasDatabase) return;
   const tag = normalizeTag(rawTag);
   await db()

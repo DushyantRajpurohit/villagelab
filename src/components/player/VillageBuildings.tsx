@@ -1,11 +1,11 @@
+import { Fragment } from 'react';
 import type { ReactNode } from 'react';
 import { Chip, Panel, Res } from '@/components/primitives';
 import { GameIcon } from '@/components/GameIcon';
 import { fmtDuration } from '@/lib/format';
 import { builderBuildingsAtBH } from '@/lib/game/builder-base';
-import { BUILDINGS_BY_ID, SUPERCHARGES, buildingsAtTH } from '@/lib/game/buildings';
+import { buildingsAtTH, superchargeBill } from '@/lib/game/buildings';
 import { craftedAtTH } from '@/lib/game/crafted';
-import { MAX_TH } from '@/lib/game/town-halls';
 import type { Resource } from '@/lib/game/types';
 import type { Village } from '@/lib/sprites';
 
@@ -34,6 +34,7 @@ const CATEGORY_LABEL: Record<string, string> = {
   other: 'Other',
 };
 const CATEGORY_ORDER = ['defense', 'trap', 'resource', 'army', 'wall', 'other'];
+const HOME_RESOURCES: Resource[] = ['gold', 'elixir', 'dark'];
 
 /** One hall's roster, flattened to what this panel needs from either village. */
 interface Entry {
@@ -75,9 +76,9 @@ export function HomeVillageBuildings({ th }: { th: number }) {
 
   // Supercharges are a Town Hall 18 mechanic and only apply to a structure
   // already at its ceiling, so they are named at that hall and nowhere else.
-  // They are deliberately absent from the total above.
-  const charged = th < MAX_TH ? []
-    : Object.keys(SUPERCHARGES).filter((id) => BUILDINGS_BY_ID[id].count[th] > 0);
+  // Their bill is stated beside the total, never inside it.
+  const charges = superchargeBill(th);
+  const chargedIn = HOME_RESOURCES.filter((k) => charges.cost[k] > 0);
 
   // Same rule as supercharges, for the same reason: the Crafting Station is a
   // structure this hall can build and belongs in the total, but the Crafted
@@ -91,15 +92,22 @@ export function HomeVillageBuildings({ th }: { th: number }) {
       title={`What Town Hall ${th} can build`}
       entries={all}
       village="home"
-      resources={['gold', 'elixir', 'dark']}
+      resources={HOME_RESOURCES}
       label={(k) => `${k === 'dark' ? 'Dark elixir' : k} to max them all`}
       footnote={
         <>
-          {charged.length > 0 && (
+          {charges.kinds > 0 && (
             <>
-              {' '}Past that, {charged.length} of them can be <em>supercharged</em> — extra levels a
-              maxed structure can take here, which the game removes again when a real level is
-              added. They are not counted above.
+              {' '}Past that, {charges.kinds} kinds of structure can be <em>supercharged</em> — extra
+              levels a maxed structure can take here, which the game removes again when a real level
+              is added. Charging all {charges.structures} copies would be a further{' '}
+              {chargedIn.map((k, i) => (
+                <Fragment key={k}>
+                  {i === 0 ? '' : i === chargedIn.length - 1 ? ' and ' : ', '}
+                  <Res amount={charges.cost[k]} kind={k} />
+                </Fragment>
+              ))}
+              {' '}over {fmtDuration(charges.hours)} of building, kept out of the figures above.
             </>
           )}
           {crafted.length > 0 && (

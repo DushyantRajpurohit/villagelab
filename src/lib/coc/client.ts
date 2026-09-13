@@ -80,5 +80,14 @@ export const getClan = (tag: string) => call<Record<string, unknown>>(`/clans/${
 export const getCurrentWar = (tag: string) => call<Record<string, unknown>>(`/clans/${encodeTag(tag)}/currentwar`);
 export const getWarLog = (tag: string, limit = 20) =>
   call<Record<string, unknown>>(`/clans/${encodeTag(tag)}/warlog?limit=${limit}`);
-export const searchClans = (name: string, limit = 10) =>
+/**
+ * The Clan War League group a clan is in this season. 404s outside a league,
+ * which is an answer about the calendar, not about the tag.
+ */
+export const getLeagueGroup = (tag: string) =>
+  call<Record<string, unknown>>(`/clans/${encodeTag(tag)}/currentwar/leaguegroup`);
+/** One league war, addressed by the tag the group schedules it under. */
+export const getLeagueWar = (warTag: string) =>
+  call<Record<string, unknown>>(`/clanwarleagues/wars/${encodeTag(warTag)}`);
+export const searchClans =(name: string, limit = 10) =>
   call<Record<string, unknown>>(`/clans?name=${encodeURIComponent(name)}&limit=${limit}`);

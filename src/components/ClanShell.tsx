@@ -2,11 +2,12 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { TagSearch } from './TagSearch';
 
-export type ClanTab = 'roster' | 'war' | 'log';
+export type ClanTab = 'roster' | 'war' | 'league' | 'log';
 
 const TABS: Array<{ id: ClanTab; label: string; href: (t: string) => string }> = [
   { id: 'roster', label: 'Roster', href: (t) => `/clan/${t}` },
   { id: 'war', label: 'Current war', href: (t) => `/clan/${t}/war` },
+  { id: 'league', label: 'War league', href: (t) => `/clan/${t}/league` },
   { id: 'log', label: 'War log', href: (t) => `/clan/${t}/log` },
 ];
 
@@ -27,7 +28,7 @@ export function ClanShell({ tag, active, children }: {
         <div>
           <h1 className="display text-[22px]">Clan war room</h1>
           <p className="mt-1 max-w-[62ch] text-[13px] text-muted">
-            Roster health, live war progress and war history.
+            Roster health, live war progress, the war league and war history.
           </p>
         </div>
         <div className="flex-1" />

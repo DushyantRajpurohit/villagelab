@@ -12,7 +12,7 @@ import { BUILDER_TROOPS, BUILDER_HEROES, MAX_BH } from '../game/builder-base';
 import { MAX_TH } from '../game/town-halls';
 import { normalizeTag } from './tags';
 import type { RawPlayer } from './client';
-import type { RawWar, RawWarLogEntry, RawWarMember } from '../war/types';
+import type { LeagueState, RawLeagueGroup, RawWar, RawWarLogEntry, RawWarMember } from '../war/types';
 
 /** xmur3 seed + mulberry32: stable PRNG derived from the tag string. */
 function seeded(str: string): () => number {
@@ -353,4 +353,120 @@ export function mockWarLog(tag: string, limit = 20): RawWarLogEntry[] {
       },
     };
   });
+}
+
+/* ------------------------------------------------------- Clan War Leagues */
+
+const LEAGUE_ROUNDS = 7;
+const LEAGUE_GROUP = 8;
+
+/**
+ * Round robin by the circle method: hold one clan still and rotate the rest, so
+ * every clan meets every other exactly once and fights once per round. Eight
+ * clans give the league's seven rounds of four wars.
+ */
+export function roundRobin(n: number): Array<Array<[number, number]>> {
+  const ids = Array.from({ length: n }, (_, i) => i);
+  const rounds: Array<Array<[number, number]>> = [];
+  for (let r = 0; r < n - 1; r++) {
+    const pairs: Array<[number, number]> = [];
+    for (let i = 0; i < n / 2; i++) pairs.push([ids[i], ids[n - 1 - i]]);
+    rounds.push(pairs);
+    ids.splice(1, 0, ids.pop()!);
+  }
+  return rounds;
+}
+
+/**
+ * A whole league group and every war it has drawn, from one clan's tag.
+ *
+ * The season is placed somewhere in its seven rounds by the seed, so different
+ * tags show a league in preparation, mid-way and finished. Each war is seeded
+ * from its own tag, so the other clans' wars are as real as ours — the
+ * standings are a sum over all of them and would be meaningless otherwise.
+ */
+export function mockLeague(tag: string): { group: RawLeagueGroup; wars: Record<string, RawWar> } {
+  const norm = normalizeTag(tag);
+  const rng = seeded(norm + 'league');
+  const teamSize = rng() < 0.7 ? 15 : 30;
+
+  const clanTags = [norm];
+  for (let i = 1; clanTags.length < LEAGUE_GROUP; i++) {
+    const t = normalizeTag('#' + norm.slice(1, 6) + 'L' + tagSuffix(i));
+    if (!clanTags.includes(t)) clanTags.push(t);
+  }
+
+  // How far into the league we are: rounds finished, and whether round one has
+  // even started.
+  const played = Math.floor(rng() * (LEAGUE_ROUNDS + 1));
+  const beforeStart = played === 0 && rng() < 0.4;
+  const state: LeagueState = beforeStart ? 'preparation' : played === LEAGUE_ROUNDS ? 'ended' : 'inWar';
+
+  const statusOf = (round: number): RawWar['state'] | null =>
+    beforeStart ? (round === 0 ? 'preparation' : null)
+      : round < played ? 'warEnded'
+      : round === played ? 'inWar'
+      : round === played + 1 ? 'preparation'
+      : null;
+
+  const now = Date.now();
+  const wars: Record<string, RawWar> = {};
+  let serial = 0;
+
+  const rounds = roundRobin(LEAGUE_GROUP).map((pairs, round) => {
+    const status = statusOf(round);
+    return {
+      warTags: pairs.map(([x, y]) => {
+        const warTag = normalizeTag('#' + norm.slice(1, 5) + 'Q' + tagSuffix(serial++));
+        if (!status) return '#0';
+
+        const wrng = seeded(warTag);
+        const ours = warRoster(clanTags[x], teamSize);
+        const theirs = warRoster(clanTags[y], teamSize);
+        const effort = status === 'preparation' ? 0 : status === 'inWar' ? 0.6 : 0.95;
+        const a = playAttacks(wrng, ours, theirs, 1, effort, 1);
+        const b = playAttacks(wrng, theirs, ours, 1, effort, a.nextOrder);
+
+        // Rounds are a day apart; the API names the clans in no fixed order.
+        const endsIn = beforeStart ? 47 : (round - played) * 24 + 10;
+        const sideA = {
+          tag: clanTags[x], name: mockClan(clanTags[x]).name,
+          stars: a.stars, destructionPercentage: a.destruction, members: ours,
+        };
+        const sideB = {
+          tag: clanTags[y], name: mockClan(clanTags[y]).name,
+          stars: b.stars, destructionPercentage: b.destruction, members: theirs,
+        };
+        const swap = wrng() < 0.5;
+
+        wars[warTag] = {
+          state: status,
+          teamSize,
+          attacksPerMember: 1,
+          preparationStartTime: cocDate(new Date(now + (endsIn - 47) * 3600_000)),
+          startTime: cocDate(new Date(now + (endsIn - 24) * 3600_000)),
+          endTime: cocDate(new Date(now + endsIn * 3600_000)),
+          clan: swap ? sideB : sideA,
+          opponent: swap ? sideA : sideB,
+        };
+        return warTag;
+      }),
+    };
+  });
+
+  return {
+    group: {
+      state,
+      season: new Date(now).toISOString().slice(0, 7),
+      clans: clanTags.map((t) => {
+        const c = mockClan(t, { members: teamSize });
+        return {
+          tag: t, name: c.name, clanLevel: c.clanLevel,
+          members: c.memberList.map((m) => ({ tag: m.tag, name: m.name, townHallLevel: m.townHallLevel })),
+        };
+      }),
+      rounds,
+    },
+    wars,
+  };
 }

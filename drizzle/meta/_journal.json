@@ -22,6 +22,13 @@
       "when": 1788628774525,
       "tag": "0002_chunky_maggott",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1789275113190,
+      "tag": "0003_clan_war_leagues",
+      "breakpoints": true
     }
   ]
 }

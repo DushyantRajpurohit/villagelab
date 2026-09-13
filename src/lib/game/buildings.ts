@@ -143,6 +143,47 @@ export const SUPERCHARGES: Record<string, LevelStep[]> = Object.fromEntries(
     ]),
 );
 
+export interface SuperchargeBill {
+  cost: Record<Resource, number>;
+  hours: number;
+  /** Charge levels bought, counted per copy — what Sparky Stones are paid on. */
+  charges: number;
+  /** Copies of supercharged structures the hall allows. */
+  structures: number;
+  /** Kinds of structure with a charge track. */
+  kinds: number;
+}
+
+/**
+ * What supercharging everything a hall allows would cost, kept as a bill of
+ * its own rather than folded into a cost-to-max — see `SUPERCHARGES`.
+ *
+ * Nothing below the top hall, which has no charge to buy. Above it, each copy
+ * is charged separately, and each structure's charges are billed in that
+ * structure's own currency: the Supercharge page prices a Gold Mine's charges
+ * in elixir and a Monolith's in dark elixir, exactly as their levels are.
+ */
+export function superchargeBill(th: number): SuperchargeBill {
+  const bill: SuperchargeBill = {
+    cost: { gold: 0, elixir: 0, dark: 0 }, hours: 0, charges: 0, structures: 0, kinds: 0,
+  };
+  if (th < MAX_TH) return bill;
+
+  for (const [id, charges] of Object.entries(SUPERCHARGES)) {
+    const b = BUILDINGS_BY_ID[id];
+    const copies = b?.count[th] ?? 0;
+    if (!copies) continue;
+    bill.kinds++;
+    bill.structures += copies;
+    bill.charges += charges.length * copies;
+    for (const c of charges) {
+      bill.cost[b.resource] += c.cost * copies;
+      bill.hours += c.hours * copies;
+    }
+  }
+  return bill;
+}
+
 /** The page each structure's numbers were read from, for provenance. */
 export const BUILDING_SOURCE: Record<string, string> = Object.fromEntries(
   Object.entries(RAW).map(([id, raw]) => [id, raw.page]),

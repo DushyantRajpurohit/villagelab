@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getClan } from '@/lib/data/clans';
 import { getCurrentWar } from '@/lib/data/wars';
@@ -50,7 +51,8 @@ export default async function CurrentWarPage({ params }: Params) {
             <p className="mx-auto max-w-[52ch]">
               {r.status === 'queued'
                 ? <>We haven&rsquo;t seen <code className="num">{norm}</code> before, so it has been queued for the next ingestion run. Reload shortly.</>
-                : <>When a war starts, the matchup, the scoreline and every unused attack appear here. A clan that keeps its war log private never shows a war at all.</>}
+                : <>When a war starts, the matchup, the scoreline and every unused attack appear here. A clan that keeps its war log private never shows a war at all. League wars are reported separately by the game, so during a Clan War League they are on the{' '}
+                  <Link href={`/clan/${norm.slice(1)}/league`} className="text-info hover:underline">war league</Link> tab instead.</>}
             </p>
           </Empty>
         </Panel>
