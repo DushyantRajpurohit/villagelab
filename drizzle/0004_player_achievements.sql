@@ -1,0 +1,1 @@
+ALTER TABLE "players" ADD COLUMN "achievements" text DEFAULT '[]' NOT NULL;

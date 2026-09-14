@@ -7,6 +7,7 @@
  */
 import { encodeTag } from './tags';
 import { extractIp, rotateKey } from './rotate';
+import type { RawAchievement } from './achievements';
 
 const BASE = process.env.COC_API_BASE?.trim() || 'https://api.clashofclans.com/v1';
 
@@ -73,6 +74,12 @@ export interface RawPlayer {
    * game's published tables says which epics a player has bought.
    */
   heroEquipment?: Array<{ name: string; level: number; village?: string }>;
+  /**
+   * Lifetime counters. The nearest the API comes to medals: it has no balance
+   * for Raid or League Medals, but it does count the raids and league stars
+   * they are paid for. See src/lib/coc/achievements.ts.
+   */
+  achievements?: RawAchievement[];
 }
 
 export const getPlayer = (tag: string) => call<RawPlayer>(`/players/${encodeTag(tag)}`);

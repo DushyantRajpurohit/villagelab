@@ -94,11 +94,12 @@ export function PlayerIdentity({ p, active }: { p: RawPlayer; active: VillageId 
           <div className="mt-1 flex flex-wrap items-center gap-2 text-muted">
             <code className="num">{p.tag}</code>
             <span>· {p.clan ? p.clan.name || 'in a clan' : 'no clan'}</span>
-            <span>· XP {p.expLevel}</span>
           </div>
         </div>
         <div className="flex-1" />
         <div className="flex flex-wrap items-center gap-7">
+          {/* The account's level, not a village's — so it heads both. */}
+          <Stat label="XP level" value={fmtInt(p.expLevel)} />
           {active === 'home' ? (
             <>
               <Stat label="Trophies" value={fmtInt(p.trophies)} sub={p.league?.name ?? 'Unranked'} />

@@ -11,6 +11,7 @@ import { UnitTable } from '@/components/UnitTable';
 import { HeroRoster, type HeroGear } from '@/components/HeroRoster';
 import { HomeVillageBuildings } from '@/components/player/VillageBuildings';
 import { CraftedDefenses } from '@/components/player/CraftedDefenses';
+import { LifetimeRecordPanel } from '@/components/player/LifetimeRecord';
 import {
   MockBanner, PlayerFrame, PlayerIdentity, PlayerNotFound, PlayerQueued,
 } from '@/components/player/PlayerFrame';
@@ -101,6 +102,8 @@ export default async function PlayerPage({ params }: Params) {
           <Stat label="War stars" value={fmtInt(p.warStars)} sub={`${fmtInt(p.attackWins)} attack wins`} />
         </Panel>
       </div>
+
+      <LifetimeRecordPanel p={p} />
 
       <Panel
         title={`Cost to max the army at TH${th}`}

@@ -33,6 +33,8 @@ export const players = pgTable('players', {
   role: text('role'),
   /** Full unit level map, kept as JSON — shape is stable but wide. */
   units: text('units').notNull().default('{}'),
+  /** The lifetime-record achievements only, as JSON — see src/lib/coc/achievements.ts. */
+  achievements: text('achievements').notNull().default('[]'),
   fetchedAt: timestamp('fetched_at', { withTimezone: true }).notNull().defaultNow(),
 }, (t) => [
   index('players_clan_idx').on(t.clanTag),

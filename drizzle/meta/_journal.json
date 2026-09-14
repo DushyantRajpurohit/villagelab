@@ -29,6 +29,13 @@
       "when": 1789275113190,
       "tag": "0003_clan_war_leagues",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1789369368671,
+      "tag": "0004_player_achievements",
+      "breakpoints": true
     }
   ]
 }

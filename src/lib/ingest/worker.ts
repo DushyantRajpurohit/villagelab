@@ -3,6 +3,7 @@ import { db, hasDatabase, schema } from '../db';
 import * as coc from '../coc/client';
 import { CocApiError } from '../coc/client';
 import { normalizeTag } from '../coc/tags';
+import { keepLifetime } from '../coc/achievements';
 import { parseCocDate } from '../format';
 import { analyseWar, standingOf } from '../war/analyse';
 import { recordLeagueWar, roundOfWar, scheduledTags } from '../war/league';
@@ -128,7 +129,7 @@ async function ingestPlayer(rawTag: string) {
     attackWins: p.attackWins, donations: p.donations, donationsReceived: p.donationsReceived,
     leagueName: p.league?.name ?? null, clanTag: p.clan?.tag ?? null, role: p.role ?? null,
     builderHallLevel: p.builderHallLevel ?? 0, builderBaseTrophies: p.builderBaseTrophies ?? 0,
-    units, fetchedAt: new Date(),
+    units, achievements: JSON.stringify(keepLifetime(p.achievements)), fetchedAt: new Date(),
   };
 
   await db().insert(schema.players).values(row)

@@ -106,6 +106,16 @@ export function mockPlayer(tag: string, opts: MockOptions = {}): RawPlayer & { _
       return { name: e.name, level, village: 'home' as const };
     });
 
+  // A stream of its own, so adding these did not reshuffle every mock player
+  // that existed before them.
+  const arng = seeded(norm + 'achievements');
+  const achievements = [
+    { name: 'Aggressive Capitalism', value: between(arng, 0, th * 180_000) },
+    { name: 'Most Valuable Clanmate', value: between(arng, 0, th * 120_000) },
+    { name: 'War League Legend', value: between(arng, 0, th * 45) },
+    { name: 'Games Champion', value: between(arng, 0, th * 16_000) },
+  ];
+
   return {
     tag: norm,
     name: opts.name ?? `${pick(rng, FIRST)}${pick(rng, SECOND)}`,
@@ -127,6 +137,7 @@ export function mockPlayer(tag: string, opts: MockOptions = {}): RawPlayer & { _
     spells: roster('spell'),
     heroes: [...roster('hero'), ...builderRoster(BUILDER_HEROES)],
     heroEquipment: equipment,
+    achievements,
     _mock: true,
   };
 }

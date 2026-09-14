@@ -49,6 +49,7 @@ export async function getPlayer(rawTag: string): Promise<PlayerResult> {
         league: row.leagueName ? { name: row.leagueName } : undefined,
         clan: row.clanTag ? { tag: row.clanTag, name: '' } : undefined,
         role: row.role ?? undefined,
+        achievements: JSON.parse(row.achievements) as RawPlayer['achievements'],
         ...units,
       },
     };

@@ -49,7 +49,7 @@ fresh clone is fully usable and CI needs no secrets.
 | Script | |
 | --- | --- |
 | `npm run dev` | Dev server |
-| `npm test` | Vitest — 966 tests |
+| `npm test` | Vitest — 971 tests |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run lint` | ESLint |
 | `npm run db:generate` | Generate a Drizzle migration |
@@ -315,6 +315,19 @@ the Home Village has no equivalent for: a Builder Base troop that unlocks late
 **arrives part-levelled** — the Electrofire Wizard is handed to you at level 17
 — so `startLevel` records that, and the levels below it are absent rather than
 free.
+
+### Lifetime records, and the balances the API does not have
+
+The API publishes no Raid Medal or League Medal balance, no gems, no magic
+items and no helper levels, so none of them appear. What it does publish is
+the achievement list, and four achievements count the activities those medals
+are paid for: Capital Gold looted in raids (*Aggressive Capitalism*), Capital
+Gold contributed (*Most Valuable Clanmate*), league stars (*War League Legend*)
+and Clan Games points (*Games Champion*). The player page shows those as
+**lifetime** totals and says so, rather than presenting a count of raids as a
+wallet. Only those four are stored (`players.achievements`), and one the API
+did not send is `null`, not zero, because an account that has never raided is
+a real answer.
 
 ### Why the tests exist
 
