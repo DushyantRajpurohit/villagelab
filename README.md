@@ -49,7 +49,7 @@ fresh clone is fully usable and CI needs no secrets.
 | Script | |
 | --- | --- |
 | `npm run dev` | Dev server |
-| `npm test` | Vitest — 971 tests |
+| `npm test` | Vitest — 974 tests |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run lint` | ESLint |
 | `npm run db:generate` | Generate a Drizzle migration |

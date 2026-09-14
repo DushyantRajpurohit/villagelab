@@ -4,6 +4,7 @@ import * as coc from '../coc/client';
 import { CocApiError } from '../coc/client';
 import { normalizeTag } from '../coc/tags';
 import { keepLifetime } from '../coc/achievements';
+import { packUnits } from '../coc/units';
 import { parseCocDate } from '../format';
 import { analyseWar, standingOf } from '../war/analyse';
 import { recordLeagueWar, roundOfWar, scheduledTags } from '../war/league';
@@ -122,7 +123,7 @@ async function ingestPlayer(rawTag: string) {
   const tag = normalizeTag(rawTag);
   const p = await coc.getPlayer(tag);
 
-  const units = JSON.stringify({ troops: p.troops ?? [], spells: p.spells ?? [], heroes: p.heroes ?? [] });
+  const units = packUnits(p);
   const row = {
     tag: p.tag, name: p.name, townHallLevel: p.townHallLevel, expLevel: p.expLevel,
     trophies: p.trophies, bestTrophies: p.bestTrophies, warStars: p.warStars,

@@ -3,6 +3,7 @@ import { sql } from 'drizzle-orm';
 import { db, hasDatabase, schema } from '../db';
 import { mockPlayer } from '../coc/mock';
 import { isValidTag, normalizeTag } from '../coc/tags';
+import { unpackUnits } from '../coc/units';
 import type { RawPlayer } from '../coc/client';
 
 /**
@@ -34,7 +35,7 @@ export async function getPlayer(rawTag: string): Promise<PlayerResult> {
     .limit(1);
 
   if (row) {
-    const units = JSON.parse(row.units) as Pick<RawPlayer, 'troops' | 'spells' | 'heroes'>;
+    const units = unpackUnits(row.units);
     return {
       status: 'ok',
       mock: false,
