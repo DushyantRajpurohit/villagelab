@@ -15,11 +15,12 @@ export interface VillageTab {
   disabled?: boolean;
 }
 
-const base =
-  'rounded-[10px] border px-3.5 py-1.5 text-[13px] font-semibold whitespace-nowrap transition';
-const on = 'border-gold-2 bg-gold text-ink';
-const off = 'border-line text-text-2 hover:bg-panel-2 hover:text-text';
-const dead = 'border-line/60 text-faint cursor-not-allowed';
+/* The same three shapes the buttons elsewhere use, so a tab and a button in
+   the same row are recognisably the same control family. */
+const base = 'btn rounded-full px-4 py-1.5 text-[13px]';
+const on = 'btn-gold raised';
+const off = 'btn-ghost';
+const dead = 'btn-ghost cursor-not-allowed opacity-55';
 
 /**
  * The Home Village / Builder Base switch.

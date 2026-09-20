@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { donationRatio, getClan } from '@/lib/data/clans';
 import { normalizeTag } from '@/lib/coc/tags';
@@ -6,6 +7,7 @@ import { fmtInt } from '@/lib/format';
 import { Banner, Chip, Empty, Panel, Stat } from '@/components/primitives';
 import { ClanRoster, ThSpread } from '@/components/ClanRoster';
 import { ClanShell } from '@/components/ClanShell';
+import { buildingSpriteUrl } from '@/lib/sprites';
 
 export const revalidate = 300;
 
@@ -51,6 +53,10 @@ export default async function ClanPage({ params }: Params) {
   const winRate = totalWars ? (c.warWins / totalWars) * 100 : 0;
   const totalDon = members.reduce((a, m) => a + m.donations, 0);
   const freeloaders = members.filter((m) => donationRatio(m) < 0.35).length;
+  // Decoration, at a fixed level: a clan's level is not its Castle's level,
+  // and the API publishes no Castle level at all, so drawing one from the
+  // clan level would be inventing a fact.
+  const castle = buildingSpriteUrl('clan_castle', 13);
 
   return (
     <ClanShell tag={c.tag} active="roster">
@@ -60,11 +66,32 @@ export default async function ClanPage({ params }: Params) {
         </Banner>
       )}
 
-      <Panel>
+      {/* The clan's own banner, built like the player's: one picture, the name,
+          and the three figures that describe the clan rather than a member.
+          The Castle stands in for a badge — clan badges are composed upstream
+          and served from Supercell's CDN, which this site does not fetch. */}
+      <section className="banner-hero p-5">
         <div className="flex flex-wrap items-center gap-5">
+          {castle && (
+            <div className="relative grid h-[92px] w-[92px] shrink-0 place-items-center rounded-full border border-line bg-panel-2/70">
+              <span
+                aria-hidden
+                className="absolute inset-1 rounded-full"
+                style={{ background: 'radial-gradient(closest-side, var(--wash-warm), transparent)' }}
+              />
+              <Image
+                src={castle}
+                alt=""
+                aria-hidden
+                width={76}
+                height={76}
+                className="relative object-contain drop-shadow-[0_6px_8px_rgba(0,0,0,.45)]"
+              />
+            </div>
+          )}
           <div>
             <div className="flex items-center gap-2.5">
-              <h1 className="display text-[22px]">{c.name}</h1>
+              <h1 className="shelf-title text-[26px]">{c.name}</h1>
               <Chip tone="gold">Lv {c.clanLevel}</Chip>
             </div>
             <div className="mt-1 flex flex-wrap items-center gap-2 text-muted">
@@ -82,7 +109,7 @@ export default async function ClanPage({ params }: Params) {
             <Stat label="Win streak" value={String(c.warWinStreak)} />
           </div>
         </div>
-      </Panel>
+      </section>
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <Panel><Stat label="Members" value={`${members.length}/50`} /></Panel>

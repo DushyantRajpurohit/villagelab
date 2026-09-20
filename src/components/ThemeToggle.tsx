@@ -36,7 +36,7 @@ export function ThemeToggle() {
       onClick={cycle}
       aria-label={`Theme: ${LABEL[theme]}. Switch to ${LABEL[next]}.`}
       title={`Theme: ${LABEL[theme]} — click for ${LABEL[next]}`}
-      className="flex h-8 shrink-0 items-center gap-1.5 rounded-full border border-line bg-panel-2 px-2.5 text-[12px] font-bold text-text-2 transition hover:border-line-2 hover:text-text"
+      className="flex h-9 shrink-0 items-center gap-1.5 rounded-full border border-line bg-panel-2 px-3 text-[12px] font-bold text-text-2 shadow-[inset_0_1px_0_var(--bevel)] transition hover:border-line-2 hover:text-text"
     >
       <Glyph theme={theme} />
       {/* Before hydration the stored choice is unknown, so a label would be a

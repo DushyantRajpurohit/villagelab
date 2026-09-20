@@ -465,7 +465,7 @@ export function BaseBuilder({ village }: { village: VillageId }) {
             tone={stats.hasHall ? 'ok' : 'bad'} />
         </div>
 
-        {note && <p className="mt-3 rounded-md border border-warn/40 bg-warn/[.07] px-3 py-2 text-[13px] text-text-2">{note}</p>}
+        {note && <p className="mt-3 rounded-[12px] border border-warn/40 bg-warn/[.07] px-3 py-2 text-[13px] text-text-2">{note}</p>}
 
         <div className="mt-4 flex justify-center">
           <canvas
@@ -479,7 +479,7 @@ export function BaseBuilder({ village }: { village: VillageId }) {
             onPointerLeave={() => { endDrag(); setHover(null); }}
             onContextMenu={(e) => e.preventDefault()}
             aria-label={`Village grid, ${GRID} by ${GRID} tiles, ${stats.placed} structures placed`}
-            className="block w-full max-w-[1040px] touch-none rounded-[10px] border border-line bg-panel-2"
+            className="block w-full max-w-[1040px] touch-none rounded-[14px] border border-line bg-panel-2"
             style={{ aspectRatio: `${VIEW.width} / ${VIEW.height}`, cursor: erasing ? 'not-allowed' : 'crosshair' }}
           />
         </div>
@@ -497,7 +497,7 @@ export function BaseBuilder({ village }: { village: VillageId }) {
             <select
               value={th}
               onChange={(e) => changeHall(Number(e.target.value))}
-              className="num rounded-md border border-line bg-panel-2 px-2 py-1 text-text outline-none focus:border-gold/50"
+              className="num rounded-lg border border-line bg-panel-2 shadow-[inset_0_2px_4px_rgba(0,0,0,.18)] outline-none focus:border-gold/50 px-2 py-1 text-text"
             >
               {Array.from({ length: maxHall }, (_, i) => i + 1).map((n) => (
                 <option key={n} value={n}>{hallShort}{n}</option>
@@ -527,11 +527,11 @@ export function BaseBuilder({ village }: { village: VillageId }) {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Layout name"
-              className="min-w-0 flex-1 rounded-md border border-line bg-panel-2 px-3 py-1.5 text-[13px] outline-none focus:border-gold/50"
+              className="min-w-0 flex-1 rounded-lg border border-line bg-panel-2 shadow-[inset_0_2px_4px_rgba(0,0,0,.18)] outline-none focus:border-gold/50 px-3 py-1.5 text-[13px]"
             />
             <button
               onClick={save}
-              className="raised rounded-[10px] border border-gold-2 bg-gold px-3 py-1.5 text-[13px] font-bold text-ink hover:brightness-105"
+              className="btn btn-gold raised rounded-full px-4 py-1.5 text-[13px]"
             >
               Save
             </button>
@@ -544,7 +544,7 @@ export function BaseBuilder({ village }: { village: VillageId }) {
             {layouts.length ? layouts.map((l) => (
               <div
                 key={l.id}
-                className={`flex items-center gap-2 rounded-md px-2.5 py-1.5 ${l.id === layoutId ? 'bg-panel-3' : 'bg-panel-2'}`}
+                className={`flex items-center gap-2 rounded-[10px] px-2.5 py-1.5 ${l.id === layoutId ? 'bg-panel-3' : 'bg-panel-2'}`}
               >
                 <div className="min-w-0 flex-1">
                   <div className="truncate text-[13px]">{l.name}</div>
@@ -668,7 +668,7 @@ function PaletteRow({ entry, used, active, onSelect, village }: {
     <button
       type="button"
       onClick={onSelect}
-      className={`flex w-full items-center gap-2 rounded-md border px-2 py-1.5 text-left transition ${
+      className={`flex w-full items-center gap-2 rounded-[10px] border px-2 py-1.5 text-left transition ${
         active ? 'border-gold/50 bg-panel-3' : 'border-transparent hover:bg-panel-2'
       } ${full ? 'opacity-45' : ''}`}
     >
@@ -684,17 +684,13 @@ function Toolbtn({ children, onClick, active, danger, disabled }: {
   children: React.ReactNode; onClick: () => void;
   active?: boolean; danger?: boolean; disabled?: boolean;
 }) {
-  const tone = active
-    ? 'border-gold bg-gold text-ink'
-    : danger
-      ? 'border-line bg-panel-2 text-bad hover:bg-panel-3'
-      : 'border-line bg-panel-2 text-text-2 hover:bg-panel-3';
+  const tone = active ? 'btn-gold' : danger ? 'btn-ghost !text-bad' : 'btn-ghost';
   return (
     <button
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className={`rounded-md border px-2.5 py-1 text-[12px] font-semibold transition disabled:opacity-40 disabled:hover:bg-panel-2 ${tone}`}
+      className={`btn rounded-full px-3 py-1 text-[12px] disabled:opacity-40 ${tone}`}
     >
       {children}
     </button>

@@ -1,64 +1,77 @@
 @import "tailwindcss";
 
 /* ============================================================================
-   VillageLab design tokens.
+   VillageLab design tokens — the storefront palette.
 
-   Two complete palettes. Light is a warm parchment-and-gold scheme in the
-   spirit of the game's own UI; dark is the same language after sundown — warm
-   browns rather than cold slate, so the gold still reads as gold.
+   The reference is Supercell's own web store: a near-black canvas lit from
+   above, content carried on chunky rounded cards, one bright gold call to
+   action per card, and artwork standing on a lit stage rather than sitting in
+   a thumbnail. Dark is therefore the *default* here and light is the override,
+   which is the opposite of how most sites are built — the storefront look only
+   works when the canvas is dark enough for the art to glow against it.
 
-   The resource colours (gold / elixir / dark elixir, and the three ores that
-   hero equipment is upgraded with) are *data* colours: a number's hue tells you
-   which currency it is. They are never decoration, and both palettes keep them
-   distinguishable against their own background. Each ore takes its hue from the
-   game's own badge — Shiny is a cyan crystal, Glowy a violet one, Starry an
-   amber star — so the colour agrees with the icon beside it.
+   The resource colours (gold / elixir / dark elixir, the three ores that hero
+   equipment is upgraded with, and the Sparky Stone) are *data* colours: a
+   number's hue tells you which currency it is. They are never decoration, and
+   both palettes keep them distinguishable against their own background. Each
+   ore takes its hue from the game's own badge — Shiny is a cyan crystal, Glowy
+   a violet one, Starry an amber star — so the colour agrees with the icon
+   beside it. The Sparky Stone's electric blue is kept clear of Shiny's teal,
+   because those two sit closest.
 
-   The Sparky Stone gets a hue on the same terms, and it is the one that is
-   never a cost: temporary upgrades pay it out and the Fancy Shop takes it. Its
-   electric blue comes from the game's badge and is kept clear of Shiny's teal,
-   because the two sit closest.
+   One split worth knowing: `--color-gold` is the *accent* gold, used as text
+   and as a rim, so it darkens in the light palette to stay readable on white.
+   The bright yellow a buy button is filled with lives in `.btn-gold` instead
+   and never changes, because a filled button carries its own contrast with it.
 
    Nothing here reproduces Supercell artwork, iconography or typography.
    ========================================================================= */
 
 @theme {
-  /* --- light (default) --- */
-  --color-bg:        #efe3ce;
-  --color-panel:     #fffaf1;
-  --color-panel-2:   #f6ebd8;
-  --color-panel-3:   #ead9be;
-  --color-line:      #d9c19b;
-  --color-line-2:    #b9986b;
+  /* --- dark (default) --- */
+  --color-bg:        #090b11;
+  --color-panel:     #141826;
+  --color-panel-2:   #1b2030;
+  --color-panel-3:   #252b3e;
+  --color-line:      #2b3143;
+  --color-line-2:    #3e465f;
 
-  --color-text:      #3a2a16;
-  --color-text-2:    #5d4728;
-  --color-muted:     #8a7250;
-  --color-faint:     #a08a68;
+  --color-text:      #f3f6fd;
+  --color-text-2:    #c2cadc;
+  --color-muted:     #8993a9;
+  --color-faint:     #676f85;
 
-  --color-gold:      #c98b0d;
-  --color-gold-2:    #a86f05;
-  --color-ink:       #2a1d0a;
+  --color-gold:      #ffc62e;
+  --color-gold-2:    #cf8500;
+  --color-ink:       #2a1c00;
 
-  --color-elixir:    #a13cb0;
-  --color-dark:      #5f4fcc;
+  --color-elixir:    #e07bf0;
+  --color-dark:      #a99cff;
 
-  --color-shiny:     #0e7d9c;
-  --color-glowy:     #8a34c9;
-  --color-starry:    #c25a10;
+  --color-shiny:     #5ad2ef;
+  --color-glowy:     #c58cff;
+  --color-starry:    #ffab55;
 
-  --color-sparky:    #0b6fd8;
+  --color-sparky:    #55b4ff;
 
-  --color-ok:        #1f8f4e;
-  --color-warn:      #c07408;
-  --color-bad:       #c3352a;
-  --color-info:      #1d6fc4;
+  --color-ok:        #3ddc84;
+  --color-warn:      #ffb545;
+  --color-bad:       #ff6f64;
+  --color-info:      #58aeff;
 
-  --bevel:           rgba(255, 255, 255, .85);
-  --shadow-panel:    0 1px 0 rgba(255,255,255,.7) inset, 0 2px 4px rgba(90,60,20,.10), 0 10px 24px rgba(90,60,20,.10);
-  --shadow-raised:   0 2px 0 var(--color-gold-2), 0 4px 10px rgba(90,60,20,.28);
+  --bevel:           rgba(255, 255, 255, .08);
+  --shadow-panel:    0 1px 0 rgba(255,255,255,.05) inset, 0 8px 24px rgba(0,0,0,.45);
+  --shadow-raised:   0 3px 0 var(--color-gold-2), 0 6px 16px rgba(0,0,0,.5);
+  --shadow-tile:     0 14px 34px rgba(0,0,0,.5);
 
-  --radius-panel:    14px;
+  /* The ambient light behind the page. Two washes rather than one so the
+     canvas has a warm side and a cool side, the way the store's hero art is
+     lit; they are referenced by `body` and by the hero banner alike. */
+  --wash-warm:       color-mix(in srgb, var(--color-gold) 13%, transparent);
+  --wash-cool:       color-mix(in srgb, #4d7dff 14%, transparent);
+
+  --radius-panel:    18px;
+  --radius-tile:     22px;
 
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
@@ -66,309 +79,525 @@
   --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
 }
 
-/* The dark palette, applied both by system preference and by explicit choice.
+/* The light palette, applied both by system preference and by explicit choice.
    Written twice on purpose: a media query cannot be re-scoped to an attribute,
-   and an explicit choice must win over the system in *both* directions. */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --color-bg:      #17120c;
-    --color-panel:   #221b13;
-    --color-panel-2: #2c2318;
-    --color-panel-3: #392e20;
-    --color-line:    #483a28;
-    --color-line-2:  #665136;
+   and an explicit choice must win over the system in *both* directions.
 
-    --color-text:    #f6ecd9;
-    --color-text-2:  #d8c7ab;
-    --color-muted:   #a08a6d;
-    --color-faint:   #756450;
+   Daylight, not parchment: the same storefront with the lights on. Surfaces go
+   white, the canvas goes to a cool page grey so cards still read as raised off
+   it, and the accent gold darkens far enough to be legible as text. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --color-bg:      #eaeef6;
+    --color-panel:   #ffffff;
+    --color-panel-2: #f3f6fb;
+    --color-panel-3: #e5eaf3;
+    --color-line:    #d5dce9;
+    --color-line-2:  #b3bdd0;
 
-    --color-gold:    #f0b429;
-    --color-gold-2:  #b7820e;
-    --color-ink:     #241906;
+    --color-text:    #10151f;
+    --color-text-2:  #39435a;
+    --color-muted:   #5f6a81;
+    --color-faint:   #838da3;
 
-    --color-elixir:  #d874e4;
-    --color-dark:    #a294f5;
+    --color-gold:    #b47a00;
+    --color-gold-2:  #8a5c00;
+    --color-ink:     #2a1c00;
 
-    --color-shiny:   #57cbe8;
-    --color-glowy:   #c48cff;
-    --color-starry:  #ffa552;
+    --color-elixir:  #a72fb8;
+    --color-dark:    #5a4ad4;
 
-    --color-sparky:  #4fb0ff;
+    --color-shiny:   #0a7691;
+    --color-glowy:   #8129c7;
+    --color-starry:  #b3500c;
 
-    --color-ok:      #46dd8b;
-    --color-warn:    #ffb746;
-    --color-bad:     #ff6f64;
-    --color-info:    #58aeff;
+    --color-sparky:  #0a68cf;
 
-    --bevel:         rgba(255, 255, 255, .07);
-    --shadow-panel:  0 1px 0 rgba(255,255,255,.05) inset, 0 2px 4px rgba(0,0,0,.45), 0 12px 28px rgba(0,0,0,.35);
-    --shadow-raised: 0 2px 0 var(--color-gold-2), 0 4px 12px rgba(0,0,0,.5);
+    --color-ok:      #12894a;
+    --color-warn:    #a66a00;
+    --color-bad:     #c22e23;
+    --color-info:    #1466c0;
 
-    color-scheme: dark;
+    --bevel:         rgba(255, 255, 255, .9);
+    --shadow-panel:  0 1px 0 rgba(255,255,255,.8) inset, 0 4px 14px rgba(24,38,72,.08);
+    --shadow-raised: 0 3px 0 var(--color-gold-2), 0 6px 14px rgba(24,38,72,.22);
+    --shadow-tile:   0 16px 34px rgba(24,38,72,.14);
+
+    --wash-warm:     color-mix(in srgb, #ffb703 18%, transparent);
+    --wash-cool:     color-mix(in srgb, #4d7dff 16%, transparent);
+
+    color-scheme: light;
   }
 }
 
-:root[data-theme="dark"] {
-  --color-bg:      #17120c;
-  --color-panel:   #221b13;
-  --color-panel-2: #2c2318;
-  --color-panel-3: #392e20;
-  --color-line:    #483a28;
-  --color-line-2:  #665136;
+:root[data-theme="light"] {
+  --color-bg:      #eaeef6;
+  --color-panel:   #ffffff;
+  --color-panel-2: #f3f6fb;
+  --color-panel-3: #e5eaf3;
+  --color-line:    #d5dce9;
+  --color-line-2:  #b3bdd0;
 
-  --color-text:    #f6ecd9;
-  --color-text-2:  #d8c7ab;
-  --color-muted:   #a08a6d;
-  --color-faint:   #756450;
+  --color-text:    #10151f;
+  --color-text-2:  #39435a;
+  --color-muted:   #5f6a81;
+  --color-faint:   #838da3;
 
-  --color-gold:    #f0b429;
-  --color-gold-2:  #b7820e;
-  --color-ink:     #241906;
+  --color-gold:    #b47a00;
+  --color-gold-2:  #8a5c00;
+  --color-ink:     #2a1c00;
 
-  --color-elixir:  #d874e4;
-  --color-dark:    #a294f5;
+  --color-elixir:  #a72fb8;
+  --color-dark:    #5a4ad4;
 
-  --color-shiny:   #57cbe8;
-  --color-glowy:   #c48cff;
-  --color-starry:  #ffa552;
+  --color-shiny:   #0a7691;
+  --color-glowy:   #8129c7;
+  --color-starry:  #b3500c;
 
-  --color-sparky:  #4fb0ff;
+  --color-sparky:  #0a68cf;
 
-  --color-ok:      #46dd8b;
-  --color-warn:    #ffb746;
-  --color-bad:     #ff6f64;
-  --color-info:    #58aeff;
+  --color-ok:      #12894a;
+  --color-warn:    #a66a00;
+  --color-bad:     #c22e23;
+  --color-info:    #1466c0;
 
-  --bevel:         rgba(255, 255, 255, .07);
-  --shadow-panel:  0 1px 0 rgba(255,255,255,.05) inset, 0 2px 4px rgba(0,0,0,.45), 0 12px 28px rgba(0,0,0,.35);
-  --shadow-raised: 0 2px 0 var(--color-gold-2), 0 4px 12px rgba(0,0,0,.5);
+  --bevel:         rgba(255, 255, 255, .9);
+  --shadow-panel:  0 1px 0 rgba(255,255,255,.8) inset, 0 4px 14px rgba(24,38,72,.08);
+  --shadow-raised: 0 3px 0 var(--color-gold-2), 0 6px 14px rgba(24,38,72,.22);
+  --shadow-tile:   0 16px 34px rgba(24,38,72,.14);
 
-  color-scheme: dark;
+  --wash-warm:     color-mix(in srgb, #ffb703 18%, transparent);
+  --wash-cool:     color-mix(in srgb, #4d7dff 16%, transparent);
+
+  color-scheme: light;
 }
 
-:root { color-scheme: light; }
-:root[data-theme="light"] { color-scheme: light; }
+:root { color-scheme: dark; }
+:root[data-theme="dark"] { color-scheme: dark; }
 
+/* The canvas: a dark sheet lit from the top corners. Fixed, so the light stays
+   where it is while the page scrolls under it — a wash that scrolls away reads
+   as a banner, one that stays reads as a room. */
 body {
-  background: var(--color-bg);
+  background-color: var(--color-bg);
   color: var(--color-text);
-  /* A faint woven texture so large empty areas are not dead flat. Two cheap
-     gradients — no image request, and it disappears at normal reading zoom. */
   background-image:
-    repeating-linear-gradient(45deg, color-mix(in srgb, var(--color-line) 9%, transparent) 0 1px, transparent 1px 7px),
-    repeating-linear-gradient(-45deg, color-mix(in srgb, var(--color-line) 7%, transparent) 0 1px, transparent 1px 9px);
+    radial-gradient(70rem 40rem at 12% -10%, var(--wash-warm), transparent 70%),
+    radial-gradient(60rem 36rem at 92% -6%, var(--wash-cool), transparent 72%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
-/* Tabular numerals everywhere a figure is compared down a column. */
-.num {
-  font-family: var(--font-mono);
-  font-variant-numeric: tabular-nums;
-}
+/* Everything below is a component class, and it lives in Tailwind's
+   `components` layer so that a utility written on the same element always
+   wins: `.btn` sets a 14px face, and `text-[13px]` beside it must be able to
+   say otherwise. Unlayered CSS would quietly outrank every utility in the
+   codebase. */
+@layer components {
+  /* Tabular numerals everywhere a figure is compared down a column. */
+  .num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
 
-/* Headings and figures carry the display face; body copy stays a system sans
-   so long text renders instantly and legibly. */
-.display {
-  font-family: var(--font-display);
-  font-weight: 800;
-  letter-spacing: -0.01em;
-}
+  /* Headings and figures carry the display face; body copy stays a system sans
+     so long text renders instantly and legibly. */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
 
-/* Interpolated values carry this marker — see src/lib/game/curve.ts */
-.est-mark {
-  color: var(--color-faint);
-  font-weight: 400;
-  cursor: help;
-}
+  /* The store sets its section headings in the display face, large and tight.
+     Anything using this is a shelf label, not a card title. */
+  .shelf-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
 
-/* --- surfaces -------------------------------------------------------------
-   The chunky, lit-from-above card the game's own panels suggest: a bright top
-   edge, a heavier bottom, and a real shadow underneath. */
-.surface {
-  background: var(--color-panel);
-  border: 1px solid var(--color-line);
-  border-bottom-color: var(--color-line-2);
-  border-radius: var(--radius-panel);
-  box-shadow: var(--shadow-panel);
-}
+  /* Interpolated values carry this marker — see src/lib/game/curve.ts */
+  .est-mark {
+    color: var(--color-faint);
+    font-weight: 400;
+    cursor: help;
+  }
 
-/* --- raised controls ------------------------------------------------------
-   A solid bottom border reads as thickness, and removing it on :active reads
-   as the button physically depressing. */
-.raised {
-  box-shadow: var(--shadow-raised);
-  transform: translateY(0);
-  transition: transform .06s ease, box-shadow .06s ease, background-color .15s ease;
-}
-.raised:active:not(:disabled) {
-  transform: translateY(2px);
-  box-shadow: 0 0 0 var(--color-gold-2), 0 1px 3px rgba(0,0,0,.35);
-}
+  /* --- surfaces -------------------------------------------------------------
+     The card the storefront is built out of: a flat dark panel, a hairline that
+     is brighter along the top edge than the bottom (light comes from above), a
+     generous radius, and a real shadow so it floats off the canvas. */
+  .surface {
+    position: relative;
+    background: var(--color-panel);
+    border: 1px solid var(--color-line);
+    border-top-color: color-mix(in srgb, var(--color-line-2) 70%, var(--color-line));
+    border-radius: var(--radius-panel);
+    box-shadow: var(--shadow-panel);
+  }
 
-@media (prefers-reduced-motion: reduce) {
-  .raised, .raised:active:not(:disabled) { transition: none; transform: none; }
-}
+  /* --- raised controls ------------------------------------------------------
+     A solid bottom border reads as thickness, and removing it on :active reads
+     as the button physically depressing. */
+  .raised {
+    box-shadow: var(--shadow-raised);
+    transform: translateY(0);
+    transition: transform .06s ease, box-shadow .06s ease, filter .15s ease;
+  }
+  .raised:active:not(:disabled) {
+    transform: translateY(3px);
+    box-shadow: 0 0 0 var(--color-gold-2), 0 1px 3px rgba(0,0,0,.4);
+  }
 
-/* --- the hero hall --------------------------------------------------------
-   Heroes are characters, not rows. The game stands them in lit niches, so
-   these do too: a warm pool of light behind the figure, a darker floor it
-   stands on, and a level badge at its feet. The alcove is what stops five
-   portraits reading as five stickers on five cards. */
-.hero-alcove {
-  position: relative;
-  background:
-    radial-gradient(120% 80% at 50% 12%,
-      color-mix(in srgb, var(--color-gold) 22%, transparent) 0%,
-      transparent 62%),
-    linear-gradient(to bottom, var(--color-panel-3), var(--color-panel-2));
-  border: 1px solid var(--color-line);
-  border-bottom-color: var(--color-line-2);
-  border-radius: 12px;
-  box-shadow:
-    0 1px 0 var(--bevel) inset,
-    0 -14px 22px -14px rgba(0, 0, 0, .38) inset;
-  overflow: hidden;
-}
+  /* --- buttons --------------------------------------------------------------
+     One filled gold button per card, the way the store gives each offer exactly
+     one thing to press. The fill is a fixed bright yellow in both palettes
+     because a filled control carries its own contrast; only the accent token
+     changes with the theme. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .45rem;
+    border-radius: 12px;
+    padding: .5rem .95rem;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 1.2;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .btn:disabled { opacity: .5; cursor: default; }
 
-/* The floor the figure stands on. A gradient, not a border: a hard line under
-   a sprite with a soft shadow makes the sprite look pasted on. */
-.hero-alcove::after {
-  content: '';
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 34%;
-  background: linear-gradient(to top,
-    color-mix(in srgb, var(--color-line-2) 34%, transparent), transparent);
-  pointer-events: none;
-}
+  .btn-gold {
+    color: var(--color-ink);
+    background: linear-gradient(to bottom, #ffd75a, #f5a300);
+    border: 1px solid #c98200;
+    text-shadow: 0 1px 0 rgba(255,255,255,.35);
+  }
+  .btn-gold:hover:not(:disabled) { filter: brightness(1.06); }
 
-/* A hero not yet unlocked is present but unlit — the niche is waiting. */
-.hero-alcove[data-locked='true'] {
-  background: linear-gradient(to bottom, var(--color-panel-2), var(--color-panel-2));
-}
-.hero-alcove[data-locked='true'] img {
-  filter: grayscale(1) brightness(.62) contrast(.9);
-  opacity: .5;
-}
+  /* The quiet alternative: same shape, no fill. Used where a card offers a
+     second route that must not compete with its gold one. */
+  .btn-ghost {
+    color: var(--color-text-2);
+    background: var(--color-panel-2);
+    border: 1px solid var(--color-line);
+    box-shadow: 0 1px 0 var(--bevel) inset;
+    transition: border-color .15s ease, color .15s ease, background-color .15s ease;
+  }
+  .btn-ghost:hover:not(:disabled) {
+    color: var(--color-text);
+    background: var(--color-panel-3);
+    border-color: var(--color-line-2);
+  }
 
-/* The hall is alive: each hero breathes in place, the way they idle in the
-   game rather than standing frozen. Small amplitude and a slow, uneven period
-   — a big bob reads as a bouncing sticker, and a synchronised one reads as a
-   machine. Each card is given its own delay so the five drift out of phase.
+  @media (prefers-reduced-motion: reduce) {
+    .raised, .raised:active:not(:disabled) { transition: none; transform: none; }
+  }
 
-   Two nested transforms on purpose: the stage carries the hover lift and the
-   figure carries the idle, so neither overwrites the other. */
-.hero-stage {
-  transition: transform .22s cubic-bezier(.22, .9, .3, 1);
-}
-.hero-card:hover .hero-stage { transform: translateY(-4px) scale(1.03); }
+  /* --- tiles ----------------------------------------------------------------
+     A storefront offer: art on a lit stage up top, a name and one action below.
+     The whole thing is one link, so the hover lift belongs to the tile rather
+     than to anything inside it. */
+  .tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--color-panel);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-tile);
+    box-shadow: var(--shadow-tile);
+    transition: transform .18s cubic-bezier(.22,.9,.3,1), border-color .18s ease,
+      box-shadow .18s ease;
+  }
+  .tile:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--color-gold) 55%, var(--color-line));
+    box-shadow: var(--shadow-tile), 0 0 0 1px color-mix(in srgb, var(--color-gold) 22%, transparent);
+  }
+  .tile:focus-within {
+    border-color: color-mix(in srgb, var(--color-gold) 65%, var(--color-line));
+  }
 
-.hero-figure {
-  animation: hero-idle 4.4s ease-in-out infinite;
-  animation-delay: var(--idle-delay, 0s);
-  transform-origin: 50% 100%;
-  will-change: transform;
-}
+  /* The stage the art stands on: a pool of light above, a floor below, and a
+     hairline where the stage meets the card body. Sized by its content so the
+     same stage serves a big hero and a small tile. */
+  .stage {
+    position: relative;
+    display: grid;
+    place-items: center;
+    border-bottom: 1px solid var(--color-line);
+    background:
+      radial-gradient(90% 70% at 50% 18%,
+        color-mix(in srgb, var(--stage-hue, var(--color-gold)) 30%, transparent) 0%,
+        transparent 68%),
+      linear-gradient(to bottom, var(--color-panel-3), var(--color-panel-2));
+  }
 
-@keyframes hero-idle {
-  0%, 100% { transform: translateY(0) scaleY(1); }
-  50%      { transform: translateY(-3px) scaleY(1.012); }
-}
+  /* The shadow the art casts on the stage floor. An ellipse, not a border: it is
+     what stops a cut-out sprite from looking pasted onto a rectangle. */
+  .stage::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 12%;
+    width: 52%;
+    height: 12%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(0,0,0,.42), transparent);
+    pointer-events: none;
+  }
 
-/* An unlit niche holds no one, so nothing in it breathes. */
-.hero-alcove[data-locked='true'] .hero-figure { animation: none; }
+  /* Art lifts a little as its tile does, which is what makes the stage read as
+     having depth rather than being a printed background. */
+  .tile .stage img { transition: transform .18s cubic-bezier(.22,.9,.3,1); }
+  .tile:hover .stage img { transform: translateY(-4px) scale(1.04); }
 
-/* The level, where the game puts it: at the hero's feet, straddling the floor
-   line so it reads as standing in front of the niche rather than inside it. */
-.hero-badge {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-variant-numeric: tabular-nums;
-  color: var(--color-ink);
-  background: linear-gradient(to bottom, var(--color-gold), var(--color-gold-2));
-  border: 1px solid var(--color-gold-2);
-  border-radius: 999px;
-  box-shadow: 0 2px 0 var(--color-gold-2), 0 3px 8px rgba(0, 0, 0, .35);
-}
-.hero-badge[data-tone='max']  {
-  background: linear-gradient(to bottom, var(--color-ok), color-mix(in srgb, var(--color-ok) 70%, #000));
-  border-color: color-mix(in srgb, var(--color-ok) 70%, #000);
-  box-shadow: 0 2px 0 color-mix(in srgb, var(--color-ok) 70%, #000), 0 3px 8px rgba(0, 0, 0, .35);
-  color: #fff;
-}
-.hero-badge[data-tone='bad'] {
-  background: linear-gradient(to bottom, var(--color-bad), color-mix(in srgb, var(--color-bad) 70%, #000));
-  border-color: color-mix(in srgb, var(--color-bad) 70%, #000);
-  box-shadow: 0 2px 0 color-mix(in srgb, var(--color-bad) 70%, #000), 0 3px 8px rgba(0, 0, 0, .35);
-  color: #fff;
-}
-.hero-badge[data-tone='locked'] {
-  background: var(--color-panel-3);
-  border-color: var(--color-line);
-  box-shadow: 0 2px 0 var(--color-line), 0 3px 8px rgba(0, 0, 0, .25);
-  color: var(--color-faint);
-}
+  @media (prefers-reduced-motion: reduce) {
+    .tile, .tile .stage img { transition: none; }
+    .tile:hover { transform: none; }
+    .tile:hover .stage img { transform: none; }
+  }
 
-@media (prefers-reduced-motion: reduce) {
-  .hero-stage { transition: none; }
-  .hero-card:hover .hero-stage { transform: none; }
-  .hero-figure { animation: none; }
-}
+  /* The corner flag the store hangs a discount from. Here it names what a tile
+     is rather than what it costs — nothing on this site is for sale. */
+  .flag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 1;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .02em;
+    color: var(--color-ink);
+    background: linear-gradient(to bottom, #ffd75a, #f5a300);
+    box-shadow: 0 2px 6px rgba(0,0,0,.35);
+  }
+  .flag[data-tone='cool'] {
+    color: #fff;
+    background: linear-gradient(to bottom, #5b8dff, #2f5fd8);
+  }
 
-/* Hero equipment, laid out as the game's own gear tray does it: a row of small
-   slots under the hero, each holding one item with its level in the corner.
+  /* --- shelves --------------------------------------------------------------
+     A row of tiles that scrolls sideways on a phone and becomes a grid when
+     there is room, which is how the store handles the same content. The
+     scrollbar is hidden because the tiles are already cut off at the edge, and
+     that is the affordance. */
+  .shelf {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(230px, 1fr);
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: .25rem;
+    scrollbar-width: none;
+  }
+  .shelf::-webkit-scrollbar { display: none; }
+  .shelf > * { scroll-snap-align: start; }
 
-   Every item the hall allows is drawn, owned or not, because the unowned ones
-   are the point — they are what is left to find. An item the account does not
-   have is unlit and carries no number, the same grammar the empty niche above
-   it uses for a hero that is not unlocked yet. */
-.gear-slot {
-  position: relative;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(to bottom, var(--color-panel-2), var(--color-panel-3));
-  border: 1px solid var(--color-line);
-  border-radius: 8px;
-  box-shadow: 0 1px 0 var(--bevel) inset;
-}
+  @media (min-width: 880px) {
+    .shelf {
+      grid-auto-flow: row;
+      grid-template-columns: repeat(var(--shelf-cols, 4), minmax(0, 1fr));
+      overflow: visible;
+    }
+  }
 
-.gear-slot[data-owned='false'] {
-  border-style: dashed;
-  background: var(--color-panel-2);
-}
-.gear-slot[data-owned='false'] img {
-  filter: grayscale(1) brightness(.7);
-  opacity: .38;
-}
+  /* --- the hero banner ------------------------------------------------------
+     The store's top card: art on one side, the offer on the other, sitting in
+     its own pool of light. Darker than the cards below it so it reads as the
+     back wall of the room rather than another tile. */
+  .banner-hero {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-tile);
+    background:
+      radial-gradient(60% 120% at 82% 0%, var(--wash-warm), transparent 70%),
+      radial-gradient(70% 120% at 0% 100%, var(--wash-cool), transparent 72%),
+      linear-gradient(140deg, var(--color-panel-2), var(--color-panel));
+    box-shadow: var(--shadow-tile);
+  }
 
-/* Epic equipment is rarer and the game marks it; a gold rim is enough here,
-   and it survives the greying above because it is on the slot, not the art. */
-.gear-slot[data-rarity='epic'] {
-  border-color: color-mix(in srgb, var(--color-gold) 62%, var(--color-line));
-}
+  /* A hairline of light along the top edge, which is what gives the banner its
+     moulded, lit-from-above look at a glance. */
+  .banner-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent,
+      color-mix(in srgb, var(--color-gold) 55%, transparent), transparent);
+  }
 
-/* The level sits on the corner of the slot, clear of the art. Tabular so a
-   one- and a two-digit level do not shift the tray. */
-.gear-level {
-  position: absolute;
-  right: -3px;
-  bottom: -4px;
-  min-width: 15px;
-  padding: 0 3px;
-  font-family: var(--font-display);
-  font-size: 9px;
-  font-weight: 800;
-  line-height: 13px;
-  font-variant-numeric: tabular-nums;
-  text-align: center;
-  color: var(--color-ink);
-  background: linear-gradient(to bottom, var(--color-gold), var(--color-gold-2));
-  border: 1px solid var(--color-gold-2);
-  border-radius: 999px;
-}
-.gear-level[data-tone='max'] {
-  background: linear-gradient(to bottom, var(--color-ok), color-mix(in srgb, var(--color-ok) 70%, #000));
-  border-color: color-mix(in srgb, var(--color-ok) 70%, #000);
-  color: #fff;
-}
+  /* --- the hero hall --------------------------------------------------------
+     Heroes are characters, not rows. The game stands them in lit niches, so
+     these do too: a warm pool of light behind the figure, a darker floor it
+     stands on, and a level badge at its feet. The alcove is what stops five
+     portraits reading as five stickers on five cards. */
+  .hero-alcove {
+    position: relative;
+    background:
+      radial-gradient(120% 80% at 50% 12%,
+        color-mix(in srgb, var(--color-gold) 26%, transparent) 0%,
+        transparent 62%),
+      linear-gradient(to bottom, var(--color-panel-3), var(--color-panel-2));
+    border: 1px solid var(--color-line);
+    border-radius: 14px;
+    box-shadow:
+      0 1px 0 var(--bevel) inset,
+      0 -14px 22px -14px rgba(0, 0, 0, .45) inset;
+    overflow: hidden;
+  }
 
+  /* The floor the figure stands on. A gradient, not a border: a hard line under
+     a sprite with a soft shadow makes the sprite look pasted on. */
+  .hero-alcove::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 34%;
+    background: linear-gradient(to top,
+      color-mix(in srgb, var(--color-line-2) 34%, transparent), transparent);
+    pointer-events: none;
+  }
+
+  /* A hero not yet unlocked is present but unlit — the niche is waiting. */
+  .hero-alcove[data-locked='true'] {
+    background: linear-gradient(to bottom, var(--color-panel-2), var(--color-panel-2));
+  }
+  .hero-alcove[data-locked='true'] img {
+    filter: grayscale(1) brightness(.62) contrast(.9);
+    opacity: .5;
+  }
+
+  /* The hall is alive: each hero breathes in place, the way they idle in the
+     game rather than standing frozen. Small amplitude and a slow, uneven period
+     — a big bob reads as a bouncing sticker, and a synchronised one reads as a
+     machine. Each card is given its own delay so the five drift out of phase.
+
+     Two nested transforms on purpose: the stage carries the hover lift and the
+     figure carries the idle, so neither overwrites the other. */
+  .hero-stage {
+    transition: transform .22s cubic-bezier(.22, .9, .3, 1);
+  }
+  .hero-card:hover .hero-stage { transform: translateY(-4px) scale(1.03); }
+
+  .hero-figure {
+    animation: hero-idle 4.4s ease-in-out infinite;
+    animation-delay: var(--idle-delay, 0s);
+    transform-origin: 50% 100%;
+    will-change: transform;
+  }
+
+  @keyframes hero-idle {
+    0%, 100% { transform: translateY(0) scaleY(1); }
+    50%      { transform: translateY(-3px) scaleY(1.012); }
+  }
+
+  /* An unlit niche holds no one, so nothing in it breathes. */
+  .hero-alcove[data-locked='true'] .hero-figure { animation: none; }
+
+  /* The level, where the game puts it: at the hero's feet, straddling the floor
+     line so it reads as standing in front of the niche rather than inside it. */
+  .hero-badge {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-ink);
+    background: linear-gradient(to bottom, #ffd75a, #f5a300);
+    border: 1px solid #c98200;
+    border-radius: 999px;
+    box-shadow: 0 2px 0 #c98200, 0 3px 8px rgba(0, 0, 0, .35);
+  }
+  .hero-badge[data-tone='max']  {
+    background: linear-gradient(to bottom, var(--color-ok), color-mix(in srgb, var(--color-ok) 70%, #000));
+    border-color: color-mix(in srgb, var(--color-ok) 70%, #000);
+    box-shadow: 0 2px 0 color-mix(in srgb, var(--color-ok) 70%, #000), 0 3px 8px rgba(0, 0, 0, .35);
+    color: #fff;
+  }
+  .hero-badge[data-tone='bad'] {
+    background: linear-gradient(to bottom, var(--color-bad), color-mix(in srgb, var(--color-bad) 70%, #000));
+    border-color: color-mix(in srgb, var(--color-bad) 70%, #000);
+    box-shadow: 0 2px 0 color-mix(in srgb, var(--color-bad) 70%, #000), 0 3px 8px rgba(0, 0, 0, .35);
+    color: #fff;
+  }
+  .hero-badge[data-tone='locked'] {
+    background: var(--color-panel-3);
+    border-color: var(--color-line);
+    box-shadow: 0 2px 0 var(--color-line), 0 3px 8px rgba(0, 0, 0, .25);
+    color: var(--color-faint);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-stage { transition: none; }
+    .hero-card:hover .hero-stage { transform: none; }
+    .hero-figure { animation: none; }
+  }
+
+  /* Hero equipment, laid out as the game's own gear tray does it: a row of small
+     slots under the hero, each holding one item with its level in the corner.
+
+     Every item the hall allows is drawn, owned or not, because the unowned ones
+     are the point — they are what is left to find. An item the account does not
+     have is unlit and carries no number, the same grammar the empty niche above
+     it uses for a hero that is not unlocked yet. */
+  .gear-slot {
+    position: relative;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(to bottom, var(--color-panel-2), var(--color-panel-3));
+    border: 1px solid var(--color-line);
+    border-radius: 10px;
+    box-shadow: 0 1px 0 var(--bevel) inset;
+  }
+
+  .gear-slot[data-owned='false'] {
+    border-style: dashed;
+    background: var(--color-panel-2);
+  }
+  .gear-slot[data-owned='false'] img {
+    filter: grayscale(1) brightness(.7);
+    opacity: .38;
+  }
+
+  /* Epic equipment is rarer and the game marks it; a gold rim is enough here,
+     and it survives the greying above because it is on the slot, not the art. */
+  .gear-slot[data-rarity='epic'] {
+    border-color: color-mix(in srgb, var(--color-gold) 62%, var(--color-line));
+  }
+
+  /* The level sits on the corner of the slot, clear of the art. Tabular so a
+     one- and a two-digit level do not shift the tray. */
+  .gear-level {
+    position: absolute;
+    right: -3px;
+    bottom: -4px;
+    min-width: 15px;
+    padding: 0 3px;
+    font-family: var(--font-display);
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 13px;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+    color: var(--color-ink);
+    background: linear-gradient(to bottom, #ffd75a, #f5a300);
+    border: 1px solid #c98200;
+    border-radius: 999px;
+  }
+  .gear-level[data-tone='max'] {
+    background: linear-gradient(to bottom, var(--color-ok), color-mix(in srgb, var(--color-ok) 70%, #000));
+    border-color: color-mix(in srgb, var(--color-ok) 70%, #000);
+    color: #fff;
+  }
+}

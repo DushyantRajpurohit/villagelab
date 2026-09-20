@@ -1,10 +1,12 @@
+import Image from 'next/image';
 import type { ReactNode } from 'react';
 import type { RawPlayer } from '@/lib/coc/client';
 import type { VillageId } from '@/lib/store';
 import { fmtInt } from '@/lib/format';
-import { Banner, Chip, Empty, Panel, Stat } from '@/components/primitives';
+import { Banner, Chip, Empty, PageHead, Panel, Stat } from '@/components/primitives';
 import { TagSearch } from '@/components/TagSearch';
 import { VillageTabs } from '@/components/VillageTabs';
+import { buildingSpriteUrl } from '@/lib/sprites';
 
 /**
  * The parts of a player page that are the same whichever village you are on.
@@ -17,17 +19,11 @@ import { VillageTabs } from '@/components/VillageTabs';
 export function PlayerFrame({ tag, children }: { tag: string; children: ReactNode }) {
   return (
     <main className="mx-auto w-full max-w-[1400px] p-5">
-      <div className="mb-5 flex flex-wrap items-end gap-4">
-        <div>
-          <h1 className="display text-[22px]">Player dashboard</h1>
-          <p className="mt-1 max-w-[62ch] text-[13px] text-muted">
-            How close an account is to the ceiling for its hall, what closing the gap costs, and
-            whether it is rushed.
-          </p>
-        </div>
-        <div className="flex-1" />
-        <TagSearch initial={tag} basePath="/player" />
-      </div>
+      <PageHead
+        title="Player dashboard"
+        sub="How close an account is to the ceiling for its hall, what closing the gap costs, and whether it is rushed."
+        action={<TagSearch initial={tag} basePath="/player" />}
+      />
       <div className="grid gap-4">{children}</div>
     </main>
   );
@@ -82,12 +78,36 @@ export function PlayerIdentity({ p, active }: { p: RawPlayer; active: VillageId 
   const hallChip = active === 'home' ? `TH${p.townHallLevel}` : bh ? `BH${bh}` : 'No Builder Base';
   const path = `/player/${p.tag.slice(1)}`;
 
+  // The hall this account actually has, drawn at its own level. It is the one
+  // picture that says more than any figure beside it — a TH6 and a TH16 are
+  // recognisably different buildings — so it leads the banner.
+  const hall = active === 'home'
+    ? buildingSpriteUrl('__townhall', p.townHallLevel)
+    : bh ? buildingSpriteUrl('__builderhall', bh, 'builder') : null;
+
   return (
-    <Panel>
+    <section className="banner-hero p-5">
       <div className="flex flex-wrap items-center gap-5">
-        <div>
-          <div className="flex items-center gap-2.5">
-            <h2 className="display text-[22px]">{p.name}</h2>
+        {hall && (
+          <div className="relative grid h-[92px] w-[92px] shrink-0 place-items-center rounded-full border border-line bg-panel-2/70">
+            <span
+              aria-hidden
+              className="absolute inset-1 rounded-full"
+              style={{ background: 'radial-gradient(closest-side, var(--wash-warm), transparent)' }}
+            />
+            <Image
+              src={hall}
+              alt={`${hallChip} hall`}
+              width={78}
+              height={78}
+              className="relative object-contain drop-shadow-[0_6px_8px_rgba(0,0,0,.45)]"
+            />
+          </div>
+        )}
+
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-2.5">
+            <h2 className="shelf-title text-[26px]">{p.name}</h2>
             <Chip tone="gold">{hallChip}</Chip>
             {p.role && <Chip>{prettyRole(p.role)}</Chip>}
           </div>
@@ -130,6 +150,6 @@ export function PlayerIdentity({ p, active }: { p: RawPlayer; active: VillageId 
           ]}
         />
       </div>
-    </Panel>
+    </section>
   );
 }

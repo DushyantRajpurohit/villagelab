@@ -54,18 +54,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="flex min-h-full flex-col bg-bg font-sans text-text">
         <SiteHeader />
         {children}
-        {/* Required by Supercell's Fan Content Policy for any public fan site. */}
-        <footer className="mt-auto border-t border-line px-5 py-4 text-xs text-faint">
-          This material is unofficial and is not endorsed by Supercell. For more information see{' '}
-          <a
-            className="underline hover:text-text-2"
-            href="https://supercell.com/en/fan-content-policy/"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Supercell&rsquo;s Fan Content Policy
-          </a>
-          .
+        {/* The store's own footer is a dark plinth under the content, carrying
+            the legal lines and nothing that competes with the shelves above.
+            The Fan Content Policy notice is required on any public fan site. */}
+        <footer className="mt-auto border-t border-line bg-panel/50">
+          <div className="mx-auto flex w-full max-w-[1400px] flex-wrap items-center gap-x-6 gap-y-3 px-5 py-7 text-xs text-faint">
+            <span className="display text-[14px] text-text-2">
+              Village<span className="text-gold">Lab</span>
+            </span>
+            <p className="max-w-[72ch]">
+              This material is unofficial and is not endorsed by Supercell. For more information see{' '}
+              <a
+                className="text-text-2 underline hover:text-gold"
+                href="https://supercell.com/en/fan-content-policy/"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Supercell&rsquo;s Fan Content Policy
+              </a>
+              .
+            </p>
+          </div>
         </footer>
       </body>
     </html>

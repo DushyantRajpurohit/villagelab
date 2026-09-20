@@ -155,7 +155,7 @@ export function VillagePlanner({ config }: { config: PlannerConfig }) {
   }, [state.queue, config.resources]);
 
   if (!loaded) {
-    return <div className="grid gap-4"><div className="h-32 animate-pulse rounded-[10px] bg-panel-2" /></div>;
+    return <div className="grid gap-4"><div className="h-32 animate-pulse rounded-[18px] bg-panel-2" /></div>;
   }
 
   const upgradable = rows.filter((r) => r.next);
@@ -187,7 +187,7 @@ export function VillagePlanner({ config }: { config: PlannerConfig }) {
             <select
               value={hall}
               onChange={(e) => setState({ hall: Number(e.target.value) })}
-              className="rounded-md border border-line bg-panel-2 px-2.5 py-1.5 text-sm text-text outline-none focus:border-gold/50"
+              className="rounded-lg border border-line bg-panel-2 shadow-[inset_0_2px_4px_rgba(0,0,0,.18)] outline-none focus:border-gold/50 px-2.5 py-1.5 text-sm text-text"
             >
               {Array.from({ length: config.maxHall }, (_, i) => i + 1).map((n) => (
                 <option key={n} value={n}>{config.hallName} {n}</option>
@@ -202,7 +202,7 @@ export function VillagePlanner({ config }: { config: PlannerConfig }) {
               onChange={(e) => setState({
                 builders: Math.max(1, Math.min(config.maxBuilders, Number(e.target.value) || 1)),
               })}
-              className="num w-[64px] rounded-md border border-line bg-panel-2 px-2.5 py-1.5 text-sm outline-none focus:border-gold/50"
+              className="num w-[64px] rounded-lg border border-line bg-panel-2 shadow-[inset_0_2px_4px_rgba(0,0,0,.18)] outline-none focus:border-gold/50 px-2.5 py-1.5 text-sm"
             />
           </label>
 
@@ -218,7 +218,7 @@ export function VillagePlanner({ config }: { config: PlannerConfig }) {
                 onChange={(e) => setState((s) => ({
                   resources: { ...s.resources, [k]: Math.max(0, Number(e.target.value) || 0) },
                 }))}
-                className="num w-[130px] rounded-md border border-line bg-panel-2 px-2.5 py-1.5 text-sm outline-none focus:border-gold/50"
+                className="num w-[130px] rounded-lg border border-line bg-panel-2 shadow-[inset_0_2px_4px_rgba(0,0,0,.18)] outline-none focus:border-gold/50 px-2.5 py-1.5 text-sm"
               />
             </label>
           ))}
@@ -231,7 +231,7 @@ export function VillagePlanner({ config }: { config: PlannerConfig }) {
                 setState({ village: {} });
               }
             }}
-            className="rounded-md border border-line px-3 py-1.5 text-[13px] text-text-2 hover:bg-panel-2"
+            className="btn btn-ghost rounded-full px-4 py-1.5 text-[13px]"
           >
             Reset village
           </button>
@@ -346,9 +346,7 @@ export function VillagePlanner({ config }: { config: PlannerConfig }) {
           {config.categories.filter((c) => c === 'all' || upgradable.some((r) => r.category === c)).map((c) => (
             <button
               key={c} type="button" onClick={() => setCat(c)}
-              className={`rounded-md px-2.5 py-1 text-xs font-medium transition ${
-                c === cat ? 'bg-gold text-ink' : 'border border-line text-text-2 hover:bg-panel-2'
-              }`}
+              className={`btn rounded-full px-3 py-1 text-xs ${c === cat ? 'btn-gold' : 'btn-ghost'}`}
             >
               {config.categoryLabel[c] ?? c}
             </button>
@@ -390,7 +388,7 @@ export function VillagePlanner({ config }: { config: PlannerConfig }) {
                   <td className="px-3 py-2 text-right"><Res amount={r.cost} kind={r.resource} est={r.est} village={config.sprites} /></td>
                   <td className="px-3 py-2 text-right">
                     <button type="button" onClick={() => addToQueue(r)}
-                      className="rounded-md border border-line px-2.5 py-1 text-xs font-medium hover:bg-panel-3">
+                      className="btn btn-ghost rounded-full px-3 py-1 text-xs">
                       Queue
                     </button>
                   </td>

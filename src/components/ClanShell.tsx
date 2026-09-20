@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { PageHead } from './primitives';
 import { TagSearch } from './TagSearch';
 
 export type ClanTab = 'roster' | 'war' | 'league' | 'log';
@@ -24,16 +25,11 @@ export function ClanShell({ tag, active, children }: {
 
   return (
     <main className="mx-auto w-full max-w-[1400px] p-5">
-      <div className="mb-4 flex flex-wrap items-end gap-4">
-        <div>
-          <h1 className="display text-[22px]">Clan war room</h1>
-          <p className="mt-1 max-w-[62ch] text-[13px] text-muted">
-            Roster health, live war progress, the war league and war history.
-          </p>
-        </div>
-        <div className="flex-1" />
-        <TagSearch initial={tag} basePath="/clan" />
-      </div>
+      <PageHead
+        title="Clan war room"
+        sub="Roster health, live war progress, the war league and war history."
+        action={<TagSearch initial={tag} basePath="/clan" />}
+      />
 
       <nav aria-label="Clan views" className="mb-4 flex flex-wrap gap-1.5">
         {TABS.map((t) => (
@@ -43,8 +39,8 @@ export function ClanShell({ tag, active, children }: {
             aria-current={t.id === active ? 'page' : undefined}
             className={
               t.id === active
-                ? 'raised rounded-[10px] border border-gold-2 bg-gold px-3 py-1.5 text-[13px] font-bold text-ink'
-                : 'rounded-md border border-line bg-panel-2 px-3 py-1.5 text-[13px] font-semibold text-text-2 transition hover:border-line hover:bg-panel-3'
+                ? 'btn btn-gold raised rounded-full px-4 py-1.5 text-[13px]'
+                : 'btn btn-ghost rounded-full px-4 py-1.5 text-[13px]'
             }
           >
             {t.label}

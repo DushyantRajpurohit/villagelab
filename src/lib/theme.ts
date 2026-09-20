@@ -108,6 +108,10 @@ export function useThemeMounted(): boolean {
 export function useResolvedTheme(): ResolvedTheme {
   const chosen = useThemeChoice();
   const mounted = useThemeMounted();
-  if (!mounted) return 'light';
+  // Before hydration the system preference is unknowable, so this has to guess
+  // — and it guesses dark, because dark is what the stylesheet paints when no
+  // choice and no preference exist. Guessing the other way made the base
+  // builder's canvas flash a daylit village on every first paint.
+  if (!mounted) return 'dark';
   return chosen === 'system' ? (prefersDark() ? 'dark' : 'light') : chosen;
 }

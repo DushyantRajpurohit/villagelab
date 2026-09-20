@@ -5,6 +5,56 @@ import { ResourceIcon } from '@/components/GameIcon';
 import { ORES } from '@/lib/game/equipment';
 import type { Village } from '@/lib/sprites';
 
+/**
+ * The page's own banner: what this section of the store is, in the display
+ * face, with the lookup that feeds it on the right.
+ *
+ * Every tool page opens with one so the four sections are recognisably the
+ * same product. `action` is the slot the tag search drops into; on a phone it
+ * wraps under the title and goes full width, because a search box squeezed
+ * beside a heading is a search box nobody uses.
+ */
+export function PageHead({ title, sub, action }: {
+  title: ReactNode; sub?: ReactNode; action?: ReactNode;
+}) {
+  return (
+    <div className="mb-5 flex flex-wrap items-end gap-x-6 gap-y-4">
+      <div className="min-w-0">
+        <h1 className="shelf-title text-[28px] sm:text-[34px]">{title}</h1>
+        {sub && <p className="mt-2 max-w-[66ch] text-[13px] text-muted">{sub}</p>}
+      </div>
+      <div className="flex-1" />
+      {action}
+    </div>
+  );
+}
+
+/**
+ * A shelf label — the heading over a row of tiles, with an optional link at
+ * the far right the way the store puts "Learn more" beside a section.
+ */
+export function SectionHead({ title, sub, action }: {
+  title: ReactNode; sub?: ReactNode; action?: ReactNode;
+}) {
+  return (
+    <div className="mb-3.5 flex flex-wrap items-end gap-x-4 gap-y-1">
+      <div>
+        <h2 className="shelf-title text-[20px]">{title}</h2>
+        {sub && <p className="mt-1 text-[13px] text-muted">{sub}</p>}
+      </div>
+      <div className="flex-1" />
+      {action}
+    </div>
+  );
+}
+
+/**
+ * The card everything on this site is served on.
+ *
+ * The title bar carries a short gold rule rather than a full border: the store
+ * marks a card's heading with a bit of colour, and a full rule across a card
+ * this wide cuts it in two.
+ */
 export function Panel({ title, action, children, tight }: {
   title?: ReactNode; action?: ReactNode; children: ReactNode; tight?: boolean;
 }) {
@@ -12,6 +62,7 @@ export function Panel({ title, action, children, tight }: {
     <section className="surface">
       {title && (
         <div className="flex items-center gap-2.5 border-b border-line px-4 py-3">
+          <span aria-hidden className="h-4 w-1 rounded-full bg-gold" />
           <h2 className="display text-[15px]">{title}</h2>
           <div className="flex-1" />
           {action}
@@ -28,20 +79,30 @@ export function Stat({ label, value, sub, tone }: {
   const color = tone === 'ok' ? 'text-ok' : tone === 'warn' ? 'text-warn' : tone === 'bad' ? 'text-bad' : '';
   return (
     <div className="flex flex-col gap-0.5">
-      <div className="text-[11px] font-semibold uppercase tracking-[.07em] text-muted">{label}</div>
-      <div className={`num text-[23px] font-bold leading-tight tracking-tight ${color}`}>{value}</div>
+      <div className="text-[11px] font-bold tracking-[.09em] text-muted uppercase">{label}</div>
+      <div className={`num text-[25px] leading-tight font-bold tracking-tight ${color}`}>{value}</div>
       {sub && <div className="text-[11px] text-faint">{sub}</div>}
     </div>
   );
 }
 
-const BAR_TONE = { ok: 'bg-ok', warn: 'bg-warn', bad: 'bg-bad', gold: 'bg-gold' } as const;
+const BAR_TONE = {
+  ok: 'bg-gradient-to-b from-ok to-ok/75',
+  warn: 'bg-gradient-to-b from-warn to-warn/75',
+  bad: 'bg-gradient-to-b from-bad to-bad/75',
+  gold: 'bg-gradient-to-b from-[#ffd75a] to-[#f5a300]',
+} as const;
 
+/**
+ * A progress bar with the weight the game's own bars have: a sunk track, a
+ * filled bead with a highlight along its top, and enough height to be read
+ * from across the room rather than squinted at.
+ */
 export function Bar({ pct, tone = 'gold' }: { pct: number; tone?: keyof typeof BAR_TONE }) {
   return (
-    <div className="h-2 overflow-hidden rounded-full border border-line bg-panel-3">
+    <div className="h-2.5 overflow-hidden rounded-full border border-line bg-panel-3 shadow-[inset_0_1px_2px_rgba(0,0,0,.35)]">
       <div
-        className={`h-full rounded-full shadow-[inset_0_1px_0_rgba(255,255,255,.35)] transition-[width] duration-300 ${BAR_TONE[tone]}`}
+        className={`h-full rounded-full shadow-[inset_0_1px_0_rgba(255,255,255,.45)] transition-[width] duration-300 ${BAR_TONE[tone]}`}
         style={{ width: `${Math.max(0, Math.min(100, pct))}%` }}
       />
     </div>
@@ -110,11 +171,11 @@ export function OreRow({ cost, gap = 'gap-2' }: { cost: OreCost; gap?: string })
 
 const TAG_TONE = {
   plain: 'text-text-2 border-line bg-panel-2',
-  gold: 'text-gold border-gold/40 bg-gold/10',
-  ok: 'text-ok border-ok/40 bg-ok/10',
-  warn: 'text-warn border-warn/40 bg-warn/10',
-  bad: 'text-bad border-bad/40 bg-bad/10',
-  info: 'text-info border-info/40 bg-info/10',
+  gold: 'text-gold border-gold/45 bg-gold/12',
+  ok: 'text-ok border-ok/45 bg-ok/12',
+  warn: 'text-warn border-warn/45 bg-warn/12',
+  bad: 'text-bad border-bad/45 bg-bad/12',
+  info: 'text-info border-info/45 bg-info/12',
 } as const;
 
 export function Chip({ tone = 'plain', title, children }: {
@@ -123,7 +184,7 @@ export function Chip({ tone = 'plain', title, children }: {
   return (
     <span
       title={title}
-      className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full border px-2.5 py-0.5 text-[11px] font-bold ${TAG_TONE[tone]}`}
+      className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-[11px] font-bold whitespace-nowrap ${TAG_TONE[tone]}`}
     >
       {children}
     </span>
@@ -137,7 +198,7 @@ export function Banner({ tone = 'plain', children }: {
     : tone === 'bad' ? 'border-bad/45 bg-bad/[.10]'
     : 'border-line bg-panel-2';
   return (
-    <div className={`flex items-start gap-2.5 rounded-[10px] border px-3.5 py-2.5 text-[13px] text-text-2 ${cls}`}>
+    <div className={`flex items-start gap-2.5 rounded-[14px] border px-4 py-3 text-[13px] text-text-2 ${cls}`}>
       {children}
     </div>
   );
@@ -145,8 +206,8 @@ export function Banner({ tone = 'plain', children }: {
 
 export function Empty({ title, children }: { title: string; children?: ReactNode }) {
   return (
-    <div className="px-5 py-10 text-center text-muted">
-      <h3 className="display mb-1.5 text-[17px] text-text-2">{title}</h3>
+    <div className="px-5 py-12 text-center text-muted">
+      <h3 className="display mb-1.5 text-[18px] text-text-2">{title}</h3>
       {children}
     </div>
   );
