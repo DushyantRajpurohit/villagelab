@@ -4,8 +4,8 @@
  *
  * Sprites come from the Clash of Clans community wiki and are used under
  * Supercell's Fan Content Policy — see README. A structure's appearance changes
- * as it upgrades, and how far it can upgrade is set by the Town Hall, so the
- * board asks for art by level: a TH4 cannon is the stubby one, a TH15 cannon
+ * as it upgrades, and how far it can upgrade is set by the Town Hall, so art
+ * is asked for by level: a TH4 cannon is the stubby one, a TH15 cannon
  * is not.
  *
  * Files are named by content hash and shared between levels whose art is
@@ -15,10 +15,6 @@
  * Resources are the simple case — one badge each, no levels — but they carry a
  * rule of their own: the badge means a *cost*, and an amount you already hold is
  * marked with the storage that banks it instead. See `STORAGE_ID`.
- *
- * Loading is lazy and cached: a village at TH3 has no reason to fetch Eagle
- * Artillery art. `onReady` fires once per image so the board can repaint as
- * art arrives, rather than blocking the first frame on hundreds of requests.
  */
 
 import type { Currency, Resource, VillageId } from '@/lib/game/types';
@@ -93,37 +89,6 @@ const dir = (village: Village) => (village === 'builder' ? '/sprites/builder' : 
 export function buildingSpriteUrl(id: string, level: number, village: Village = 'home'): string | null {
   const file = buildingSpriteFile(id, level, village);
   return file ? `${dir(village)}/${file}` : null;
-}
-
-type Entry =
-  | { state: 'loading' }
-  | { state: 'ready'; img: HTMLImageElement }
-  | { state: 'failed' };
-
-// Keyed by file, not by structure: levels that share art share one download.
-const cache = new Map<string, Entry>();
-
-/**
- * The sprite for a structure at a level, or null while it loads or if it never
- * arrives. Callers fall back to the vector icon, so missing art degrades the
- * board rather than leaving a hole in it.
- */
-export function buildingSprite(
-  id: string, level: number, onReady: () => void, village: Village = 'home',
-): HTMLImageElement | null {
-  const file = buildingSpriteFile(id, level, village);
-  if (!file) return null;
-
-  const hit = cache.get(file);
-  if (hit) return hit.state === 'ready' ? hit.img : null;
-
-  cache.set(file, { state: 'loading' });
-  const img = new Image();
-  img.decoding = 'async';
-  img.onload = () => { cache.set(file, { state: 'ready', img }); onReady(); };
-  img.onerror = () => { cache.set(file, { state: 'failed' }); };
-  img.src = `${dir(village)}/${file}`;
-  return null;
 }
 
 /* ------------------------------------------------------------------ units */

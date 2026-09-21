@@ -13,7 +13,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE}/player`, changeFrequency: 'weekly', priority: 0.7 },
     { url: `${SITE}/clan`, changeFrequency: 'weekly', priority: 0.7 },
     { url: `${SITE}/planner`, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${SITE}/base`, changeFrequency: 'monthly', priority: 0.6 },
   ];
 
   if (!hasDatabase) return staticRoutes;

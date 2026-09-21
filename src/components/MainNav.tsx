@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
  * The storefront's section switch.
  *
  * A client component only because the current section has to be marked, and
- * the server cannot read the URL. It is four links and a string comparison, so
+ * the server cannot read the URL. It is three links and a string comparison, so
  * the cost of shipping it is a rounding error against knowing where you are.
  *
  * Matching is by prefix: `/player/2PP0JCVL9/builder` is still the Player
@@ -18,7 +18,6 @@ const NAV = [
   { href: '/player', label: 'Player' },
   { href: '/planner', label: 'Planner' },
   { href: '/clan', label: 'War room' },
-  { href: '/base', label: 'Base builder' },
 ];
 
 export function MainNav() {

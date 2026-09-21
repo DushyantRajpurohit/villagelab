@@ -23,14 +23,13 @@ const V1 = {
 };
 
 describe('the two villages have separate state', () => {
-  it('gives each village its own hall, builders, queue, layouts and resources', () => {
+  it('gives each village its own hall, builders, queue and resources', () => {
     expect(DEFAULT_STATE.home.hall).not.toBe(DEFAULT_STATE.builder.hall);
     expect(DEFAULT_STATE.home.resources).toHaveProperty('dark');
     // There is no dark elixir in the Builder Base.
     expect(DEFAULT_STATE.builder.resources).not.toHaveProperty('dark');
     for (const v of [DEFAULT_STATE.home, DEFAULT_STATE.builder]) {
       expect(v.queue).toEqual([]);
-      expect(v.layouts).toEqual([]);
       expect(v.village).toEqual({});
     }
   });
@@ -49,7 +48,6 @@ describe('parseImport', () => {
     expect(s.home.village).toEqual({ cannon: { 11: 4, 12: 3 } });
     expect(s.home.lab).toEqual({ barbarian: 9 });
     expect(s.home.queue).toHaveLength(1);
-    expect(s.home.layouts).toHaveLength(1);
     expect(s.home.resources).toEqual({ gold: 500, elixir: 400, dark: 30 });
     expect(s.playerTag).toBe('#2PP');
     expect(s.clanTag).toBe('#ABC');
@@ -59,7 +57,6 @@ describe('parseImport', () => {
     const s = parseImport(JSON.stringify(V1));
     expect(s.builder.village).toEqual({});
     expect(s.builder.queue).toEqual([]);
-    expect(s.builder.layouts).toEqual([]);
     expect(s.builder.hall).toBe(DEFAULT_STATE.builder.hall);
   });
 

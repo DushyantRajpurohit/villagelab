@@ -3,7 +3,6 @@
 import { useCallback, useMemo, useSyncExternalStore } from 'react';
 import type { QueueItem, VillageId } from './game/types';
 import type { Buckets } from './game/planner';
-import type { BaseLayout } from './base/layout';
 
 /**
  * Client-side persistence.
@@ -19,7 +18,7 @@ import type { BaseLayout } from './base/layout';
  * hydration mismatch and no cascading render from a setState-in-effect.
  *
  * State is stored **per village**. The Home Village and the Builder Base have
- * separate halls, separate builders, separate currencies and separate layouts;
+ * separate halls, separate builders and separate currencies;
  * the game never mixes them and neither does this. That separation is what
  * makes it impossible for a Builder Base cost to land in a Home Village total —
  * not discipline at each call site, but the shape of the state itself.
@@ -41,8 +40,6 @@ export interface VillageState {
   /** unitId -> current level */
   lab: Record<string, number>;
   queue: QueueItem[];
-  /** Saved base layouts for this village, newest first. */
-  layouts: BaseLayout[];
   /** Resource on hand. The home village adds dark elixir; the Builder Base has no such thing. */
   resources: Record<string, number>;
 }
@@ -55,7 +52,7 @@ export interface PlannerState {
 }
 
 const emptyVillage = (hall: number, builders: number, resources: Record<string, number>): VillageState => ({
-  hall, builders, village: {}, lab: {}, queue: [], layouts: [], resources,
+  hall, builders, village: {}, lab: {}, queue: [], resources,
 });
 
 export const DEFAULT_STATE: PlannerState = Object.freeze({
@@ -87,7 +84,7 @@ const merge = (incoming: Partial<PlannerState>): PlannerState => ({
  * Lift a pre-split save into the home village.
  *
  * The old store was one flat Home Village — `th`, `village`, `lab`, `queue`,
- * `layouts`, `resources` at the top level. Dropping it would silently erase a
+ * `resources` at the top level. Dropping it would silently erase a
  * village someone spent an evening recording, so it is read once and moved
  * across; the Builder Base starts empty because there was never anything in it.
  */
@@ -102,7 +99,6 @@ function migrateV1(raw: string): PlannerState | null {
         village: (old.village as VillageState['village']) ?? {},
         lab: (old.lab as VillageState['lab']) ?? {},
         queue: (old.queue as QueueItem[]) ?? [],
-        layouts: (old.layouts as BaseLayout[]) ?? [],
         resources: { ...DEFAULT_STATE.home.resources, ...((old.resources as Record<string, number>) ?? {}) },
       },
       playerTag: typeof old.playerTag === 'string' ? old.playerTag : '',

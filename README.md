@@ -13,12 +13,11 @@ Next.js 16 · TypeScript · Postgres · deployed free.
 | `/clan/[tag]/war` | Live war: scoreline, matchup, attacks still owed |
 | `/clan/[tag]/league` | Clan War League: group standings, each round, every member's attacks |
 | `/clan/[tag]/log` | War history: record, win rate, average stars |
-| `/base` | Isometric 44×44 editor with the game's own art, placement limits per hall |
 
 ## Two villages, kept apart
 
 An account is two villages. They have separate halls, separate currencies,
-separate troops, separate trophies and separate layouts, and the game never
+separate troops and separate trophies, and the game never
 mixes them — so neither does this. Every surface carries a **Home Village /
 Builder Base** switch:
 
@@ -26,7 +25,6 @@ Builder Base** switch:
 | --- | --- | --- |
 | Player | `/player/[tag]` | `/player/[tag]/builder` |
 | Planner | Town Hall, 6 builders, gold · elixir · dark | Builder Hall, 2 builders, builder gold · builder elixir |
-| Base builder | Town Hall palette and layouts | Builder Hall palette and layouts |
 
 The separation is structural rather than a matter of care at each call site: the
 planner state is one slice per village, so a Builder Base cost has no path into
@@ -401,10 +399,10 @@ stack, and ISR plus Postgres covers the load until traffic proves otherwise.
 Unofficial fan content. The attribution Supercell's [Fan Content Policy](https://supercell.com/en/fan-content-policy/)
 requires is in the root layout so it cannot be dropped from a page.
 
-The base builder renders official structure art, used under that policy, and it
-renders it **per level**: a structure is drawn at the level the selected Town
-Hall can reach, so a TH4 cannon is the stubby one and a TH14 cannon is not.
-`src/lib/game/buildings.ts` supplies that ceiling.
+Structures are drawn with official art, used under that policy, and **per
+level**: a structure is shown at the level it is, so a TH4 cannon is the stubby
+one and a TH14 cannon is not. `src/lib/game/buildings.ts` supplies the ceiling
+each Town Hall reaches.
 
 Units get art too — the player pages and the planner show the same portraits the
 game's own Laboratory and Army screens do. Structures are indexed per **level**
@@ -440,10 +438,7 @@ Picking "highest numbered file on the wiki" is not safe on its own — it yields
 `Archer_Tower109.png` and `Air_Defense2012.png`, a typo and a year — so the
 game data caps which files are considered.
 
-Everything else in the UI is original, including the vector structure icons in
-`src/lib/base/icons.ts`. Those are still the fallback the board draws while a
-sprite loads or if one is missing, so removing `public/sprites/` degrades the
-builder rather than breaking it.
+Everything else in the UI is original.
 
 ## Layout
 
@@ -454,9 +449,6 @@ src/lib/game/sparky.ts   Sparky Stones — the one figure that is earned, not sp
 src/lib/war/       war analysis — star credit, standings, war log summaries
 src/lib/war/league.ts    Clan War Leagues — group table, rounds, members' season
 src/lib/theme.ts   three-state theme store (system / light / dark)
-src/lib/base/      base layout rules — collision, count limits, drag painting
-src/lib/base/iso.ts      isometric projection, its inverse, and the zoom/pan camera
-src/lib/base/terrain.ts  the village ground, painted once and cached
 src/lib/sprites/   official art: per-level structures, per-unit portraits
 src/lib/coc/       Supercell client, tag handling, key rotation, mock generator
 src/lib/data/      read paths — Postgres only, never upstream

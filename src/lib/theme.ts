@@ -19,8 +19,6 @@ import { useSyncExternalStore } from 'react';
 export const THEME_KEY = 'villagelab.theme';
 
 export type Theme = 'system' | 'light' | 'dark';
-/** What the page is actually painted as, once `system` has been resolved. */
-export type ResolvedTheme = 'light' | 'dark';
 
 export const THEME_ORDER: Theme[] = ['system', 'light', 'dark'];
 
@@ -32,9 +30,6 @@ function read(): Theme {
     return 'system';
   }
 }
-
-const prefersDark = () =>
-  typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches;
 
 const listeners = new Set<() => void>();
 let choice: Theme | null = null;
@@ -56,18 +51,11 @@ function subscribe(fn: () => void): () => void {
   const onStorage = (e: StorageEvent) => {
     if (e.key === THEME_KEY) { choice = read(); emit(); }
   };
-  // And while on `system`, the OS flipping at sunset must repaint anything
-  // that reads the resolved value — the base builder's canvas, for one.
-  const mq = window.matchMedia('(prefers-color-scheme: dark)');
-  const onSystem = () => emit();
-
   window.addEventListener('storage', onStorage);
-  mq.addEventListener('change', onSystem);
 
   return () => {
     listeners.delete(fn);
     window.removeEventListener('storage', onStorage);
-    mq.removeEventListener('change', onSystem);
   };
 }
 
@@ -99,19 +87,4 @@ export function useThemeChoice(): Theme {
 /** False during SSR and hydration, true once the real store is live. */
 export function useThemeMounted(): boolean {
   return useSyncExternalStore(subscribe, () => true, () => false);
-}
-
-/**
- * The palette actually in effect. Anything that paints its own pixels rather
- * than using CSS tokens — canvas, mainly — needs this so it can repaint.
- */
-export function useResolvedTheme(): ResolvedTheme {
-  const chosen = useThemeChoice();
-  const mounted = useThemeMounted();
-  // Before hydration the system preference is unknowable, so this has to guess
-  // — and it guesses dark, because dark is what the stylesheet paints when no
-  // choice and no preference exist. Guessing the other way made the base
-  // builder's canvas flash a daylit village on every first paint.
-  if (!mounted) return 'dark';
-  return chosen === 'system' ? (prefersDark() ? 'dark' : 'light') : chosen;
 }

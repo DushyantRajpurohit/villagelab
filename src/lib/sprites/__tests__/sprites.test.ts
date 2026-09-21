@@ -8,23 +8,22 @@ import { buildingsAtTH } from '@/lib/game/buildings';
 import { EQUIPMENT, ORES } from '@/lib/game/equipment';
 import { CRAFTED_DEFENSES } from '@/lib/game/crafted';
 import type { Resource } from '@/lib/game/types';
-import { BUILDER_UNITS } from '@/lib/game/builder-base';
-import { BUILDER_HALL_ID, paletteFor, TOWN_HALL_ID, type PaletteEntry } from '@/lib/base/layout';
-import { MAX_BH } from '@/lib/game/builder-base';
+import { BUILDER_UNITS, builderBuildingsAtBH, MAX_BH } from '@/lib/game/builder-base';
 import { MAX_TH } from '@/lib/game/town-halls';
 import index from '@/lib/sprites/buildings.json';
 
 const INDEX = index as Record<string, Record<string, string>>;
 
+/** The hall is in neither building table, so its art is indexed under a reserved id. */
+const TOWN_HALL_ID = '__townhall';
+
 describe('sprite index', () => {
-  it('has art for every structure the palette can place, at every Town Hall', () => {
-    // The board falls back to a vector icon, so a gap here is not fatal — but
-    // it is always a mistake, and silently shipping one is how the board ends
-    // up half official art and half not.
+  it('has art for every structure at its ceiling, at every Town Hall', () => {
     const gaps: string[] = [];
     for (let th = 1; th <= MAX_TH; th++) {
-      for (const e of paletteFor(th)) {
-        if (!buildingSpriteFile(e.id, e.level)) gaps.push(`TH${th} ${e.id}@${e.level}`);
+      if (!buildingSpriteFile(TOWN_HALL_ID, th)) gaps.push(`TH${th}`);
+      for (const b of buildingsAtTH(th)) {
+        if (!buildingSpriteFile(b.id, b.maxHere)) gaps.push(`TH${th} ${b.id}@${b.maxHere}`);
       }
     }
     expect(gaps).toEqual([]);
@@ -58,10 +57,10 @@ describe('sprite index', () => {
   });
 
   it('changes a cannon between a low and a high Town Hall', () => {
-    const low = paletteFor(3).find((e: PaletteEntry) => e.id === 'cannon')!;
-    const high = paletteFor(15).find((e: PaletteEntry) => e.id === 'cannon')!;
-    expect(low.level).toBeLessThan(high.level);
-    expect(buildingSpriteFile('cannon', low.level)).not.toBe(buildingSpriteFile('cannon', high.level));
+    const low = buildingsAtTH(3).find((b) => b.id === 'cannon')!;
+    const high = buildingsAtTH(15).find((b) => b.id === 'cannon')!;
+    expect(low.maxHere).toBeLessThan(high.maxHere);
+    expect(buildingSpriteFile('cannon', low.maxHere)).not.toBe(buildingSpriteFile('cannon', high.maxHere));
   });
 
   it('builds urls under /sprites and null for an unknown structure', () => {
@@ -264,11 +263,12 @@ describe('the sparky stone badge', () => {
 });
 
 describe('builder base structure art', () => {
-  it('has art for every structure the builder palette can place, at every hall', () => {
+  it('has art for every builder structure at its ceiling, at every hall', () => {
     const gaps: string[] = [];
     for (let bh = 1; bh <= MAX_BH; bh++) {
-      for (const e of paletteFor(bh, 'builder')) {
-        if (!buildingSpriteFile(e.id, e.level, 'builder')) gaps.push(`BH${bh} ${e.id}@${e.level}`);
+      for (const b of builderBuildingsAtBH(bh)) {
+        const level = Math.max(1, b.maxHere);
+        if (!buildingSpriteFile(b.id, level, 'builder')) gaps.push(`BH${bh} ${b.id}@${level}`);
       }
     }
     expect(gaps).toEqual([]);
@@ -304,11 +304,5 @@ describe('builder base structure art', () => {
     }
     expect(seen.size).toBe(MAX_BH);
     expect(seen.has('')).toBe(false);
-  });
-
-  it('uses the reserved hall id in the builder palette', () => {
-    const p = paletteFor(6, 'builder');
-    expect(p[0].id).toBe(BUILDER_HALL_ID);
-    expect(p.some((e) => e.id === TOWN_HALL_ID)).toBe(false);
   });
 });

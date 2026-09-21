@@ -3,7 +3,6 @@ import Link from 'next/link';
 import type { CSSProperties, ReactNode } from 'react';
 import { TagSearch } from '@/components/TagSearch';
 import { SectionHead } from '@/components/primitives';
-import { GRID } from '@/lib/base/layout';
 import { buildingSpriteUrl, unitSpriteUrl } from '@/lib/sprites';
 
 /**
@@ -48,15 +47,6 @@ const TOOLS = [
     art: buildingSpriteUrl('clan_castle', 13),
     alt: 'Clan Castle',
     hue: 'var(--color-info)',
-  },
-  {
-    href: '/base',
-    flag: 'Layout',
-    title: 'Base builder',
-    copy: `Draw a village on a ${GRID}×${GRID} grid with the counts and footprints your hall actually allows.`,
-    art: buildingSpriteUrl('builders_hut', 4),
-    alt: 'Builder Hut',
-    hue: 'var(--color-ok)',
   },
 ];
 
