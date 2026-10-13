@@ -453,6 +453,4 @@ src/lib/sprites/   official art: per-level structures, per-unit portraits
 src/lib/coc/       Supercell client, tag handling, key rotation, mock generator
 src/lib/data/      read paths — Postgres only, never upstream
 src/lib/ingest/    the only code that calls Supercell
-src/app/           routes; /player/[tag] and /clan/[tag] are SSR'd and indexable
-legacy/            the original zero-dependency prototype, kept for reference
-```
+src/app/           routes; /player/[tag] and /clan/[tag] are SSR'd and indexable```

@@ -12,8 +12,6 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
-    // The archived vanilla app, kept only as a reference during the port.
-    "legacy/**",
     // Generated SQL migrations.
     "drizzle/**",
   ]),
