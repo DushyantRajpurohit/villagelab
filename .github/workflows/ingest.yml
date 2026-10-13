@@ -3,8 +3,10 @@ name: Ingest
 # GitHub Actions is the scheduler because Vercel's Hobby plan only offers
 # daily cron. Scheduled runs on public repos are free.
 on:
-  schedule:
-    - cron: '*/15 * * * *'
+  # Paused until the site is deployed: there is nothing at SITE_URL to call
+  # yet, so every scheduled run failed. Restore these two lines at deploy.
+  # schedule:
+  #   - cron: '*/15 * * * *'
   workflow_dispatch:
     inputs:
       limit:
