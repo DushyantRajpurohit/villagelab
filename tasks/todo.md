@@ -110,7 +110,7 @@ dataset, lifetime records, CWL) to `docs/data-accuracy.md` and link them.
 
 **Acceptance criteria:**
 - [ ] A non-player can say what the app does from the first screen of the README
-- [ ] README is 200 lines or fewer; every moved section exists in `docs/data-accuracy.md`
+- [x] README is 200 lines or fewer; every moved section exists in `docs/data-accuracy.md`
 - [ ] CI badge and screenshots render on GitHub
 
 **Verification:**
