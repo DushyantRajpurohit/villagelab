@@ -1,7 +1,7 @@
 import type { RawPlayer } from '@/lib/coc/client';
 import { lifetimeRecords } from '@/lib/coc/achievements';
 import { fmtInt } from '@/lib/format';
-import { Panel, Stat } from '@/components/primitives';
+import { Panel, Stat, StatLine } from '@/components/primitives';
 
 /**
  * What the account has done over its whole life, in the activities medals are
@@ -17,11 +17,11 @@ export function LifetimeRecordPanel({ p }: { p: RawPlayer }) {
 
   return (
     <Panel title="Lifetime record">
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <StatLine inset>
         {records.map((r) => (
           <Stat key={r.id} label={r.label} value={fmtInt(r.value)} sub={r.unit} />
         ))}
-      </div>
+      </StatLine>
       <p className="mt-3 text-xs text-muted">
         Lifetime totals from the account&rsquo;s achievements, not balances. The Clash of Clans API
         does not publish Raid Medals, League Medals, gems, magic items or helper levels.

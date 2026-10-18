@@ -23,7 +23,7 @@ export function BucketEditor({ buckets, count, cap, name, onChange }: {
   return (
     <div className="flex flex-wrap items-center gap-1.5">
       {levels.map((lvl) => (
-        <div key={lvl} className="flex items-center gap-1 rounded border border-line bg-panel-2 px-1.5 py-0.5">
+        <div key={lvl} className="flex items-center gap-1 border border-line bg-panel-2 px-1.5 py-0.5">
           <span className="text-[11px] text-muted">L{lvl}</span>
           <input
             type="number"
@@ -37,7 +37,7 @@ export function BucketEditor({ buckets, count, cap, name, onChange }: {
               if (!n) delete next[lvl];
               onChange(rebalance(next, count));
             }}
-            className="num w-[46px] rounded bg-transparent px-1 py-0.5 text-xs outline-none focus:bg-panel-3"
+            className="num w-[46px] bg-transparent px-1 py-0.5 text-xs outline-none focus:bg-panel-3"
           />
           {lvl < cap && (
             <button
@@ -50,7 +50,7 @@ export function BucketEditor({ buckets, count, cap, name, onChange }: {
                 next[lvl + 1] = (next[lvl + 1] || 0) + 1;
                 onChange(next);
               }}
-              className="rounded px-1 text-xs text-muted hover:bg-panel-3 hover:text-text"
+              className="px-1 text-xs text-muted hover:bg-panel-3 hover:text-text"
             >
               +
             </button>
@@ -61,7 +61,7 @@ export function BucketEditor({ buckets, count, cap, name, onChange }: {
         type="button"
         title={`Set every ${name} to the level cap (${cap})`}
         onClick={() => onChange({ [cap]: count })}
-        className="rounded border border-line px-1.5 py-0.5 text-[11px] text-muted hover:bg-panel-3 hover:text-text"
+        className="border border-line px-1.5 py-0.5 text-[11px] text-muted hover:bg-panel-3 hover:text-text"
       >
         max
       </button>

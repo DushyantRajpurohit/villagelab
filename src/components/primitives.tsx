@@ -6,22 +6,22 @@ import { ORES } from '@/lib/game/equipment';
 import type { Village } from '@/lib/sprites';
 
 /**
- * The page's own banner: what this section of the store is, in the display
- * face, with the lookup that feeds it on the right.
+ * A section's opening line: what this part of the programme is, in the
+ * headline face, with the lookup that feeds it on the right.
  *
- * Every tool page opens with one so the four sections are recognisably the
- * same product. `action` is the slot the tag search drops into; on a phone it
- * wraps under the title and goes full width, because a search box squeezed
- * beside a heading is a search box nobody uses.
+ * Every tool page opens with one so the sections are recognisably the same
+ * publication. `action` is the slot the tag search drops into; on a phone it
+ * wraps under the title, because a search box squeezed beside a heading is a
+ * search box nobody uses.
  */
 export function PageHead({ title, sub, action }: {
   title: ReactNode; sub?: ReactNode; action?: ReactNode;
 }) {
   return (
-    <div className="mb-5 flex flex-wrap items-end gap-x-6 gap-y-4">
+    <div className="mb-6 flex flex-wrap items-end gap-x-6 gap-y-4 border-b border-line pb-5">
       <div className="min-w-0">
-        <h1 className="shelf-title text-[28px] sm:text-[34px]">{title}</h1>
-        {sub && <p className="mt-2 max-w-[66ch] text-[13px] text-muted">{sub}</p>}
+        <h1 className="shelf-title text-[40px] sm:text-[56px]">{title}</h1>
+        {sub && <p className="mt-3 max-w-[66ch] text-[15px] text-text-2">{sub}</p>}
       </div>
       <div className="flex-1" />
       {action}
@@ -29,18 +29,15 @@ export function PageHead({ title, sub, action }: {
   );
 }
 
-/**
- * A shelf label — the heading over a row of tiles, with an optional link at
- * the far right the way the store puts "Learn more" beside a section.
- */
+/** A heading over a run of content, with an optional link at the far right. */
 export function SectionHead({ title, sub, action }: {
   title: ReactNode; sub?: ReactNode; action?: ReactNode;
 }) {
   return (
-    <div className="mb-3.5 flex flex-wrap items-end gap-x-4 gap-y-1">
+    <div className="mb-4 flex flex-wrap items-end gap-x-4 gap-y-1">
       <div>
-        <h2 className="shelf-title text-[20px]">{title}</h2>
-        {sub && <p className="mt-1 text-[13px] text-muted">{sub}</p>}
+        <h2 className="shelf-title text-[30px]">{title}</h2>
+        {sub && <p className="mt-1.5 text-[14px] text-muted">{sub}</p>}
       </div>
       <div className="flex-1" />
       {action}
@@ -49,11 +46,10 @@ export function SectionHead({ title, sub, action }: {
 }
 
 /**
- * The card everything on this site is served on.
+ * A section of the page.
  *
- * The title bar carries a short gold rule rather than a full border: the store
- * marks a card's heading with a bit of colour, and a full rule across a card
- * this wide cuts it in two.
+ * It starts under a heavy ink rule and names itself in caps, the way a table
+ * does in an almanac. The rule is the container; there is no box.
  */
 export function Panel({ title, action, children, tight }: {
   title?: ReactNode; action?: ReactNode; children: ReactNode; tight?: boolean;
@@ -61,9 +57,8 @@ export function Panel({ title, action, children, tight }: {
   return (
     <section className="surface">
       {title && (
-        <div className="flex items-center gap-2.5 border-b border-line px-4 py-3">
-          <span aria-hidden className="h-4 w-1 rounded-full bg-gold" />
-          <h2 className="display text-[15px]">{title}</h2>
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-line px-4 py-2.5">
+          <h2 className="display text-[19px] leading-tight">{title}</h2>
           <div className="flex-1" />
           {action}
         </div>
@@ -73,36 +68,67 @@ export function Panel({ title, action, children, tight }: {
   );
 }
 
+/**
+ * A run of figures under one rule, divided by hairlines: how an almanac sets a
+ * team's numbers, as one line rather than a row of boxes. `inset` drops the
+ * rule for a run that already sits inside a section.
+ */
+export function StatLine({ children, inset }: { children: ReactNode; inset?: boolean }) {
+  return <div className={inset ? 'stat-line' : 'surface stat-line'}>{children}</div>;
+}
+
+/**
+ * The scoreline: two figures with a small "v" between them, the first in the
+ * accent. The cover sets the sample village this way, the war page the stars,
+ * the player band the levels.
+ */
+export function Score({ a, b, className = '' }: { a: string; b: string; className?: string }) {
+  return (
+    <span className={`shelf-title inline-flex flex-wrap items-end gap-x-[.18em] leading-[.82] ${className}`}>
+      <span className="text-gold">{a}</span>
+      <span className="pb-[.12em] text-[.34em]">v</span>
+      <span>{b}</span>
+    </span>
+  );
+}
+
+/** The star a war is scored in, drawn rather than typed. */
+export function StarMark() {
+  return (
+    <svg viewBox="0 0 20 20" aria-label="stars" role="img"
+      className="ml-[.12em] inline-block h-[.85em] w-[.85em] -translate-y-[.06em] fill-current align-baseline">
+      <path d="M10 1.2l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L10 15l-5.4 2.9 1.1-6.1L1.2 7.6l6.1-.8z" />
+    </svg>
+  );
+}
+
 export function Stat({ label, value, sub, tone }: {
   label: string; value: ReactNode; sub?: ReactNode; tone?: 'ok' | 'warn' | 'bad';
 }) {
   const color = tone === 'ok' ? 'text-ok' : tone === 'warn' ? 'text-warn' : tone === 'bad' ? 'text-bad' : '';
   return (
     <div className="flex flex-col gap-0.5">
-      <div className="text-[11px] font-bold tracking-[.09em] text-muted uppercase">{label}</div>
-      <div className={`num text-[25px] leading-tight font-bold tracking-tight ${color}`}>{value}</div>
-      {sub && <div className="text-[11px] text-faint">{sub}</div>}
+      <div className="display text-[13px] text-muted">{label}</div>
+      <div className={`display text-[44px] leading-none font-black tabular-nums ${color}`}>{value}</div>
+      {sub && <div className="mt-1 text-[12px] text-muted">{sub}</div>}
     </div>
   );
 }
 
-const BAR_TONE = {
-  ok: 'bg-gradient-to-b from-ok to-ok/75',
-  warn: 'bg-gradient-to-b from-warn to-warn/75',
-  bad: 'bg-gradient-to-b from-bad to-bad/75',
-  gold: 'bg-gradient-to-b from-[#ffd75a] to-[#f5a300]',
-} as const;
+type BarTone = 'ok' | 'warn' | 'bad' | 'gold';
 
 /**
- * A progress bar with the weight the game's own bars have: a sunk track, a
- * filled bead with a highlight along its top, and enough height to be read
- * from across the room rather than squinted at.
+ * A progress bar. Left is level one, right is the ceiling. What is done is
+ * solid and what remains is hatched, so the bar still reads with its colour
+ * taken away. `count` draws a tally instead, for a distribution: a count has
+ * nothing left to do, so its track is plain.
  */
-export function Bar({ pct, tone = 'gold' }: { pct: number; tone?: keyof typeof BAR_TONE }) {
+export function Bar({ pct, tone = 'gold', count }: { pct: number; tone?: BarTone; count?: boolean }) {
   return (
-    <div className="h-2.5 overflow-hidden rounded-full border border-line bg-panel-3 shadow-[inset_0_1px_2px_rgba(0,0,0,.35)]">
+    <div className="bar-track" data-kind={count ? 'count' : undefined}>
       <div
-        className={`h-full rounded-full shadow-[inset_0_1px_0_rgba(255,255,255,.45)] transition-[width] duration-300 ${BAR_TONE[tone]}`}
+        className="bar-fill"
+        data-tone={tone}
         style={{ width: `${Math.max(0, Math.min(100, pct))}%` }}
       />
     </div>
@@ -110,7 +136,7 @@ export function Bar({ pct, tone = 'gold' }: { pct: number; tone?: keyof typeof B
 }
 
 /** Tone from completion percentage — used consistently for every progress bar. */
-export const pctTone = (pct: number): keyof typeof BAR_TONE =>
+export const pctTone = (pct: number): BarTone =>
   pct >= 99 ? 'ok' : pct >= 60 ? 'gold' : pct >= 30 ? 'warn' : 'bad';
 
 const RES_COLOR: Record<Currency, string> = {
@@ -169,36 +195,23 @@ export function OreRow({ cost, gap = 'gap-2' }: { cost: OreCost; gap?: string })
   );
 }
 
-const TAG_TONE = {
-  plain: 'text-text-2 border-line bg-panel-2',
-  gold: 'text-gold border-gold/45 bg-gold/12',
-  ok: 'text-ok border-ok/45 bg-ok/12',
-  warn: 'text-warn border-warn/45 bg-warn/12',
-  bad: 'text-bad border-bad/45 bg-bad/12',
-  info: 'text-info border-info/45 bg-info/12',
-} as const;
+type ChipTone = 'plain' | 'gold' | 'ok' | 'warn' | 'bad' | 'info';
 
+/** A result box. The tone changes the border as well as the colour. */
 export function Chip({ tone = 'plain', title, children }: {
-  tone?: keyof typeof TAG_TONE; title?: string; children: ReactNode;
+  tone?: ChipTone; title?: string; children: ReactNode;
 }) {
-  return (
-    <span
-      title={title}
-      className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-[11px] font-bold whitespace-nowrap ${TAG_TONE[tone]}`}
-    >
-      {children}
-    </span>
-  );
+  return <span title={title} className="chip" data-tone={tone}>{children}</span>;
 }
 
 export function Banner({ tone = 'plain', children }: {
   tone?: 'plain' | 'warn' | 'bad'; children: ReactNode;
 }) {
-  const cls = tone === 'warn' ? 'border-warn/45 bg-warn/[.10]'
-    : tone === 'bad' ? 'border-bad/45 bg-bad/[.10]'
-    : 'border-line bg-panel-2';
+  const cls = tone === 'warn' ? 'border-warn border-dashed'
+    : tone === 'bad' ? 'border-bad'
+    : 'border-line-2';
   return (
-    <div className={`flex items-start gap-2.5 rounded-[14px] border px-4 py-3 text-[13px] text-text-2 ${cls}`}>
+    <div className={`flex items-start gap-2.5 border-2 bg-panel px-4 py-3 text-[14px] text-text-2 ${cls}`}>
       {children}
     </div>
   );
@@ -207,7 +220,7 @@ export function Banner({ tone = 'plain', children }: {
 export function Empty({ title, children }: { title: string; children?: ReactNode }) {
   return (
     <div className="px-5 py-12 text-center text-muted">
-      <h3 className="display mb-1.5 text-[18px] text-text-2">{title}</h3>
+      <h3 className="display mb-2 text-[26px] text-text">{title}</h3>
       {children}
     </div>
   );

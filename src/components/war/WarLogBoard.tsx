@@ -1,4 +1,4 @@
-import { Panel, Stat } from '../primitives';
+import { Panel, Stat, StatLine } from '../primitives';
 import { fmtRelative } from '@/lib/format';
 import type { WarLogEntry, WarLogSummary } from '@/lib/war/types';
 
@@ -6,42 +6,42 @@ const HEAD = 'sticky top-0 bg-panel px-3 py-2.5 text-[11px] font-semibold upperc
 const CELL = 'px-3 py-2';
 
 const RESULT_TONE: Record<WarLogEntry['result'], string> = {
-  win: 'border-ok/40 bg-ok/10 text-ok',
-  lose: 'border-bad/40 bg-bad/10 text-bad',
-  tie: 'border-line bg-panel-3 text-muted',
+  win: 'border-ok bg-ok text-bg',
+  lose: 'border-bad text-bad',
+  tie: 'border-dashed border-line-2 text-muted',
 };
 const RESULT_LETTER: Record<WarLogEntry['result'], string> = { win: 'W', lose: 'L', tie: 'T' };
 
 export function WarLogBoard({ entries, summary }: { entries: WarLogEntry[]; summary: WarLogSummary }) {
   return (
     <>
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <Panel>
+      <StatLine>
+        <div>
           <Stat
             label="Record"
             value={`${summary.wins}–${summary.losses}${summary.ties ? `–${summary.ties}` : ''}`}
             sub={`last ${summary.wars} wars`}
           />
-        </Panel>
-        <Panel>
+        </div>
+        <div>
           <Stat
             label="Win rate"
             value={`${summary.winRate.toFixed(0)}%`}
             tone={summary.winRate >= 60 ? 'ok' : summary.winRate >= 40 ? 'warn' : 'bad'}
             sub={`best run ${summary.bestStreak} in a row`}
           />
-        </Panel>
-        <Panel><Stat label="Avg stars" value={summary.avgStars.toFixed(1)} sub="per war" /></Panel>
-        <Panel><Stat label="Avg destruction" value={`${summary.avgDestruction.toFixed(1)}%`} /></Panel>
-      </div>
+        </div>
+        <div><Stat label="Avg stars" value={summary.avgStars.toFixed(1)} sub="per war" /></div>
+        <div><Stat label="Avg destruction" value={`${summary.avgDestruction.toFixed(1)}%`} /></div>
+      </StatLine>
 
       <Panel title="Recent form" action={<span className="text-[11px] text-faint">newest first</span>}>
         <div className="flex flex-wrap gap-1">
           {entries.map((e, i) => (
             <div
               key={`${e.endTime}-${i}`}
-              title={`${e.result} vs ${e.opponentName} — ${e.stars}★ vs ${e.opponentStars}★`}
-              className={`grid h-6 w-6 place-items-center rounded border text-[11px] font-bold ${RESULT_TONE[e.result]}`}
+              title={`${e.result} vs ${e.opponentName} — ${e.stars} stars v ${e.opponentStars}`}
+              className={`display grid h-6 w-6 place-items-center border-2 text-[12px] ${RESULT_TONE[e.result]}`}
             >
               {RESULT_LETTER[e.result]}
             </div>
@@ -66,7 +66,7 @@ export function WarLogBoard({ entries, summary }: { entries: WarLogEntry[]; summ
               {entries.map((e, i) => (
                 <tr key={`${e.endTime}-${i}`} className="border-b border-line/40 last:border-0 hover:bg-panel-2">
                   <td className={CELL}>
-                    <span className={`inline-flex rounded-full border px-2 py-0.5 text-[11px] font-semibold ${RESULT_TONE[e.result]}`}>
+                    <span className={`display inline-flex border-2 px-2 text-[12px] ${RESULT_TONE[e.result]}`}>
                       {e.result}
                     </span>
                   </td>

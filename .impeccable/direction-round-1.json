@@ -1,0 +1,171 @@
+{
+  "title": "Choose the visual world for VillageLab",
+  "question": "The roll assigned Matchday Programme. Keep it, take an alternate, or re-roll. Nothing is built until you pick.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "Matchday Programme",
+      "kicker": "THE ROLL",
+      "lineage": "football matchday programmes and league almanacs",
+      "thesis": "Your village against its Town Hall ceiling, printed as today's fixture with a scoreline anyone can read.",
+      "palette": ["#1f7a3a", "#fbfbf7", "#101410", "#ffc21a", "#d43fd0"],
+      "materials": ["two-colour litho programme stock", "ruled league tables", "heavy condensed squad numerals"],
+      "viewport": "A full-bleed green cover: the fixture line 'YOUR VILLAGE v. THE CEILING', the sample player's scoreline in giant numerals, the tag lookup as the team-sheet box, and the league table starting at the fold.",
+      "risk": "A sports frame on a fantasy game reads as a joke unless the tables are genuinely the most useful thing on the page.",
+      "raised": [
+        {"from": "challenger-exposure", "raise": "Every state (rushed, maxed, missed, unowned) carries a pattern or mark as well as a colour, so the tables still read in greyscale."},
+        {"from": "challenger-cyclorama", "raise": "One progression axis runs the whole app: left is level 1, right is the ceiling, and nothing breaks that direction."},
+        {"from": "challenger-menhera", "raise": "Colour at full strength over whole regions; the green owns the cover edge to edge, not a stripe on white."},
+        {"from": "challenger-wuxia", "raise": "The cover holds one figure at full scale, and moving between sections is a hard cut to the next page, never a fade."}
+      ],
+      "wireframe": {"cols": 12, "rows": 10, "regions": [
+        {"label": "masthead + nav", "x": 0, "y": 0, "w": 12, "h": 1},
+        {"label": "fixture line", "x": 0, "y": 1, "w": 8, "h": 1},
+        {"label": "giant scoreline", "x": 0, "y": 2, "w": 8, "h": 4, "accent": true},
+        {"label": "Town Hall art", "x": 8, "y": 1, "w": 4, "h": 5},
+        {"label": "team-sheet lookup", "x": 0, "y": 6, "w": 8, "h": 1, "accent": true},
+        {"label": "sample link", "x": 8, "y": 6, "w": 4, "h": 1},
+        {"label": "league table: the three engineering stories as results", "x": 0, "y": 7, "w": 12, "h": 3}
+      ]}
+    },
+    {
+      "id": "model-pick",
+      "label": "Strategy Guide",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "printed game strategy guides and their annotated spreads",
+      "thesis": "The official guide the game never printed: every page a spread with art, callouts and the real numbers.",
+      "palette": ["#ffd100", "#15161a", "#ffffff", "#1d4ed8", "#e23b2e"],
+      "materials": ["glossy guidebook stock", "thumb-index chapter tabs", "numbered callout boxes"],
+      "viewport": "An open spread: chapter tabs down the right edge as navigation, a full-page Town Hall cut-out with numbered callouts, and the lookup set as the guide's 'find your village' index box.",
+      "risk": "The most expected answer for a game companion; done timidly it reads as a wiki with a nicer skin.",
+      "wireframe": {"cols": 12, "rows": 10, "regions": [
+        {"label": "running head", "x": 0, "y": 0, "w": 11, "h": 1},
+        {"label": "chapter tabs (nav)", "x": 11, "y": 0, "w": 1, "h": 10, "accent": true},
+        {"label": "headline + intro", "x": 0, "y": 1, "w": 5, "h": 3},
+        {"label": "index box: tag lookup", "x": 0, "y": 4, "w": 5, "h": 2, "accent": true},
+        {"label": "Town Hall cut-out with numbered callouts", "x": 5, "y": 1, "w": 6, "h": 6},
+        {"label": "callout notes: the three engineering stories", "x": 0, "y": 7, "w": 11, "h": 3}
+      ]}
+    },
+    {
+      "id": "challenger-signals-instruments-seven-segment-alarm-clock",
+      "label": "Scoreboard Segments",
+      "verdict": "competitive",
+      "lineage": "seven-segment displays: scoreboards, price totems, bedside clocks",
+      "thesis": "Every figure is a lit readout in a fixed cell, and the levels you have not reached are drawn as unlit segments.",
+      "palette": ["#0a0a0a", "#ff2b1c", "#ffb000", "#2bff7a", "#2a1210"],
+      "materials": ["LED segments on matte black", "ghost cells for what is unlit", "instant segment swaps"],
+      "viewport": "A wall of fixed digit cells: the sample village's progress as one large readout, unreached levels as ghost segments, and the tag entered cell by cell.",
+      "case": "Fuses on numbers, which are the product; loses clarity where the engineering stories need prose and where game art must sit beside digits.",
+      "risk": "Near-black with glowing digits is a look many generated sites share, and long text is hard to carry in it.",
+      "hero": "https://impeccable.style/worlds/cards/signals-instruments-seven-segment-alarm-clock-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/signals-instruments-seven-segment-alarm-clock.webp",
+      "wireframe": {"cols": 12, "rows": 10, "regions": [
+        {"label": "mode buttons (nav)", "x": 0, "y": 0, "w": 12, "h": 1},
+        {"label": "progress readout, four giant digits", "x": 0, "y": 1, "w": 12, "h": 4, "accent": true},
+        {"label": "tag entry cells", "x": 0, "y": 5, "w": 8, "h": 2, "accent": true},
+        {"label": "sample", "x": 8, "y": 5, "w": 4, "h": 2},
+        {"label": "price-totem stack: gold / elixir / dark owed", "x": 0, "y": 7, "w": 12, "h": 3}
+      ]}
+    },
+    {
+      "id": "challenger-textiles-weave-drape-fashion-industrial-quote-grammar",
+      "label": "Stockroom Labels",
+      "verdict": "competitive",
+      "lineage": "industrial streetwear labelling: quoted captions, zip-tie tags, hazard stripes",
+      "thesis": "Everything is named in plain quoted caps, so a non-player always knows what a panel is.",
+      "palette": ["#ffffff", "#0b0b0b", "#ff5a00"],
+      "materials": ["white cotton and black nylon", "square stencilled label plates", "45-degree hazard stripes"],
+      "viewport": "A white page of square label plates reading \"PLAYER\", \"PLANNER\" and \"WAR ROOM\", the sample village wearing an orange zip-tie tag, and a hazard stripe under the lookup.",
+      "case": "Its literal labels explain every panel to a reviewer who has never played; players will not recognise their game in it.",
+      "risk": "Reads as a fashion reference and can feel detached from a colourful fantasy game.",
+      "hero": "https://impeccable.style/worlds/cards/textiles-weave-drape-fashion-industrial-quote-grammar-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/textiles-weave-drape-fashion-industrial-quote-grammar.webp",
+      "wireframe": {"cols": 12, "rows": 10, "regions": [
+        {"label": "\"VILLAGELAB\" plate", "x": 0, "y": 0, "w": 4, "h": 2},
+        {"label": "\"NAVIGATION\"", "x": 4, "y": 0, "w": 8, "h": 1},
+        {"label": "giant quoted headline", "x": 0, "y": 2, "w": 12, "h": 3},
+        {"label": "hazard stripe + \"LOOK UP A PLAYER\"", "x": 0, "y": 5, "w": 12, "h": 2, "accent": true},
+        {"label": "\"PLAYER\"", "x": 0, "y": 7, "w": 4, "h": 3},
+        {"label": "\"PLANNER\"", "x": 4, "y": 7, "w": 4, "h": 3},
+        {"label": "\"WAR ROOM\"", "x": 8, "y": 7, "w": 4, "h": 3}
+      ]}
+    },
+    {
+      "id": "challenger-exposure",
+      "label": "Exposure Record",
+      "verdict": "declined",
+      "lineage": "a darkroom printer's exposure record with tracing overlays",
+      "thesis": "Overlapping translucent sheets where hatch density shows load and crossed hatches show conflict.",
+      "palette": ["#f2f2f2", "#8a8a8a", "#1a1a1a", "#e0218a"],
+      "materials": ["backlit zone ramp", "tracing-paper overlays", "hatching"],
+      "viewport": "Stacked angled sheets, one per tool, over a grey step ramp.",
+      "case": "Fuses poorly: neither reviewers nor players identify with darkroom records, and greys fight the currency colours.",
+      "kept": "State shown by pattern, not colour alone.",
+      "risk": "Too quiet and too specialist to sell the project in a minute.",
+      "hero": "https://impeccable.style/worlds/cards/operate-b-exposure-record-zone-sheets-hero.webp"
+    },
+    {
+      "id": "challenger-cyclorama",
+      "label": "Cyclorama Dawn",
+      "verdict": "declined",
+      "lineage": "theatre cyclorama lighting, night through dawn to day",
+      "thesis": "The page lightens from night to day as a village approaches its ceiling.",
+      "palette": ["#050507", "#1f3fb5", "#f0668f", "#ffffff"],
+      "materials": ["horizon bands of light", "stencil cue names", "scrubbable cue timeline"],
+      "viewport": "Black ground with a cobalt horizon band carrying the lookup, rose rising above it.",
+      "case": "Fuses poorly: atmosphere says little about what the product does, and tables have nowhere to sit.",
+      "kept": "One progression axis the whole app obeys.",
+      "risk": "Beautiful and uninformative; a reviewer leaves with a mood.",
+      "hero": "https://impeccable.style/worlds/cards/stagecraft-theater-lighting-cyclorama-dawn-hero.webp"
+    },
+    {
+      "id": "challenger-menhera",
+      "label": "Pastel Character Sheet",
+      "verdict": "declined",
+      "lineage": "pastel mascot character sheets with hardware accessories",
+      "thesis": "Each hero as a centred character sheet on candy pink with a repeating motif border.",
+      "palette": ["#ff8fc7", "#9ff0d0", "#111111", "#ffffff"],
+      "materials": ["candy pastel flats", "heavy black outline", "repeating motif border"],
+      "viewport": "A centred hero portrait on pink with a motif border as navigation.",
+      "case": "Fuses poorly: the tone contradicts a careful engineering story, and the game's art has its own style.",
+      "kept": "Colour committed at full strength across whole regions.",
+      "risk": "Wrong register for the reviewer the project is trying to convince.",
+      "hero": "https://impeccable.style/worlds/cards/pop-culture-shelf-menhera-pastel-grimness-hero.webp"
+    },
+    {
+      "id": "challenger-wuxia",
+      "label": "Painted Hoarding",
+      "verdict": "declined",
+      "lineage": "painted martial-arts film hoardings",
+      "thesis": "The landing page as one held film-poster moment with a billing band for navigation.",
+      "palette": ["#c8321f", "#e9e4d8", "#2b2b2b", "#d9a520"],
+      "materials": ["painted ink wash", "vertical stacked title", "hand-lettered billing band"],
+      "viewport": "A hero figure mid-leap across the upper two thirds, title down the right edge, billing band at the foot.",
+      "case": "Declined on assets: it needs painted backgrounds this project does not have, and brush titles on an English fan site would be costume.",
+      "kept": "One figure held at full scale, and hard cuts between sections.",
+      "risk": "Cannot be built honestly from the sprites on hand.",
+      "hero": "https://impeccable.style/worlds/cards/posters-covers-sleeves-wuxia-painted-hoarding-hero.webp"
+    }
+  ],
+  "reroll": {"registers": ["safer", "bolder"]},
+  "buildPath": {"value": "code"},
+  "canon": true,
+  "canonCard": {
+    "label": "The category standard",
+    "thesis": "The dark stats dashboard other Clash trackers ship, executed at full craft.",
+    "palette": ["#0f1115", "#1c2030", "#f5b301", "#e8eaf0"],
+    "materials": ["dark panels", "stat cards", "sortable tables"],
+    "viewport": "A search bar centred over a dark page, with stat cards and tables below.",
+    "risk": "Looks like every other Clash stats site, by design.",
+    "wireframe": {"cols": 12, "rows": 10, "regions": [
+      {"label": "nav bar", "x": 0, "y": 0, "w": 12, "h": 1},
+      {"label": "headline", "x": 2, "y": 2, "w": 8, "h": 2},
+      {"label": "search", "x": 3, "y": 4, "w": 6, "h": 1, "accent": true},
+      {"label": "card", "x": 0, "y": 6, "w": 4, "h": 4},
+      {"label": "card", "x": 4, "y": 6, "w": 4, "h": 4},
+      {"label": "card", "x": 8, "y": 6, "w": 4, "h": 4}
+    ]}
+  },
+  "steer": true
+}

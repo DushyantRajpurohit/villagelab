@@ -74,7 +74,7 @@ export function PlannerApp() {
   const [village, setVillage] = useState<VillageId>('home');
 
   return (
-    <div className="grid gap-4">
+    <div className="grid gap-4 [&>*]:min-w-0">
       <VillageTabs
         active={village}
         onSelect={setVillage}

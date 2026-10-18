@@ -39,8 +39,8 @@ export function ClanShell({ tag, active, children }: {
             aria-current={t.id === active ? 'page' : undefined}
             className={
               t.id === active
-                ? 'btn btn-gold raised rounded-full px-4 py-1.5 text-[13px]'
-                : 'btn btn-ghost rounded-full px-4 py-1.5 text-[13px]'
+                ? 'btn btn-gold raised px-4 py-1.5 text-[13px]'
+                : 'btn btn-ghost px-4 py-1.5 text-[13px]'
             }
           >
             {t.label}
@@ -48,7 +48,7 @@ export function ClanShell({ tag, active, children }: {
         ))}
       </nav>
 
-      <div className="grid gap-4">{children}</div>
+      <div className="grid gap-4 [&>*]:min-w-0">{children}</div>
     </main>
   );
 }

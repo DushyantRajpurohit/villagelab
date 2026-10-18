@@ -131,7 +131,9 @@ export function mockPlayer(tag: string, opts: MockOptions = {}): RawPlayer & { _
     donations: between(rng, 200, 12000),
     donationsReceived: between(rng, 200, 12000),
     league: leagueFor(trophies),
-    role: opts.role ?? pick(rng, ['member', 'member', 'member', 'admin', 'coLeader']),
+    // Drawn either way so the rest of the account does not shift, but only
+    // an account in a clan has a role in one.
+    role: ((r) => (opts.clan ? r : undefined))(opts.role ?? pick(rng, ['member', 'member', 'member', 'admin', 'coLeader'])),
     clan: opts.clan ?? undefined,
     troops: [...roster('troop'), ...roster('pet'), ...roster('siege'), ...builderRoster(BUILDER_TROOPS)],
     spells: roster('spell'),
@@ -151,7 +153,10 @@ export interface MockClanMember {
 export function mockClan(tag: string, opts: { name?: string; members?: number } = {}) {
   const norm = normalizeTag(tag);
   const rng = seeded(norm + 'clan');
-  const size = opts.members ?? between(rng, 28, 50);
+  // Always drawn, so a clan's name is the same whether or not a size is
+  // forced; the league page asks for a size and the clan page does not.
+  const drawnSize = between(rng, 28, 50);
+  const size = opts.members ?? drawnSize;
 
   const memberList: MockClanMember[] = Array.from({ length: size }, (_, i) => {
     const p = mockPlayer('#' + norm.slice(1) + 'V' + tagSuffix(i));
@@ -293,6 +298,11 @@ export function mockWar(tag: string): RawWar & { _mock: true } {
   const endsIn = state === 'preparation' ? 30 : state === 'inWar' ? 9 : -4; // hours
   const clan = mockClan(norm);
   const opponent = mockClan(oppTag);
+  // Two clans drawn from the same word lists can share a name; a war page
+  // reading "Shadow Legion vs Shadow Legion" is a generator artefact, not a war.
+  for (let i = 0; opponent.name === clan.name && i < 8; i++) {
+    opponent.name = mockClan(oppTag + tagSuffix(i)).name;
+  }
 
   return {
     state,

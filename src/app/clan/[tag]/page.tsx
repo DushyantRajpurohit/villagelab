@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { donationRatio, getClan } from '@/lib/data/clans';
 import { normalizeTag } from '@/lib/coc/tags';
 import { fmtInt } from '@/lib/format';
-import { Banner, Chip, Empty, Panel, Stat } from '@/components/primitives';
+import { Banner, Chip, Empty, Panel, Stat, StatLine } from '@/components/primitives';
 import { ClanRoster, ThSpread } from '@/components/ClanRoster';
 import { ClanShell } from '@/components/ClanShell';
 import { buildingSpriteUrl } from '@/lib/sprites';
@@ -73,33 +73,28 @@ export default async function ClanPage({ params }: Params) {
       <section className="banner-hero p-5">
         <div className="flex flex-wrap items-center gap-5">
           {castle && (
-            <div className="relative grid h-[92px] w-[92px] shrink-0 place-items-center rounded-full border border-line bg-panel-2/70">
-              <span
-                aria-hidden
-                className="absolute inset-1 rounded-full"
-                style={{ background: 'radial-gradient(closest-side, var(--wash-warm), transparent)' }}
-              />
+            <div className="grid h-[112px] w-[112px] shrink-0 place-items-center">
               <Image
                 src={castle}
                 alt=""
                 aria-hidden
-                width={76}
-                height={76}
-                className="relative object-contain drop-shadow-[0_6px_8px_rgba(0,0,0,.45)]"
+                width={112}
+                height={112}
+                className="object-contain"
               />
             </div>
           )}
           <div>
             <div className="flex items-center gap-2.5">
-              <h1 className="shelf-title text-[26px]">{c.name}</h1>
+              <h1 className="shelf-title text-[40px] sm:text-[52px]">{c.name}</h1>
               <Chip tone="gold">Lv {c.clanLevel}</Chip>
             </div>
-            <div className="mt-1 flex flex-wrap items-center gap-2 text-muted">
+            <div className="mt-2 flex flex-wrap items-center gap-2 text-[15px] text-text-2">
               <code className="num">{c.tag}</code>
               <span>· {c.members}/50 members</span>
               <span>· requires TH{c.requiredTownhallLevel} / {fmtInt(c.requiredTrophies)} cups</span>
             </div>
-            {c.description && <p className="mt-2 max-w-[70ch] text-[13px] text-muted">{c.description}</p>}
+            {c.description && <p className="mt-2 max-w-[70ch] text-[14px] text-text-2">{c.description}</p>}
           </div>
           <div className="flex-1" />
           <div className="flex flex-wrap gap-7">
@@ -111,15 +106,15 @@ export default async function ClanPage({ params }: Params) {
         </div>
       </section>
 
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <Panel><Stat label="Members" value={`${members.length}/50`} /></Panel>
-        <Panel><Stat label="Total donations" value={fmtInt(totalDon)}
-          sub={`${fmtInt(Math.round(totalDon / Math.max(1, members.length)))} average`} /></Panel>
-        <Panel><Stat label="Freeloaders" value={String(freeloaders)} tone={freeloaders ? 'warn' : 'ok'}
-          sub="give under a third of what they take" /></Panel>
-        <Panel><Stat label="Top Town Hall"
-          value={members.length ? `TH${Math.max(...members.map((m) => m.townHallLevel))}` : '—'} /></Panel>
-      </div>
+      <StatLine>
+        <div><Stat label="Members" value={`${members.length}/50`} /></div>
+        <div><Stat label="Total donations" value={fmtInt(totalDon)}
+          sub={`${fmtInt(Math.round(totalDon / Math.max(1, members.length)))} average`} /></div>
+        <div><Stat label="Freeloaders" value={String(freeloaders)} tone={freeloaders ? 'warn' : 'ok'}
+          sub="give under a third of what they take" /></div>
+        <div><Stat label="Top Town Hall"
+          value={members.length ? `TH${Math.max(...members.map((m) => m.townHallLevel))}` : '—'} /></div>
+      </StatLine>
 
       <Panel title="Town Hall spread"><ThSpread members={members} /></Panel>
 

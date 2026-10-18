@@ -36,7 +36,7 @@ export function GameIcon({ kind, id, level, village = 'home', size = 26, alt = '
     return (
       <span
         aria-hidden
-        className="shrink-0 rounded-[4px] border border-line bg-panel-2"
+        className="shrink-0-[4px] border border-line bg-panel-2"
         style={{ width: size, height: size }}
       />
     );
@@ -76,7 +76,7 @@ export function EquipmentIcon({ id, size = 26, alt = '' }: {
     return (
       <span
         aria-hidden
-        className="shrink-0 rounded-[4px] border border-line bg-panel-2"
+        className="shrink-0-[4px] border border-line bg-panel-2"
         style={{ width: size, height: size }}
       />
     );
@@ -108,7 +108,7 @@ export function CraftedIcon({ id, level, size = 26, alt = '' }: {
     return (
       <span
         aria-hidden
-        className="shrink-0 rounded-[4px] border border-line bg-panel-2"
+        className="shrink-0-[4px] border border-line bg-panel-2"
         style={{ width: size, height: size }}
       />
     );

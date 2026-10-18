@@ -114,14 +114,14 @@ function HeroCard({ hero: h, village, hall, hallShort, index, gear }: {
               alt=""
               fill
               sizes="180px"
-              className="hero-figure object-contain object-bottom drop-shadow-[0_6px_8px_rgba(0,0,0,.45)]"
+              className="hero-figure object-contain object-bottom"
               /* Each hero idles out of phase with its neighbours — in step,
                  five figures breathing together read as one machine. */
               style={{ ['--idle-delay' as string]: `${(index * 0.37).toFixed(2)}s` }}
             />
           </div>
         ) : (
-          <span aria-hidden className="block h-full w-full rounded bg-panel-3" />
+          <span aria-hidden className="block h-full w-full bg-panel-3" />
         )}
       </div>
 

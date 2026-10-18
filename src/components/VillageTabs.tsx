@@ -17,7 +17,7 @@ export interface VillageTab {
 
 /* The same three shapes the buttons elsewhere use, so a tab and a button in
    the same row are recognisably the same control family. */
-const base = 'btn rounded-full px-4 py-1.5 text-[13px]';
+const base = 'btn px-4 py-1.5 text-[13px]';
 const on = 'btn-gold raised';
 const off = 'btn-ghost';
 const dead = 'btn-ghost cursor-not-allowed opacity-55';
@@ -49,7 +49,7 @@ export function VillageTabs({ active, tabs, onSelect }: {
           <span className="flex items-baseline gap-1.5">
             {VILLAGE_LABEL[t.id]}
             {t.sub && (
-              <span className={`num text-[11px] font-bold ${selected ? 'text-ink/70' : 'text-faint'}`}>
+              <span className={`num text-[11px] font-bold ${selected ? 'text-ink/75' : 'text-muted'}`}>
                 {t.sub}
               </span>
             )}

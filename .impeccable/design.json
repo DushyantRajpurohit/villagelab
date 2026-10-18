@@ -1,0 +1,748 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-14T04:10:48.243Z",
+  "title": "Design System: VillageLab",
+  "extensions": {
+    "colorMeta": {
+      "pitch": {
+        "role": "primary",
+        "displayName": "Pitch Green",
+        "canonical": "#17713a",
+        "approxOklch": "oklch(48.4% 0.119 151.3)",
+        "themeInvariant": true,
+        "tonalRamp": [
+          "#001500",
+          "#003200",
+          "#00501b",
+          "#157039",
+          "#41945b",
+          "#67ba7e",
+          "#8ee1a3",
+          "#d8f8df"
+        ]
+      },
+      "pitch-2": {
+        "role": "primary",
+        "displayName": "Mow Stripe",
+        "canonical": "#116031",
+        "approxOklch": "oklch(43.2% 0.106 151.7)",
+        "themeInvariant": true,
+        "tonalRamp": [
+          "#001500",
+          "#003103",
+          "#004f21",
+          "#246e3e",
+          "#4a9260",
+          "#70b883",
+          "#95dfa8",
+          "#dbf7e1"
+        ]
+      },
+      "kit": {
+        "role": "primary",
+        "displayName": "Kit Yellow",
+        "canonical": "#ffd21f",
+        "approxOklch": "oklch(87.7% 0.174 92.5)",
+        "themeInvariant": true,
+        "tonalRamp": [
+          "#230000",
+          "#411600",
+          "#603600",
+          "#805500",
+          "#a57a00",
+          "#cb9f00",
+          "#f2c600",
+          "#ffeeb9"
+        ]
+      },
+      "chalk": {
+        "role": "secondary",
+        "displayName": "Chalk",
+        "canonical": "#f6faf2",
+        "approxOklch": "oklch(98.0% 0.011 128.6)",
+        "themeInvariant": true,
+        "tonalRamp": [
+          "#0a0c07",
+          "#22251f",
+          "#3e413b",
+          "#5c5f58",
+          "#7e827a",
+          "#a2a69f",
+          "#c8ccc4",
+          "#edefec"
+        ]
+      },
+      "gold": {
+        "role": "secondary",
+        "displayName": "Accent Gold",
+        "canonical": "#8a5f00",
+        "approxOklch": "oklch(51.8% 0.108 77.9)",
+        "nightFixture": "#ffcf33",
+        "tonalRamp": [
+          "#210000",
+          "#3f1800",
+          "#5e3500",
+          "#7e5400",
+          "#a37729",
+          "#ca9c51",
+          "#f1c277",
+          "#ffeccf"
+        ]
+      },
+      "gold-2": {
+        "role": "secondary",
+        "displayName": "Deep Gold",
+        "canonical": "#6b4900",
+        "approxOklch": "oklch(43.2% 0.090 78.2)",
+        "nightFixture": "#c99700",
+        "tonalRamp": [
+          "#1e0200",
+          "#3b1b00",
+          "#593800",
+          "#795616",
+          "#9e793d",
+          "#c49e62",
+          "#ebc487",
+          "#fcecd4"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Programme Ink",
+        "canonical": "#0d1a11",
+        "approxOklch": "oklch(20.2% 0.026 153.4)",
+        "themeInvariant": true,
+        "tonalRamp": [
+          "#030e06",
+          "#1a281e",
+          "#354439",
+          "#536257",
+          "#758579",
+          "#99aa9d",
+          "#bed0c3",
+          "#eaf1eb"
+        ]
+      },
+      "bg": {
+        "role": "neutral",
+        "displayName": "Stock",
+        "canonical": "#f3f6ef",
+        "approxOklch": "oklch(96.9% 0.010 125.7)",
+        "nightFixture": "#08150d",
+        "tonalRamp": [
+          "#0a0c08",
+          "#232520",
+          "#3e413b",
+          "#5c5f59",
+          "#7f817b",
+          "#a3a69f",
+          "#c9ccc5",
+          "#eeefec"
+        ]
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Panel White",
+        "canonical": "#ffffff",
+        "approxOklch": "oklch(100.0% 0.000 89.9)",
+        "nightFixture": "#0e2015",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#242424",
+          "#404040",
+          "#5d5d5d",
+          "#808080",
+          "#a4a4a4",
+          "#cacaca",
+          "#eeeeee"
+        ]
+      },
+      "panel-2": {
+        "role": "neutral",
+        "displayName": "Panel Tint",
+        "canonical": "#e9efe3",
+        "approxOklch": "oklch(94.4% 0.017 128.7)",
+        "nightFixture": "#14291c",
+        "tonalRamp": [
+          "#090d06",
+          "#21261d",
+          "#3d4238",
+          "#5b6055",
+          "#7d8278",
+          "#a1a79c",
+          "#c7cdc1",
+          "#edefeb"
+        ]
+      },
+      "panel-3": {
+        "role": "neutral",
+        "displayName": "Panel Shade",
+        "canonical": "#d9e3d1",
+        "approxOklch": "oklch(90.3% 0.026 130.9)",
+        "nightFixture": "#1c3626",
+        "tonalRamp": [
+          "#070d03",
+          "#202719",
+          "#3b4334",
+          "#586151",
+          "#7b8473",
+          "#9fa897",
+          "#c5cebd",
+          "#ecf0e9"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#c6d2bd",
+        "approxOklch": "oklch(84.9% 0.031 131.6)",
+        "nightFixture": "#264533",
+        "tonalRamp": [
+          "#070e02",
+          "#1e2717",
+          "#3a4332",
+          "#57624f",
+          "#798471",
+          "#9ea995",
+          "#c3cfba",
+          "#ebf0e8"
+        ]
+      },
+      "line-2": {
+        "role": "neutral",
+        "displayName": "Rule Grey-Green",
+        "canonical": "#8a9c80",
+        "approxOklch": "oklch(67.1% 0.045 134.4)",
+        "nightFixture": "#4a7860",
+        "tonalRamp": [
+          "#040f00",
+          "#1b2912",
+          "#36452d",
+          "#53644a",
+          "#75876b",
+          "#99ab8f",
+          "#bed2b4",
+          "#e9f1e5"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Text",
+        "canonical": "#0d1a11",
+        "approxOklch": "oklch(20.2% 0.026 153.4)",
+        "nightFixture": "#f1f6ee",
+        "tonalRamp": [
+          "#030e06",
+          "#1a281e",
+          "#354439",
+          "#536257",
+          "#758579",
+          "#99aa9d",
+          "#bed0c3",
+          "#eaf1eb"
+        ]
+      },
+      "text-2": {
+        "role": "neutral",
+        "displayName": "Text Secondary",
+        "canonical": "#2c3b30",
+        "approxOklch": "oklch(33.5% 0.028 153.0)",
+        "nightFixture": "#c6d5c8",
+        "tonalRamp": [
+          "#030e06",
+          "#1a281e",
+          "#354439",
+          "#526256",
+          "#748579",
+          "#98aa9d",
+          "#bed0c2",
+          "#e9f1eb"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "canonical": "#526257",
+        "approxOklch": "oklch(47.9% 0.026 155.3)",
+        "nightFixture": "#93aa98",
+        "tonalRamp": [
+          "#030e07",
+          "#1a281e",
+          "#35443a",
+          "#526257",
+          "#748579",
+          "#98aa9e",
+          "#bed0c3",
+          "#e9f1eb"
+        ]
+      },
+      "faint": {
+        "role": "neutral",
+        "displayName": "Faint",
+        "canonical": "#64736a",
+        "approxOklch": "oklch(54.0% 0.023 159.2)",
+        "nightFixture": "#7c9482",
+        "tonalRamp": [
+          "#040e08",
+          "#1b2720",
+          "#36443b",
+          "#536259",
+          "#75857b",
+          "#99a9a0",
+          "#bfcfc5",
+          "#eaf0ec"
+        ]
+      },
+      "elixir": {
+        "role": "data",
+        "displayName": "Elixir",
+        "canonical": "#a12bb2",
+        "approxOklch": "oklch(52.9% 0.215 322.3)",
+        "nightFixture": "#e88af5",
+        "tonalRamp": [
+          "#2c003d",
+          "#4d005d",
+          "#6e007f",
+          "#9114a2",
+          "#b845ca",
+          "#e16df2",
+          "#ff94ff",
+          "#ffdcff"
+        ]
+      },
+      "dark": {
+        "role": "data",
+        "displayName": "Dark Elixir",
+        "canonical": "#5545cf",
+        "approxOklch": "oklch(49.4% 0.203 281.2)",
+        "nightFixture": "#b0a4ff",
+        "tonalRamp": [
+          "#19005d",
+          "#250081",
+          "#3915a5",
+          "#5240ca",
+          "#7168f4",
+          "#928eff",
+          "#b6b6ff",
+          "#e4e9ff"
+        ]
+      },
+      "shiny": {
+        "role": "data",
+        "displayName": "Shiny Ore",
+        "canonical": "#08708a",
+        "approxOklch": "oklch(50.6% 0.091 221.8)",
+        "nightFixture": "#5ad2ef",
+        "tonalRamp": [
+          "#000f26",
+          "#002b43",
+          "#004962",
+          "#006882",
+          "#348ca7",
+          "#5db2cd",
+          "#84d8f5",
+          "#d5f5ff"
+        ]
+      },
+      "glowy": {
+        "role": "data",
+        "displayName": "Glowy Ore",
+        "canonical": "#7b25c0",
+        "approxOklch": "oklch(48.2% 0.221 303.9)",
+        "nightFixture": "#c58cff",
+        "tonalRamp": [
+          "#240054",
+          "#3e0077",
+          "#5b009b",
+          "#7a24bf",
+          "#9e50e8",
+          "#c378ff",
+          "#eaa0ff",
+          "#fbe1ff"
+        ]
+      },
+      "starry": {
+        "role": "data",
+        "displayName": "Starry Ore",
+        "canonical": "#a8490a",
+        "approxOklch": "oklch(52.2% 0.141 46.5)",
+        "nightFixture": "#ffab55",
+        "tonalRamp": [
+          "#310000",
+          "#530000",
+          "#761900",
+          "#9a3c00",
+          "#c2612c",
+          "#eb8652",
+          "#ffac78",
+          "#ffe4cf"
+        ]
+      },
+      "sparky": {
+        "role": "data",
+        "displayName": "Sparky Stone",
+        "canonical": "#0a62c4",
+        "approxOklch": "oklch(50.8% 0.171 256.4)",
+        "nightFixture": "#62baff",
+        "tonalRamp": [
+          "#020051",
+          "#001173",
+          "#003796",
+          "#0059bb",
+          "#307fe3",
+          "#57a5ff",
+          "#7dccff",
+          "#d1f1ff"
+        ]
+      },
+      "ok": {
+        "role": "status",
+        "displayName": "OK",
+        "canonical": "#0f7a41",
+        "approxOklch": "oklch(51.0% 0.126 152.9)",
+        "nightFixture": "#4ee08e",
+        "tonalRamp": [
+          "#001600",
+          "#003300",
+          "#00511a",
+          "#007139",
+          "#36955b",
+          "#5fbb7e",
+          "#86e3a3",
+          "#d6f9df"
+        ]
+      },
+      "warn": {
+        "role": "status",
+        "displayName": "Warn",
+        "canonical": "#8a5800",
+        "approxOklch": "oklch(50.4% 0.108 71.5)",
+        "nightFixture": "#ffb545",
+        "tonalRamp": [
+          "#230000",
+          "#421400",
+          "#623200",
+          "#835100",
+          "#a8742c",
+          "#cf9953",
+          "#f7bf79",
+          "#ffead0"
+        ]
+      },
+      "bad": {
+        "role": "status",
+        "displayName": "Bad",
+        "canonical": "#bd2a20",
+        "approxOklch": "oklch(52.3% 0.185 29.0)",
+        "nightFixture": "#ff7a70",
+        "tonalRamp": [
+          "#3c0000",
+          "#620000",
+          "#880000",
+          "#ae1610",
+          "#d84639",
+          "#ff6e5d",
+          "#ff9682",
+          "#ffddd2"
+        ]
+      },
+      "info": {
+        "role": "status",
+        "displayName": "Info",
+        "canonical": "#1260b6",
+        "approxOklch": "oklch(49.4% 0.154 255.3)",
+        "nightFixture": "#6cb8ff",
+        "tonalRamp": [
+          "#000049",
+          "#00186b",
+          "#003b8e",
+          "#0a5cb1",
+          "#3880d9",
+          "#5ea6ff",
+          "#83cdff",
+          "#d4f1ff"
+        ]
+      }
+    },
+    "pitchOverrides": {
+      "purpose": "Inside a pitch region (.on-pitch, .banner-hero) neutral and status tokens are re-pointed so any component reads on green.",
+      "values": {
+        "text": "var(--color-chalk)",
+        "text-2": "#e2efdd",
+        "muted": "#cfe3cb",
+        "faint": "#b9d4b6",
+        "gold": "var(--color-kit)",
+        "line": "rgb(246 250 242 / .28)",
+        "line-2": "rgb(246 250 242 / .55)",
+        "panel": "var(--color-pitch-2)",
+        "panel-2": "#0d5229",
+        "panel-3": "#0a4522",
+        "ok": "#b9f5c9",
+        "warn": "#ffe08a",
+        "bad": "#ffc2bb",
+        "info": "#c9e4ff",
+        "elixir": "#f6b8ff",
+        "dark": "#d3ccff"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Cover headline only. Uppercase, balanced wrap, word-spacing .14em."
+      },
+      "scoreline": {
+        "displayName": "Scoreline",
+        "purpose": "Cover score; first figure in accent, 0.34em 'v' between figures."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Landing section heads; tool page heads at 40/56px, section heads at 30px. Uppercase."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Panel names, report and fixture titles, nav links. Uppercase, word-spacing .18em."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text at full width; 17-18px for cover and lead copy, capped near 52-66ch."
+      },
+      "figure": {
+        "displayName": "Figure",
+        "purpose": "Numbers compared down a column and costs; tabular at 88% width."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Buttons and tabs. Uppercase."
+      },
+      "chip": {
+        "displayName": "Chip",
+        "purpose": "Chips, flags and small tags. Uppercase."
+      }
+    },
+    "shadows": [],
+    "rules": [
+      {
+        "name": "section-rule",
+        "value": "border-top: 3px solid var(--color-text)",
+        "purpose": "Opens every section and table."
+      },
+      {
+        "name": "hairline",
+        "value": "1px solid var(--color-line)",
+        "purpose": "Between rows and figures."
+      },
+      {
+        "name": "touchline",
+        "value": "4px solid var(--color-chalk)",
+        "purpose": "Foot of the masthead and identity bands."
+      },
+      {
+        "name": "control-frame",
+        "value": "2px solid var(--color-text)",
+        "purpose": "Buttons, tag search, fixture tiles."
+      }
+    ],
+    "patterns": [
+      {
+        "name": "mow-stripe-stage",
+        "value": "repeating-linear-gradient(90deg, transparent 0 1.75rem, rgb(0 0 0 / .1) 1.75rem 3.5rem)",
+        "purpose": "Pitch under game art."
+      },
+      {
+        "name": "mow-stripe-band",
+        "value": "repeating-linear-gradient(90deg, transparent 0 7rem, rgb(0 0 0 / .14) 7rem 14rem)",
+        "purpose": "Cover and identity bands."
+      },
+      {
+        "name": "remaining-hatch",
+        "value": "repeating-linear-gradient(135deg, transparent 0 3px, var(--color-line-2) 3px 4px)",
+        "purpose": "Unfilled part of a progress track."
+      },
+      {
+        "name": "locked-hatch",
+        "value": "repeating-linear-gradient(135deg, transparent 0 6px, var(--color-line) 6px 7px)",
+        "purpose": "Locked hero alcove."
+      }
+    ],
+    "motion": [
+      {
+        "name": "hard-cut",
+        "value": "none",
+        "purpose": "Every state change is instant; no transition properties exist."
+      },
+      {
+        "name": "score-in",
+        "value": "animation: score-in .01s steps(1, end) both; animation-delay: calc(n * 0.09s)",
+        "purpose": "Cover scoreline digits arrive one at a time. Disabled under prefers-reduced-motion."
+      },
+      {
+        "name": "press",
+        "value": "transform: translateY(1px) on :active",
+        "purpose": "Filled controls only, no transition."
+      }
+    ],
+    "focus": {
+      "value": "outline: 3px solid var(--color-kit); outline-offset: 2px",
+      "purpose": "Global :focus-visible and :focus-within on tiles and tag search."
+    },
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "shelf-grid",
+        "value": "880px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Kit-yellow filled action; the one thing to press in a region.",
+      "html": "<button class=\"ds-btn ds-btn-gold\">Look up</button>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: .45rem; border: 2px solid var(--color-text, #0d1a11); padding: .45rem .9rem; font-family: var(--font-display, 'Archivo', 'Arial Narrow', sans-serif); font-stretch: 75%; font-weight: 800; font-size: 14px; line-height: 1.2; letter-spacing: .04em; word-spacing: .18em; text-transform: uppercase; white-space: nowrap; cursor: pointer; border-radius: 0; } .ds-btn-gold { color: var(--color-ink, #0d1a11); background: var(--color-kit, #ffd21f); border-color: var(--color-ink, #0d1a11); } .ds-btn-gold:hover { background: var(--color-ink, #0d1a11); color: var(--color-kit, #ffd21f); } .ds-btn-gold:active { transform: translateY(1px); } .ds-btn:focus-visible { outline: 3px solid var(--color-kit, #ffd21f); outline-offset: 2px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary control and unselected tab; inverts to text colour on hover.",
+      "html": "<button class=\"ds-btn-ghost\">Builder Base</button>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; border: 2px solid var(--color-line-2, #8a9c80); padding: .45rem .9rem; background: transparent; color: var(--color-text, #0d1a11); font-family: var(--font-display, 'Archivo', 'Arial Narrow', sans-serif); font-stretch: 75%; font-weight: 800; font-size: 14px; line-height: 1.2; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; border-radius: 0; } .ds-btn-ghost:hover { background: var(--color-text, #0d1a11); border-color: var(--color-text, #0d1a11); color: var(--color-bg, #f3f6ef); } .ds-btn-ghost:focus-visible { outline: 3px solid var(--color-kit, #ffd21f); outline-offset: 2px; }"
+    },
+    {
+      "name": "Tag Search",
+      "kind": "input",
+      "refersTo": "tag-search",
+      "description": "The one input: a single ruled box holding the field and the primary button.",
+      "html": "<form class=\"ds-search\"><input class=\"ds-search-input\" placeholder=\"#2PP0JCVL9\" aria-label=\"Player tag\"><button class=\"ds-search-btn\" type=\"submit\">Look up</button></form>",
+      "css": ".ds-search { display: flex; align-items: stretch; max-width: 460px; border: 2px solid var(--color-ink, #0d1a11); background: #fff; color: var(--color-ink, #0d1a11); } .ds-search:focus-within { outline: 3px solid var(--color-kit, #ffd21f); outline-offset: 2px; } .ds-search-input { flex: 1; min-width: 0; border: 0; background: transparent; outline: none; padding: 12px 16px; font-family: var(--font-sans, 'Archivo', sans-serif); font-stretch: 88%; font-variant-numeric: tabular-nums; font-weight: 600; font-size: 17px; letter-spacing: .025em; color: var(--color-ink, #0d1a11); } .ds-search-input::placeholder { font-weight: 400; color: #5b6a60; } .ds-search-btn { border: 0; border-left: 2px solid var(--color-ink, #0d1a11); padding: 0 24px; background: var(--color-kit, #ffd21f); color: var(--color-ink, #0d1a11); font-family: var(--font-display, 'Archivo', sans-serif); font-stretch: 75%; font-weight: 800; font-size: 16px; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; } .ds-search-btn:hover { background: var(--color-ink, #0d1a11); color: var(--color-kit, #ffd21f); } .ds-search-btn:active { transform: translateY(1px); }"
+    },
+    {
+      "name": "Masthead",
+      "kind": "nav",
+      "refersTo": "masthead",
+      "description": "Sticky pitch-green masthead with chalk touchline; current section is a solid kit block.",
+      "html": "<header class=\"ds-mast\"><a class=\"ds-mast-mark\" href=\"#\">VillageLab</a><nav class=\"ds-mast-nav\"><a href=\"#\" class=\"ds-mast-link\" aria-current=\"page\">Player</a><a href=\"#\" class=\"ds-mast-link\">Planner</a><a href=\"#\" class=\"ds-mast-link\">War room</a></nav></header>",
+      "css": ".ds-mast { display: flex; align-items: stretch; gap: 20px; height: 56px; padding: 0 20px; background: var(--color-pitch, #17713a); color: var(--color-chalk, #f6faf2); border-bottom: 4px solid var(--color-chalk, #f6faf2); } .ds-mast-mark { display: flex; align-items: center; color: inherit; text-decoration: none; font-family: var(--font-display, 'Archivo', sans-serif); font-stretch: 62%; font-weight: 900; font-size: 26px; text-transform: uppercase; } .ds-mast-nav { display: flex; align-items: stretch; } .ds-mast-link { display: flex; align-items: center; padding: 0 14px; color: var(--color-chalk, #f6faf2); text-decoration: none; font-family: var(--font-display, 'Archivo', sans-serif); font-stretch: 62%; font-weight: 800; font-size: 15px; letter-spacing: .012em; text-transform: uppercase; } .ds-mast-link:hover { background: var(--color-chalk, #f6faf2); color: var(--color-ink, #0d1a11); } .ds-mast-link[aria-current='page'] { background: var(--color-kit, #ffd21f); color: var(--color-ink, #0d1a11); } .ds-mast-link:focus-visible { outline: 3px solid var(--color-kit, #ffd21f); outline-offset: 2px; }"
+    },
+    {
+      "name": "Chips",
+      "kind": "chip",
+      "refersTo": "chip-gold",
+      "description": "Result boxes; tone is carried by the border style as well as the colour.",
+      "html": "<span class=\"ds-chip\" data-tone=\"gold\">Maxed</span> <span class=\"ds-chip\" data-tone=\"ok\">Ready</span> <span class=\"ds-chip\" data-tone=\"warn\">Rushed</span> <span class=\"ds-chip\" data-tone=\"bad\">Missed</span> <span class=\"ds-chip\" data-tone=\"plain\">TH 17</span>",
+      "css": ".ds-chip { display: inline-flex; align-items: center; gap: .25rem; border: 1.5px solid currentColor; padding: 1px 6px; font-family: var(--font-display, 'Archivo', sans-serif); font-stretch: 75%; font-size: 11px; font-weight: 800; letter-spacing: .05em; line-height: 1.5; text-transform: uppercase; white-space: nowrap; border-radius: 0; } .ds-chip[data-tone='plain'] { color: var(--color-text-2, #2c3b30); border-color: var(--color-line-2, #8a9c80); } .ds-chip[data-tone='gold'] { color: var(--color-ink, #0d1a11); background: var(--color-kit, #ffd21f); border-color: var(--color-ink, #0d1a11); } .ds-chip[data-tone='ok'] { color: var(--color-ok, #0f7a41); } .ds-chip[data-tone='warn'] { color: var(--color-warn, #8a5800); border-style: dashed; } .ds-chip[data-tone='bad'] { color: var(--color-bad, #bd2a20); background-image: repeating-linear-gradient(135deg, transparent 0 4px, color-mix(in srgb, var(--color-bad, #bd2a20) 22%, transparent) 4px 5px); }"
+    },
+    {
+      "name": "Section Panel",
+      "kind": "card",
+      "refersTo": "section-panel",
+      "description": "Not a card: a section under a heavy ink rule with a hairline-divided title bar.",
+      "html": "<section class=\"ds-panel\"><div class=\"ds-panel-head\"><h2>Heroes</h2></div><div class=\"ds-panel-body\">Barbarian King 95 v 100</div></section>",
+      "css": ".ds-panel { background: var(--color-panel, #fff); color: var(--color-text, #0d1a11); border-top: 3px solid var(--color-text, #0d1a11); border-bottom: 1px solid var(--color-line, #c6d2bd); border-radius: 0; } .ds-panel-head { padding: 10px 16px; border-bottom: 1px solid var(--color-line, #c6d2bd); } .ds-panel-head h2 { margin: 0; font-family: var(--font-display, 'Archivo', sans-serif); font-stretch: 62%; font-weight: 800; font-size: 19px; line-height: 1.25; letter-spacing: .012em; word-spacing: .18em; text-transform: uppercase; } .ds-panel-body { padding: 16px; font-size: 15px; }"
+    },
+    {
+      "name": "Fixture Row",
+      "kind": "custom",
+      "refersTo": "fixture-row-hover",
+      "description": "A tool as a row in the fixture list: art on a mown stage, title, and an Open button; the whole row inverts on hover.",
+      "html": "<a class=\"ds-fixture\" href=\"#\"><span class=\"ds-stage\"></span><span><span class=\"ds-fixture-title\">Upgrade planner</span><span class=\"ds-fixture-copy\">Queue upgrades and get a completion date.</span></span><span class=\"ds-fixture-open\">Open</span></a>",
+      "css": ".ds-fixture { display: grid; grid-template-columns: 88px 1fr auto; align-items: center; gap: 8px 20px; padding: 16px 0; border-top: 3px solid var(--color-text, #0d1a11); border-bottom: 1px solid var(--color-line, #c6d2bd); color: var(--color-text, #0d1a11); text-decoration: none; } .ds-fixture:hover { background: var(--color-text, #0d1a11); color: var(--color-bg, #f3f6ef); } .ds-fixture:focus-visible { outline: 3px solid var(--color-kit, #ffd21f); outline-offset: 2px; } .ds-stage { width: 88px; height: 88px; background-color: var(--color-pitch, #17713a); background-image: repeating-linear-gradient(90deg, transparent 0 1.75rem, rgb(0 0 0 / .1) 1.75rem 3.5rem); } .ds-fixture-title { display: block; font-family: var(--font-display, 'Archivo', sans-serif); font-stretch: 62%; font-weight: 800; font-size: 28px; line-height: 1; text-transform: uppercase; } .ds-fixture-copy { display: block; margin-top: 8px; font-size: 15px; } .ds-fixture-open { border: 2px solid var(--color-ink, #0d1a11); padding: .45rem .9rem; background: var(--color-kit, #ffd21f); color: var(--color-ink, #0d1a11); font-family: var(--font-display, 'Archivo', sans-serif); font-stretch: 75%; font-weight: 800; font-size: 14px; letter-spacing: .04em; text-transform: uppercase; }"
+    },
+    {
+      "name": "Progress Bar",
+      "kind": "custom",
+      "refersTo": "progress-bar",
+      "description": "Left is level one, right is the ceiling; done is solid, remaining is hatched.",
+      "html": "<div class=\"ds-bar\"><div class=\"ds-bar-fill\" style=\"width:64%\"></div></div>",
+      "css": ".ds-bar { height: 10px; max-width: 320px; border: 1px solid var(--color-text, #0d1a11); background-image: repeating-linear-gradient(135deg, transparent 0 3px, var(--color-line-2, #8a9c80) 3px 4px); } .ds-bar-fill { height: 100%; background: var(--color-kit, #ffd21f); border-right: 1px solid var(--color-text, #0d1a11); }"
+    },
+    {
+      "name": "Scoreline",
+      "kind": "custom",
+      "refersTo": "scoreline",
+      "description": "Two figures and a small v on the pitch; the first in kit yellow, digits arriving as hard cuts.",
+      "html": "<div class=\"ds-score\"><span class=\"ds-score-a\">909</span><span class=\"ds-score-v\">v</span><span>974</span></div>",
+      "css": ".ds-score { display: inline-flex; align-items: flex-end; gap: .18em; padding: 24px; background: var(--color-pitch, #17713a); color: var(--color-chalk, #f6faf2); font-family: var(--font-display, 'Archivo', sans-serif); font-stretch: 62%; font-weight: 900; font-size: 96px; line-height: .82; text-transform: uppercase; font-variant-numeric: tabular-nums; } .ds-score-a { color: var(--color-kit, #ffd21f); } .ds-score-v { font-size: .34em; padding-bottom: .12em; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Matchday Programme",
+    "overview": "A village plays its Town Hall ceiling, and every page is a sheet of the programme that prints the score. The reference is a printed football programme and the league almanac behind it: pitch green owning whole regions edge to edge, white stock for the tables, near-black green ink, one kit yellow. Print is flat, so nothing floats and nothing has a shadow. Corners are square everywhere. A section starts under a heavy ink rule and its rows are divided by hairlines; there are no cards.\n\nOne typeface does everything. Archivo's width axis sets the condensed, heavy, all-caps headlines and squad numerals (62% width), the button and chip labels (75%), table figures (88%, tabular) and running text (100%). State changes are hard cuts: hover is an instant inversion, nothing eases between states, and the one authored motion (the cover scoreline) arrives digit by digit in steps.\n\nDaylight is the default, because a programme is read in daylight. Dark is the night fixture: the same page under floodlights, with the pitch, chalk, kit yellow and ink unchanged. Game currencies keep their own hues as data colours in both themes. Official game art stands on mown pitch stripes.",
+    "keyCharacteristics": [
+      "Pitch green regions, full bleed, with a 4px chalk touchline at their foot.",
+      "White or pale stock for tables; 3px ink rule above, 1px hairlines between rows.",
+      "Square corners, no shadows, no transitions.",
+      "One face (Archivo variable), width axis carries the hierarchy.",
+      "Kit yellow for the one action and for the accent numeral on green.",
+      "State shown by pattern as well as colour: hatch for what remains, dashes for unowned or caution."
+    ],
+    "rules": [
+      {
+        "name": "The Theme-Invariant Four Rule",
+        "body": "Pitch, mow stripe, chalk and kit yellow do not change under the night fixture. A green page is a green page at night.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Yellows Rule",
+        "body": "Gold is yellow you read (text, the gold currency); kit is yellow you press (fills). Never fill a control with gold, never set body text in kit on white stock.",
+        "section": "colors"
+      },
+      {
+        "name": "The Data Colour Rule",
+        "body": "A currency hue names a currency. Do not use elixir, dark, ore or sparky hues for decoration, headings or status.",
+        "section": "colors"
+      },
+      {
+        "name": "The Pitch Re-point Rule",
+        "body": "Inside a pitch region the neutral and status tokens are re-pointed to chalk-based values, so any component dropped on green is legible without knowing it is there. Do not hand-colour components for the pitch.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Face Rule",
+        "body": "Everything is Archivo; hierarchy comes from width, weight and case, not from a second family. Tables are set in the text face, not a typewriter.",
+        "section": "typography"
+      },
+      {
+        "name": "The Headline Width Rule",
+        "body": "A figure inside a headline takes the headline's width, not the table's.",
+        "section": "typography"
+      },
+      {
+        "name": "The Print Is Flat Rule",
+        "body": "No box-shadow, no blur, no glow. If something needs to separate, give it a rule or a different stock.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do run pitch green edge to edge and close it with the 4px chalk touchline.",
+      "Do open every section and table with a 3px ink rule and divide rows with 1px hairlines.",
+      "Do pair kit yellow with ink, and use it for the one action per region.",
+      "Do set every figure that is compared down a column in the figure voice (tabular, 88% width).",
+      "Do mark state with pattern as well as colour: hatch for remaining, dashes for unowned or caution.",
+      "Do change state as an instant inversion; use stepped animation if anything must arrive over time.",
+      "Do stand game art on mown pitch stripes."
+    ],
+    "donts": [
+      "Don't round a corner.",
+      "Don't add a shadow, blur or glow.",
+      "Don't add transitions or eased fades between states.",
+      "Don't wrap content in floating cards; use the ruled section.",
+      "Don't introduce a second typeface; use Archivo's width axis.",
+      "Don't use a currency hue for anything but that currency's figures.",
+      "Don't fill a control with gold or set text in kit yellow on white stock."
+    ]
+  }
+}

@@ -22,14 +22,14 @@ export function Timeline({ sched, builders }: { sched: Schedule; builders: numbe
         {lanes.map((lane) => (
           <div key={`${lane.type}-${lane.index}`} className="flex items-center gap-2.5">
             <div className="w-[92px] shrink-0 text-xs text-muted">{lane.label}</div>
-            <div className="relative h-5 flex-1 overflow-hidden rounded bg-panel-2">
+            <div className="relative h-5 flex-1 overflow-hidden bg-panel-2">
               {sched.items
                 .filter((it) => it.laneType === lane.type && it.laneIndex === lane.index)
                 .map((it) => (
                   <div
                     key={it.uid}
                     title={`${it.name} ${it.from}→${it.to} · ${fmtDuration(it.hours)}`}
-                    className={`absolute inset-y-0.5 rounded-sm opacity-80 ${LANE_COLOR[it.resource]}`}
+                    className={`absolute inset-y-0.5 border border-text ${LANE_COLOR[it.resource]}`}
                     style={{
                       left: `${(it.start / span) * 100}%`,
                       width: `${Math.max(0.6, (it.hours / span) * 100)}%`,

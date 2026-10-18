@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import type { ReactNode } from 'react';
-import { Chip, Panel, Res } from '@/components/primitives';
+import { Chip, Panel, Res, StatLine } from '@/components/primitives';
 import { GameIcon } from '@/components/GameIcon';
 import { fmtDuration } from '@/lib/format';
 import { builderBuildingsAtBH } from '@/lib/game/builder-base';
@@ -153,18 +153,18 @@ function VillageBuildings({ title, entries, village, resources, label, footnote 
   return (
     <>
       <Panel title={title} action={<Chip>{structures} structures</Chip>}>
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <StatLine inset>
           <Figure label="Structures allowed" value={String(structures)}
             sub={`${entries.length} kinds`} />
           {resources.filter((k) => cost[k] > 0).map((k) => (
             <div key={k}>
               <div className="text-[11px] uppercase tracking-[.06em] text-muted">{label(k)}</div>
-              <div className="text-[22px] font-semibold">
+              <div className="display text-[30px] leading-none">
                 <Res amount={cost[k]} kind={k} est={est} village={village} />
               </div>
             </div>
           ))}
-        </div>
+        </StatLine>
         <p className="mt-3 text-xs text-muted">
           The hall&rsquo;s own allowance, not this account&rsquo;s village — the API exposes no
           building levels for either village. Record yours in the planner to see what is actually
@@ -182,7 +182,7 @@ function VillageBuildings({ title, entries, village, resources, label, footnote 
             <div className="grid grid-cols-2 gap-2 p-4 sm:grid-cols-3 xl:grid-cols-4">
               {group.map((b) => (
                 <div key={b.id}
-                  className="flex items-center gap-2.5 rounded-[10px] border border-line bg-panel-2 px-2.5 py-2">
+                  className="flex items-center gap-2.5-[10px] border border-line bg-panel-2 px-2.5 py-2">
                   <GameIcon kind="building" id={b.id} level={b.maxHere} village={village} size={34} />
                   <div className="min-w-0 flex-1">
                     <div className="truncate text-[13px]">{b.name}</div>
@@ -205,7 +205,7 @@ function Figure({ label, value, sub }: { label: string; value: string; sub?: str
   return (
     <div>
       <div className="text-[11px] uppercase tracking-[.06em] text-muted">{label}</div>
-      <div className="num text-[22px] font-semibold">{value}</div>
+      <div className="display text-[30px] leading-none tabular-nums">{value}</div>
       {sub && <div className="text-[11px] text-faint">{sub}</div>}
     </div>
   );

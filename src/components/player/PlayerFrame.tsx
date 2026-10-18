@@ -3,7 +3,8 @@ import type { ReactNode } from 'react';
 import type { RawPlayer } from '@/lib/coc/client';
 import type { VillageId } from '@/lib/store';
 import { fmtInt } from '@/lib/format';
-import { Banner, Chip, Empty, PageHead, Panel, Stat } from '@/components/primitives';
+import { Banner, Chip, Empty, PageHead, Panel, Score } from '@/components/primitives';
+import { analyseBuilderUnits, analyseUnits } from '@/lib/game/progress';
 import { TagSearch } from '@/components/TagSearch';
 import { VillageTabs } from '@/components/VillageTabs';
 import { buildingSpriteUrl } from '@/lib/sprites';
@@ -24,7 +25,7 @@ export function PlayerFrame({ tag, children }: { tag: string; children: ReactNod
         sub="How close an account is to the ceiling for its hall, what closing the gap costs, and whether it is rushed."
         action={<TagSearch initial={tag} basePath="/player" />}
       />
-      <div className="grid gap-4">{children}</div>
+      <div className="grid gap-4 [&>*]:min-w-0">{children}</div>
     </main>
   );
 }
@@ -77,6 +78,10 @@ export function PlayerIdentity({ p, active }: { p: RawPlayer; active: VillageId 
   const bh = p.builderHallLevel ?? 0;
   const hallChip = active === 'home' ? `TH${p.townHallLevel}` : bh ? `BH${bh}` : 'No Builder Base';
   const path = `/player/${p.tag.slice(1)}`;
+  const rows: Array<{ level: number; maxHere: number }> = active === 'home'
+    ? analyseUnits(p) : bh ? analyseBuilderUnits(p) : [];
+  const reached = rows.reduce((n, r) => n + r.level, 0);
+  const allowed = rows.reduce((n, r) => n + r.maxHere, 0);
 
   // The hall this account actually has, drawn at its own level. It is the one
   // picture that says more than any figure beside it — a TH6 and a TH16 are
@@ -86,55 +91,59 @@ export function PlayerIdentity({ p, active }: { p: RawPlayer; active: VillageId 
     : bh ? buildingSpriteUrl('__builderhall', bh, 'builder') : null;
 
   return (
-    <section className="banner-hero p-5">
+    <section className="banner-hero px-5 pt-5 pb-4">
       <div className="flex flex-wrap items-center gap-5">
         {hall && (
-          <div className="relative grid h-[92px] w-[92px] shrink-0 place-items-center rounded-full border border-line bg-panel-2/70">
-            <span
-              aria-hidden
-              className="absolute inset-1 rounded-full"
-              style={{ background: 'radial-gradient(closest-side, var(--wash-warm), transparent)' }}
-            />
+          <div className="grid h-[112px] w-[112px] shrink-0 place-items-center">
             <Image
               src={hall}
               alt={`${hallChip} hall`}
-              width={78}
-              height={78}
-              className="relative object-contain drop-shadow-[0_6px_8px_rgba(0,0,0,.45)]"
+              width={112}
+              height={112}
+              className="object-contain"
             />
           </div>
         )}
 
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2.5">
-            <h2 className="shelf-title text-[26px]">{p.name}</h2>
+            <h2 className="shelf-title text-[40px] sm:text-[52px]">{p.name}</h2>
             <Chip tone="gold">{hallChip}</Chip>
             {p.role && <Chip>{prettyRole(p.role)}</Chip>}
           </div>
-          <div className="mt-1 flex flex-wrap items-center gap-2 text-muted">
+          <div className="mt-2 flex flex-wrap items-center gap-2 text-[15px] text-text-2">
             <code className="num">{p.tag}</code>
             <span>· {p.clan ? p.clan.name || 'in a clan' : 'no clan'}</span>
           </div>
         </div>
         <div className="flex-1" />
-        <div className="flex flex-wrap items-center gap-7">
-          {/* The account's level, not a village's — so it heads both. */}
-          <Stat label="XP level" value={fmtInt(p.expLevel)} />
-          {active === 'home' ? (
-            <>
-              <Stat label="Trophies" value={fmtInt(p.trophies)} sub={p.league?.name ?? 'Unranked'} />
-              <Stat label="Best" value={fmtInt(p.bestTrophies)} />
-              <Stat label="Donated" value={fmtInt(p.donations)}
-                sub={`${fmtInt(p.donationsReceived)} received`} />
-            </>
-          ) : (
-            <>
-              <Stat label="Builder trophies" value={p.builderBaseTrophies != null ? fmtInt(p.builderBaseTrophies) : '—'} />
-              <Stat label="Best" value={p.bestBuilderBaseTrophies != null ? fmtInt(p.bestBuilderBaseTrophies) : '—'} />
-            </>
-          )}
-        </div>
+        {/* The village's result, set like the cover's: levels reached against
+            levels the hall allows. */}
+        {rows.length > 0 && (
+          <div>
+            <Score a={fmtInt(reached)} b={fmtInt(allowed)} className="text-[clamp(3.25rem,7vw,5.5rem)]" />
+            <p className="mt-1.5 text-[13px] text-text-2">levels reached v allowed at {hallChip}</p>
+          </div>
+        )}
       </div>
+
+      {/* The rest of the account in one almanac line rather than a row of
+          boxes. XP is the account's, not a village's, so it heads both. */}
+      <p className="num mt-4 text-[15px] text-text-2">
+        XP level <b className="text-text">{fmtInt(p.expLevel)}</b>
+        {active === 'home' ? (
+          <>
+            {' · '}<b className="text-text">{fmtInt(p.trophies)}</b> trophies, {p.league?.name ?? 'unranked'}
+            {' · '}best <b className="text-text">{fmtInt(p.bestTrophies)}</b>
+            {' · '}donated <b className="text-text">{fmtInt(p.donations)}</b>, received {fmtInt(p.donationsReceived)}
+          </>
+        ) : (
+          <>
+            {' · '}<b className="text-text">{p.builderBaseTrophies != null ? fmtInt(p.builderBaseTrophies) : '—'}</b> builder trophies
+            {' · '}best <b className="text-text">{p.bestBuilderBaseTrophies != null ? fmtInt(p.bestBuilderBaseTrophies) : '—'}</b>
+          </>
+        )}
+      </p>
 
       <div className="mt-4 border-t border-line pt-3.5">
         <VillageTabs

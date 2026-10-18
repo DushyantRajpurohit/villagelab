@@ -9,7 +9,7 @@ import type { Lane, QueueItem, Resource } from '@/lib/game/types';
 import type { LevelStep } from '@/lib/game/curve';
 import { useVillageState, type VillageId } from '@/lib/store';
 import { fmtDuration, fmtResource } from '@/lib/format';
-import { Banner, Chip, Empty, Panel, Res, Stat } from '@/components/primitives';
+import { Banner, Chip, Empty, Panel, Res, Stat, StatLine } from '@/components/primitives';
 import { GameIcon, StorageIcon } from '@/components/GameIcon';
 import type { Village as SpriteVillage } from '@/lib/sprites';
 import { Timeline } from './Timeline';
@@ -155,7 +155,7 @@ export function VillagePlanner({ config }: { config: PlannerConfig }) {
   }, [state.queue, config.resources]);
 
   if (!loaded) {
-    return <div className="grid gap-4"><div className="h-32 animate-pulse rounded-[18px] bg-panel-2" /></div>;
+    return <div className="grid gap-4"><div className="h-32 bg-panel-2" /></div>;
   }
 
   const upgradable = rows.filter((r) => r.next);
@@ -178,7 +178,7 @@ export function VillagePlanner({ config }: { config: PlannerConfig }) {
     .filter((d) => d.need > d.have);
 
   return (
-    <div className="grid gap-4">
+    <div className="grid gap-4 [&>*]:min-w-0">
       {/* ---------------------------------------------------------- setup */}
       <Panel>
         <div className="flex flex-wrap items-end gap-5">
@@ -187,7 +187,7 @@ export function VillagePlanner({ config }: { config: PlannerConfig }) {
             <select
               value={hall}
               onChange={(e) => setState({ hall: Number(e.target.value) })}
-              className="rounded-lg border border-line bg-panel-2 shadow-[inset_0_2px_4px_rgba(0,0,0,.18)] outline-none focus:border-gold/50 px-2.5 py-1.5 text-sm text-text"
+              className="border-2 border-line-2 bg-panel outline-none focus:border-text px-2.5 py-1.5 text-sm text-text"
             >
               {Array.from({ length: config.maxHall }, (_, i) => i + 1).map((n) => (
                 <option key={n} value={n}>{config.hallName} {n}</option>
@@ -202,7 +202,7 @@ export function VillagePlanner({ config }: { config: PlannerConfig }) {
               onChange={(e) => setState({
                 builders: Math.max(1, Math.min(config.maxBuilders, Number(e.target.value) || 1)),
               })}
-              className="num w-[64px] rounded-lg border border-line bg-panel-2 shadow-[inset_0_2px_4px_rgba(0,0,0,.18)] outline-none focus:border-gold/50 px-2.5 py-1.5 text-sm"
+              className="num w-[64px] border-2 border-line-2 bg-panel outline-none focus:border-text px-2.5 py-1.5 text-sm"
             />
           </label>
 
@@ -218,7 +218,7 @@ export function VillagePlanner({ config }: { config: PlannerConfig }) {
                 onChange={(e) => setState((s) => ({
                   resources: { ...s.resources, [k]: Math.max(0, Number(e.target.value) || 0) },
                 }))}
-                className="num w-[130px] rounded-lg border border-line bg-panel-2 shadow-[inset_0_2px_4px_rgba(0,0,0,.18)] outline-none focus:border-gold/50 px-2.5 py-1.5 text-sm"
+                className="num w-[130px] border-2 border-line-2 bg-panel outline-none focus:border-text px-2.5 py-1.5 text-sm"
               />
             </label>
           ))}
@@ -231,7 +231,7 @@ export function VillagePlanner({ config }: { config: PlannerConfig }) {
                 setState({ village: {} });
               }
             }}
-            className="btn btn-ghost rounded-full px-4 py-1.5 text-[13px]"
+            className="btn btn-ghost px-4 py-1.5 text-[13px]"
           >
             Reset village
           </button>
@@ -239,25 +239,25 @@ export function VillagePlanner({ config }: { config: PlannerConfig }) {
         {config.note && <p className="mt-3 text-xs text-muted">{config.note}</p>}
       </Panel>
 
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <Panel>
+      <StatLine>
+        <div>
           <Stat label={`Everything left at ${config.hallShort}${hall}`} value={String(toMax.pending)}
             sub="upgrades outstanding" />
-        </Panel>
+        </div>
         {config.resources.map((k) => (
-          <Panel key={k}>
+          <div key={k}>
             <Stat label={`${config.resourceLabel[k]} needed`}
               value={<Res amount={toMax.acc[k]} kind={k} est={toMax.est} village={config.sprites} />} />
-          </Panel>
+          </div>
         ))}
-      </div>
+      </StatLine>
 
       {/* ---------------------------------------------------------- queue */}
       <Panel
         title="Build queue"
         action={state.queue.length ? (
           <button type="button" onClick={() => setState({ queue: [] })}
-            className="rounded px-2 py-1 text-xs text-bad hover:bg-panel-2">Clear all</button>
+            className="px-2 py-1 text-xs text-bad hover:bg-panel-2">Clear all</button>
         ) : null}
       >
         {state.queue.length === 0 ? (
@@ -266,14 +266,14 @@ export function VillagePlanner({ config }: { config: PlannerConfig }) {
           </Empty>
         ) : (
           <div className="grid gap-3.5">
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <StatLine inset>
               <Stat label="Finishes in" value={fmtDuration(sched.finishHours)}
                 sub={`${state.builders} builder${state.builders === 1 ? '' : 's'} + ${config.labName.toLowerCase()} + heroes`} />
               {config.resources.map((k) => (
                 <Stat key={k} label={config.resourceLabel[k]}
                   value={<Res amount={queueTotals.acc[k]} kind={k} est={queueTotals.est} village={config.sprites} />} />
               ))}
-            </div>
+            </StatLine>
 
             {deficits.length ? (
               <Banner tone="warn">
@@ -346,7 +346,7 @@ export function VillagePlanner({ config }: { config: PlannerConfig }) {
           {config.categories.filter((c) => c === 'all' || upgradable.some((r) => r.category === c)).map((c) => (
             <button
               key={c} type="button" onClick={() => setCat(c)}
-              className={`btn rounded-full px-3 py-1 text-xs ${c === cat ? 'btn-gold' : 'btn-ghost'}`}
+              className={`btn px-3 py-1 text-xs ${c === cat ? 'btn-gold' : 'btn-ghost'}`}
             >
               {config.categoryLabel[c] ?? c}
             </button>
@@ -388,7 +388,7 @@ export function VillagePlanner({ config }: { config: PlannerConfig }) {
                   <td className="px-3 py-2 text-right"><Res amount={r.cost} kind={r.resource} est={r.est} village={config.sprites} /></td>
                   <td className="px-3 py-2 text-right">
                     <button type="button" onClick={() => addToQueue(r)}
-                      className="btn btn-ghost rounded-full px-3 py-1 text-xs">
+                      className="btn btn-ghost px-3 py-1 text-xs">
                       Queue
                     </button>
                   </td>
@@ -455,7 +455,7 @@ export function VillagePlanner({ config }: { config: PlannerConfig }) {
 function MoveBtn({ label, onClick, tone }: { label: string; onClick: () => void; tone?: 'bad' }) {
   return (
     <button type="button" onClick={onClick}
-      className={`rounded px-1.5 py-0.5 text-xs hover:bg-panel-3 ${tone === 'bad' ? 'text-bad' : 'text-muted'}`}>
+      className={` px-1.5 py-0.5 text-xs hover:bg-panel-3 ${tone === 'bad' ? 'text-bad' : 'text-muted'}`}>
       {label}
     </button>
   );

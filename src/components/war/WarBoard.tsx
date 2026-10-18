@@ -1,4 +1,4 @@
-import { Bar, Chip, Panel, Stat } from '../primitives';
+import { Bar, Chip, Panel, Score, StarMark, Stat, StatLine } from '../primitives';
 import { fmtRelative } from '@/lib/format';
 import type { SideSummary, WarAnalysis, WarMemberRow } from '@/lib/war/types';
 
@@ -18,38 +18,43 @@ export function WarBoard({ war }: { war: WarAnalysis }) {
 
   return (
     <>
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <Panel>
-          <Stat
-            label="Stars"
-            value={`${war.us.stars} – ${war.them.stars}`}
-            tone={tone}
-            sub={prep ? 'battle has not started' : war.standing}
-          />
-        </Panel>
-        <Panel>
+      {/* The scoreline, the way the cover sets one: both clans named, the
+          stars between them at the size of a result. */}
+      <section className="banner-hero px-5 py-6" aria-label="Stars">
+        <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-3">
+          <h2 className="display min-w-0 text-[24px] leading-none sm:text-[32px]">{war.us.name || 'Our clan'}</h2>
+          <Score a={String(war.us.stars)} b={String(war.them.stars)} className="text-[clamp(4rem,11vw,8rem)]" />
+          <h2 className="display min-w-0 text-[24px] leading-none sm:text-right sm:text-[32px]">{war.them.name}</h2>
+        </div>
+        <p className={`mt-3 text-[15px] ${tone === 'ok' ? 'text-ok' : tone === 'bad' ? 'text-bad' : 'text-text-2'}`}>
+          Stars, {prep ? 'battle has not started' : war.standing}.
+        </p>
+      </section>
+
+      <StatLine>
+        <div>
           <Stat
             label="Destruction"
             value={`${war.us.destruction.toFixed(1)}%`}
             sub={`opponent ${war.them.destruction.toFixed(1)}%`}
           />
-        </Panel>
-        <Panel>
+        </div>
+        <div>
           <Stat
             label="Attacks used"
             value={`${war.attacksUsed}/${war.attacksTotal}`}
             tone={war.outstanding ? 'warn' : 'ok'}
             sub={`${war.outstanding} outstanding`}
           />
-        </Panel>
-        <Panel>
+        </div>
+        <div>
           <Stat
             label={prep ? 'Battle starts' : 'War ends'}
             value={fmtRelative(prep ? war.startTime : war.endTime)}
             sub={`${war.teamSize} v ${war.teamSize} · ${war.attacksPerMember} ${war.attacksPerMember === 1 ? 'attack' : 'attacks'} each`}
           />
-        </Panel>
-      </div>
+        </div>
+      </StatLine>
 
       <Panel
         title={`${war.us.name || 'Our clan'} vs ${war.them.name}`}
@@ -100,7 +105,7 @@ function SideSpread({ label, side }: { label: string; side: SideSummary }) {
           {side.spread.map(([th, n]) => (
             <div key={th} className="flex items-center gap-2.5">
               <div className="w-[54px] text-xs text-muted">TH{th}</div>
-              <div className="flex-1"><Bar pct={(n / peak) * 100} /></div>
+              <div className="flex-1"><Bar pct={(n / peak) * 100} count /></div>
               <div className="num w-8 text-right text-xs">{n}</div>
             </div>
           ))}
@@ -170,7 +175,7 @@ function RosterTable({ rows, prep }: { rows: WarMemberRow[]; prep: boolean }) {
               {/* Stars *added*, so two attacks can be worth up to six — a
                   three-star glyph row would be the wrong shape entirely. */}
               <td className={`num ${CELL} text-right`}>
-                {prep ? '—' : <span className={r.stars ? 'text-gold' : 'text-faint'}>{r.stars}★</span>}
+                {prep ? '—' : <span className={r.stars ? 'text-gold' : 'text-faint'}>{r.stars}<StarMark /></span>}
               </td>
               <td className={`num ${CELL} text-right`}>
                 {prep || !r.attacksUsed ? '—' : `${r.bestDestruction.toFixed(0)}%`}
@@ -178,7 +183,7 @@ function RosterTable({ rows, prep }: { rows: WarMemberRow[]; prep: boolean }) {
               <td className={`num ${CELL} text-right text-muted`}>
                 {r.defenseStars === null
                   ? <span className="text-ok">clean</span>
-                  : `${r.defenseStars}★ / ${r.defenseDestruction?.toFixed(0)}%`}
+                  : <>{r.defenseStars}<StarMark /> / {r.defenseDestruction?.toFixed(0)}%</>}
               </td>
             </tr>
           ))}

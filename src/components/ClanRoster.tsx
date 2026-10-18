@@ -69,7 +69,7 @@ export function ThSpread({ members }: { members: ClanMember[] }) {
       {rows.map(([th, n]) => (
         <div key={th} className="flex items-center gap-2.5">
           <div className="w-[54px] text-xs text-muted">TH{th}</div>
-          <div className="flex-1"><Bar pct={(n / peak) * 100} /></div>
+          <div className="flex-1"><Bar pct={(n / peak) * 100} count /></div>
           <div className="num w-8 text-right text-xs">{n}</div>
         </div>
       ))}

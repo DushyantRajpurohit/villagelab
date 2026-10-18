@@ -5,22 +5,24 @@ import { THEME_KEY } from '@/lib/theme';
 import './globals.css';
 
 /**
- * Display face only, self-hosted.
+ * One face, self-hosted, for everything.
  *
- * Body copy stays on a system stack — it renders instantly and needs no
- * download. Headings and figures get a heavy rounded face, which is what
- * carries the game's visual character; it is an independently licensed font
- * (SIL OFL, see fonts/LICENSE.md), not Supercell's proprietary typeface.
+ * Archivo is a variable font with a width axis, so the same file sets the
+ * condensed heavy headlines, the body text and the slightly narrowed table
+ * figures. It is independently licensed (SIL OFL, see fonts/LICENSE.md), not
+ * Supercell's proprietary typeface.
  *
  * `next/font/local` reads the file from disk at build time, so unlike
- * `next/font/google` it adds no network dependency to the build.
+ * `next/font/google` it adds no network dependency to the build. The
+ * `font-stretch` declaration is what tells the browser the width axis is there.
  */
-const baloo = localFont({
-  src: './fonts/baloo2-latin.woff2',
-  weight: '400 800',
-  variable: '--font-baloo',
+const archivo = localFont({
+  src: './fonts/archivo-latin-variable.woff2',
+  weight: '100 900',
+  variable: '--font-archivo',
   display: 'swap',
-  fallback: ['ui-rounded', 'Segoe UI', 'system-ui', 'sans-serif'],
+  declarations: [{ prop: 'font-stretch', value: '62% 125%' }],
+  fallback: ['ui-sans-serif', 'system-ui', 'Segoe UI', 'sans-serif'],
 });
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://villagelab.is-a.dev';
@@ -47,25 +49,24 @@ const THEME_SCRIPT = `(function(){try{var t=localStorage.getItem(${JSON.stringif
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${baloo.variable} h-full antialiased`} suppressHydrationWarning>
+    <html lang="en" className={`${archivo.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
       <body className="flex min-h-full flex-col bg-bg font-sans text-text">
         <SiteHeader />
         {children}
-        {/* The store's own footer is a dark plinth under the content, carrying
-            the legal lines and nothing that competes with the shelves above.
-            The Fan Content Policy notice is required on any public fan site. */}
-        <footer className="mt-auto border-t border-line bg-panel/50">
-          <div className="mx-auto flex w-full max-w-[1400px] flex-wrap items-center gap-x-6 gap-y-3 px-5 py-7 text-xs text-faint">
-            <span className="display text-[14px] text-text-2">
-              Village<span className="text-gold">Lab</span>
-            </span>
+        {/* The back page: an ink band carrying the colophon. The Fan Content
+            Policy notice is required on any public fan site. The band is ink in
+            both themes; a page ending in a white slab under the night fixture
+            reads as a missing style. */}
+        <footer className="mt-auto bg-ink text-chalk">
+          <div className="mx-auto flex w-full max-w-[1400px] flex-wrap items-baseline gap-x-8 gap-y-3 px-5 py-7 text-[13px]">
+            <span className="shelf-title text-[22px]">VillageLab</span>
             <p className="max-w-[72ch]">
               This material is unofficial and is not endorsed by Supercell. For more information see{' '}
               <a
-                className="text-text-2 underline hover:text-gold"
+                className="underline hover:bg-kit hover:text-ink"
                 href="https://supercell.com/en/fan-content-policy/"
                 rel="noopener noreferrer"
                 target="_blank"

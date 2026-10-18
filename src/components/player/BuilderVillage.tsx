@@ -1,4 +1,4 @@
-import { Bar, Chip, Panel, Res, Stat, pctTone } from '@/components/primitives';
+import { Bar, Chip, Panel, Res, Stat, pctTone, StatLine } from '@/components/primitives';
 import { GameIcon, RESOURCE_NAME } from '@/components/GameIcon';
 import { HeroRoster } from '@/components/HeroRoster';
 import { fmtDuration } from '@/lib/format';
@@ -31,26 +31,21 @@ export function BuilderVillage({ bh, summary }: {
 
   return (
     <>
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <Panel>
-          <Stat label="Army progress" value={`${summary.overallPct.toFixed(0)}%`}
-            sub={`${summary.maxedCount} of ${rows.length} maxed for BH${bh}`} />
-          <div className="mt-2.5"><Bar pct={summary.overallPct} tone={pctTone(summary.overallPct)} /></div>
-        </Panel>
-        <Panel>
+      <StatLine>
+        <div>
           <Stat label="Rushed units" value={String(summary.rushedCount)}
             tone={summary.rushedCount ? 'bad' : 'ok'}
             sub={summary.rushedCount ? `below the BH${bh - 1} ceiling` : 'nothing left behind'} />
-        </Panel>
-        <Panel>
+        </div>
+        <div>
           <Stat label="Star Lab time left" value={fmtDuration(summary.totalHours)}
             sub="one laboratory, sequential" />
-        </Panel>
-        <Panel>
+        </div>
+        <div>
           <Stat label="Builder Hall" value={`BH${bh}`}
             sub={bh >= MAX_BH ? 'maximum' : `${MAX_BH - bh} to go`} />
-        </Panel>
-      </div>
+        </div>
+      </StatLine>
 
       <Panel title={`Cost to max the army at BH${bh}`}>
         <div className="grid gap-4 sm:grid-cols-2">
@@ -61,7 +56,7 @@ export function BuilderVillage({ bh, summary }: {
                 <div className="text-[11px] uppercase tracking-[.06em] text-muted">
                   Builder {RESOURCE_NAME[k]}
                 </div>
-                <div className="text-[22px] font-semibold"><Res amount={summary.cost[k]} kind={k} village="builder" /></div>
+                <div className="display text-[30px] leading-none"><Res amount={summary.cost[k]} kind={k} village="builder" /></div>
               </div>
             ))}
         </div>

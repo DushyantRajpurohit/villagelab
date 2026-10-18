@@ -1,4 +1,4 @@
-import { Chip, Panel, Stat } from '../primitives';
+import { Chip, Panel, Stat, StatLine, StarMark } from '../primitives';
 import { fmtRelative } from '@/lib/format';
 import { WIN_BONUS } from '@/lib/war/league';
 import type {
@@ -18,9 +18,9 @@ const ROUND_LABEL: Record<RoundStatus, string> = {
 };
 
 const RESULT_TONE = {
-  win: 'border-ok/40 bg-ok/10 text-ok',
-  lose: 'border-bad/40 bg-bad/10 text-bad',
-  tie: 'border-line bg-panel-3 text-muted',
+  win: 'border-ok bg-ok text-bg',
+  lose: 'border-bad text-bad',
+  tie: 'border-dashed border-line-2 text-muted',
 } as const;
 
 /** `2026-09` → "September 2026". */
@@ -43,37 +43,37 @@ export function LeagueBoard({ league }: { league: LeagueAnalysis }) {
 
   return (
     <>
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <Panel>
+      <StatLine>
+        <div>
           <Stat
             label={ended ? 'Final place' : 'Group place'}
             value={us && started ? `#${us.rank}` : '—'}
             sub={`${started ? `of ${league.groupSize} clans` : 'from the first battle day'} · ${fmtSeason(league.season)}`}
           />
-        </Panel>
-        <Panel>
+        </div>
+        <div>
           <Stat
             label="League stars"
             value={us ? String(us.stars) : '—'}
             sub={us?.bonus ? `${us.bonus} of them win bonuses` : 'no win bonus yet'}
           />
-        </Panel>
-        <Panel>
+        </div>
+        <div>
           <Stat
             label="Record"
             value={us ? record(us) : '—'}
             sub={`${league.roundsPlayed} of ${league.roundsTotal} wars finished`}
           />
-        </Panel>
-        <Panel>
+        </div>
+        <div>
           <Stat
             label="Attacks used"
             value={String(league.attacksUsed)}
             tone={league.attacksMissed ? 'warn' : 'ok'}
             sub={`${league.attacksMissed} missed${league.attacksOwed ? ` · ${league.attacksOwed} still to use` : ''}`}
           />
-        </Panel>
-      </div>
+        </div>
+      </StatLine>
 
       {league.live && (
         <Panel
@@ -175,7 +175,7 @@ function StandingsTable({ rows, clanTag, ranked }: { rows: LeagueStanding[]; cla
             return (
               <tr key={s.tag}
                 aria-current={mine ? 'true' : undefined}
-                className={`border-b border-line/40 last:border-0 ${mine ? 'bg-gold/10' : 'hover:bg-panel-2'}`}>
+                className={`border-b border-line/40 last:border-0 ${mine ? 'bg-kit/25' : 'hover:bg-panel-2'}`}>
                 <td className={`num ${CELL} text-right text-faint`}>{ranked ? s.rank : '—'}</td>
                 <td className={CELL}>
                   {mine
@@ -184,7 +184,7 @@ function StandingsTable({ rows, clanTag, ranked }: { rows: LeagueStanding[]; cla
                 </td>
                 <td className={`num ${CELL} text-right text-muted`}>{record(s)}</td>
                 <td className={`num ${CELL} text-right`}>
-                  <span className="text-gold">{s.stars}★</span>
+                  <span className="text-gold">{s.stars}<StarMark /></span>
                   {s.bonus > 0 && <span className="text-faint" title="Win bonus included"> +{s.bonus}</span>}
                 </td>
                 <td className={`num ${CELL} text-right text-muted`}>{Math.round(s.destruction).toLocaleString('en-US')}%</td>
@@ -226,7 +226,7 @@ function RoundList({ rounds }: { rounds: LeagueRound[] }) {
               </div>
             )}
             {r.result && (
-              <span className={`inline-flex w-10 justify-center rounded-full border px-2 py-0.5 text-[11px] font-semibold ${RESULT_TONE[r.result]}`}>
+              <span className={`display inline-flex w-10 justify-center border-2 px-2 text-[12px] ${RESULT_TONE[r.result]}`}>
                 {r.result}
               </span>
             )}
@@ -266,13 +266,13 @@ function MemberTable({ rows }: { rows: LeagueMemberSeason[] }) {
                 {m.owed > 0 && <span className="text-warn"> · {m.owed} to go</span>}
               </td>
               <td className={`num ${CELL} text-right`}>
-                <span className={m.stars ? 'text-gold' : 'text-faint'}>{m.stars}★</span>
+                <span className={m.stars ? 'text-gold' : 'text-faint'}>{m.stars}<StarMark /></span>
               </td>
               <td className={`num ${CELL} text-right text-muted`}>
                 {m.attacksUsed ? `${m.avgDestruction.toFixed(0)}%` : '—'}
               </td>
               <td className={`num ${CELL} text-right text-muted`}>
-                {m.defended ? `${m.starsConceded}★ in ${m.defended}` : <span className="text-ok">clean</span>}
+                {m.defended ? <>{m.starsConceded}<StarMark /> in {m.defended}</> : <span className="text-ok">clean</span>}
               </td>
             </tr>
           ))}

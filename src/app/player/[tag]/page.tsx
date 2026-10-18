@@ -4,7 +4,7 @@ import { getPlayer } from '@/lib/data/players';
 import { analyseEquipment, analyseUnits, summarise, summariseEquipment } from '@/lib/game/progress';
 import { normalizeTag } from '@/lib/coc/tags';
 import { fmtDuration, fmtInt } from '@/lib/format';
-import { Bar, Chip, OreRow, Panel, Res, Stat, pctTone } from '@/components/primitives';
+import { Chip, OreRow, Panel, Res, Stat, StatLine } from '@/components/primitives';
 import { RESOURCE_NAME } from '@/components/GameIcon';
 import { totalOre } from '@/lib/game/equipment';
 import { UnitTable } from '@/components/UnitTable';
@@ -85,23 +85,18 @@ export default async function PlayerPage({ params }: Params) {
       {result.mock && <MockBanner />}
       <PlayerIdentity p={p} active="home" />
 
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <Panel>
-          <Stat label="Army progress" value={`${s.overallPct.toFixed(0)}%`}
-            sub={`${s.maxedCount} of ${rows.length} maxed for TH${th}`} />
-          <div className="mt-2.5"><Bar pct={s.overallPct} tone={pctTone(s.overallPct)} /></div>
-        </Panel>
-        <Panel>
+      <StatLine>
+        <div>
           <Stat label="Rushed units" value={String(s.rushedCount)} tone={s.rushedCount ? 'bad' : 'ok'}
             sub={s.rushedCount ? `below the TH${th - 1} ceiling` : 'nothing left behind'} />
-        </Panel>
-        <Panel>
+        </div>
+        <div>
           <Stat label="Lab time left" value={fmtDuration(s.totalHours)} sub="one laboratory, sequential" />
-        </Panel>
-        <Panel>
+        </div>
+        <div>
           <Stat label="War stars" value={fmtInt(p.warStars)} sub={`${fmtInt(p.attackWins)} attack wins`} />
-        </Panel>
-      </div>
+        </div>
+      </StatLine>
 
       <LifetimeRecordPanel p={p} />
 
@@ -117,7 +112,7 @@ export default async function PlayerPage({ params }: Params) {
                 <div className="text-[11px] uppercase tracking-[.06em] text-muted">
                   {RESOURCE_NAME[k]}
                 </div>
-                <div className="text-[22px] font-semibold"><Res amount={s.cost[k]} kind={k} est={s.est} /></div>
+                <div className="display text-[30px] leading-none"><Res amount={s.cost[k]} kind={k} est={s.est} /></div>
               </div>
             ))}
         </div>
@@ -166,7 +161,7 @@ export default async function PlayerPage({ params }: Params) {
             />
             <div className="sm:col-span-2">
               <div className="text-[11px] uppercase tracking-[.06em] text-muted">Ore to max what you have</div>
-              <div className="mt-1 text-[22px] font-semibold">
+              <div className="mt-1 display text-[30px] leading-none">
                 {totalOre(gearSummary.ore) > 0
                   ? <OreRow cost={gearSummary.ore} />
                   : <span className="text-ok">nothing owed</span>}

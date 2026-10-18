@@ -1,4 +1,4 @@
-import { Chip, Panel, Res, Stat } from '@/components/primitives';
+import { Chip, Panel, Res, Stat, StatLine } from '@/components/primitives';
 import { CraftedIcon, RESOURCE_NAME } from '@/components/GameIcon';
 import { fmtDuration, fmtInt } from '@/lib/format';
 import {
@@ -53,7 +53,7 @@ export function CraftedDefenses({ th }: { th: number }) {
           </Chip>
         }
       >
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <StatLine inset>
           <Stat
             label="Defenses this phase"
             value={String(here.length)}
@@ -64,12 +64,12 @@ export function CraftedDefenses({ th }: { th: number }) {
               <div className="text-[11px] uppercase tracking-[.06em] text-muted">
                 {RESOURCE_NAME[k]} for all {here.length}
               </div>
-              <div className="text-[22px] font-semibold">
+              <div className="display text-[30px] leading-none">
                 <Res amount={phase.cost[k]} kind={k} />
               </div>
             </div>
           ))}
-        </div>
+        </StatLine>
 
         <div className="mt-4 grid gap-4 border-t border-line pt-4 sm:grid-cols-2">
           <div>
@@ -77,7 +77,7 @@ export function CraftedDefenses({ th }: { th: number }) {
               Sparky Stones earned
             </div>
             <div className="mt-0.5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <span className="text-[22px] font-semibold">
+              <span className="display text-[30px] leading-none">
                 <Res amount={sparky.crafted} kind="sparky" />
               </span>
               <span className="text-[12px] text-muted">
@@ -153,7 +153,7 @@ export function CraftedDefenses({ th }: { th: number }) {
                   const mc = moduleCostToMax(m, 1, th);
                   return (
                     <div key={m.index}
-                      className="flex items-center gap-2 rounded-[8px] border border-line bg-panel-2 px-2.5 py-1.5">
+                      className="flex items-center gap-2-[8px] border border-line bg-panel-2 px-2.5 py-1.5">
                       <div className="min-w-0 flex-1 truncate text-[12px]">{m.name}</div>
                       <div className="num shrink-0 text-[11px] text-faint">to {m.max[th]}</div>
                       <div className="shrink-0 text-[11px] font-semibold">
