@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { SiteHeader } from '@/components/SiteHeader';
-import { THEME_KEY } from '@/lib/theme';
+import { THEME_KEY } from '@/lib/theme-key';
 import './globals.css';
 
 /**
