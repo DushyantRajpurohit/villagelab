@@ -11,6 +11,11 @@ left to pay and how to schedule it, and how its clan's wars went.
 
 Next.js 16 · TypeScript · Postgres · 931 tests · designed to run for $0.
 
+**[Live demo](https://villagelab.vercel.app)**, running on generated sample accounts: it has no
+database or Supercell key connected, so a real tag shows an invented player. Try the
+[sample village](https://villagelab.vercel.app/player/2PP0JCVL9) or
+[war room](https://villagelab.vercel.app/clan/2QJ8YVLC/war).
+
 ```bash
 npm install
 npm run dev        # works immediately — no database, no API token

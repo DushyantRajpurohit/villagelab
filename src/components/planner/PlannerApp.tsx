@@ -48,8 +48,9 @@ const BUILDER: PlannerConfig = {
   hallName: 'Builder Hall',
   hallShort: 'BH',
   maxHall: MAX_BH,
-  // The Master Builder, and O.T.T.O once the B.O.B Control is finished at BH9.
-  maxBuilders: 2,
+  // The Master Builder, O.T.T.O once the B.O.B Control is finished at BH9, and
+  // the extra builder the shop sells from BH2 (May 2026 update).
+  maxBuilders: 3,
   buildersLabel: 'Builders',
   labName: 'Star Laboratory',
   buildings: BUILDER_BUILDINGS,

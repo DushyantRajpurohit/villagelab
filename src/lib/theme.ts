@@ -1,6 +1,7 @@
 'use client';
 
 import { useSyncExternalStore } from 'react';
+import { THEME_KEY } from './theme-key';
 
 /**
  * Theme store.
@@ -15,8 +16,6 @@ import { useSyncExternalStore } from 'react';
  * document head (see app/layout.tsx). Everything here only mirrors and changes
  * it — with one exception noted in ThemeToggle for React's dev-mode remount.
  */
-
-export const THEME_KEY = 'villagelab.theme';
 
 export type Theme = 'system' | 'light' | 'dark';
 

@@ -36,7 +36,8 @@ engineering is careful. Features are frozen (see `docs/ideas/portfolio-first.md`
 ## Operating Context
 
 - Runs fully on a deterministic mock generator with no database or token.
-- Not deployed; deploy is on hold. Reviewers currently meet it as a repo.
+- Deployed at https://villagelab.vercel.app on the mock generator, with no
+  database or Supercell key connected. Real-data ingestion is not live.
 - Routes: `/`, `/player`, `/player/[tag]`, `/player/[tag]/builder`, `/planner`,
   `/clan`, `/clan/[tag]`, `/clan/[tag]/war`, `/clan/[tag]/league`,
   `/clan/[tag]/log`.

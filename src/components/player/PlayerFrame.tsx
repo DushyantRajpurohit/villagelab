@@ -56,9 +56,9 @@ export function MockBanner() {
   return (
     <Banner tone="warn">
       <span>
-        <b className="text-text">Mock data.</b> Generated deterministically from the tag so the app
-        works with no credentials. Set <code>DATABASE_URL</code> and run the ingestion worker for
-        real profiles.
+        <b className="text-text">Mock data.</b> This deployment reads no real accounts: every village
+        is generated from its tag, so a real tag shows an invented player. With{' '}
+        <code>DATABASE_URL</code> and the ingestion worker it serves real profiles.
       </span>
     </Banner>
   );
